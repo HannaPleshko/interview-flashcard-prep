@@ -1,28 +1,25 @@
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft, Code } from "lucide-react";
 import { questionsData, getTechnologyQuestions } from "@/data/questions";
 
 const Study = () => {
   const { techId } = useParams();
+  const navigate = useNavigate();
   const technology = questionsData.find(t => t.id === techId);
   const questions = techId ? getTechnologyQuestions(techId) : [];
 
-  if (techId && !technology) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Технология не найдена</h1>
-          <Button asChild>
-            <Link to="/">Вернуться на главную</Link>
-          </Button>
-        </div>
-      </div>
-    );
-  }
+  const handleTechnologyChange = (value: string) => {
+    if (value === "all") {
+      navigate("/study");
+    } else {
+      navigate(`/study/${value}`);
+    }
+  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -72,12 +69,27 @@ const Study = () => {
               Назад
             </Link>
           </Button>
-          {technology && (
+          <div className="flex items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">{technology.name}</h1>
+              <h1 className="text-3xl font-bold text-foreground">Изучение</h1>
               <p className="text-muted-foreground">Изучение теоретических вопросов</p>
             </div>
-          )}
+            <div className="ml-auto">
+              <Select value={techId || "all"} onValueChange={handleTechnologyChange}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="Выберите технологию" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Все технологии</SelectItem>
+                  {questionsData.map((tech) => (
+                    <SelectItem key={tech.id} value={tech.id}>
+                      {tech.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </div>
 
         {!techId ? (
