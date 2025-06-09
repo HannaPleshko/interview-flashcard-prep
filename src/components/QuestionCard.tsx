@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Question } from "@/data/questions";
+import { Sparkles, Eye, EyeOff } from "lucide-react";
 
 interface QuestionCardProps {
   question: Question;
@@ -25,18 +26,18 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'easy': return 'bg-green-500';
-      case 'medium': return 'bg-yellow-500';
-      case 'hard': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'easy': return 'from-green-400 to-green-600';
+      case 'medium': return 'from-yellow-400 to-orange-500';
+      case 'hard': return 'from-red-400 to-red-600';
+      default: return 'from-gray-400 to-gray-600';
     }
   };
 
   const getDifficultyText = (difficulty: string) => {
     switch (difficulty) {
-      case 'easy': return 'Легкий';
-      case 'medium': return 'Средний';
-      case 'hard': return 'Сложный';
+      case 'easy': return '🟢 Легкий';
+      case 'medium': return '🟡 Средний';
+      case 'hard': return '🔴 Сложный';
       default: return 'Неизвестно';
     }
   };
@@ -44,38 +45,52 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
   return (
     <div className="perspective-1000 w-full h-80">
       <Card 
-        className={`relative w-full h-full cursor-pointer transition-transform duration-700 transform-style-preserve-3d ${
+        className={`relative w-full h-full cursor-pointer transition-all duration-700 transform-style-preserve-3d ${
           flipped ? 'rotate-y-180' : ''
-        } hover:shadow-lg`}
+        } glow-hover border-0 bg-white/80 backdrop-blur-sm overflow-hidden group`}
         onClick={handleClick}
       >
+        {/* Gradient background */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+        
         {/* Front of card - Question */}
         <div className="absolute inset-0 backface-hidden">
-          <CardContent className="p-6 h-full flex flex-col justify-between">
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
             <div>
               <div className="flex justify-between items-start mb-4">
-                <Badge className={`${getDifficultyColor(question.difficulty)} text-white`}>
+                <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg`}>
                   {getDifficultyText(question.difficulty)}
                 </Badge>
-                <span className="text-sm text-muted-foreground">Вопрос</span>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground bg-white/50 px-3 py-1 rounded-full">
+                  <Eye className="h-4 w-4" />
+                  Вопрос
+                </div>
               </div>
-              <h3 className="text-lg font-medium text-foreground leading-relaxed">
+              <h3 className="text-lg font-medium text-foreground leading-relaxed mb-4">
                 {question.question}
               </h3>
             </div>
-            <p className="text-sm text-muted-foreground text-center mt-4">
-              Нажмите, чтобы увидеть ответ
-            </p>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                <Sparkles className="h-4 w-4" />
+                Нажмите, чтобы увидеть ответ
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div className="w-12 h-1 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full mx-auto"></div>
+            </div>
           </CardContent>
         </div>
 
         {/* Back of card - Answer */}
         <div className="absolute inset-0 backface-hidden rotate-y-180">
-          <CardContent className="p-6 h-full flex flex-col justify-between bg-primary/5">
+          <CardContent className="p-6 h-full flex flex-col justify-between bg-gradient-to-br from-blue-50 to-purple-50 relative z-10">
             <div>
               <div className="flex justify-between items-start mb-4">
-                <Badge variant="secondary">Ответ</Badge>
-                <Badge className={`${getDifficultyColor(question.difficulty)} text-white`}>
+                <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 shadow-lg">
+                  <EyeOff className="h-3 w-3 mr-1" />
+                  Ответ
+                </Badge>
+                <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg`}>
                   {getDifficultyText(question.difficulty)}
                 </Badge>
               </div>
@@ -83,9 +98,14 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
                 {question.answer}
               </p>
             </div>
-            <p className="text-sm text-muted-foreground text-center mt-4">
-              Нажмите, чтобы вернуться к вопросу
-            </p>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                <Sparkles className="h-4 w-4" />
+                Нажмите, чтобы вернуться к вопросу
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto"></div>
+            </div>
           </CardContent>
         </div>
       </Card>

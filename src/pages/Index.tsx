@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code, Database, Globe, Layers, Server, Zap } from "lucide-react";
+import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target } from "lucide-react";
 
 const technologies = [
   {
@@ -11,7 +11,7 @@ const technologies = [
     name: "HTML",
     description: "Структура веб-страниц",
     icon: Globe,
-    color: "bg-orange-500",
+    gradient: "from-orange-400 to-orange-600",
     questions: 25
   },
   {
@@ -19,7 +19,7 @@ const technologies = [
     name: "CSS",
     description: "Стилизация и дизайн",
     icon: Layers,
-    color: "bg-blue-500",
+    gradient: "from-blue-400 to-blue-600",
     questions: 30
   },
   {
@@ -27,7 +27,7 @@ const technologies = [
     name: "JavaScript",
     description: "Язык программирования",
     icon: Zap,
-    color: "bg-yellow-500",
+    gradient: "from-yellow-400 to-yellow-600",
     questions: 45
   },
   {
@@ -35,7 +35,7 @@ const technologies = [
     name: "TypeScript",
     description: "Типизированный JavaScript",
     icon: Code,
-    color: "bg-blue-600",
+    gradient: "from-blue-500 to-indigo-600",
     questions: 20
   },
   {
@@ -43,7 +43,7 @@ const technologies = [
     name: "React",
     description: "Библиотека для UI",
     icon: Code,
-    color: "bg-cyan-500",
+    gradient: "from-cyan-400 to-cyan-600",
     questions: 35
   },
   {
@@ -51,7 +51,7 @@ const technologies = [
     name: "Node.js",
     description: "Серверный JavaScript",
     icon: Server,
-    color: "bg-green-600",
+    gradient: "from-green-500 to-green-700",
     questions: 28
   },
   {
@@ -59,27 +59,36 @@ const technologies = [
     name: "SQL",
     description: "Работа с базами данных",
     icon: Database,
-    color: "bg-purple-600",
+    gradient: "from-purple-500 to-purple-700",
     questions: 22
   }
 ];
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b bg-card">
+      <header className="backdrop-blur-md bg-white/80 border-b border-white/20 shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Code className="h-8 w-8 text-primary" />
-              <h1 className="text-2xl font-bold text-foreground">DevPrep</h1>
+            <div className="flex items-center space-x-3">
+              <div className="p-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 glow">
+                <Code className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  DevPrep
+                </h1>
+                <p className="text-xs text-muted-foreground">Готовься к успеху</p>
+              </div>
             </div>
             <nav className="flex items-center space-x-6">
-              <Link to="/study" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/study" className="flex items-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/50 transition-all duration-300">
+                <Brain className="h-4 w-4" />
                 Изучение
               </Link>
-              <Link to="/practice" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/practice" className="flex items-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/50 transition-all duration-300">
+                <Target className="h-4 w-4" />
                 Практика
               </Link>
             </nav>
@@ -88,51 +97,115 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Готовься к собеседованиям эффективно
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек
+      <section className="py-20 text-center relative overflow-hidden">
+        <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Sparkles className="h-12 w-12 text-purple-500 animate-pulse" />
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              Готовься к собеседованиям
+            </h2>
+            <Sparkles className="h-12 w-12 text-blue-500 animate-pulse" />
+          </div>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
+            Превращай подготовку в увлекательное путешествие к мечтной работе!
           </p>
+          <div className="flex items-center justify-center gap-4">
+            <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover">
+              <Link to="/study" className="flex items-center gap-2">
+                <Brain className="h-5 w-5" />
+                Начать изучение
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50">
+              <Link to="/practice" className="flex items-center gap-2">
+                <Target className="h-5 w-5" />
+                Попрактиковаться
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Technologies Grid */}
-      <section className="py-8">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">
-            Выберите технологию для изучения
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {technologies.map((tech) => {
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-semibold text-foreground mb-4">
+              🎯 Выберите технологию для изучения
+            </h3>
+            <p className="text-lg text-muted-foreground">
+              Каждая карточка содержит вопросы разного уровня сложности
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {technologies.map((tech, index) => {
               const IconComponent = tech.icon;
               return (
-                <Card key={tech.id} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
-                  <CardHeader className="text-center">
-                    <div className={`w-16 h-16 ${tech.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <IconComponent className="h-8 w-8 text-white" />
+                <Card key={tech.id} className="card-hover glow-hover border-0 bg-white/60 backdrop-blur-sm overflow-hidden relative group">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                  <CardHeader className="text-center relative z-10">
+                    <div className={`w-20 h-20 bg-gradient-to-br ${tech.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                      <IconComponent className="h-10 w-10 text-white" />
                     </div>
-                    <CardTitle className="text-xl">{tech.name}</CardTitle>
+                    <CardTitle className="text-xl font-bold">{tech.name}</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-muted-foreground mb-4">{tech.description}</p>
-                    <Badge variant="secondary" className="mb-4">
-                      {tech.questions} вопросов
-                    </Badge>
-                    <div className="flex gap-2">
-                      <Button asChild className="flex-1" size="sm">
-                        <Link to={`/study/${tech.id}`}>Изучение</Link>
+                  <CardContent className="text-center relative z-10">
+                    <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{tech.description}</p>
+                    <div className="flex justify-center mb-6">
+                      <Badge variant="secondary" className={`bg-gradient-to-r ${tech.gradient} text-white border-0 px-3 py-1`}>
+                        {tech.questions} вопросов
+                      </Badge>
+                    </div>
+                    <div className="flex gap-3">
+                      <Button asChild className={`flex-1 bg-gradient-to-r ${tech.gradient} hover:opacity-90 text-white border-0 text-sm`} size="sm">
+                        <Link to={`/study/${tech.id}`}>
+                          <Brain className="h-4 w-4 mr-1" />
+                          Изучение
+                        </Link>
                       </Button>
-                      <Button asChild variant="outline" className="flex-1" size="sm">
-                        <Link to={`/practice/${tech.id}`}>Практика</Link>
+                      <Button asChild variant="outline" className="flex-1 border-2 hover:bg-white/50 text-sm" size="sm">
+                        <Link to={`/practice/${tech.id}`}>
+                          <Target className="h-4 w-4 mr-1" />
+                          Практика
+                        </Link>
                       </Button>
                     </div>
                   </CardContent>
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-2xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Brain className="h-8 w-8 text-white" />
+              </div>
+              <h4 className="text-lg font-semibold mb-2">Интерактивное обучение</h4>
+              <p className="text-muted-foreground text-sm">Карточки с вопросами помогают лучше запоминать материал</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-white" />
+              </div>
+              <h4 className="text-lg font-semibold mb-2">Разные уровни</h4>
+              <p className="text-muted-foreground text-sm">Вопросы для junior, middle и senior разработчиков</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="h-8 w-8 text-white" />
+              </div>
+              <h4 className="text-lg font-semibold mb-2">Актуальные технологии</h4>
+              <p className="text-muted-foreground text-sm">Современный стек технологий для веб-разработки</p>
+            </div>
           </div>
         </div>
       </section>
