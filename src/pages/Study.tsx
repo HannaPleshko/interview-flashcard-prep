@@ -1,5 +1,4 @@
-
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,9 +17,13 @@ import {
   SortDesc,
   Zap,
   Target,
-  Flame
+  Flame,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question } from "@/data/questions";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Study = () => {
   const { techId } = useParams();
@@ -28,6 +31,8 @@ const Study = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [sortBy, setSortBy] = useState("default");
+  const [currentPage, setCurrentPage] = useState(1);
+  const questionsPerPage = 5; // Количество вопросов на странице
   
   const technology = questionsData.find(t => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : 
@@ -64,6 +69,50 @@ const Study = () => {
 
     return filtered;
   }, [allQuestions, searchQuery, difficultyFilter, sortBy]);
+
+  // Вычисляем пагинацию
+  const totalPages = Math.ceil(filteredAndSortedQuestions.length / questionsPerPage);
+  const startIndex = (currentPage - 1) * questionsPerPage;
+  const endIndex = startIndex + questionsPerPage;
+  const currentQuestions = filteredAndSortedQuestions.slice(startIndex, endIndex);
+
+  // Сброс страницы при изменении фильтров
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, difficultyFilter, sortBy, techId]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Прокрутка к началу страницы
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const generatePageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push('...', totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1, '...');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+      }
+    }
+    
+    return pages;
+  };
 
   const handleTechnologyChange = (value: string) => {
     if (value === "all") {
@@ -115,45 +164,12 @@ const Study = () => {
   const stats = getQuestionStats();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50">
-      {/* Header */}
-      <header className="backdrop-blur-xl bg-white/90 border-b border-purple-100 shadow-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="p-3 rounded-2xl bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
-                <Code className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-                  DevPrep
-                </h1>
-                <p className="text-xs text-muted-foreground">Готовься к успеху в IT</p>
-              </div>
-            </div>
-            <nav className="flex items-center space-x-6">
-              <Link to="/study" className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <Brain className="h-5 w-5" />
-                Изучение
-              </Link>
-              <Link to="/practice" className="flex items-center gap-2 px-6 py-3 rounded-xl text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300">
-                <BookOpen className="h-5 w-5" />
-                Практика
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+      <Header />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" asChild className="hover:bg-white/70 rounded-xl">
-            <Link to="/">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Назад
-            </Link>
-          </Button>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <Brain className="h-10 w-10 text-purple-500" />
@@ -286,20 +302,8 @@ const Study = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-                {technology?.name || "Все технологии"}
-              </h2>
-              <p className="text-gray-600">
-                Найдено {filteredAndSortedQuestions.length} {
-                  filteredAndSortedQuestions.length === 1 ? 'вопрос' :
-                  filteredAndSortedQuestions.length < 5 ? 'вопроса' : 'вопросов'
-                }
-              </p>
-            </div>
-            
-            {filteredAndSortedQuestions.map((question, index) => {
+          <div className="space-y-6">      
+            {currentQuestions.map((question, index) => {
               const DifficultyIcon = getDifficultyIcon(question.difficulty);
               return (
                 <Card key={question.id} className="card-hover border-0 bg-white/80 backdrop-blur-sm shadow-lg overflow-hidden group">
@@ -308,7 +312,7 @@ const Study = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-4">
                           <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
-                            {index + 1}
+                            {startIndex + index + 1}
                           </div>
                           <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg flex items-center gap-1`}>
                             <DifficultyIcon className="h-3 w-3" />
@@ -332,9 +336,55 @@ const Study = () => {
                 </Card>
               );
             })}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 mt-8">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="rounded-full border-purple-200 hover:border-purple-400 hover:bg-purple-50"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                
+                {generatePageNumbers().map((page, index) => (
+                  page === '...' ? (
+                    <span key={`ellipsis-${index}`} className="px-2 text-gray-500">...</span>
+                  ) : (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      onClick={() => handlePageChange(page as number)}
+                      className={`rounded-full ${
+                        currentPage === page 
+                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-0' 
+                          : 'border-purple-200 hover:border-purple-400 hover:bg-purple-50'
+                      }`}
+                    >
+                      {page}
+                    </Button>
+                  )
+                ))}
+
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="rounded-full border-purple-200 hover:border-purple-400 hover:bg-purple-50"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };

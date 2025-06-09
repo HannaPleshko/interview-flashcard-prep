@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Code, RotateCcw, Shuffle } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Practice = () => {
   const { techId } = useParams();
@@ -50,47 +51,34 @@ const Practice = () => {
 
   if (techId && !technology) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Технология не найдена</h1>
-          <Button asChild>
-            <Link to="/">Вернуться на главную</Link>
-          </Button>
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+        <div className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-foreground mb-4">Технология не найдена</h1>
+            <Button asChild>
+              <Link to="/">Вернуться на главную</Link>
+            </Button>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
   if (!techId) {
     return (
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b bg-card">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Code className="h-8 w-8 text-primary" />
-                <h1 className="text-2xl font-bold text-foreground">DevPrep</h1>
-              </div>
-              <nav className="flex items-center space-x-6">
-                <Link to="/study" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Изучение
-                </Link>
-                <Link to="/practice" className="text-foreground font-medium">
-                  Практика
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+        <Header />
 
-        <div className="container mx-auto px-4 py-8 text-center">
+        <div className="container mx-auto px-4 py-8 text-center flex-grow">
           <h1 className="text-3xl font-bold text-foreground mb-4">Выберите технологию для практики</h1>
           <p className="text-muted-foreground mb-8">Вернитесь на главную страницу, чтобы выбрать технологию</p>
           <Button asChild>
             <Link to="/">Выбрать технологию</Link>
           </Button>
         </div>
+
+        <Footer />
       </div>
     );
   }
@@ -98,28 +86,10 @@ const Practice = () => {
   const currentQuestion = currentQuestions[currentIndex];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Code className="h-8 w-8 text-primary" />
-              <h1 className="text-2xl font-bold text-foreground">DevPrep</h1>
-            </div>
-            <nav className="flex items-center space-x-6">
-              <Link to="/study" className="text-muted-foreground hover:text-foreground transition-colors">
-                Изучение
-              </Link>
-              <Link to="/practice" className="text-foreground font-medium">
-                Практика
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+      <Header />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="sm" asChild>
@@ -199,6 +169,8 @@ const Practice = () => {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };

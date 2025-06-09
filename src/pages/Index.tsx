@@ -1,9 +1,10 @@
-
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target } from "lucide-react";
+import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Flame, BookOpen } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const technologies = [
   {
@@ -66,71 +67,44 @@ const technologies = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="backdrop-blur-md bg-white/80 border-b border-white/20 shadow-lg">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 glow">
-                <Code className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  DevPrep
-                </h1>
-                <p className="text-xs text-muted-foreground">Готовься к успеху</p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+      <Header />
+
+      <div className="container mx-auto px-4 py-8 flex-grow">
+        {/* Hero Section */}
+        <section className="py-20 text-center relative overflow-hidden">
+          <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Sparkles className="h-12 w-12 text-purple-500 animate-pulse" />
+              <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                Готовься к собеседованиям
+              </h2>
+              <Sparkles className="h-12 w-12 text-blue-500 animate-pulse" />
             </div>
-            <nav className="flex items-center space-x-6">
-              <Link to="/study" className="flex items-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/50 transition-all duration-300">
-                <Brain className="h-4 w-4" />
-                Изучение
-              </Link>
-              <Link to="/practice" className="flex items-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/50 transition-all duration-300">
-                <Target className="h-4 w-4" />
-                Практика
-              </Link>
-            </nav>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+              🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
+              Превращай подготовку в увлекательное путешествие к мечтной работе!
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover">
+                <Link to="/study" className="flex items-center gap-2">
+                  <Brain className="h-5 w-5" />
+                  Начать изучение
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50">
+                <Link to="/practice" className="flex items-center gap-2">
+                  <Target className="h-5 w-5" />
+                  Попрактиковаться
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </header>
+        </section>
 
-      {/* Hero Section */}
-      <section className="py-20 text-center relative overflow-hidden">
-        <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <Sparkles className="h-12 w-12 text-purple-500 animate-pulse" />
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Готовься к собеседованиям
-            </h2>
-            <Sparkles className="h-12 w-12 text-blue-500 animate-pulse" />
-          </div>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
-            Превращай подготовку в увлекательное путешествие к мечтной работе!
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover">
-              <Link to="/study" className="flex items-center gap-2">
-                <Brain className="h-5 w-5" />
-                Начать изучение
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50">
-              <Link to="/practice" className="flex items-center gap-2">
-                <Target className="h-5 w-5" />
-                Попрактиковаться
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Technologies Grid */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+        {/* Technologies Grid */}
+        <section className="py-16">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-semibold text-foreground mb-4">
               🎯 Выберите технологию для изучения
@@ -177,38 +151,40 @@ const Index = () => {
               );
             })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Brain className="h-8 w-8 text-white" />
+        {/* Features Section */}
+        <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
+          <div className="container mx-auto px-4 text-center">
+            <h3 className="text-2xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Brain className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Интерактивное обучение</h4>
+                <p className="text-muted-foreground text-sm">Карточки с вопросами помогают лучше запоминать материал</p>
               </div>
-              <h4 className="text-lg font-semibold mb-2">Интерактивное обучение</h4>
-              <p className="text-muted-foreground text-sm">Карточки с вопросами помогают лучше запоминать материал</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-white" />
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Разные уровни</h4>
+                <p className="text-muted-foreground text-sm">Вопросы для junior, middle и senior разработчиков</p>
               </div>
-              <h4 className="text-lg font-semibold mb-2">Разные уровни</h4>
-              <p className="text-muted-foreground text-sm">Вопросы для junior, middle и senior разработчиков</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="h-8 w-8 text-white" />
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
+                <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Sparkles className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Актуальные технологии</h4>
+                <p className="text-muted-foreground text-sm">Современный стек технологий для веб-разработки</p>
               </div>
-              <h4 className="text-lg font-semibold mb-2">Актуальные технологии</h4>
-              <p className="text-muted-foreground text-sm">Современный стек технологий для веб-разработки</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+
+      <Footer />
     </div>
   );
 };
