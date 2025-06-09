@@ -1,4 +1,3 @@
-
 export interface Question {
   id: string;
   question: string;
@@ -136,6 +135,66 @@ export const questionsData: Technology[] = [
         question: "Что такое preload и prefetch?",
         answer: "preload — приоритетная загрузка критических ресурсов, prefetch — загрузка ресурсов с низким приоритетом для будущего использования.",
         difficulty: "hard"
+      },
+      {
+        id: "html-21",
+        question: "Что такое data-атрибуты и как их использовать?",
+        answer: "data-атрибуты (data-*) позволяют хранить дополнительную информацию в HTML элементах. Доступны через dataset в JavaScript.",
+        difficulty: "easy"
+      },
+      {
+        id: "html-22",
+        question: "Объясните разницу между <section> и <article>",
+        answer: "<section> группирует тематически связанный контент. <article> представляет самодостаточный контент, который может быть независимо распределен.",
+        difficulty: "medium"
+      },
+      {
+        id: "html-23",
+        question: "Что такое HTML5 Canvas и когда его использовать?",
+        answer: "Canvas — элемент для рисования графики через JavaScript. Используется для игр, анимаций, визуализации данных, обработки изображений.",
+        difficulty: "medium"
+      },
+      {
+        id: "html-24",
+        question: "Объясните работу Web Workers",
+        answer: "Web Workers позволяют выполнять JavaScript в фоновом потоке, не блокируя основной поток. Используются для тяжелых вычислений.",
+        difficulty: "hard"
+      },
+      {
+        id: "html-25",
+        question: "Что такое WebSocket и как его использовать?",
+        answer: "WebSocket обеспечивает двустороннюю связь между клиентом и сервером в реальном времени. Используется для чатов, игр, уведомлений.",
+        difficulty: "hard"
+      },
+      {
+        id: "html-26",
+        question: "Объясните разницу между <iframe> и <object>",
+        answer: "<iframe> встраивает другой HTML документ. <object> встраивает внешние ресурсы (PDF, Flash, Java).",
+        difficulty: "medium"
+      },
+      {
+        id: "html-27",
+        question: "Что такое HTML5 Geolocation API?",
+        answer: "Geolocation API позволяет получить географическое положение пользователя через navigator.geolocation. Требует разрешения пользователя.",
+        difficulty: "medium"
+      },
+      {
+        id: "html-28",
+        question: "Объясните работу Drag and Drop API",
+        answer: "Drag and Drop API позволяет перетаскивать элементы через события dragstart, dragover, drop. Используется для интерактивных интерфейсов.",
+        difficulty: "medium"
+      },
+      {
+        id: "html-29",
+        question: "Что такое HTML5 Form Validation?",
+        answer: "Встроенная валидация форм через атрибуты required, pattern, min, max, type. Можно кастомизировать через JavaScript.",
+        difficulty: "medium"
+      },
+      {
+        id: "html-30",
+        question: "Объясните работу File API",
+        answer: "File API позволяет работать с файлами: чтение, загрузка, предпросмотр. Использует FileReader, FormData, Blob.",
+        difficulty: "hard"
       }
     ]
   },
@@ -261,6 +320,66 @@ export const questionsData: Technology[] = [
         id: "css-20",
         question: "Что такое CSS Container Queries?",
         answer: "Container Queries позволяют применять стили на основе размера контейнера, а не viewport: @container (min-width: 300px) { ... }",
+        difficulty: "hard"
+      },
+      {
+        id: "css-21",
+        question: "Что такое CSS Custom Properties (переменные)?",
+        answer: "CSS переменные позволяют хранить и переиспользовать значения: --main-color: blue; color: var(--main-color);",
+        difficulty: "medium"
+      },
+      {
+        id: "css-22",
+        question: "Объясните CSS Grid Layout",
+        answer: "Grid — двумерная система компоновки с строками и столбцами. Использует grid-template-columns, grid-template-rows, grid-area.",
+        difficulty: "medium"
+      },
+      {
+        id: "css-23",
+        question: "Что такое CSS Modules?",
+        answer: "CSS Modules — подход к изоляции стилей компонентов. Генерирует уникальные имена классов для предотвращения конфликтов.",
+        difficulty: "medium"
+      },
+      {
+        id: "css-24",
+        question: "Объясните CSS Scroll Snap",
+        answer: "Scroll Snap создает точки привязки при прокрутке. Использует scroll-snap-type и scroll-snap-align.",
+        difficulty: "medium"
+      },
+      {
+        id: "css-25",
+        question: "Что такое CSS Containment?",
+        answer: "Containment оптимизирует рендеринг через изоляцию частей DOM: contain: layout style paint size.",
+        difficulty: "hard"
+      },
+      {
+        id: "css-26",
+        question: "Объясните CSS Scrollbar Styling",
+        answer: "Стилизация скроллбара через ::-webkit-scrollbar, scrollbar-width, scrollbar-color. Поддержка браузеров ограничена.",
+        difficulty: "medium"
+      },
+      {
+        id: "css-27",
+        question: "Что такое CSS Scroll-driven Animations?",
+        answer: "Анимации, привязанные к прокрутке: @scroll-timeline, animation-timeline, scroll-timeline-axis.",
+        difficulty: "hard"
+      },
+      {
+        id: "css-28",
+        question: "Объясните CSS Container Queries",
+        answer: "Container Queries позволяют стилизовать элементы на основе размера их контейнера: @container (min-width: 300px).",
+        difficulty: "hard"
+      },
+      {
+        id: "css-29",
+        question: "Что такое CSS Logical Properties?",
+        answer: "Логические свойства адаптируются к направлению письма: margin-block-start вместо margin-top.",
+        difficulty: "medium"
+      },
+      {
+        id: "css-30",
+        question: "Объясните CSS Subgrid",
+        answer: "Subgrid позволяет вложенным grid элементам наследовать размеры родительского grid: grid-template-columns: subgrid.",
         difficulty: "hard"
       }
     ]
@@ -388,6 +507,306 @@ export const questionsData: Technology[] = [
         question: "Объясните microtasks и macrotasks",
         answer: "Microtasks (Promise, queueMicrotask) имеют более высокий приоритет чем macrotasks (setTimeout, setInterval) в Event Loop.",
         difficulty: "hard"
+      },
+      {
+        id: "js-21",
+        question: "Что такое Web Workers и как их использовать?",
+        answer: "Web Workers выполняют JavaScript в фоновом потоке. Создаются через new Worker(), общаются через postMessage().",
+        difficulty: "hard"
+      },
+      {
+        id: "js-22",
+        question: "Объясните работу Service Workers",
+        answer: "Service Workers — прокси между приложением и сетью. Используются для кэширования, офлайн-работы, push-уведомлений.",
+        difficulty: "hard"
+      },
+      {
+        id: "js-23",
+        question: "Что такое WebAssembly?",
+        answer: "WebAssembly — бинарный формат для выполнения кода в браузере. Позволяет запускать код на C++, Rust с высокой производительностью.",
+        difficulty: "hard"
+      },
+      {
+        id: "js-24",
+        question: "Объясните работу WebSocket API",
+        answer: "WebSocket API обеспечивает двустороннюю связь: new WebSocket(), onopen, onmessage, send(), close().",
+        difficulty: "hard"
+      },
+      {
+        id: "js-25",
+        question: "Что такое IndexedDB?",
+        answer: "IndexedDB — низкоуровневое API для хранения больших объемов данных в браузере. Поддерживает индексы, транзакции, версионирование.",
+        difficulty: "hard"
+      },
+      {
+        id: "js-26",
+        question: "Объясните работу Intersection Observer API",
+        answer: "Intersection Observer отслеживает появление элементов в viewport: new IntersectionObserver(callback, options).",
+        difficulty: "medium"
+      },
+      {
+        id: "js-27",
+        question: "Что такое ResizeObserver?",
+        answer: "ResizeObserver отслеживает изменения размеров элементов: new ResizeObserver(callback).",
+        difficulty: "medium"
+      },
+      {
+        id: "js-28",
+        question: "Объясните работу Performance API",
+        answer: "Performance API измеряет производительность: performance.now(), performance.mark(), performance.measure().",
+        difficulty: "hard"
+      },
+      {
+        id: "js-29",
+        question: "Что такое Web Audio API?",
+        answer: "Web Audio API создает и обрабатывает звук: AudioContext, OscillatorNode, GainNode, AudioBuffer.",
+        difficulty: "hard"
+      },
+      {
+        id: "js-30",
+        question: "Объясните работу WebRTC",
+        answer: "WebRTC обеспечивает peer-to-peer связь: getUserMedia(), RTCPeerConnection, RTCDataChannel.",
+        difficulty: "hard"
+      },
+      {
+        id: "js-31",
+        question: "Что такое строгий режим ('use strict')?",
+        answer: "Строгий режим включает дополнительные проверки и ограничения в JavaScript: запрещает неявное создание глобальных переменных, дублирование параметров, использование this без контекста.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-32",
+        question: "Как работает оператор typeof?",
+        answer: "typeof возвращает строку с типом операнда: 'number', 'string', 'boolean', 'undefined', 'object', 'function'. Имеет особенности с null (возвращает 'object') и массивом (возвращает 'object').",
+        difficulty: "easy"
+      },
+      {
+        id: "js-33",
+        question: "В чем разница между null и undefined?",
+        answer: "undefined — переменная объявлена, но не инициализирована. null — явное отсутствие значения. typeof undefined возвращает 'undefined', typeof null возвращает 'object'.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-34",
+        question: "Как работает оператор instanceof?",
+        answer: "instanceof проверяет, является ли объект экземпляром класса или конструктора: obj instanceof Class. Проверяет цепочку прототипов.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-35",
+        question: "Что такое NaN и как его проверить?",
+        answer: "NaN (Not a Number) — результат некорректной математической операции. Проверяется через isNaN() или Number.isNaN(). NaN не равен самому себе.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-36",
+        question: "Как работает оператор spread (...) в массивах?",
+        answer: "Spread оператор распаковывает элементы массива: [...arr1, ...arr2] объединяет массивы, [...arr] создает копию массива.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-37",
+        question: "Что такое деструктуризация массивов?",
+        answer: "Деструктуризация позволяет извлекать элементы массива в переменные: const [first, second] = arr. Можно использовать значения по умолчанию и пропускать элементы.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-38",
+        question: "Как работает метод map()?",
+        answer: "map() создает новый массив, применяя функцию к каждому элементу: arr.map(x => x * 2). Не изменяет исходный массив.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-39",
+        question: "В чем разница между forEach и map?",
+        answer: "forEach выполняет функцию для каждого элемента, но не возвращает новый массив. map создает новый массив с результатами вызова функции.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-40",
+        question: "Как работает метод filter()?",
+        answer: "filter() создает новый массив с элементами, прошедшими проверку: arr.filter(x => x > 5). Возвращает пустой массив, если ни один элемент не прошел проверку.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-41",
+        question: "Что такое метод reduce()?",
+        answer: "reduce() применяет функцию к каждому элементу, накапливая результат: arr.reduce((acc, curr) => acc + curr, 0). Второй аргумент — начальное значение.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-42",
+        question: "Как работает оператор rest (...) в параметрах функции?",
+        answer: "Rest оператор собирает оставшиеся аргументы в массив: function sum(...args). Позволяет работать с произвольным количеством аргументов.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-43",
+        question: "Что такое стрелочные функции?",
+        answer: "Стрелочные функции — короткий синтаксис для функций: const add = (a, b) => a + b. Не имеют своего this, arguments, super.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-44",
+        question: "Как работает метод slice()?",
+        answer: "slice() создает копию части массива: arr.slice(1, 3). Не изменяет исходный массив. Без аргументов создает полную копию.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-45",
+        question: "В чем разница между slice() и splice()?",
+        answer: "slice() создает копию части массива, не изменяя исходный. splice() изменяет исходный массив, удаляя или добавляя элементы.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-46",
+        question: "Как работает метод concat()?",
+        answer: "concat() объединяет массивы: arr1.concat(arr2). Не изменяет исходные массивы. Может принимать несколько аргументов.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-47",
+        question: "Что такое метод includes()?",
+        answer: "includes() проверяет наличие элемента в массиве: arr.includes(5). Возвращает true/false. Работает с примитивами и объектами.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-48",
+        question: "Как работает метод indexOf()?",
+        answer: "indexOf() возвращает индекс первого вхождения элемента: arr.indexOf(5). Возвращает -1, если элемент не найден.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-49",
+        question: "Что такое метод find()?",
+        answer: "find() возвращает первый элемент, удовлетворяющий условию: arr.find(x => x > 5). Возвращает undefined, если элемент не найден.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-50",
+        question: "Как работает метод some()?",
+        answer: "some() проверяет, удовлетворяет ли хотя бы один элемент условию: arr.some(x => x > 5). Возвращает true/false.",
+        difficulty: "easy"
+      },
+      {
+        id: "js-51",
+        question: "Что такое прототипное наследование в JavaScript?",
+        answer: "Прототипное наследование — механизм, при котором объекты наследуют свойства и методы от других объектов через цепочку прототипов. Каждый объект имеет скрытое свойство [[Prototype]], которое ссылается на его прототип.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-52",
+        question: "Как работает Object.create()?",
+        answer: "Object.create() создает новый объект с указанным прототипом: Object.create(proto, propertiesObject). Позволяет создавать объекты без конструкторов и настраивать их свойства.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-53",
+        question: "Что такое дескрипторы свойств в JavaScript?",
+        answer: "Дескрипторы свойств определяют поведение свойства: value, writable, enumerable, configurable. Доступны через Object.getOwnPropertyDescriptor() и Object.defineProperty().",
+        difficulty: "medium"
+      },
+      {
+        id: "js-54",
+        question: "Объясните работу Promise.all() и Promise.race()",
+        answer: "Promise.all() ждет выполнения всех промисов и возвращает массив результатов. Promise.race() возвращает результат первого выполненного промиса. Оба возвращают Promise.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-55",
+        question: "Что такое async/await и как обрабатывать ошибки?",
+        answer: "async/await — синтаксический сахар для работы с Promise. Ошибки обрабатываются через try/catch. async функция всегда возвращает Promise.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-56",
+        question: "Как работает Event Loop в JavaScript?",
+        answer: "Event Loop обрабатывает асинхронные операции: сначала выполняет синхронный код, затем microtasks (Promise), затем macrotasks (setTimeout, setInterval).",
+        difficulty: "medium"
+      },
+      {
+        id: "js-57",
+        question: "Что такое замыкания (closures) и как они работают?",
+        answer: "Замыкание — функция, которая имеет доступ к переменным из внешней области видимости. Сохраняет ссылку на переменные даже после завершения выполнения внешней функции.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-58",
+        question: "Объясните работу this в JavaScript",
+        answer: "this — контекст выполнения функции. Зависит от способа вызова: в методе объекта — сам объект, в обычной функции — window/undefined, в стрелочной — внешний контекст.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-59",
+        question: "Что такое WeakMap и WeakSet?",
+        answer: "WeakMap и WeakSet хранят слабые ссылки на объекты, позволяя сборщику мусора удалять неиспользуемые объекты. Не итерируемы, ключи WeakMap — только объекты.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-60",
+        question: "Как работает Proxy в JavaScript?",
+        answer: "Proxy — объект-обертка, перехватывающий операции с объектом: get, set, has, deleteProperty и др. Позволяет кастомизировать поведение объекта.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-61",
+        question: "Что такое Symbol в JavaScript?",
+        answer: "Symbol — примитивный тип данных для создания уникальных идентификаторов. Используется для создания приватных свойств и специальных методов объектов.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-62",
+        question: "Объясните работу генераторов (generators)",
+        answer: "Генераторы — функции, которые могут приостанавливать выполнение через yield. Возвращают итератор. Позволяют создавать асинхронный код в синхронном стиле.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-63",
+        question: "Что такое декораторы в JavaScript?",
+        answer: "Декораторы — функции, которые модифицируют классы, методы или свойства. Используются для добавления функциональности без изменения исходного кода.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-64",
+        question: "Как работает Object.freeze() и Object.seal()?",
+        answer: "Object.freeze() делает объект неизменяемым. Object.seal() запрещает добавлять/удалять свойства, но позволяет изменять существующие. Оба возвращают модифицированный объект.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-65",
+        question: "Что такое Reflect в JavaScript?",
+        answer: "Reflect — встроенный объект, предоставляющий методы для перехватываемых операций. Используется с Proxy для создания более предсказуемого поведения.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-66",
+        question: "Объясните работу async итераторов",
+        answer: "Async итераторы позволяют асинхронно перебирать данные. Используют Symbol.asyncIterator и методы next(), return(), throw(). Поддерживаются в for await...of.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-67",
+        question: "Что такое BigInt в JavaScript?",
+        answer: "BigInt — тип данных для работы с целыми числами произвольной точности. Создается через n суффикс или BigInt(). Нельзя смешивать с обычными числами.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-68",
+        question: "Как работает Optional Chaining (?.)",
+        answer: "Optional Chaining позволяет безопасно обращаться к вложенным свойствам объекта. Возвращает undefined вместо ошибки, если промежуточное свойство null или undefined.",
+        difficulty: "medium"
+      },
+      {
+        id: "js-69",
+        question: "Что такое Nullish Coalescing (??)?",
+        answer: "Nullish Coalescing возвращает правый операнд, если левый равен null или undefined. В отличие от ||, не заменяет другие falsy значения (0, '', false).",
+        difficulty: "medium"
+      },
+      {
+        id: "js-70",
+        question: "Объясните работу Intl API",
+        answer: "Intl API предоставляет интернационализацию: форматирование дат, чисел, строк, сортировку. Использует Intl.DateTimeFormat, Intl.NumberFormat, Intl.Collator.",
+        difficulty: "medium"
       }
     ]
   },
@@ -766,6 +1185,372 @@ export const questionsData: Technology[] = [
         question: "Объясните память и garbage collection в Node.js",
         answer: "Node.js использует V8 garbage collector: young generation (Scavenge), old generation (Mark-Sweep-Compact), память делится на heap и stack.",
         difficulty: "hard"
+      },
+      {
+        id: "node-21",
+        question: "Что такое PM2 и зачем он нужен?",
+        answer: "PM2 — это менеджер процессов для Node.js приложений, обеспечивающий балансировку нагрузки, автоматический перезапуск, логирование и мониторинг.",
+        difficulty: "medium"
+      },
+      {
+        id: "node-22",
+        question: "Объясните разницу между process.env и dotenv",
+        answer: "process.env — глобальный объект с переменными окружения. dotenv — пакет для загрузки переменных из .env файла в process.env.",
+        difficulty: "easy"
+      },
+      {
+        id: "node-23",
+        question: "Что такое JWT и как его использовать в Node.js?",
+        answer: "JWT (JSON Web Token) — стандарт для создания токенов доступа. В Node.js используется для аутентификации через jsonwebtoken пакет.",
+        difficulty: "medium"
+      },
+      {
+        id: "node-24",
+        question: "Объясните паттерн Repository в Node.js",
+        answer: "Repository паттерн абстрагирует доступ к данным, инкапсулируя логику работы с базой данных в отдельном слое.",
+        difficulty: "hard"
+      },
+      {
+        id: "node-25",
+        question: "Что такое Rate Limiting и как его реализовать?",
+        answer: "Rate Limiting ограничивает количество запросов от клиента. Реализуется через middleware с использованием Redis или in-memory хранилища.",
+        difficulty: "medium"
+      }
+    ]
+  },
+  {
+    id: "database",
+    name: "Базы данных",
+    questions: [
+      {
+        id: "db-1",
+        question: "В чем разница между SQL и NoSQL базами данных?",
+        answer: "SQL — реляционные БД с фиксированной схемой и ACID. NoSQL — нереляционные БД с гибкой схемой, высокой производительностью и масштабируемостью.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-2",
+        question: "Что такое индексы в базах данных?",
+        answer: "Индексы — структуры данных, ускоряющие поиск записей. Улучшают производительность SELECT, но замедляют INSERT/UPDATE/DELETE.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-3",
+        question: "Объясните нормализацию баз данных",
+        answer: "Нормализация — процесс организации данных для минимизации избыточности: 1NF (атомарность), 2NF (зависимость от ключа), 3NF (транзитивная зависимость).",
+        difficulty: "hard"
+      },
+      {
+        id: "db-4",
+        question: "Что такое транзакции и ACID?",
+        answer: "ACID: Atomicity (атомарность), Consistency (согласованность), Isolation (изоляция), Durability (долговечность). Транзакции обеспечивают целостность данных.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-5",
+        question: "Объясните разницу между MongoDB и PostgreSQL",
+        answer: "MongoDB — документоориентированная NoSQL БД, гибкая схема. PostgreSQL — реляционная SQL БД с поддержкой JSON и сложных запросов.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-6",
+        question: "Что такое Redis и когда его использовать?",
+        answer: "Redis — in-memory хранилище данных типа ключ-значение. Используется для кэширования, сессий, очередей, pub/sub.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-7",
+        question: "Объясните шардирование баз данных",
+        answer: "Шардирование — горизонтальное разделение данных между несколькими серверами для масштабирования и распределения нагрузки.",
+        difficulty: "hard"
+      },
+      {
+        id: "db-8",
+        question: "Что такое репликация в базах данных?",
+        answer: "Репликация — копирование данных между серверами для отказоустойчивости, балансировки нагрузки и географического распределения.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-9",
+        question: "Объясните разницу между LEFT, RIGHT и INNER JOIN",
+        answer: "INNER JOIN — только совпадающие записи. LEFT JOIN — все записи из левой таблицы. RIGHT JOIN — все записи из правой таблицы.",
+        difficulty: "medium"
+      },
+      {
+        id: "db-10",
+        question: "Что такое ORM и зачем он нужен?",
+        answer: "ORM (Object-Relational Mapping) — технология для работы с БД через объекты. Примеры: Sequelize, TypeORM, Mongoose.",
+        difficulty: "medium"
+      }
+    ]
+  },
+  {
+    id: "sql",
+    name: "SQL",
+    questions: [
+      {
+        id: "sql-1",
+        question: "Что такое SQL и какие основные команды он включает?",
+        answer: "SQL (Structured Query Language) — язык для работы с реляционными базами данных. Основные команды: SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP.",
+        difficulty: "easy"
+      },
+      {
+        id: "sql-2",
+        question: "Объясните разницу между INNER JOIN и LEFT JOIN",
+        answer: "INNER JOIN возвращает только совпадающие записи из обеих таблиц. LEFT JOIN возвращает все записи из левой таблицы и совпадающие из правой.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-3",
+        question: "Что такое индексы в SQL?",
+        answer: "Индексы — структуры данных, ускоряющие поиск записей. Улучшают производительность SELECT, но замедляют INSERT/UPDATE/DELETE.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-4",
+        question: "Объясните нормализацию баз данных",
+        answer: "Нормализация — процесс организации данных для минимизации избыточности: 1NF (атомарность), 2NF (зависимость от ключа), 3NF (транзитивная зависимость).",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-5",
+        question: "Что такое транзакции и ACID?",
+        answer: "ACID: Atomicity (атомарность), Consistency (согласованность), Isolation (изоляция), Durability (долговечность). Транзакции обеспечивают целостность данных.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-6",
+        question: "Как работает GROUP BY?",
+        answer: "GROUP BY группирует строки по указанным столбцам. Используется с агрегатными функциями (COUNT, SUM, AVG, MAX, MIN).",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-7",
+        question: "Что такое подзапросы (subqueries)?",
+        answer: "Подзапросы — запросы внутри других запросов. Могут быть в WHERE, FROM, SELECT. Используются для сложной фильтрации и агрегации.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-8",
+        question: "Объясните разницу между HAVING и WHERE",
+        answer: "WHERE фильтрует строки до группировки, HAVING — после. HAVING используется с GROUP BY для фильтрации групп.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-9",
+        question: "Что такое оконные функции?",
+        answer: "Оконные функции выполняют вычисления над набором строк: ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(). Используют OVER().",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-10",
+        question: "Как работает UNION?",
+        answer: "UNION объединяет результаты нескольких SELECT запросов. Удаляет дубликаты. UNION ALL сохраняет дубликаты.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-11",
+        question: "Что такое внешние ключи (foreign keys)?",
+        answer: "Внешние ключи обеспечивают ссылочную целостность между таблицами. Создаются через FOREIGN KEY CONSTRAINT.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-12",
+        question: "Объясните разницу между DELETE и TRUNCATE",
+        answer: "DELETE удаляет строки с возможностью отката. TRUNCATE удаляет все строки без возможности отката, сбрасывает автоинкремент.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-13",
+        question: "Что такое представления (views)?",
+        answer: "Представления — виртуальные таблицы на основе SELECT запроса. Упрощают сложные запросы, обеспечивают безопасность данных.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-14",
+        question: "Как работает EXISTS?",
+        answer: "EXISTS проверяет наличие записей в подзапросе. Возвращает TRUE, если подзапрос возвращает хотя бы одну строку.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-15",
+        question: "Что такое хранимые процедуры?",
+        answer: "Хранимые процедуры — набор SQL команд, сохраненных в базе данных. Улучшают производительность, безопасность, переиспользуемость кода.",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-16",
+        question: "Объясните разницу между CHAR и VARCHAR",
+        answer: "CHAR имеет фиксированную длину, дополняется пробелами. VARCHAR имеет переменную длину, занимает только необходимое пространство.",
+        difficulty: "easy"
+      },
+      {
+        id: "sql-17",
+        question: "Что такое триггеры?",
+        answer: "Триггеры — процедуры, автоматически выполняемые при определенных событиях (INSERT, UPDATE, DELETE).",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-18",
+        question: "Как работает CASE в SQL?",
+        answer: "CASE — условный оператор: CASE WHEN condition THEN result ELSE default END. Используется для условной логики в запросах.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-19",
+        question: "Что такое CTE (Common Table Expressions)?",
+        answer: "CTE — временные результаты запроса, доступные в рамках одного запроса. Создаются через WITH. Улучшают читаемость сложных запросов.",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-20",
+        question: "Объясните разницу между IN и EXISTS",
+        answer: "IN проверяет наличие значения в списке. EXISTS проверяет наличие записей в подзапросе. EXISTS обычно эффективнее для больших наборов данных.",
+        difficulty: "medium"
+      },
+      {
+        id: "sql-21",
+        question: "Что такое партиционирование таблиц?",
+        answer: "Партиционирование — разделение таблицы на логические части. Улучшает производительность запросов и управление данными.",
+        difficulty: "hard"
+      },
+      {
+        id: "sql-22",
+        question: "Как работает FULL OUTER JOIN?",
+        answer: "FULL OUTER JOIN возвращает все записи из обеих таблиц. Если нет совпадения, заполняет NULL. Эквивалентен UNION LEFT и RIGHT JOIN.",
+        difficulty: "medium"
+      }
+    ]
+  },
+  {
+    id: "testing",
+    name: "Тестирование",
+    questions: [
+      {
+        id: "test-1",
+        question: "В чем разница между unit, integration и e2e тестами?",
+        answer: "Unit тесты проверяют отдельные компоненты. Integration тесты проверяют взаимодействие компонентов. E2E тесты проверяют весь процесс от начала до конца.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-2",
+        question: "Что такое TDD и BDD?",
+        answer: "TDD (Test-Driven Development) — разработка через тестирование. BDD (Behavior-Driven Development) — разработка через описание поведения.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-3",
+        question: "Объясните моки и стабы в тестировании",
+        answer: "Моки — объекты, имитирующие поведение реальных объектов. Стабы — объекты, возвращающие предопределенные ответы.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-4",
+        question: "Что такое Jest и как его использовать?",
+        answer: "Jest — фреймворк для тестирования JavaScript. Поддерживает моки, снапшоты, асинхронное тестирование и покрытие кода.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-5",
+        question: "Объясните тестирование асинхронного кода",
+        answer: "Асинхронное тестирование использует async/await, done callback или возврат Promise. Важно правильно обрабатывать таймауты и ошибки.",
+        difficulty: "hard"
+      },
+      {
+        id: "test-6",
+        question: "Что такое CI/CD и как его настроить?",
+        answer: "CI (Continuous Integration) — автоматическая сборка и тестирование. CD (Continuous Deployment) — автоматический деплой. Настраивается через GitHub Actions, Jenkins, GitLab CI.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-7",
+        question: "Объясните тестирование React компонентов",
+        answer: "React компоненты тестируются с помощью React Testing Library и Jest. Проверяются рендеринг, события, состояние и пропсы.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-8",
+        question: "Что такое snapshot тестирование?",
+        answer: "Snapshot тестирование сохраняет результат рендеринга компонента и сравнивает его с предыдущими версиями при следующих тестах.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-9",
+        question: "Объясните тестирование API",
+        answer: "API тестирование проверяет эндпоинты, статусы, заголовки, тело ответа. Используются инструменты: Postman, Supertest, Jest.",
+        difficulty: "medium"
+      },
+      {
+        id: "test-10",
+        question: "Что такое performance тестирование?",
+        answer: "Performance тестирование проверяет скорость, отзывчивость, стабильность и масштабируемость приложения под нагрузкой.",
+        difficulty: "hard"
+      }
+    ]
+  },
+  {
+    id: "security",
+    name: "Безопасность",
+    questions: [
+      {
+        id: "sec-1",
+        question: "Что такое XSS и как его предотвратить?",
+        answer: "XSS (Cross-Site Scripting) — внедрение вредоносного кода. Предотвращается через экранирование, CSP, HttpOnly cookies, Content-Type.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-2",
+        question: "Объясните CSRF атаки",
+        answer: "CSRF (Cross-Site Request Forgery) — выполнение действий от имени пользователя. Предотвращается через CSRF токены, SameSite cookies.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-3",
+        question: "Что такое SQL инъекции?",
+        answer: "SQL инъекции — внедрение SQL кода через пользовательский ввод. Предотвращается через параметризованные запросы, ORM, валидацию.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-4",
+        question: "Объясните OAuth 2.0",
+        answer: "OAuth 2.0 — протокол авторизации. Использует токены доступа, refresh токены, разные гранты (authorization code, client credentials).",
+        difficulty: "hard"
+      },
+      {
+        id: "sec-5",
+        question: "Что такое JWT и как его безопасно использовать?",
+        answer: "JWT — токен для передачи данных. Безопасность обеспечивается через подпись, короткое время жизни, хранение в HttpOnly cookies.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-6",
+        question: "Объясните HTTPS и SSL/TLS",
+        answer: "HTTPS — защищенный HTTP через SSL/TLS. Обеспечивает шифрование, аутентификацию, целостность данных.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-7",
+        question: "Что такое CORS и как его настроить?",
+        answer: "CORS (Cross-Origin Resource Sharing) — механизм доступа к ресурсам с других доменов. Настраивается через заголовки Access-Control-*.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-8",
+        question: "Объясните Content Security Policy",
+        answer: "CSP — механизм безопасности, контролирующий ресурсы, которые может загружать страница. Предотвращает XSS, инъекции.",
+        difficulty: "hard"
+      },
+      {
+        id: "sec-9",
+        question: "Что такое rate limiting?",
+        answer: "Rate limiting ограничивает количество запросов от клиента. Защищает от DDoS, брутфорса, злоупотребления API.",
+        difficulty: "medium"
+      },
+      {
+        id: "sec-10",
+        question: "Объясните безопасное хранение паролей",
+        answer: "Пароли хешируются с солью через bcrypt, Argon2. Никогда не хранятся в открытом виде. Используется много итераций.",
+        difficulty: "medium"
       }
     ]
   }

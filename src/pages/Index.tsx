@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Flame, BookOpen } from "lucide-react";
+import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Flame, BookOpen, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { questionsData } from "@/data/questions";
 
 const technologies = [
   {
@@ -12,56 +13,63 @@ const technologies = [
     name: "HTML",
     description: "Структура веб-страниц",
     icon: Globe,
-    gradient: "from-orange-400 to-orange-600",
-    questions: 25
+    gradient: "from-orange-400 to-orange-600"
   },
   {
     id: "css",
     name: "CSS",
     description: "Стилизация и дизайн",
     icon: Layers,
-    gradient: "from-blue-400 to-blue-600",
-    questions: 30
+    gradient: "from-blue-400 to-blue-600"
   },
   {
     id: "javascript",
     name: "JavaScript",
     description: "Язык программирования",
     icon: Zap,
-    gradient: "from-yellow-400 to-yellow-600",
-    questions: 45
+    gradient: "from-yellow-400 to-yellow-600"
   },
   {
     id: "typescript",
     name: "TypeScript",
     description: "Типизированный JavaScript",
     icon: Code,
-    gradient: "from-blue-500 to-indigo-600",
-    questions: 20
+    gradient: "from-blue-500 to-indigo-600"
   },
   {
     id: "react",
     name: "React",
     description: "Библиотека для UI",
     icon: Code,
-    gradient: "from-cyan-400 to-cyan-600",
-    questions: 35
+    gradient: "from-cyan-400 to-cyan-600"
   },
   {
     id: "nodejs",
     name: "Node.js",
     description: "Серверный JavaScript",
     icon: Server,
-    gradient: "from-green-500 to-green-700",
-    questions: 28
+    gradient: "from-green-500 to-green-700"
   },
   {
     id: "sql",
     name: "SQL",
     description: "Работа с базами данных",
     icon: Database,
-    gradient: "from-purple-500 to-purple-700",
-    questions: 22
+    gradient: "from-purple-500 to-purple-700"
+  },
+  {
+    id: "testing",
+    name: "Тестирование",
+    description: "Методы и инструменты тестирования",
+    icon: Target,
+    gradient: "from-red-400 to-red-600"
+  },
+  {
+    id: "security",
+    name: "Безопасность",
+    description: "Безопасность веб-приложений",
+    icon: Shield,
+    gradient: "from-emerald-400 to-emerald-600"
   }
 ];
 
@@ -114,8 +122,9 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {technologies.map((tech, index) => {
+            {technologies.map((tech) => {
               const IconComponent = tech.icon;
+              const techQuestions = questionsData.find(t => t.id === tech.id)?.questions.length || 0;
               return (
                 <Card key={tech.id} className="card-hover glow-hover border-0 bg-white/60 backdrop-blur-sm overflow-hidden relative group">
                   <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
@@ -129,7 +138,7 @@ const Index = () => {
                     <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{tech.description}</p>
                     <div className="flex justify-center mb-6">
                       <Badge variant="secondary" className={`bg-gradient-to-r ${tech.gradient} text-white border-0 px-3 py-1`}>
-                        {tech.questions} вопросов
+                        {techQuestions} вопросов
                       </Badge>
                     </div>
                     <div className="flex gap-3">
