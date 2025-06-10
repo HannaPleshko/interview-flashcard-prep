@@ -55,8 +55,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
         }}
       >
         {/* Front of card - Question */}
-        <Card className="flip-card-front absolute inset-0 w-full h-full glow-hover border-0 bg-white/80 backdrop-blur-sm overflow-hidden group">
-          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+        <Card className="flip-card-front absolute inset-0 w-full h-full border-0 bg-white/80 backdrop-blur-sm overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
           
           <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
             <div>
@@ -85,8 +85,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
         </Card>
 
         {/* Back of card - Answer */}
-        <Card className="flip-card-back absolute inset-0 w-full h-full glow-hover border-0 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden group">
-          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+        <Card className="flip-card-back absolute inset-0 w-full h-full border-0 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
           
           <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
             <div>

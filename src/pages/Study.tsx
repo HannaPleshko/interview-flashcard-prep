@@ -1,167 +1,121 @@
-import { useState, useMemo, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  ArrowLeft, 
-  Code, 
-  Brain, 
-  BookOpen, 
-  Sparkles, 
-  Search, 
-  Filter, 
-  SortAsc, 
-  SortDesc,
-  Zap,
-  Target,
-  Flame,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react";
+import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question } from "@/data/questions";
+import QuestionCard from "@/components/QuestionCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Study = () => {
   const { techId } = useParams();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [sortBy, setSortBy] = useState("default");
-  const [currentPage, setCurrentPage] = useState(1);
-  const questionsPerPage = 5; // Количество вопросов на странице
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   
   const technology = questionsData.find(t => t.id === techId);
-  const allQuestions = techId ? getTechnologyQuestions(techId) : 
-    questionsData.flatMap(tech => tech.questions.map(q => ({ ...q, technology: tech.name })));
+  const allQuestions = techId ? getTechnologyQuestions(techId) : [];
 
-  const filteredAndSortedQuestions = useMemo(() => {
-    let filtered = allQuestions.filter(question => {
-      const matchesSearch = question.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          question.answer.toLowerCase().includes(searchQuery.toLowerCase());
+  // Filtering and sorting logic
+  const filteredAndSortedQuestions = allQuestions
+    .filter(question => {
+      const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           question.answer.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
       return matchesSearch && matchesDifficulty;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "difficulty":
+          const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
+          return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
+                 difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
+        case "alphabetical":
+          return a.question.localeCompare(b.question);
+        default:
+          return 0;
+      }
     });
 
-    // Сортировка
-    switch (sortBy) {
-      case "difficulty-asc":
-        filtered.sort((a, b) => {
-          const order = { easy: 1, medium: 2, hard: 3 };
-          return order[a.difficulty as keyof typeof order] - order[b.difficulty as keyof typeof order];
-        });
-        break;
-      case "difficulty-desc":
-        filtered.sort((a, b) => {
-          const order = { easy: 1, medium: 2, hard: 3 };
-          return order[b.difficulty as keyof typeof order] - order[a.difficulty as keyof typeof order];
-        });
-        break;
-      case "alphabetical":
-        filtered.sort((a, b) => a.question.localeCompare(b.question));
-        break;
-      default:
-        break;
+  const handleCardFlip = (index: number) => {
+    const newFlippedCards = new Set(flippedCards);
+    if (newFlippedCards.has(index)) {
+      newFlippedCards.delete(index);
+    } else {
+      newFlippedCards.add(index);
     }
-
-    return filtered;
-  }, [allQuestions, searchQuery, difficultyFilter, sortBy]);
-
-  // Вычисляем пагинацию
-  const totalPages = Math.ceil(filteredAndSortedQuestions.length / questionsPerPage);
-  const startIndex = (currentPage - 1) * questionsPerPage;
-  const endIndex = startIndex + questionsPerPage;
-  const currentQuestions = filteredAndSortedQuestions.slice(startIndex, endIndex);
-
-  // Сброс страницы при изменении фильтров
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, difficultyFilter, sortBy, techId]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Прокрутка к началу страницы
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setFlippedCards(newFlippedCards);
   };
 
-  const generatePageNumbers = () => {
-    const pages = [];
-    const maxVisiblePages = 5;
-    
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) {
-          pages.push(i);
-        }
-        pages.push('...', totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1, '...');
-        for (let i = totalPages - 3; i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
-      }
-    }
-    
-    return pages;
-  };
-
-  const handleTechnologyChange = (value: string) => {
-    if (value === "all") {
-      navigate("/study");
-    } else {
-      navigate(`/study/${value}`);
-    }
-    // Сброс фильтров при смене технологии
-    setSearchQuery("");
+  const resetFilters = () => {
+    setSearchTerm("");
     setDifficultyFilter("all");
     setSortBy("default");
+    setFlippedCards(new Set());
   };
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy': return 'from-emerald-400 to-green-500';
-      case 'medium': return 'from-amber-400 to-orange-500';
-      case 'hard': return 'from-red-400 to-pink-500';
-      default: return 'from-gray-400 to-gray-600';
-    }
+  const getDifficultyStats = () => {
+    const stats = { easy: 0, medium: 0, hard: 0 };
+    filteredAndSortedQuestions.forEach(q => {
+      stats[q.difficulty as keyof typeof stats]++;
+    });
+    return stats;
   };
 
-  const getDifficultyText = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy': return 'Легкий';
-      case 'medium': return 'Средний';
-      case 'hard': return 'Сложный';
-      default: return 'Неизвестно';
-    }
-  };
+  if (techId && !technology) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+        <div className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-foreground mb-4">Технология не найдена</h1>
+            <Button asChild>
+              <Link to="/">Вернуться на главную</Link>
+            </Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
-  const getDifficultyIcon = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy': return Zap;
-      case 'medium': return Target;
-      case 'hard': return Flame;
-      default: return Code;
-    }
-  };
+  if (!techId) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
+        <Header />
+        <div className="container mx-auto px-4 py-8 text-center flex-grow">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/20">
+              <div className="mb-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <BookOpen className="h-10 w-10 text-white" />
+                </div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                  Выберите технологию для изучения
+                </h1>
+                <p className="text-muted-foreground text-lg">
+                  Вернитесь на главную страницу, чтобы выбрать технологию для изучения
+                </p>
+              </div>
+              <Button asChild className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <Link to="/">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Выбрать технологию
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
-  const getQuestionStats = () => {
-    const total = filteredAndSortedQuestions.length;
-    const easy = filteredAndSortedQuestions.filter(q => q.difficulty === 'easy').length;
-    const medium = filteredAndSortedQuestions.filter(q => q.difficulty === 'medium').length;
-    const hard = filteredAndSortedQuestions.filter(q => q.difficulty === 'hard').length;
-    return { total, easy, medium, hard };
-  };
-
-  const stats = getQuestionStats();
+  const stats = getDifficultyStats();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
@@ -169,217 +123,139 @@ const Study = () => {
 
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
-        <div className="flex items-center gap-4 mb-8">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <Brain className="h-10 w-10 text-purple-500" />
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-                Изучение
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="sm" asChild className="hover:bg-white/50">
+              <Link to="/">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Назад
+              </Link>
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                {technology?.name}
               </h1>
+              <p className="text-muted-foreground">Изучение материалов</p>
             </div>
-            <p className="text-muted-foreground flex items-center gap-2">
-              <Sparkles className="h-5 w-5" />
-              Изучение теоретических вопросов по программированию
-            </p>
+          </div>
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={resetFilters}
+            className="hover:bg-white/50 border-purple-200"
+          >
+            Сбросить фильтры
+          </Button>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20 shadow-lg">
+            <div className="text-2xl font-bold text-purple-600">{filteredAndSortedQuestions.length}</div>
+            <div className="text-sm text-muted-foreground">Всего вопросов</div>
+          </div>
+          <div className="bg-green-50/80 backdrop-blur-sm rounded-xl p-4 border border-green-200/50 shadow-lg">
+            <div className="text-2xl font-bold text-green-600">{stats.easy}</div>
+            <div className="text-sm text-green-700">🟢 Легкие</div>
+          </div>
+          <div className="bg-yellow-50/80 backdrop-blur-sm rounded-xl p-4 border border-yellow-200/50 shadow-lg">
+            <div className="text-2xl font-bold text-orange-600">{stats.medium}</div>
+            <div className="text-sm text-orange-700">🟡 Средние</div>
+          </div>
+          <div className="bg-red-50/80 backdrop-blur-sm rounded-xl p-4 border border-red-200/50 shadow-lg">
+            <div className="text-2xl font-bold text-red-600">{stats.hard}</div>
+            <div className="text-sm text-red-700">🔴 Сложные</div>
           </div>
         </div>
 
-        {/* Controls Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
-          {/* Technology Selector */}
-          <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Code className="h-5 w-5 text-purple-500" />
-                <span className="font-medium text-gray-700">Технология</span>
-              </div>
-              <Select value={techId || "all"} onValueChange={handleTechnologyChange}>
-                <SelectTrigger className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-400 focus:border-purple-500 transition-all duration-300">
-                  <SelectValue placeholder="Выберите технологию" />
-                </SelectTrigger>
-                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200">
-                  <SelectItem value="all">🌟 Все технологии</SelectItem>
-                  {questionsData.map((tech) => (
-                    <SelectItem key={tech.id} value={tech.id}>
-                      {tech.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </CardContent>
-          </Card>
-
-          {/* Search */}
-          <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Search className="h-5 w-5 text-purple-500" />
-                <span className="font-medium text-gray-700">Поиск</span>
-              </div>
+        {/* Search and Filter Controls */}
+        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Search */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="Поиск по вопросам..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 focus:border-purple-500"
+                placeholder="Поиск по вопросам и ответам..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
               />
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Difficulty Filter */}
-          <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Filter className="h-5 w-5 text-purple-500" />
-                <span className="font-medium text-gray-700">Сложность</span>
-              </div>
+            {/* Difficulty Filter */}
+            <div className="relative">
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 z-10" />
               <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                <SelectTrigger className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-400 focus:border-purple-500 transition-all duration-300">
-                  <SelectValue />
+                <SelectTrigger className="pl-10 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
+                  <SelectValue placeholder="Фильтр по сложности" />
                 </SelectTrigger>
-                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200">
-                  <SelectItem value="all">🎯 Все уровни</SelectItem>
-                  <SelectItem value="easy">🟢 Легкий</SelectItem>
-                  <SelectItem value="medium">🟡 Средний</SelectItem>
-                  <SelectItem value="hard">🔴 Сложный</SelectItem>
+                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
+                  <SelectItem value="all" className="rounded-lg hover:bg-purple-50">
+                    Все уровни
+                  </SelectItem>
+                  <SelectItem value="easy" className="rounded-lg hover:bg-green-50">
+                    🟢 Легкий
+                  </SelectItem>
+                  <SelectItem value="medium" className="rounded-lg hover:bg-yellow-50">
+                    🟡 Средний
+                  </SelectItem>
+                  <SelectItem value="hard" className="rounded-lg hover:bg-red-50">
+                    🔴 Сложный
+                  </SelectItem>
                 </SelectContent>
               </Select>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Sort */}
-          <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <SortAsc className="h-5 w-5 text-purple-500" />
-                <span className="font-medium text-gray-700">Сортировка</span>
-              </div>
+            {/* Sort */}
+            <div className="relative">
+              <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 z-10" />
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-400 focus:border-purple-500 transition-all duration-300">
-                  <SelectValue />
+                <SelectTrigger className="pl-10 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
+                  <SelectValue placeholder="Сортировка" />
                 </SelectTrigger>
-                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200">
-                  <SelectItem value="default">📋 По умолчанию</SelectItem>
-                  <SelectItem value="difficulty-asc">⬆️ Сложность: легкие первые</SelectItem>
-                  <SelectItem value="difficulty-desc">⬇️ Сложность: сложные первые</SelectItem>
-                  <SelectItem value="alphabetical">🔤 По алфавиту</SelectItem>
+                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
+                  <SelectItem value="default" className="rounded-lg hover:bg-purple-50">
+                    По умолчанию
+                  </SelectItem>
+                  <SelectItem value="difficulty" className="rounded-lg hover:bg-purple-50">
+                    По сложности
+                  </SelectItem>
+                  <SelectItem value="alphabetical" className="rounded-lg hover:bg-purple-50">
+                    По алфавиту
+                  </SelectItem>
                 </SelectContent>
               </Select>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
-        {/* Stats */}
-        <Card className="mb-8 bg-gradient-to-r from-purple-500/10 via-violet-500/10 to-indigo-500/10 border-purple-200 shadow-lg">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">{stats.total}</div>
-                <div className="text-sm text-gray-600">Всего вопросов</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">{stats.easy}</div>
-                <div className="text-sm text-gray-600">Легких</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-orange-600">{stats.medium}</div>
-                <div className="text-sm text-gray-600">Средних</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-red-600">{stats.hard}</div>
-                <div className="text-sm text-gray-600">Сложных</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Questions */}
-        {filteredAndSortedQuestions.length === 0 ? (
-          <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
-            <CardContent className="p-12 text-center">
-              <Search className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">Вопросы не найдены</h3>
-              <p className="text-gray-500">Попробуйте изменить параметры поиска или фильтрации</p>
-            </CardContent>
-          </Card>
+        {/* Questions Grid */}
+        {filteredAndSortedQuestions.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAndSortedQuestions.map((question, index) => (
+              <QuestionCard
+                key={`${question.id}-${index}`}
+                question={question}
+                isFlipped={flippedCards.has(index)}
+                onFlip={() => handleCardFlip(index)}
+              />
+            ))}
+          </div>
         ) : (
-          <div className="space-y-6">      
-            {currentQuestions.map((question, index) => {
-              const DifficultyIcon = getDifficultyIcon(question.difficulty);
-              return (
-                <Card key={question.id} className="card-hover border-0 bg-white/80 backdrop-blur-sm shadow-lg overflow-hidden group">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
-                            {startIndex + index + 1}
-                          </div>
-                          <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg flex items-center gap-1`}>
-                            <DifficultyIcon className="h-3 w-3" />
-                            {getDifficultyText(question.difficulty)}
-                          </Badge>
-                          {!techId && 'technology' in question && (
-                            <Badge variant="outline" className="border-purple-300 text-purple-700 bg-purple-50">
-                              {question.technology}
-                            </Badge>
-                          )}
-                        </div>
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4 group-hover:text-purple-700 transition-colors duration-300">
-                          {question.question}
-                        </h3>
-                        <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-50 via-blue-50 to-purple-50 border-l-4 border-gradient-to-b border-emerald-400">
-                          <p className="text-gray-700 leading-relaxed">{question.answer}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 mt-8">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="rounded-full border-purple-200 hover:border-purple-400 hover:bg-purple-50"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                
-                {generatePageNumbers().map((page, index) => (
-                  page === '...' ? (
-                    <span key={`ellipsis-${index}`} className="px-2 text-gray-500">...</span>
-                  ) : (
-                    <Button
-                      key={page}
-                      variant={currentPage === page ? "default" : "outline"}
-                      onClick={() => handlePageChange(page as number)}
-                      className={`rounded-full ${
-                        currentPage === page 
-                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-0' 
-                          : 'border-purple-200 hover:border-purple-400 hover:bg-purple-50'
-                      }`}
-                    >
-                      {page}
-                    </Button>
-                  )
-                ))}
-
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="rounded-full border-purple-200 hover:border-purple-400 hover:bg-purple-50"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-            )}
+          <div className="text-center py-12">
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-white/20 shadow-lg max-w-md mx-auto">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                Ничего не найдено
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Попробуйте изменить критерии поиска или фильтрации
+              </p>
+              <Button onClick={resetFilters} variant="outline" className="hover:bg-purple-50">
+                Сбросить фильтры
+              </Button>
+            </div>
           </div>
         )}
       </div>
