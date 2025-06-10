@@ -5,6 +5,8 @@ export interface Question {
   difficulty: 'easy' | 'medium' | 'hard';
 }
 
+export type ProgressStatus = 'learning' | 'review' | 'known';
+
 export interface Technology {
   id: string;
   name: string;
