@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Header = () => {
@@ -25,34 +25,41 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="flex items-center space-x-3 hover:opacity-90 transition-opacity"
+              className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
               onClick={() => isMenuOpen && toggleMenu()}
             >
-              <div className="p-3 rounded-2xl bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
-                <Code className="h-8 w-8 text-white" />
+              <div className="p-2 rounded-xl bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
+                <Code className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
                   Hschool
                 </h1>
               </div>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-4">
               <Link
                 to="/study/html"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white font-medium bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                <Brain className="h-5 w-5" />
+                <Brain className="h-4 w-4" />
                 Изучение
               </Link>
               <Link
                 to="/practice"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
               >
-                <BookOpen className="h-5 w-5" />
+                <BookOpen className="h-4 w-4" />
                 Практика
+              </Link>
+              <Link
+                to="/rate"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
+                title="Оценить приложение"
+              >
+                <Star className="h-5 w-5 text-yellow-500" />
               </Link>
             </nav>
 
@@ -95,20 +102,28 @@ const Header = () => {
 
           <nav className="flex-grow mt-8 flex flex-col">
             <Link
-              to="/study/html"
+              to="/study"
               onClick={toggleMenu}
-              className="flex items-center gap-4 py-4 px-6 text-lg font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
             >
-              <Brain className="h-6 w-6 text-purple-500" />
+              <Brain className="h-5 w-5 text-purple-500" />
               <span>Изучение</span>
             </Link>
             <Link
               to="/practice"
               onClick={toggleMenu}
-              className="flex items-center gap-4 py-4 px-6 text-lg font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
             >
-              <BookOpen className="h-6 w-6 text-blue-500" />
+              <BookOpen className="h-5 w-5 text-blue-500" />
               <span>Практика</span>
+            </Link>
+            <Link
+              to="/rate"
+              onClick={toggleMenu}
+              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+            >
+              <Star className="h-5 w-5 text-yellow-500" />
+              <span>Оценить</span>
             </Link>
           </nav>
 

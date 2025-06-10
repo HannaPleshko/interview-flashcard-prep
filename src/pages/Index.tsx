@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Flame, BookOpen, Shield } from "lucide-react";
+import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { questionsData } from "@/data/questions";
+import React from "react";
 
 const technologies = [
   {
@@ -78,9 +79,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
 
-      <div className="container mx-auto px-4 py-8 flex-grow">
+      <div className="flex-grow">
         {/* Hero Section */}
-        <section className="py-12 md:py-20 text-center relative overflow-hidden">
+        <section className="py-12 md:py-20 text-center relative overflow-hidden w-full">
           <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
@@ -112,59 +113,62 @@ const Index = () => {
         </section>
 
         {/* Technologies Grid */}
-        <section className="py-12 md:py-16">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
-              🎯 Выберите технологию для изучения
-            </h3>
-            <p className="text-base md:text-lg text-muted-foreground">
-              Каждая карточка содержит вопросы разного уровня сложности
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {technologies.map((tech) => {
-              const IconComponent = tech.icon;
-              const techQuestions = questionsData.find(t => t.id === tech.id)?.questions.length || 0;
-              return (
-                <Card key={tech.id} className="card-hover glow-hover border-0 bg-white/60 backdrop-blur-sm overflow-hidden relative group">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                  <CardHeader className="text-center relative z-10">
-                    <div className={`w-20 h-20 bg-gradient-to-br ${tech.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
-                      <IconComponent className="h-10 w-10 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-bold">{tech.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center relative z-10">
-                    <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{tech.description}</p>
-                    <div className="flex justify-center mb-6">
-                      <Badge variant="secondary" className={`bg-gradient-to-r ${tech.gradient} text-white border-0 px-3 py-1`}>
-                        {techQuestions} вопросов
-                      </Badge>
-                    </div>
-                    <div className="flex gap-3">
-                      <Button asChild className={`flex-1 bg-gradient-to-r ${tech.gradient} hover:opacity-90 text-white border-0 text-sm`} size="sm">
-                        <Link to={`/study/${tech.id}`}>
-                          <Brain className="h-4 w-4 mr-1" />
-                          Изучение
-                        </Link>
-                      </Button>
-                      <Button asChild variant="outline" className="flex-1 border-2 hover:bg-white/50 text-sm" size="sm">
-                        <Link to={`/practice/${tech.id}`}>
-                          <Target className="h-4 w-4 mr-1" />
-                          Практика
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
+                🎯 Выберите технологию для изучения
+              </h3>
+              <p className="text-base md:text-lg text-muted-foreground">
+                Каждая карточка содержит вопросы разного уровня сложности
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {technologies.map((tech) => {
+                const IconComponent = tech.icon;
+                const techQuestions = questionsData.find(t => t.id === tech.id)?.questions.length || 0;
+                return (
+                  <Card key={tech.id} className="card-hover glow-hover border-0 bg-white/60 backdrop-blur-sm overflow-hidden relative group transition-shadow duration-300 hover:shadow-2xl">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                    <CardHeader className="text-center relative z-10">
+                      <div className={`w-20 h-20 bg-gradient-to-br ${tech.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                        <IconComponent className="h-10 w-10 text-white" />
+                      </div>
+                      <CardTitle className="text-xl font-bold">{tech.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center relative z-10">
+                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed h-12">{tech.description}</p>
+                      <div className="flex justify-center mb-6">
+                        <Badge variant="secondary" className={`bg-gradient-to-r ${tech.gradient} text-white border-0 px-3 py-1`}>
+                          {techQuestions} вопросов
+                        </Badge>
+                      </div>
+                      <div className="flex gap-3">
+                        <Button asChild className={`flex-1 bg-gradient-to-r ${tech.gradient} hover:opacity-90 text-white border-0 text-sm`} size="sm">
+                          <Link to={`/study/${tech.id}`}>
+                            <Brain className="h-4 w-4 mr-1" />
+                            Изучение
+                          </Link>
+                        </Button>
+                        <Button asChild variant="outline" className="flex-1 border-2 hover:bg-white/50 text-sm" size="sm">
+                          <Link to={`/practice/${tech.id}`}>
+                            <Target className="h-4 w-4 mr-1" />
+                            Практика
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-r from-purple-50 to-blue-50">
-          <div className="container mx-auto px-4 text-center">
+        <section className="py-12 md:py-16 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-hero gradient-animated opacity-5" />
+          <div className="container mx-auto px-4 text-center relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">

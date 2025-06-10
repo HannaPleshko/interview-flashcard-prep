@@ -163,7 +163,13 @@
 
 .gradient-animated {
   background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
+  animation: gradient-animation 10s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .gradient-hero {
@@ -175,17 +181,15 @@
 }
 
 .glow-hover:hover {
-  box-shadow: 0 10px 25px rgba(139, 69, 219, 0.2), 0 0 20px rgba(59, 130, 246, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 5px rgba(139, 92, 246, 0.2);
 }
 
 .card-hover {
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card-hover:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(139, 69, 219, 0.15);
 }
 
 .story-link {
