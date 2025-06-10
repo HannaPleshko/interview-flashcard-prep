@@ -50,7 +50,9 @@ const Practice = () => {
   };
 
   const shuffleQuestions = () => {
-    const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
+    // Берем максимум 15 вопросов
+    const limitedQuestions = allQuestions.slice(0, 15);
+    const shuffled = [...limitedQuestions].sort(() => Math.random() - 0.5);
     setCurrentQuestions(shuffled);
     setCurrentIndex(0);
     setIsFlipped(false);
