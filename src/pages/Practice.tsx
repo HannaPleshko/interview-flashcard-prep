@@ -95,25 +95,25 @@ const Practice = () => {
   }
 
   const currentQuestion = currentQuestions[currentIndex];
+  const progress = currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
 
+      {/* Progress Bar */}
+      {currentQuestions.length > 0 && (
+        <div className="w-full bg-white/60 backdrop-blur-sm h-2 shadow-inner">
+          <div 
+            className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-r-full transition-all duration-500 ease-in-out"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      )}
+
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
-             <Button variant="ghost" size="icon" asChild className="hover:bg-white/50 flex-shrink-0 -ml-2 sm:hidden">
-              <Link to="/">
-                <ArrowLeft className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild className="hover:bg-white/50 hidden sm:flex">
-              <Link to="/">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Назад
-              </Link>
-            </Button>
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 {technology?.name}
