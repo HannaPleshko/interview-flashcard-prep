@@ -128,31 +128,129 @@ const Index = () => {
                 const IconComponent = tech.icon;
                 const techQuestions = questionsData.find(t => t.id === tech.id)?.questions.length || 0;
                 return (
-                  <Card key={tech.id} className="card-hover glow-hover border-0 bg-white/60 backdrop-blur-sm overflow-hidden relative group transition-shadow duration-300 hover:shadow-2xl">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                    <CardHeader className="text-center relative z-10">
-                      <div className={`w-20 h-20 bg-gradient-to-br ${tech.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
-                        <IconComponent className="h-10 w-10 text-white" />
+                  <Card 
+                    key={tech.id} 
+                    className="
+                      group relative
+                      bg-white/90 backdrop-blur-md
+                      border-0
+                      overflow-hidden
+                      transition-all duration-700
+                      hover:scale-[1.03] hover:-translate-y-2
+                      hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)]
+                      shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+                      rounded-3xl
+                      before:absolute before:inset-0
+                      before:bg-gradient-to-br before:from-white/50 before:to-transparent
+                      before:opacity-0 before:transition-all before:duration-700
+                      hover:before:opacity-100
+                      after:absolute after:inset-0
+                      after:bg-gradient-to-br after:from-white/20 after:to-transparent
+                      after:opacity-0 after:transition-all after:duration-700
+                      hover:after:opacity-100
+                      hover:rotate-[0.5deg]
+                    "
+                  >
+                    <div className={`
+                      absolute inset-0 
+                      bg-gradient-to-br ${tech.gradient}
+                      opacity-[0.15] group-hover:opacity-[0.25]
+                      transition-all duration-700
+                      rounded-3xl
+                      group-hover:scale-110
+                    `}></div>
+                    
+                    <CardHeader className="text-center relative z-10 pt-8">
+                      <div className={`
+                        w-24 h-24 
+                        bg-gradient-to-br ${tech.gradient}
+                        rounded-[2rem] 
+                        flex items-center justify-center 
+                        mx-auto mb-6
+                        transition-all duration-700
+                        group-hover:scale-110 group-hover:rotate-6
+                        shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+                        relative
+                        before:absolute before:inset-0
+                        before:bg-gradient-to-br before:from-white/20 before:to-transparent
+                        before:rounded-[2rem]
+                        after:absolute after:inset-0
+                        after:bg-gradient-to-br after:from-black/10 after:to-transparent
+                        after:rounded-[2rem]
+                        group-hover:shadow-[0_12px_30px_rgba(0,0,0,0.2)]
+                      `}>
+                        <IconComponent className="h-12 w-12 text-white transition-all duration-700 group-hover:scale-110 group-hover:rotate-[-6deg]" />
                       </div>
-                      <CardTitle className="text-xl font-bold">{tech.name}</CardTitle>
+                      <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent transition-all duration-700 group-hover:from-blue-600 group-hover:to-purple-600">
+                        {tech.name}
+                      </CardTitle>
                     </CardHeader>
-                    <CardContent className="text-center relative z-10">
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed h-12">{tech.description}</p>
-                      <div className="flex justify-center mb-6">
-                        <Badge variant="secondary" className={`bg-gradient-to-r ${tech.gradient} text-white border-0 px-3 py-1`}>
+                    
+                    <CardContent className="text-center relative z-10 pb-8">
+                      <p className="text-gray-600 mb-6 text-sm leading-relaxed h-12 transition-all duration-700 group-hover:text-gray-700">
+                        {tech.description}
+                      </p>
+                      <div className="flex justify-center mb-8">
+                        <Badge 
+                          variant="secondary" 
+                          className={`
+                            bg-gradient-to-r ${tech.gradient}
+                            text-white border-0 px-4 py-1.5
+                            transition-all duration-700
+                            group-hover:scale-110
+                            shadow-sm
+                            rounded-full
+                            text-sm font-medium
+                            group-hover:shadow-md
+                          `}
+                        >
                           {techQuestions} вопросов
                         </Badge>
                       </div>
-                      <div className="flex gap-3">
-                        <Button asChild className={`flex-1 bg-gradient-to-r ${tech.gradient} hover:opacity-90 text-white border-0 text-sm`} size="sm">
-                          <Link to={`/study/${tech.id}`}>
-                            <Brain className="h-4 w-4 mr-1" />
+                      <div className="flex gap-3 px-4">
+                        <Button 
+                          asChild 
+                          className={`
+                            flex-1 
+                            bg-gradient-to-r ${tech.gradient}
+                            hover:opacity-90 
+                            text-white border-0 
+                            text-sm font-medium
+                            transition-all duration-700
+                            group-hover:scale-105
+                            shadow-sm
+                            rounded-xl
+                            h-10
+                            group-hover:shadow-md
+                          `} 
+                          size="sm"
+                        >
+                          <Link to={`/study/${tech.id}`} className="flex items-center justify-center gap-2">
+                            <Brain className="h-4 w-4 transition-transform duration-700 group-hover:scale-110" />
                             Изучение
                           </Link>
                         </Button>
-                        <Button asChild variant="outline" className="flex-1 border-2 hover:bg-white/50 text-sm" size="sm">
-                          <Link to={`/practice/${tech.id}`}>
-                            <Target className="h-4 w-4 mr-1" />
+                        <Button 
+                          asChild 
+                          variant="outline" 
+                          className="
+                            flex-1 
+                            border-2 border-gray-200
+                            hover:bg-white/50 
+                            text-sm font-medium
+                            transition-all duration-700
+                            group-hover:scale-105
+                            shadow-sm
+                            rounded-xl
+                            h-10
+                            group-hover:shadow-md
+                            group-hover:border-blue-200
+                            group-hover:text-blue-600
+                          " 
+                          size="sm"
+                        >
+                          <Link to={`/practice/${tech.id}`} className="flex items-center justify-center gap-2">
+                            <Target className="h-4 w-4 transition-transform duration-700 group-hover:scale-110" />
                             Практика
                           </Link>
                         </Button>
@@ -171,26 +269,98 @@ const Index = () => {
           <div className="container mx-auto px-4 text-center relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-                <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Brain className="h-8 w-8 text-white" />
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-500
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
+                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+                relative overflow-hidden
+                before:absolute before:inset-0
+                before:bg-gradient-to-br before:from-white/50 before:to-transparent
+                before:opacity-0 before:transition-opacity before:duration-500
+                hover:before:opacity-100
+                after:absolute after:inset-0
+                after:bg-gradient-to-br after:from-white/20 after:to-transparent
+                after:opacity-0 after:transition-opacity after:duration-500
+                hover:after:opacity-100
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
+                  before:absolute before:inset-0
+                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
+                  before:rounded-[2rem]
+                  after:absolute after:inset-0
+                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
+                  after:rounded-[2rem]
+                ">
+                  <Brain className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-lg font-semibold mb-2">Интерактивное обучение</h4>
-                <p className="text-muted-foreground text-sm">Карточки с вопросами помогают лучше запоминать материал</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Интерактивное обучение</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Карточки с вопросами помогают лучше запоминать материал</p>
               </div>
-              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-white" />
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-500
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
+                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+                relative overflow-hidden
+                before:absolute before:inset-0
+                before:bg-gradient-to-br before:from-white/50 before:to-transparent
+                before:opacity-0 before:transition-opacity before:duration-500
+                hover:before:opacity-100
+                after:absolute after:inset-0
+                after:bg-gradient-to-br after:from-white/20 after:to-transparent
+                after:opacity-0 after:transition-opacity after:duration-500
+                hover:after:opacity-100
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
+                  before:absolute before:inset-0
+                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
+                  before:rounded-[2rem]
+                  after:absolute after:inset-0
+                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
+                  after:rounded-[2rem]
+                ">
+                  <Target className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-lg font-semibold mb-2">Разные уровни</h4>
-                <p className="text-muted-foreground text-sm">Вопросы для junior, middle и senior разработчиков</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Разные уровни</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Вопросы для junior, middle и senior разработчиков</p>
               </div>
-              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
-                <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sparkles className="h-8 w-8 text-white" />
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-500
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
+                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+                relative overflow-hidden
+                before:absolute before:inset-0
+                before:bg-gradient-to-br before:from-white/50 before:to-transparent
+                before:opacity-0 before:transition-opacity before:duration-500
+                hover:before:opacity-100
+                after:absolute after:inset-0
+                after:bg-gradient-to-br after:from-white/20 after:to-transparent
+                after:opacity-0 after:transition-opacity after:duration-500
+                hover:after:opacity-100
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
+                  before:absolute before:inset-0
+                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
+                  before:rounded-[2rem]
+                  after:absolute after:inset-0
+                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
+                  after:rounded-[2rem]
+                ">
+                  <Sparkles className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-lg font-semibold mb-2">Актуальные технологии</h4>
-                <p className="text-muted-foreground text-sm">Современный стек технологий для веб-разработки</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Актуальные технологии</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Современный стек технологий для веб-разработки</p>
               </div>
             </div>
           </div>
