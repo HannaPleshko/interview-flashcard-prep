@@ -13,15 +13,24 @@ interface QuestionCardProps {
 
 const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps) => {
   const [localFlipped, setLocalFlipped] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
   
   const flipped = isFlipped || localFlipped;
   
   const handleClick = () => {
-    if (onFlip) {
-      onFlip();
-    } else {
-      setLocalFlipped(!localFlipped);
-    }
+    setIsFlipping(true);
+    
+    setTimeout(() => {
+      if (onFlip) {
+        onFlip();
+      } else {
+        setLocalFlipped(!localFlipped);
+      }
+    }, 250); // Половина времени анимации
+    
+    setTimeout(() => {
+      setIsFlipping(false);
+    }, 500); // Полное время анимации
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -44,20 +53,26 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
 
   return (
     <div className="flip-card w-full h-80 relative group" style={{ perspective: '1000px' }}>
-      {/* Animated gradient border */}
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 opacity-75 blur-sm group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
-      <div className="absolute inset-0.5 rounded-xl bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
+      {/* Animated gradient border - скрываем во время переворота */}
+      <div className={`absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 transition-opacity duration-300 ${
+        isFlipping ? 'opacity-0' : 'opacity-75 blur-sm group-hover:opacity-100'
+      }`}></div>
+      <div className={`absolute inset-0.5 rounded-xl bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-opacity duration-500 ${
+        isFlipping ? 'opacity-0' : 'opacity-0 group-hover:opacity-30'
+      }`}></div>
       
-      {/* Floating particles effect */}
-      <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
-        <div className="absolute top-4 left-4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce opacity-60"></div>
-        <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-pulse opacity-70"></div>
-        <div className="absolute bottom-6 left-8 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-50"></div>
-        <div className="absolute bottom-4 right-4 w-2 h-2 bg-purple-300 rounded-full animate-bounce opacity-60" style={{ animationDelay: '0.5s' }}></div>
-      </div>
+      {/* Floating particles effect - скрываем во время переворота */}
+      {!isFlipping && (
+        <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
+          <div className="absolute top-4 left-4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce opacity-60"></div>
+          <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-pulse opacity-70"></div>
+          <div className="absolute bottom-6 left-8 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-50"></div>
+          <div className="absolute bottom-4 right-4 w-2 h-2 bg-purple-300 rounded-full animate-bounce opacity-60" style={{ animationDelay: '0.5s' }}></div>
+        </div>
+      )}
 
       <div 
-        className={`flip-card-inner w-full h-full cursor-pointer transition-all duration-700 ease-in-out relative z-10 ${
+        className={`flip-card-inner w-full h-full cursor-pointer transition-all duration-500 ease-in-out relative z-10 ${
           flipped ? 'flipped' : ''
         }`}
         onClick={handleClick}
@@ -66,7 +81,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
         }}
       >
         {/* Front of card - Question */}
-        <Card className="flip-card-front absolute inset-0 w-full h-full border-2 border-white/20 bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-lg shadow-2xl overflow-hidden hover:shadow-purple-500/20 transition-all duration-300">
+        <Card className="flip-card-front absolute inset-0 w-full h-full border-2 border-white/20 bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-lg shadow-2xl overflow-hidden transition-all duration-300">
           <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
           
           {/* Corner decorations */}
@@ -91,21 +106,23 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3 bg-gradient-to-r from-purple-50 to-blue-50 px-4 py-2 rounded-full">
-                <Sparkles className="h-4 w-4 text-purple-500 animate-pulse" />
+                <Sparkles className={`h-4 w-4 text-purple-500 ${!isFlipping ? 'animate-pulse' : ''}`} />
                 <span className="font-medium">Нажмите, чтобы увидеть ответ</span>
-                <Sparkles className="h-4 w-4 text-blue-500 animate-pulse" />
+                <Sparkles className={`h-4 w-4 text-blue-500 ${!isFlipping ? 'animate-pulse' : ''}`} />
               </div>
-              <div className="flex justify-center gap-1">
-                <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-              </div>
+              {!isFlipping && (
+                <div className="flex justify-center gap-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
 
         {/* Back of card - Answer */}
-        <Card className="flip-card-back absolute inset-0 w-full h-full border-2 border-white/20 bg-gradient-to-br from-blue-50/95 via-purple-50/95 to-pink-50/95 backdrop-blur-lg shadow-2xl overflow-hidden hover:shadow-blue-500/20 transition-all duration-300">
+        <Card className="flip-card-back absolute inset-0 w-full h-full border-2 border-white/20 bg-gradient-to-br from-blue-50/95 via-purple-50/95 to-pink-50/95 backdrop-blur-lg shadow-2xl overflow-hidden transition-all duration-300">
           <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
           
           {/* Corner decorations */}
@@ -136,11 +153,13 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
                 <span className="font-medium">Нажмите, чтобы вернуться к вопросу</span>
                 <Eye className="h-4 w-4 text-blue-500" />
               </div>
-              <div className="flex justify-center gap-1">
-                <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-              </div>
+              {!isFlipping && (
+                <div className="flex justify-center gap-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
