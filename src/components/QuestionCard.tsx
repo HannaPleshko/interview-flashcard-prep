@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,13 +52,6 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
 
   return (
     <div className="flip-card w-full h-80 relative group" style={{ perspective: '1000px' }}>
-      {/* Animated gradient border - скрываем во время переворота */}
-      <div className={`absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 transition-opacity duration-300 ${
-        isFlipping ? 'opacity-0' : 'opacity-75 blur-sm group-hover:opacity-100'
-      }`}></div>
-      <div className={`absolute inset-0.5 rounded-xl bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-opacity duration-500 ${
-        isFlipping ? 'opacity-0' : 'opacity-0 group-hover:opacity-30'
-      }`}></div>
       
       {/* Floating particles effect - скрываем во время переворота */}
       {!isFlipping && (
@@ -106,17 +98,15 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3 bg-gradient-to-r from-purple-50 to-blue-50 px-4 py-2 rounded-full">
-                <Sparkles className={`h-4 w-4 text-purple-500 ${!isFlipping ? 'animate-pulse' : ''}`} />
+                <Sparkles className="h-4 w-4 text-purple-500 animate-pulse" />
                 <span className="font-medium">Нажмите, чтобы увидеть ответ</span>
-                <Sparkles className={`h-4 w-4 text-blue-500 ${!isFlipping ? 'animate-pulse' : ''}`} />
+                <Sparkles className="h-4 w-4 text-blue-500 animate-pulse" />
               </div>
-              {!isFlipping && (
-                <div className="flex justify-center gap-1">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                </div>
-              )}
+              <div className="flex justify-center gap-1">
+                <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -148,18 +138,16 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
               </div>
             </div>
             <div className="text-center">
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3 bg-gradient-to-r from-green-50 to-blue-50 px-4 py-2 rounded-full">
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3 bg-gradient-to-r from-purple-50 to-blue-50 px-4 py-2 rounded-full">
                 <EyeOff className="h-4 w-4 text-green-500" />
                 <span className="font-medium">Нажмите, чтобы вернуться к вопросу</span>
                 <Eye className="h-4 w-4 text-blue-500" />
               </div>
-              {!isFlipping && (
-                <div className="flex justify-center gap-1">
-                  <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                </div>
-              )}
+              <div className="flex justify-center gap-1">
+                <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+              </div>
             </div>
           </CardContent>
         </Card>
