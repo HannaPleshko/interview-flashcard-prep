@@ -43,18 +43,21 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
   };
 
   return (
-    <div className="perspective-1000 w-full h-80">
-      <Card 
-        className={`relative w-full h-full cursor-pointer transition-all duration-700 transform-style-preserve-3d ${
-          flipped ? 'rotate-y-180' : ''
-        } glow-hover border-0 bg-white/80 backdrop-blur-sm overflow-hidden group`}
+    <div className="flip-card w-full h-80" style={{ perspective: '1000px' }}>
+      <div 
+        className={`flip-card-inner w-full h-full cursor-pointer transition-transform duration-700 ${
+          flipped ? 'flipped' : ''
+        }`}
         onClick={handleClick}
+        style={{ 
+          transformStyle: 'preserve-3d',
+          position: 'relative'
+        }}
       >
-        {/* Gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-        
         {/* Front of card - Question */}
-        <div className="absolute inset-0 backface-hidden">
+        <Card className="flip-card-front absolute inset-0 w-full h-full glow-hover border-0 bg-white/80 backdrop-blur-sm overflow-hidden group">
+          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+          
           <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
             <div>
               <div className="flex justify-between items-start mb-4">
@@ -79,11 +82,13 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
               <div className="w-12 h-1 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full mx-auto"></div>
             </div>
           </CardContent>
-        </div>
+        </Card>
 
         {/* Back of card - Answer */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180">
-          <CardContent className="p-6 h-full flex flex-col justify-between bg-gradient-to-br from-blue-50 to-purple-50 relative z-10">
+        <Card className="flip-card-back absolute inset-0 w-full h-full glow-hover border-0 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden group">
+          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+          
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
             <div>
               <div className="flex justify-between items-start mb-4">
                 <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 shadow-lg">
@@ -107,8 +112,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
               <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto"></div>
             </div>
           </CardContent>
-        </div>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 };
