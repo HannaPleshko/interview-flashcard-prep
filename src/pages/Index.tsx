@@ -80,29 +80,29 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Hero Section */}
-        <section className="py-20 text-center relative overflow-hidden">
+        <section className="py-12 md:py-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Sparkles className="h-12 w-12 text-purple-500 animate-pulse" />
-              <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
+              <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 text-purple-500 animate-pulse" />
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
                 Готовься к собеседованиям
               </h2>
-              <Sparkles className="h-12 w-12 text-blue-500 animate-pulse" />
+              <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 text-blue-500 animate-pulse" />
             </div>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
               Превращай подготовку в увлекательное путешествие к мечтной работе!
             </p>
-            <div className="flex items-center justify-center gap-4">
-              <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover">
-                <Link to="/study" className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover w-full sm:w-auto">
+                <Link to="/study" className="flex items-center justify-center gap-2">
                   <Brain className="h-5 w-5" />
                   Начать изучение
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50">
-                <Link to="/practice" className="flex items-center gap-2">
+              <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50 w-full sm:w-auto">
+                <Link to="/practice" className="flex items-center justify-center gap-2">
                   <Target className="h-5 w-5" />
                   Попрактиковаться
                 </Link>
@@ -112,12 +112,12 @@ const Index = () => {
         </section>
 
         {/* Technologies Grid */}
-        <section className="py-16">
+        <section className="py-12 md:py-16">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-semibold text-foreground mb-4">
+            <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
               🎯 Выберите технологию для изучения
             </h3>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               Каждая карточка содержит вопросы разного уровня сложности
             </p>
           </div>
@@ -163,9 +163,9 @@ const Index = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
+        <section className="py-12 md:py-16 bg-gradient-to-r from-purple-50 to-blue-50">
           <div className="container mx-auto px-4 text-center">
-            <h3 className="text-2xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-8">✨ Особенности платформы</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm card-hover">
                 <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">

@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen } from "lucide-react";
+import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, ArrowRight } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import Header from "@/components/Header";
@@ -17,9 +16,16 @@ const Study = () => {
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [sortBy, setSortBy] = useState("default");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
   
   const technology = questionsData.find(t => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : [];
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setFlippedCards(new Set());
+  }, [searchTerm, difficultyFilter, sortBy]);
 
   // Filtering and sorting logic
   const filteredAndSortedQuestions = allQuestions
@@ -57,6 +63,7 @@ const Study = () => {
     setDifficultyFilter("all");
     setSortBy("default");
     setFlippedCards(new Set());
+    setCurrentPage(1);
   };
 
   const getDifficultyStats = () => {
@@ -87,17 +94,17 @@ const Study = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
         <Header />
-        <div className="container mx-auto px-4 py-8 text-center flex-grow">
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/20">
+        <div className="container mx-auto px-4 py-8 text-center flex-grow flex items-center justify-center">
+          <div className="max-w-md mx-auto">
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/20">
               <div className="mb-8">
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
                   Выберите технологию для изучения
                 </h1>
-                <p className="text-muted-foreground text-lg">
+                <p className="text-muted-foreground text-base sm:text-lg">
                   Вернитесь на главную страницу, чтобы выбрать технологию для изучения
                 </p>
               </div>
@@ -116,6 +123,12 @@ const Study = () => {
   }
 
   const stats = getDifficultyStats();
+  
+  // Pagination logic
+  const totalPages = Math.ceil(filteredAndSortedQuestions.length / ITEMS_PER_PAGE);
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const currentQuestions = filteredAndSortedQuestions.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
@@ -123,19 +136,18 @@ const Study = () => {
 
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild className="hover:bg-white/50">
+            <Button variant="ghost" size="icon" asChild className="hover:bg-white/50 flex-shrink-0 -ml-2 sm:hidden">
               <Link to="/">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Назад
+                <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 {technology?.name}
               </h1>
-              <p className="text-muted-foreground">Изучение материалов</p>
+              <p className="text-muted-foreground text-sm sm:text-base">Изучение материалов</p>
             </div>
           </div>
           
@@ -143,14 +155,14 @@ const Study = () => {
             variant="outline" 
             size="sm" 
             onClick={resetFilters}
-            className="hover:bg-white/50 border-purple-200"
+            className="hover:bg-white/50 border-purple-200 self-end sm:self-auto"
           >
             Сбросить фильтры
           </Button>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20 shadow-lg">
             <div className="text-2xl font-bold text-purple-600">{filteredAndSortedQuestions.length}</div>
             <div className="text-sm text-muted-foreground">Всего вопросов</div>
@@ -170,7 +182,7 @@ const Study = () => {
         </div>
 
         {/* Search and Filter Controls */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 shadow-lg">
+        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/20 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search */}
             <div className="relative">
@@ -231,14 +243,14 @@ const Study = () => {
         </div>
 
         {/* Questions Grid */}
-        {filteredAndSortedQuestions.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAndSortedQuestions.map((question, index) => (
+        {currentQuestions.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {currentQuestions.map((question, index) => (
               <QuestionCard
-                key={`${question.id}-${index}`}
+                key={`${question.id}-${indexOfFirstItem + index}`}
                 question={question}
-                isFlipped={flippedCards.has(index)}
-                onFlip={() => handleCardFlip(index)}
+                isFlipped={flippedCards.has(indexOfFirstItem + index)}
+                onFlip={() => handleCardFlip(indexOfFirstItem + index)}
               />
             ))}
           </div>
@@ -249,13 +261,41 @@ const Study = () => {
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 Ничего не найдено
               </h3>
-              <p className="text-muted-foreground mb-4">
-                Попробуйте изменить критерии поиска или фильтрации
+              <p className="text-muted-foreground">
+                Попробуйте изменить фильтры или сбросить их, чтобы увидеть больше вопросов.
               </p>
-              <Button onClick={resetFilters} variant="outline" className="hover:bg-purple-50">
-                Сбросить фильтры
-              </Button>
             </div>
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 sm:gap-4 mt-8">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="hover:bg-white/50 border-purple-200 text-purple-700"
+            >
+              <ArrowLeft className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Назад</span>
+            </Button>
+
+            <span className="text-muted-foreground font-medium text-sm hidden sm:block">
+              Страница {currentPage} из {totalPages}
+            </span>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="hover:bg-white/50 border-purple-200 text-purple-700"
+            >
+              <span className="hidden sm:inline">Далее</span>
+              <ArrowRight className="h-4 w-4 sm:ml-2" />
+            </Button>
           </div>
         )}
       </div>
