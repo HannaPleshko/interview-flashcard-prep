@@ -274,8 +274,8 @@ const Index = () => {
                 <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
                   <Brain className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Интерактивное обучение</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">Карточки с вопросами помогают лучше запоминать материал</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Интерактивные карточки</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Изучайте теорию с помощью карточек, которые помогают лучше запоминать материал и готовиться к собеседованиям</p>
               </div>
               <div className="
                 p-8 rounded-3xl 
@@ -288,10 +288,10 @@ const Index = () => {
                 relative
               ">
                 <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
-                  <Target className="h-10 w-10 text-white" />
+                  <Code className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Разные уровни</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">Вопросы для junior, middle и senior разработчиков</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Практические задачи</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Решайте реальные задачи с автоматической проверкой кода и мгновенной обратной связью</p>
               </div>
               <div className="
                 p-8 rounded-3xl 
@@ -304,10 +304,58 @@ const Index = () => {
                 relative
               ">
                 <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
+                  <Target className="h-10 w-10 text-white" />
+                </div>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Разные уровни сложности</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Задачи и вопросы для разработчиков любого уровня: от junior до senior</p>
+              </div>
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-300
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
+                  <Layers className="h-10 w-10 text-white" />
+                </div>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Современный стек</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Актуальные технологии веб-разработки: от HTML/CSS до React и Node.js</p>
+              </div>
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-300
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
+                  <Zap className="h-10 w-10 text-white" />
+                </div>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Мгновенная проверка</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Автоматическая проверка решений с подробными тестами и объяснениями ошибок</p>
+              </div>
+              <div className="
+                p-8 rounded-3xl 
+                bg-white/90 backdrop-blur-md
+                border-0
+                transition-all duration-300
+                hover:scale-[1.02] hover:-translate-y-1
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
+              ">
+                <div className="w-20 h-20 bg-gradient-to-r from-violet-400 to-purple-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
                   <Sparkles className="h-10 w-10 text-white" />
                 </div>
-                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Актуальные технологии</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">Современный стек технологий для веб-разработки</p>
+                <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Удобный интерфейс</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">Современный дизайн с адаптивной версткой для комфортного обучения на любых устройствах</p>
               </div>
             </div>
           </div>
