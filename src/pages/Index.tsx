@@ -134,30 +134,19 @@ const Index = () => {
                       group relative
                       bg-white/90 backdrop-blur-md
                       border-0
-                      overflow-hidden
-                      transition-all duration-700
-                      hover:scale-[1.03] hover:-translate-y-2
-                      hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)]
-                      shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+                      transition-all duration-300
+                      hover:scale-[1.02] hover:-translate-y-1
+                      hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                      shadow-md
                       rounded-3xl
-                      before:absolute before:inset-0
-                      before:bg-gradient-to-br before:from-white/50 before:to-transparent
-                      before:opacity-0 before:transition-all before:duration-700
-                      hover:before:opacity-100
-                      after:absolute after:inset-0
-                      after:bg-gradient-to-br after:from-white/20 after:to-transparent
-                      after:opacity-0 after:transition-all after:duration-700
-                      hover:after:opacity-100
-                      hover:rotate-[0.5deg]
                     "
                   >
                     <div className={`
                       absolute inset-0 
                       bg-gradient-to-br ${tech.gradient}
                       opacity-[0.15] group-hover:opacity-[0.25]
-                      transition-all duration-700
+                      transition-opacity duration-300
                       rounded-3xl
-                      group-hover:scale-110
                     `}></div>
                     
                     <CardHeader className="text-center relative z-10 pt-8">
@@ -167,27 +156,20 @@ const Index = () => {
                         rounded-[2rem] 
                         flex items-center justify-center 
                         mx-auto mb-6
-                        transition-all duration-700
-                        group-hover:scale-110 group-hover:rotate-6
-                        shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+                        transition-transform duration-300
+                        group-hover:scale-105
+                        shadow-md
                         relative
-                        before:absolute before:inset-0
-                        before:bg-gradient-to-br before:from-white/20 before:to-transparent
-                        before:rounded-[2rem]
-                        after:absolute after:inset-0
-                        after:bg-gradient-to-br after:from-black/10 after:to-transparent
-                        after:rounded-[2rem]
-                        group-hover:shadow-[0_12px_30px_rgba(0,0,0,0.2)]
                       `}>
-                        <IconComponent className="h-12 w-12 text-white transition-all duration-700 group-hover:scale-110 group-hover:rotate-[-6deg]" />
+                        <IconComponent className="h-12 w-12 text-white transition-transform duration-300 group-hover:scale-105" />
                       </div>
-                      <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent transition-all duration-700 group-hover:from-blue-600 group-hover:to-purple-600">
+                      <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent transition-colors duration-300 group-hover:text-blue-600">
                         {tech.name}
                       </CardTitle>
                     </CardHeader>
                     
                     <CardContent className="text-center relative z-10 pb-8">
-                      <p className="text-gray-600 mb-6 text-sm leading-relaxed h-12 transition-all duration-700 group-hover:text-gray-700">
+                      <p className="text-gray-600 mb-6 text-sm leading-relaxed h-12 transition-colors duration-300 group-hover:text-gray-700">
                         {tech.description}
                       </p>
                       <div className="flex justify-center mb-8">
@@ -196,12 +178,11 @@ const Index = () => {
                           className={`
                             bg-gradient-to-r ${tech.gradient}
                             text-white border-0 px-4 py-1.5
-                            transition-all duration-700
-                            group-hover:scale-110
+                            transition-transform duration-300
+                            group-hover:scale-105
                             shadow-sm
                             rounded-full
                             text-sm font-medium
-                            group-hover:shadow-md
                           `}
                         >
                           {techQuestions} вопросов
@@ -216,17 +197,16 @@ const Index = () => {
                             hover:opacity-90 
                             text-white border-0 
                             text-sm font-medium
-                            transition-all duration-700
+                            transition-transform duration-300
                             group-hover:scale-105
                             shadow-sm
                             rounded-xl
                             h-10
-                            group-hover:shadow-md
                           `} 
                           size="sm"
                         >
                           <Link to={`/study/${tech.id}`} className="flex items-center justify-center gap-2">
-                            <Brain className="h-4 w-4 transition-transform duration-700 group-hover:scale-110" />
+                            <Brain className="h-4 w-4" />
                             Изучение
                           </Link>
                         </Button>
@@ -238,19 +218,18 @@ const Index = () => {
                             border-2 border-gray-200
                             hover:bg-white/50 
                             text-sm font-medium
-                            transition-all duration-700
+                            transition-all duration-300
                             group-hover:scale-105
                             shadow-sm
                             rounded-xl
                             h-10
-                            group-hover:shadow-md
-                            group-hover:border-blue-200
-                            group-hover:text-blue-600
+                            hover:border-blue-200
+                            hover:text-blue-600
                           " 
                           size="sm"
                         >
                           <Link to={`/practice/${tech.id}`} className="flex items-center justify-center gap-2">
-                            <Target className="h-4 w-4 transition-transform duration-700 group-hover:scale-110" />
+                            <Target className="h-4 w-4" />
                             Практика
                           </Link>
                         </Button>
@@ -273,28 +252,13 @@ const Index = () => {
                 p-8 rounded-3xl 
                 bg-white/90 backdrop-blur-md
                 border-0
-                transition-all duration-500
+                transition-all duration-300
                 hover:scale-[1.02] hover:-translate-y-1
-                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
-                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-                relative overflow-hidden
-                before:absolute before:inset-0
-                before:bg-gradient-to-br before:from-white/50 before:to-transparent
-                before:opacity-0 before:transition-opacity before:duration-500
-                hover:before:opacity-100
-                after:absolute after:inset-0
-                after:bg-gradient-to-br after:from-white/20 after:to-transparent
-                after:opacity-0 after:transition-opacity after:duration-500
-                hover:after:opacity-100
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
               ">
-                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
-                  before:absolute before:inset-0
-                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
-                  before:rounded-[2rem]
-                  after:absolute after:inset-0
-                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
-                  after:rounded-[2rem]
-                ">
+                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
                   <Brain className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Интерактивное обучение</h4>
@@ -304,28 +268,13 @@ const Index = () => {
                 p-8 rounded-3xl 
                 bg-white/90 backdrop-blur-md
                 border-0
-                transition-all duration-500
+                transition-all duration-300
                 hover:scale-[1.02] hover:-translate-y-1
-                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
-                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-                relative overflow-hidden
-                before:absolute before:inset-0
-                before:bg-gradient-to-br before:from-white/50 before:to-transparent
-                before:opacity-0 before:transition-opacity before:duration-500
-                hover:before:opacity-100
-                after:absolute after:inset-0
-                after:bg-gradient-to-br after:from-white/20 after:to-transparent
-                after:opacity-0 after:transition-opacity after:duration-500
-                hover:after:opacity-100
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
               ">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
-                  before:absolute before:inset-0
-                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
-                  before:rounded-[2rem]
-                  after:absolute after:inset-0
-                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
-                  after:rounded-[2rem]
-                ">
+                <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
                   <Target className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Разные уровни</h4>
@@ -335,28 +284,13 @@ const Index = () => {
                 p-8 rounded-3xl 
                 bg-white/90 backdrop-blur-md
                 border-0
-                transition-all duration-500
+                transition-all duration-300
                 hover:scale-[1.02] hover:-translate-y-1
-                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]
-                shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-                relative overflow-hidden
-                before:absolute before:inset-0
-                before:bg-gradient-to-br before:from-white/50 before:to-transparent
-                before:opacity-0 before:transition-opacity before:duration-500
-                hover:before:opacity-100
-                after:absolute after:inset-0
-                after:bg-gradient-to-br after:from-white/20 after:to-transparent
-                after:opacity-0 after:transition-opacity after:duration-500
-                hover:after:opacity-100
+                hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)]
+                shadow-md
+                relative
               ">
-                <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:scale-110 shadow-[0_8px_20px_rgba(0,0,0,0.15)] relative
-                  before:absolute before:inset-0
-                  before:bg-gradient-to-br before:from-white/20 before:to-transparent
-                  before:rounded-[2rem]
-                  after:absolute after:inset-0
-                  after:bg-gradient-to-br after:from-black/10 after:to-transparent
-                  after:rounded-[2rem]
-                ">
+                <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-105 shadow-md">
                   <Sparkles className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="text-xl font-semibold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Актуальные технологии</h4>
