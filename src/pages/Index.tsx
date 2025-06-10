@@ -93,7 +93,7 @@ const Index = () => {
             </div>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
-              Превращай подготовку в увлекательное путешествие к мечтной работе!
+              Преврати подготовку в увлекательный путь к работе мечты!
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover w-full sm:w-auto">

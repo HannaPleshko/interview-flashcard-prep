@@ -3,19 +3,49 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Code, RotateCcw, Shuffle } from "lucide-react";
-import { questionsData, getTechnologyQuestions, Question } from "@/data/questions";
+import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+type ProgressData = {
+  [questionId: string]: ProgressStatus;
+};
 
 const Practice = () => {
   const { techId } = useParams();
   const [currentQuestions, setCurrentQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [progress, setProgress] = useState<ProgressData>({});
   
   const technology = questionsData.find(t => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : [];
+
+  // Загрузка прогресса из localStorage при монтировании компонента
+  useEffect(() => {
+    const savedProgress = localStorage.getItem("questionProgress");
+    if (savedProgress) {
+      setProgress(JSON.parse(savedProgress));
+    }
+  }, []);
+
+  // Сохранение прогресса в localStorage при его изменении
+  useEffect(() => {
+    localStorage.setItem("questionProgress", JSON.stringify(progress));
+  }, [progress]);
+
+  const handleProgressChange = (questionId: string, status: ProgressStatus) => {
+    setProgress(prev => {
+      const newProgress = { ...prev };
+      if (newProgress[questionId] === status) {
+        delete newProgress[questionId];
+      } else {
+        newProgress[questionId] = status;
+      }
+      return newProgress;
+    });
+  };
 
   const shuffleQuestions = () => {
     const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
@@ -95,7 +125,7 @@ const Practice = () => {
   }
 
   const currentQuestion = currentQuestions[currentIndex];
-  const progress = currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
+  const progressPercentage = currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
@@ -106,7 +136,7 @@ const Practice = () => {
         <div className="w-full bg-white/60 backdrop-blur-sm h-2 shadow-inner">
           <div 
             className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-r-full transition-all duration-500 ease-in-out"
-            style={{ width: `${progress}%` }}
+            style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
       )}
@@ -147,6 +177,8 @@ const Practice = () => {
                 question={currentQuestion}
                 isFlipped={isFlipped}
                 onFlip={() => setIsFlipped(!isFlipped)}
+                progressStatus={progress[currentQuestion.id]}
+                onProgressChange={(status) => handleProgressChange(currentQuestion.id, status)}
               />
             </div>
 
