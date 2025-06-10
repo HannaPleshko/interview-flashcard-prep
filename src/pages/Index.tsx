@@ -6,7 +6,7 @@ import { Code, Database, Globe, Layers, Server, Zap, Sparkles, Brain, Target, Sh
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { questionsData } from "@/data/questions";
-import React from "react";
+import React, { useState } from "react";
 
 const technologies = [
   {
@@ -75,6 +75,8 @@ const technologies = [
 ];
 
 const Index = () => {
+  const [showAllTechnologies, setShowAllTechnologies] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
@@ -124,7 +126,7 @@ const Index = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {technologies.map((tech) => {
+              {technologies.slice(0, showAllTechnologies ? technologies.length : 4).map((tech) => {
                 const IconComponent = tech.icon;
                 const techQuestions = questionsData.find(t => t.id === tech.id)?.questions.length || 0;
                 return (
@@ -239,6 +241,17 @@ const Index = () => {
                 );
               })}
             </div>
+            
+            {!showAllTechnologies && technologies.length > 4 && (
+              <div className="text-center mt-12">
+                <Button
+                  onClick={() => setShowAllTechnologies(true)}
+                  className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover"
+                >
+                  Показать все технологии
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 

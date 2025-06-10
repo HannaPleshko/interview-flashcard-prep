@@ -167,6 +167,16 @@ const Study = () => {
     }
   }, [techId]);
 
+  // Функция для определения веса сложности
+  const getDifficultyWeight = (difficulty: string) => {
+    switch (difficulty) {
+      case 'easy': return 1;
+      case 'medium': return 2;
+      case 'hard': return 3;
+      default: return 0;
+    }
+  };
+
   // Filtering and sorting logic
   useEffect(() => {
     const filtered = questions
@@ -181,10 +191,10 @@ const Study = () => {
       })
       .sort((a, b) => {
         switch (sortBy) {
-          case "difficulty":
-            const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
-            return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
-                   difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
+          case "difficulty-asc":
+            return getDifficultyWeight(a.difficulty) - getDifficultyWeight(b.difficulty);
+          case "difficulty-desc":
+            return getDifficultyWeight(b.difficulty) - getDifficultyWeight(a.difficulty);
           case "alphabetical":
             return a.question.localeCompare(b.question);
           default:
@@ -428,8 +438,11 @@ const Study = () => {
                     <SelectItem value="default" className="rounded-lg hover:bg-purple-50">
                       По умолчанию
                     </SelectItem>
-                    <SelectItem value="difficulty" className="rounded-lg hover:bg-purple-50">
-                      По сложности
+                    <SelectItem value="difficulty-asc" className="rounded-lg hover:bg-purple-50">
+                      По сложности (легкие → сложные)
+                    </SelectItem>
+                    <SelectItem value="difficulty-desc" className="rounded-lg hover:bg-purple-50">
+                      По сложности (сложные → легкие)
                     </SelectItem>
                     <SelectItem value="alphabetical" className="rounded-lg hover:bg-purple-50">
                       По алфавиту

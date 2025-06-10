@@ -156,6 +156,7 @@ interface TestResult {
 const Tasks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
   const [sortBy, setSortBy] = useState("default");
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
@@ -163,12 +164,40 @@ const Tasks = () => {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);
 
-  const filteredTasks = sampleTasks.filter(task => {
-    const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         task.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDifficulty = difficultyFilter === "all" || task.difficulty === difficultyFilter;
-    return matchesSearch && matchesDifficulty;
-  });
+  // Получаем уникальные категории из задач
+  const categories = Array.from(new Set(sampleTasks.map(task => task.category)));
+
+  // Функция для определения веса сложности
+  const getDifficultyWeight = (difficulty: string) => {
+    switch (difficulty) {
+      case 'easy': return 1;
+      case 'medium': return 2;
+      case 'hard': return 3;
+      default: return 0;
+    }
+  };
+
+  // Сортируем и фильтруем задачи
+  const filteredTasks = sampleTasks
+    .filter(task => {
+      const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           task.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesDifficulty = difficultyFilter === "all" || task.difficulty === difficultyFilter;
+      const matchesCategory = categoryFilter === "all" || task.category === categoryFilter;
+      return matchesSearch && matchesDifficulty && matchesCategory;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'difficulty-asc':
+          return getDifficultyWeight(a.difficulty) - getDifficultyWeight(b.difficulty);
+        case 'difficulty-desc':
+          return getDifficultyWeight(b.difficulty) - getDifficultyWeight(a.difficulty);
+        case 'alphabetical':
+          return a.title.localeCompare(b.title);
+        default:
+          return 0;
+      }
+    });
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -337,13 +366,28 @@ const Tasks = () => {
                   </SelectContent>
                 </Select>
 
+                <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Тема" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Все темы</SelectItem>
+                    {categories.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Сортировка" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="default">По умолчанию</SelectItem>
-                    <SelectItem value="difficulty">По сложности</SelectItem>
+                    <SelectItem value="difficulty-asc">По сложности (легкие → сложные)</SelectItem>
+                    <SelectItem value="difficulty-desc">По сложности (сложные → легкие)</SelectItem>
                     <SelectItem value="alphabetical">По алфавиту</SelectItem>
                   </SelectContent>
                 </Select>
@@ -478,7 +522,7 @@ const Tasks = () => {
                                     </span>
                                   )}
                                 </Button>
-                                <div className="text-xs text-muted-foreground flex items-center">
+                                <div className="text-xs text-muted-foreground hidden sm:flex items-center">
                                   <span>Ctrl + Enter для запуска</span>
                                 </div>
                               </div>

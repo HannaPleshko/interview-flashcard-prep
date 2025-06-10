@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -17,6 +18,27 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const isActive = (path: string) => {
+    if (path === '/practice') {
+      return location.pathname === '/' || location.pathname.startsWith('/practice');
+    }
+    return location.pathname.startsWith(path);
+  };
+
+  const getNavLinkClass = (path: string) => {
+    const baseClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300";
+    return isActive(path)
+      ? `${baseClass} text-white bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md hover:shadow-lg hover:scale-105`
+      : `${baseClass} text-gray-600 hover:text-purple-600 hover:bg-white/70`;
+  };
+
+  const getMobileNavLinkClass = (path: string) => {
+    const baseClass = "flex items-center gap-3 py-3 px-6 text-base font-medium transition-colors duration-200";
+    return isActive(path)
+      ? `${baseClass} text-white bg-gradient-to-r from-purple-500 to-indigo-500`
+      : `${baseClass} text-gray-700 hover:bg-purple-50 hover:text-purple-600`;
+  };
 
   return (
     <>
@@ -42,21 +64,21 @@ const Header = () => {
             <nav className="hidden md:flex items-center space-x-4">
               <Link
                 to="/study"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white font-medium bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className={getNavLinkClass('/study')}
               >
                 <Brain className="h-4 w-4" />
                 Изучение теории
               </Link>
               <Link
-                to="/practice"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
+                to="/"
+                className={getNavLinkClass('/practice')}
               >
                 <BookOpen className="h-4 w-4" />
                 Практиковать теорию
               </Link>
               <Link
                 to="/tasks"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
+                className={getNavLinkClass('/tasks')}
               >
                 <ClipboardList className="h-4 w-4" />
                 Задачи
@@ -111,15 +133,15 @@ const Header = () => {
             <Link
               to="/study"
               onClick={toggleMenu}
-              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className={getMobileNavLinkClass('/study')}
             >
               <Brain className="h-5 w-5 text-purple-500" />
               <span>Изучение теории</span>
             </Link>
             <Link
-              to="/practice"
+              to="/"
               onClick={toggleMenu}
-              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className={getMobileNavLinkClass('/practice')}
             >
               <BookOpen className="h-5 w-5 text-blue-500" />
               <span>Практиковать теорию</span>
@@ -127,7 +149,7 @@ const Header = () => {
             <Link
               to="/tasks"
               onClick={toggleMenu}
-              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className={getMobileNavLinkClass('/tasks')}
             >
               <ClipboardList className="h-5 w-5 text-green-500" />
               <span>Задачи</span>
@@ -135,7 +157,7 @@ const Header = () => {
             <Link
               to="/rate"
               onClick={toggleMenu}
-              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+              className={getMobileNavLinkClass('/rate')}
             >
               <Star className="h-5 w-5 text-yellow-500" />
               <span>Оценить</span>
