@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Rate = () => {
-  const [likes, setLikes] = useState(17);
+  const [likes, setLikes] = useState(26);
   const [dislikes, setDislikes] = useState(0);
   const [voted, setVoted] = useState<"like" | "dislike" | null>(null);
 

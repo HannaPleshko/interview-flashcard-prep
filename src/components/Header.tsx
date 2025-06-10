@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Header = () => {
@@ -41,18 +41,25 @@ const Header = () => {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center space-x-4">
               <Link
-                to="/study/html"
+                to="/study"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white font-medium bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 <Brain className="h-4 w-4" />
-                Изучение
+                Изучение теории
               </Link>
               <Link
                 to="/practice"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
               >
                 <BookOpen className="h-4 w-4" />
-                Практика
+                Практиковать теорию
+              </Link>
+              <Link
+                to="/tasks"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
+              >
+                <ClipboardList className="h-4 w-4" />
+                Задачи
               </Link>
               <Link
                 to="/rate"
@@ -107,7 +114,7 @@ const Header = () => {
               className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
             >
               <Brain className="h-5 w-5 text-purple-500" />
-              <span>Изучение</span>
+              <span>Изучение теории</span>
             </Link>
             <Link
               to="/practice"
@@ -115,7 +122,15 @@ const Header = () => {
               className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
             >
               <BookOpen className="h-5 w-5 text-blue-500" />
-              <span>Практика</span>
+              <span>Практиковать теорию</span>
+            </Link>
+            <Link
+              to="/tasks"
+              onClick={toggleMenu}
+              className="flex items-center gap-3 py-3 px-6 text-base font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-200"
+            >
+              <ClipboardList className="h-5 w-5 text-green-500" />
+              <span>Задачи</span>
             </Link>
             <Link
               to="/rate"
