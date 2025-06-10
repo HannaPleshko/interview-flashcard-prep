@@ -57,14 +57,21 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
     <div 
       ref={setNodeRef} 
       style={style} 
-      {...attributes} 
-      {...listeners}
       className={`
         ${isDragging ? 'shadow-lg' : ''}
-        cursor-grab active:cursor-grabbing
+        w-full
       `}
     >
-      <QuestionCard {...props} question={question} />
+      <div className="relative">
+        <div 
+          {...attributes} 
+          {...listeners}
+          className="absolute top-2 right-2 p-2 rounded-lg cursor-grab active:cursor-grabbing hover:bg-white/50 transition-colors z-10"
+        >
+          <GripVertical className="h-5 w-5 text-gray-400" />
+        </div>
+        <QuestionCard {...props} question={question} />
+      </div>
     </div>
   );
 };
