@@ -86,8 +86,9 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.7s;
+  transition: transform 0.5s ease-in-out;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .flip-card-inner.flipped {
@@ -101,10 +102,53 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 0.75rem;
+  will-change: transform;
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+/* Gradient Border Animation */
+.gradient-border-animated {
+  position: relative;
+  padding: 2px;
+  border-radius: 0.75rem;
+  background: linear-gradient(45deg, 
+    #ff0000, #ff7f00, #ffff00, #00ff00, 
+    #0000ff, #4b0082, #9400d3, #ff0000);
+  background-size: 400% 400%;
+  animation: gradient-border 4s ease infinite;
+}
+
+.gradient-border-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, 
+    #ff0000, #ff7f00, #ffff00, #00ff00, 
+    #0000ff, #4b0082, #9400d3, #ff0000);
+  background-size: 400% 400%;
+  border-radius: inherit;
+  animation: gradient-border 4s ease infinite;
+  z-index: -1;
+}
+
+.gradient-border-animated > div {
+  background: inherit;
+  border-radius: calc(0.75rem - 2px);
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes gradient-border {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Custom animations and effects */

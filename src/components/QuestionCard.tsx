@@ -44,75 +44,77 @@ const QuestionCard = ({ question, isFlipped = false, onFlip }: QuestionCardProps
 
   return (
     <div className="flip-card w-full h-80" style={{ perspective: '1000px' }}>
-      <div 
-        className={`flip-card-inner w-full h-full cursor-pointer transition-transform duration-700 ${
-          flipped ? 'flipped' : ''
-        }`}
-        onClick={handleClick}
-        style={{ 
-          transformStyle: 'preserve-3d',
-          position: 'relative'
-        }}
-      >
-        {/* Front of card - Question */}
-        <Card className="flip-card-front absolute inset-0 w-full h-full border-0 bg-white/80 backdrop-blur-sm overflow-hidden hover:shadow-lg transition-shadow duration-300">
-          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
-          
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
-            <div>
-              <div className="flex justify-between items-start mb-4">
-                <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg`}>
-                  {getDifficultyText(question.difficulty)}
-                </Badge>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground bg-white/50 px-3 py-1 rounded-full">
-                  <Eye className="h-4 w-4" />
-                  Вопрос
+      <div className="gradient-border-animated">
+        <div 
+          className={`flip-card-inner w-full h-full cursor-pointer transition-all duration-500 ease-in-out ${
+            flipped ? 'flipped' : ''
+          }`}
+          onClick={handleClick}
+          style={{ 
+            transformStyle: 'preserve-3d',
+            position: 'relative'
+          }}
+        >
+          {/* Front of card - Question */}
+          <Card className="flip-card-front absolute inset-0 w-full h-full border-0 bg-white/90 backdrop-blur-sm overflow-hidden transition-all duration-300 ease-in-out">
+            <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
+            
+            <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg transition-all duration-300`}>
+                    {getDifficultyText(question.difficulty)}
+                  </Badge>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground bg-white/50 px-3 py-1 rounded-full">
+                    <Eye className="h-4 w-4" />
+                    Вопрос
+                  </div>
                 </div>
+                <h3 className="text-lg font-medium text-foreground leading-relaxed mb-4">
+                  {question.question}
+                </h3>
               </div>
-              <h3 className="text-lg font-medium text-foreground leading-relaxed mb-4">
-                {question.question}
-              </h3>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
-                <Sparkles className="h-4 w-4" />
-                Нажмите, чтобы увидеть ответ
-                <Sparkles className="h-4 w-4" />
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                  <Sparkles className="h-4 w-4" />
+                  Нажмите, чтобы увидеть ответ
+                  <Sparkles className="h-4 w-4" />
+                </div>
+                <div className="w-12 h-1 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full mx-auto"></div>
               </div>
-              <div className="w-12 h-1 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full mx-auto"></div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        {/* Back of card - Answer */}
-        <Card className="flip-card-back absolute inset-0 w-full h-full border-0 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-          <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
-          
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
-            <div>
-              <div className="flex justify-between items-start mb-4">
-                <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 shadow-lg">
-                  <EyeOff className="h-3 w-3 mr-1" />
-                  Ответ
-                </Badge>
-                <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg`}>
-                  {getDifficultyText(question.difficulty)}
-                </Badge>
+          {/* Back of card - Answer */}
+          <Card className="flip-card-back absolute inset-0 w-full h-full border-0 bg-gradient-to-br from-blue-50/90 to-purple-50/90 backdrop-blur-sm overflow-hidden transition-all duration-300 ease-in-out">
+            <div className={`absolute inset-0 bg-gradient-to-br ${getDifficultyColor(question.difficulty)} opacity-5`}></div>
+            
+            <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 shadow-lg">
+                    <EyeOff className="h-3 w-3 mr-1" />
+                    Ответ
+                  </Badge>
+                  <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg`}>
+                    {getDifficultyText(question.difficulty)}
+                  </Badge>
+                </div>
+                <p className="text-foreground leading-relaxed">
+                  {question.answer}
+                </p>
               </div>
-              <p className="text-foreground leading-relaxed">
-                {question.answer}
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
-                <Sparkles className="h-4 w-4" />
-                Нажмите, чтобы вернуться к вопросу
-                <Sparkles className="h-4 w-4" />
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                  <Sparkles className="h-4 w-4" />
+                  Нажмите, чтобы вернуться к вопросу
+                  <Sparkles className="h-4 w-4" />
+                </div>
+                <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto"></div>
               </div>
-              <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto"></div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
