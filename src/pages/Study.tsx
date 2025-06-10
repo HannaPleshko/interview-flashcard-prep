@@ -5,15 +5,116 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List } from "lucide-react";
+import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import QuestionListItem from "@/components/QuestionListItem";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+  rectSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 type ProgressData = {
   [questionId: string]: ProgressStatus;
+};
+
+const SortableQuestionCard = ({ question, index, ...props }: { question: Question; index: number } & any) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: question.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: isDragging ? 'none' : 'transform 200ms ease-out',
+    opacity: isDragging ? 0.8 : 1,
+    zIndex: isDragging ? 1 : 0,
+    position: 'relative' as const,
+    willChange: 'transform',
+  };
+
+  return (
+    <div 
+      ref={setNodeRef} 
+      style={style} 
+      {...attributes} 
+      {...listeners}
+      className={`
+        ${isDragging ? 'shadow-lg' : ''}
+        cursor-grab active:cursor-grabbing
+      `}
+    >
+      <QuestionCard {...props} question={question} />
+    </div>
+  );
+};
+
+const SortableQuestionListItem = ({ question, ...props }: { question: Question } & any) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: question.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: isDragging ? 'none' : 'transform 200ms ease-out',
+    opacity: isDragging ? 0.8 : 1,
+    zIndex: isDragging ? 1 : 0,
+    position: 'relative' as const,
+    willChange: 'transform',
+  };
+
+  return (
+    <div 
+      ref={setNodeRef} 
+      style={style} 
+      className={`
+        ${isDragging ? 'shadow-lg' : ''}
+        flex items-center gap-2
+      `}
+    >
+      <div 
+        {...attributes} 
+        {...listeners}
+        className="
+          cursor-grab p-2 
+          hover:bg-gray-100/50 
+          rounded-md 
+          transition-colors duration-150
+          active:cursor-grabbing
+        "
+      >
+        <GripVertical className="h-5 w-5 text-gray-400" />
+      </div>
+      <div className="flex-grow">
+        <QuestionListItem {...props} question={question} />
+      </div>
+    </div>
+  );
 };
 
 const Study = () => {
@@ -25,12 +126,15 @@ const Study = () => {
   const [progressFilter, setProgressFilter] = useState("all");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [progress, setProgress] = useState<ProgressData>({});
-  const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
+  const [viewMode, setViewMode] = useState<'cards' | 'list'>('list');
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = viewMode === 'cards' ? 9 : 10;
   
   const technology = questionsData.find(t => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : [];
+
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
 
   useEffect(() => {
     const savedProgress = localStorage.getItem("questionProgress");
@@ -48,34 +152,41 @@ const Study = () => {
     setFlippedCards(new Set());
   }, [searchTerm, difficultyFilter, sortBy, progressFilter, viewMode]);
 
+  useEffect(() => {
+    if (techId) {
+      const initialQuestions = getTechnologyQuestions(techId);
+      setQuestions(initialQuestions);
+      setFilteredQuestions(initialQuestions);
+    }
+  }, [techId]);
+
   // Filtering and sorting logic
-  const preFilteredQuestions = allQuestions
-    .filter(question => {
-      const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
-      return matchesSearch && matchesDifficulty;
-    });
-    
-  const filteredAndSortedQuestions = preFilteredQuestions
-    .filter(question => {
-      const questionProgress = progress[question.id];
-      const matchesProgress = progressFilter === 'all' || 
+  useEffect(() => {
+    const filtered = questions
+      .filter(question => {
+        const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
+        const questionProgress = progress[question.id];
+        const matchesProgress = progressFilter === 'all' || 
                               (progressFilter === 'not_started' && !questionProgress) ||
                               questionProgress === progressFilter;
-      return matchesProgress;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "difficulty":
-          const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
-          return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
-                 difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
-        case "alphabetical":
-          return a.question.localeCompare(b.question);
-        default:
-          return 0;
-      }
-    });
+        return matchesSearch && matchesDifficulty && matchesProgress;
+      })
+      .sort((a, b) => {
+        switch (sortBy) {
+          case "difficulty":
+            const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
+            return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
+                   difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
+          case "alphabetical":
+            return a.question.localeCompare(b.question);
+          default:
+            return 0;
+        }
+      });
+    
+    setFilteredQuestions(filtered);
+  }, [questions, searchTerm, difficultyFilter, sortBy, progressFilter, progress]);
 
   const handleCardFlip = (index: number) => {
     const newFlippedCards = new Set(flippedCards);
@@ -110,7 +221,7 @@ const Study = () => {
 
   const getDifficultyStats = () => {
     const stats = { easy: 0, medium: 0, hard: 0 };
-    filteredAndSortedQuestions.forEach(q => {
+    filteredQuestions.forEach(q => {
       stats[q.difficulty as keyof typeof stats]++;
     });
     return stats;
@@ -124,7 +235,7 @@ const Study = () => {
       not_started: 0,
     };
     
-    filteredAndSortedQuestions.forEach(q => {
+    filteredQuestions.forEach(q => {
       const status = progress[q.id];
       if (status) {
         stats[status]++;
@@ -133,6 +244,48 @@ const Study = () => {
       }
     });
     return stats;
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      setQuestions((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        const newItems = arrayMove(items, oldIndex, newIndex);
+        
+        // Обновляем filteredQuestions с сохранением текущих фильтров
+        const filtered = newItems
+          .filter(question => {
+            const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
+            const questionProgress = progress[question.id];
+            const matchesProgress = progressFilter === 'all' || 
+                                  (progressFilter === 'not_started' && !questionProgress) ||
+                                  questionProgress === progressFilter;
+            return matchesSearch && matchesDifficulty && matchesProgress;
+          })
+          .sort((a, b) => {
+            if (sortBy === 'difficulty') {
+              const difficultyOrder = { easy: 0, medium: 1, hard: 2 };
+              return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
+                     difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
+            }
+            return 0;
+          });
+        
+        setFilteredQuestions(filtered);
+        return newItems;
+      });
+    }
   };
 
   if (techId && !technology) {
@@ -154,10 +307,10 @@ const Study = () => {
   const progressStats = getProgressStats();
   
   // Pagination logic
-  const totalPages = Math.ceil(filteredAndSortedQuestions.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredQuestions.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentQuestions = filteredAndSortedQuestions.slice(indexOfFirstItem, indexOfLastItem);
+  const currentQuestions = filteredQuestions.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
@@ -165,7 +318,7 @@ const Study = () => {
 
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" asChild className="hover:bg-white/50 flex-shrink-0 -ml-2 sm:hidden">
               <Link to="/">
@@ -181,45 +334,6 @@ const Study = () => {
           </div>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div 
-            className={`backdrop-blur-sm rounded-xl p-4 border shadow-lg cursor-pointer transition-transform hover:scale-105 ${
-              progressFilter === 'learning' ? 'ring-2 ring-blue-500' : 'border-blue-200/50'
-            } bg-blue-50/80`}
-            onClick={() => setProgressFilter(progressFilter === 'learning' ? 'all' : 'learning')}
-          >
-            <div className="text-2xl font-bold text-blue-600">{progressStats.learning}</div>
-            <div className="text-sm text-blue-700">📘 Учу</div>
-          </div>
-          <div 
-            className={`backdrop-blur-sm rounded-xl p-4 border shadow-lg cursor-pointer transition-transform hover:scale-105 ${
-              progressFilter === 'review' ? 'ring-2 ring-yellow-500' : 'border-yellow-200/50'
-            } bg-yellow-50/80`}
-            onClick={() => setProgressFilter(progressFilter === 'review' ? 'all' : 'review')}
-          >
-            <div className="text-2xl font-bold text-orange-600">{progressStats.review}</div>
-            <div className="text-sm text-orange-700">🔄 Повторяю</div>
-          </div>
-          <div 
-            className={`backdrop-blur-sm rounded-xl p-4 border shadow-lg cursor-pointer transition-transform hover:scale-105 ${
-              progressFilter === 'known' ? 'ring-2 ring-green-500' : 'border-green-200/50'
-            } bg-green-50/80`}
-            onClick={() => setProgressFilter(progressFilter === 'known' ? 'all' : 'known')}
-          >
-            <div className="text-2xl font-bold text-green-600">{progressStats.known}</div>
-            <div className="text-sm text-green-700">✅ Знаю</div>
-          </div>
-          <div 
-            className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 border shadow-lg cursor-pointer transition-transform hover:scale-105 ${
-              progressFilter === 'all' ? 'ring-2 ring-purple-500' : 'border-white/20'
-            }`}
-            onClick={() => setProgressFilter('all')}
-          >
-            <div className="text-2xl font-bold text-purple-600">{allQuestions.length}</div>
-            <div className="text-sm text-muted-foreground">Всего вопросов</div>
-          </div>
-        </div>
 
         {/* Search and Filter Controls */}
         <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/20 shadow-lg">
@@ -348,33 +462,90 @@ const Study = () => {
           </div>
         </div>
 
+     {/* Stats Cards */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          <div 
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+              progressFilter === 'all' ? 'bg-purple-100 ring-2 ring-purple-500' : 'bg-white/60 backdrop-blur-sm border border-white/20'
+            }`}
+            onClick={() => setProgressFilter('all')}
+          >
+            <div className="text-lg font-bold text-purple-600">{allQuestions.length}</div>
+            <div className="text-sm text-muted-foreground">Все</div>
+          </div>
+          <div 
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+              progressFilter === 'learning' ? 'bg-blue-100 ring-2 ring-blue-500' : 'bg-blue-50/80 border border-blue-200/50'
+            }`}
+            onClick={() => setProgressFilter(progressFilter === 'learning' ? 'all' : 'learning')}
+          >
+            <div className="text-lg font-bold text-blue-600">{progressStats.learning}</div>
+            <div className="text-sm text-blue-700">📘 Учу</div>
+          </div>
+          <div 
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+              progressFilter === 'review' ? 'bg-yellow-100 ring-2 ring-yellow-500' : 'bg-yellow-50/80 border border-yellow-200/50'
+            }`}
+            onClick={() => setProgressFilter(progressFilter === 'review' ? 'all' : 'review')}
+          >
+            <div className="text-lg font-bold text-orange-600">{progressStats.review}</div>
+            <div className="text-sm text-orange-700">🔄 Повторяю</div>
+          </div>
+          <div 
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+              progressFilter === 'known' ? 'bg-green-100 ring-2 ring-green-500' : 'bg-green-50/80 border border-green-200/50'
+            }`}
+            onClick={() => setProgressFilter(progressFilter === 'known' ? 'all' : 'known')}
+          >
+            <div className="text-lg font-bold text-green-600">{progressStats.known}</div>
+            <div className="text-sm text-green-700">✅ Знаю</div>
+          </div>
+        </div>
+        
         {/* Questions Grid / List */}
         {currentQuestions.length > 0 ? (
-          viewMode === 'cards' ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {currentQuestions.map((question, index) => (
-                <QuestionCard
-                  key={`${question.id}-${indexOfFirstItem + index}`}
-                  question={question}
-                  isFlipped={flippedCards.has(indexOfFirstItem + index)}
-                  onFlip={() => handleCardFlip(indexOfFirstItem + index)}
-                  progressStatus={progress[question.id]}
-                  onProgressChange={(status) => handleProgressChange(question.id, status)}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {currentQuestions.map((question) => (
-                <QuestionListItem
-                  key={question.id}
-                  question={question}
-                  progressStatus={progress[question.id]}
-                  onProgressChange={(status) => handleProgressChange(question.id, status)}
-                />
-              ))}
-            </div>
-          )
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            {viewMode === 'cards' ? (
+              <SortableContext
+                items={currentQuestions.map(q => q.id)}
+                strategy={rectSortingStrategy}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentQuestions.map((question, index) => (
+                    <SortableQuestionCard
+                      key={`${question.id}-${indexOfFirstItem + index}`}
+                      question={question}
+                      index={indexOfFirstItem + index}
+                      isFlipped={flippedCards.has(indexOfFirstItem + index)}
+                      onFlip={() => handleCardFlip(indexOfFirstItem + index)}
+                      progressStatus={progress[question.id]}
+                      onProgressChange={(status) => handleProgressChange(question.id, status)}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            ) : (
+              <SortableContext
+                items={currentQuestions.map(q => q.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-4">
+                  {currentQuestions.map((question) => (
+                    <SortableQuestionListItem
+                      key={question.id}
+                      question={question}
+                      progressStatus={progress[question.id]}
+                      onProgressChange={(status) => handleProgressChange(question.id, status)}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            )}
+          </DndContext>
         ) : (
           <div className="text-center py-12">
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-white/20 shadow-lg max-w-md mx-auto">
