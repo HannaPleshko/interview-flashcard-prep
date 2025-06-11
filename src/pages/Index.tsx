@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingElements from "@/components/FloatingElements";
+import DynamicBackground from "@/components/DynamicBackground";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroSection from "@/components/HeroSection";
 import TechnologiesSection from "@/components/TechnologiesSection";
@@ -10,8 +10,8 @@ import FeaturesSection from "@/components/FeaturesSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col relative overflow-hidden">
-      <FloatingElements />
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      <DynamicBackground />
 
       <Header />
 
