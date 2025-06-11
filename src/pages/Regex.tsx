@@ -30,6 +30,47 @@ const FLAG_OPTIONS = [
 
 const REGEX_CHEAT_SHEET = [
   {
+    title: 'Флаги',
+    items: [
+      { 
+        pattern: 'g', 
+        description: 'Глобальный поиск',
+        example: '/hello/g - найдет все вхождения "hello"',
+        usage: 'Используется когда нужно найти все совпадения, а не только первое'
+      },
+      { 
+        pattern: 'i', 
+        description: 'Игнорирование регистра',
+        example: '/hello/i - найдет "hello", "Hello", "HELLO"',
+        usage: 'Когда регистр букв не имеет значения'
+      },
+      { 
+        pattern: 'm', 
+        description: 'Многострочный режим',
+        example: '/^hello/m - найдет "hello" в начале каждой строки',
+        usage: 'Когда нужно искать совпадения в начале или конце каждой строки'
+      },
+      { 
+        pattern: 's', 
+        description: 'Точка (.) захватывает \n',
+        example: '/hello.world/s - найдет "hello\nworld"',
+        usage: 'Когда нужно чтобы точка (.) соответствовала также символу новой строки'
+      },
+      { 
+        pattern: 'u', 
+        description: 'Unicode режим',
+        example: '/\\u{1F600}/u - найдет эмодзи 😀',
+        usage: 'Для работы с Unicode символами и эмодзи'
+      },
+      { 
+        pattern: 'y', 
+        description: 'Поиск с текущей позиции (sticky)',
+        example: '/hello/y - ищет только с текущей позиции',
+        usage: 'Когда нужно искать совпадения только с определенной позиции'
+      },
+    ]
+  },
+  {
     title: 'Основные символы',
     items: [
       { 
@@ -293,13 +334,20 @@ const Regex = () => {
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
       <div className="container mx-auto px-4 py-8 flex-grow">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-grow">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
+          <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                Регулярные выражения
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base">Интерактивный инструмент для тестирования и изучения регулярных выражений</p>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-6">
+          <div className="flex flex-col lg:flex-row gap-6 justify-between">
+            <div className="w-full lg:w-[60%]">
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4 sm:p-6">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4 sm:mb-6">
-                  Регулярные выражения
-                </h1>
                 <div className="mb-4 relative">
                   {copied && (
                     <div className="absolute top-0 right-0 mt-0.10 text-green-500 text-xs bg-white/90 px-3 py-1 rounded shadow z-20 animate-fade-in">
@@ -437,7 +485,7 @@ const Regex = () => {
                 )}
               </div>
             </div>
-            <div className="w-full lg:w-80">
+            <div className="w-full lg:w-[35%]">
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
@@ -501,6 +549,58 @@ const Regex = () => {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-6">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+              Примеры использования флага g
+            </h2>
+            <div className="space-y-4">
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="font-medium text-gray-900 mb-2">Поиск всех чисел в строке</h3>
+                <div className="bg-gray-50 rounded p-2">
+                  <code className="text-sm font-mono text-blue-600">
+                    const text = "Цена: 100, скидка: 20, итого: 80";<br/>
+                    const numbers = text.match(/\d+/g);<br/>
+                    console.log(numbers); // ["100", "20", "80"]
+                  </code>
+                </div>
+              </div>
+
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="font-medium text-gray-900 mb-2">Замена всех вхождений</h3>
+                <div className="bg-gray-50 rounded p-2">
+                  <code className="text-sm font-mono text-blue-600">
+                    const text = "cat, cat, cat";<br/>
+                    const newText = text.replace(/cat/g, "dog");<br/>
+                    console.log(newText); // "dog, dog, dog"
+                  </code>
+                </div>
+              </div>
+
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="font-medium text-gray-900 mb-2">Поиск всех email адресов</h3>
+                <div className="bg-gray-50 rounded p-2">
+                  <code className="text-sm font-mono text-blue-600">
+                    const text = "Email: test@test.com, support@test.com";<br/>
+                    const emails = text.match(/[\w.-]+@[\w.-]+\.\w+/g);<br/>
+                    console.log(emails); // ["test@test.com", "support@test.com"]
+                  </code>
+                </div>
+              </div>
+
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="font-medium text-gray-900 mb-2">Поиск всех слов в тексте</h3>
+                <div className="bg-gray-50 rounded p-2">
+                  <code className="text-sm font-mono text-blue-600">
+                    const text = "Hello World! How are you?";<br/>
+                    const words = text.match(/\b\w+\b/g);<br/>
+                    console.log(words); // ["Hello", "World", "How", "are", "you"]
+                  </code>
+                </div>
               </div>
             </div>
           </div>
