@@ -10,6 +10,7 @@ import NotFound from "@/pages/NotFound";
 import Tasks from "@/pages/Tasks";
 import Interpreter from "@/pages/Interpreter";
 import Regex from "@/pages/Regex";
+import Methods from "./pages/Methods";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/interpreter" element={<Interpreter />} />
           <Route path="/regex" element={<Regex />} />
+          <Route path="/methods" element={<Methods />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

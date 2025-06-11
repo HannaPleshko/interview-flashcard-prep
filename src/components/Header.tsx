@@ -49,6 +49,7 @@ const Header = () => {
     { path: "/tasks", icon: ListTodo, label: "Задачи", isNew: true },
     { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
     { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
+    { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
   ];
 
   return (
