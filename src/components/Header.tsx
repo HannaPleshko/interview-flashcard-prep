@@ -46,9 +46,9 @@ const Header = () => {
   const navItems = [
     { path: "/study", icon: BookOpen, label: "Учебник" },
     { path: "/", icon: Play, label: "Карточки теории" },
-    { path: "/tasks", icon: ListTodo, label: "Задачи" },
-    { path: "/interpreter", icon: Terminal, label: "Интерпретатор" },
-    { path: "/regex", icon: Regex, label: "RegEx" },
+    { path: "/tasks", icon: ListTodo, label: "Задачи", isNew: true },
+    { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
+    { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
   ];
 
   return (
@@ -79,9 +79,14 @@ const Header = () => {
                   isActive(item.path) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                 )}
               >
-                <Link to={item.path}>
+                <Link to={item.path} className="relative">
                   <item.icon className="mr-2 h-4 w-4" />
                   {item.label}
+                  {item.isNew && (
+                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                      new
+                    </span>
+                  )}
                   {isActive(item.path) && (
                     <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
                   )}
@@ -140,9 +145,14 @@ const Header = () => {
                   location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                 }`}
               >
-                <Link to={item.path} className="flex items-center gap-3">
+                <Link to={item.path} className="flex items-center gap-3 relative">
                   <item.icon className="h-5 w-5" />
                   {item.label}
+                  {item.isNew && (
+                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                      new
+                    </span>
+                  )}
                 </Link>
               </Button>
             ))}

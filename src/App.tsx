@@ -7,7 +7,6 @@ import Index from "@/pages/Index";
 import Study from "@/pages/Study";
 import Practice from "@/pages/Practice";
 import NotFound from "@/pages/NotFound";
-import Rate from "./pages/Rate";
 import Tasks from "@/pages/Tasks";
 import Interpreter from "@/pages/Interpreter";
 import Regex from "@/pages/Regex";
@@ -26,7 +25,6 @@ const App = () => (
           <Route path="/study/:techId" element={<Study />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="/practice/:techId" element={<Practice />} />
-          <Route path="/rate" element={<Rate />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/interpreter" element={<Interpreter />} />
           <Route path="/regex" element={<Regex />} />
