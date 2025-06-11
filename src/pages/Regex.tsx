@@ -556,50 +556,82 @@ const Regex = () => {
         <div className="mt-6">
           <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-              Примеры использования флага g
+              Методы работы с регулярными выражениями в JavaScript
             </h2>
-            <div className="space-y-4">
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-2">Поиск всех чисел в строке</h3>
-                <div className="bg-gray-50 rounded p-2">
-                  <code className="text-sm font-mono text-blue-600">
-                    const text = "Цена: 100, скидка: 20, итого: 80";<br/>
-                    const numbers = text.match(/\d+/g);<br/>
-                    console.log(numbers); // ["100", "20", "80"]
-                  </code>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">String.prototype.match()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Находит все совпадения в строке и возвращает массив.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const str = "Hello 123 World 456";<br/>
+                      const matches = str.match(/\d+/g);<br/>
+                      // ["123", "456"]
+                    </code>
+                  </div>
+                </div>
+
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">String.prototype.replace()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Заменяет совпадения в строке на указанное значение.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const str = "Hello World";<br/>
+                      const newStr = str.replace(/World/, "JavaScript");<br/>
+                      // "Hello JavaScript"
+                    </code>
+                  </div>
+                </div>
+
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">String.prototype.split()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Разбивает строку на массив по регулярному выражению.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const str = "Hello,World,JavaScript";<br/>
+                      const arr = str.split(/,/);<br/>
+                      // ["Hello", "World", "JavaScript"]
+                    </code>
+                  </div>
                 </div>
               </div>
 
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-2">Замена всех вхождений</h3>
-                <div className="bg-gray-50 rounded p-2">
-                  <code className="text-sm font-mono text-blue-600">
-                    const text = "cat, cat, cat";<br/>
-                    const newText = text.replace(/cat/g, "dog");<br/>
-                    console.log(newText); // "dog, dog, dog"
-                  </code>
+              <div className="space-y-4">
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">RegExp.prototype.test()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Проверяет наличие совпадения в строке.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const regex = /\d+/;<br/>
+                      const hasNumber = regex.test("Hello123");<br/>
+                      // true
+                    </code>
+                  </div>
                 </div>
-              </div>
 
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-2">Поиск всех email адресов</h3>
-                <div className="bg-gray-50 rounded p-2">
-                  <code className="text-sm font-mono text-blue-600">
-                    const text = "Email: test@test.com, support@test.com";<br/>
-                    const emails = text.match(/[\w.-]+@[\w.-]+\.\w+/g);<br/>
-                    console.log(emails); // ["test@test.com", "support@test.com"]
-                  </code>
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">RegExp.prototype.exec()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Выполняет поиск совпадения и возвращает подробную информацию.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const regex = /(\d+)/g;<br/>
+                      const result = regex.exec("Hello123World456");<br/>
+                      // ["123", "123", index: 5, input: "Hello123World456"]
+                    </code>
+                  </div>
                 </div>
-              </div>
 
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-2">Поиск всех слов в тексте</h3>
-                <div className="bg-gray-50 rounded p-2">
-                  <code className="text-sm font-mono text-blue-600">
-                    const text = "Hello World! How are you?";<br/>
-                    const words = text.match(/\b\w+\b/g);<br/>
-                    console.log(words); // ["Hello", "World", "How", "are", "you"]
-                  </code>
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">String.prototype.search()</h3>
+                  <p className="text-sm text-gray-600 mb-2">Возвращает индекс первого совпадения.</p>
+                  <div className="bg-gray-50 rounded p-2">
+                    <code className="text-sm font-mono text-blue-600">
+                      const str = "Hello123World";<br/>
+                      const index = str.search(/\d+/);<br/>
+                      // 5
+                    </code>
+                  </div>
                 </div>
               </div>
             </div>
