@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,25 +9,23 @@ import FeaturesSection from "@/components/FeaturesSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      <DynamicBackground />
-
+    <div className="min-h-screen flex flex-col relative">
       <Header />
 
       <div className="flex-grow relative z-10">
-        {/* Hero Section */}
+        {/* Hero Section with Features */}
         <AnimatedSection delay={200}>
-          <HeroSection />
+          <div className="relative">
+            <DynamicBackground />
+            <HeroSection />
+          </div>
         </AnimatedSection>
 
         {/* Technologies Grid */}
         <AnimatedSection delay={400}>
-          <TechnologiesSection />
-        </AnimatedSection>
-
-        {/* Features Section */}
-        <AnimatedSection delay={600}>
-          <FeaturesSection />
+          <div className="bg-white">
+            <TechnologiesSection />
+          </div>
         </AnimatedSection>
       </div>
 

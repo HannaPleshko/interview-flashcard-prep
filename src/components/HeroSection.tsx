@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Brain, Target } from "lucide-react";
+import FeaturesSection from "./FeaturesSection";
 
 const HeroSection = () => {
   return (
@@ -52,7 +53,9 @@ const HeroSection = () => {
             </Link>
           </Button>
         </div>
+
       </div>
+        <FeaturesSection />
     </section>
   );
 };

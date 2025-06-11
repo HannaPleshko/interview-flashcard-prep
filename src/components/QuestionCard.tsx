@@ -68,7 +68,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
   };
 
   return (
-    <div className="flip-card w-full h-80 relative group" style={{ perspective: '1000px' }}>
+    <div className="flip-card w-full h-[calc(100vh-350px)] sm:h-80 relative group" style={{ perspective: '1000px' }}>
       
       {/* Floating particles effect - скрываем во время переворота */}
       {!isFlipping && (
@@ -97,7 +97,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
           <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-blue-400/20 to-transparent rounded-tr-full"></div>
           
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-300px)]">
             <div>
               <div className="flex justify-between items-start mb-4">
                 <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg transition-all duration-300 hover:scale-105`}>
@@ -136,8 +136,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
           <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-transparent rounded-br-full"></div>
           <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-cyan-400/20 to-transparent rounded-tl-full"></div>
           
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
-            <div>
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-300px)]">
+            <div className="flex-grow overflow-y-auto">
               <div className="flex justify-between items-start mb-4">
                 <Badge className="bg-gradient-to-r from-green-500 to-blue-500 text-white border-0 shadow-lg hover:scale-105 transition-all duration-300">
                   <Lightbulb className="h-3 w-3 mr-1" />
@@ -154,9 +154,9 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
                 </p>
               </div>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-3 mt-4">
               <div className="progress-buttons flex justify-center gap-2">
-                <Button 
+                <Button
                   size="sm" 
                   variant={progressStatus === 'learning' ? 'default' : 'outline'}
                   className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200"
@@ -164,7 +164,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
                 >
                   <Book className="h-4 w-4 mr-1.5" /> Учу
                 </Button>
-                <Button 
+                <Button
                   size="sm" 
                   variant={progressStatus === 'review' ? 'default' : 'outline'}
                   className="bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200"
@@ -172,7 +172,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
                 >
                   <RefreshCw className="h-4 w-4 mr-1.5" /> Повторить
                 </Button>
-                <Button 
+                <Button
                   size="sm" 
                   variant={progressStatus === 'known' ? 'default' : 'outline'}
                   className="bg-green-100 text-green-800 border-green-200 hover:bg-green-200"
