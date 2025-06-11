@@ -4,7 +4,15 @@ import { questionsData } from "@/data/questions";
 import TechnologyCard from "./TechnologyCard";
 import { technologies } from "@/data/technologies";
 
-const TechnologiesSection = () => {
+interface TechnologiesSectionProps {
+  title?: string;
+  description?: string;
+}
+
+const TechnologiesSection = ({ 
+  title = "🎯 Подготовьтесь к собеседованию",
+  description = "Выберите технологию для изучения. В каждой карточке:\n📚 Изучайте теорию с помощью карточек-вопросов\n🎯 Отмечайте свой прогресс: \"Учу\", \"Повторяю\", \"Знаю\"\n🔄 Практикуйтесь с разными уровнями сложности"
+}: TechnologiesSectionProps) => {
   const [showAllTechnologies, setShowAllTechnologies] = useState(false);
   const initialTechnologies = technologies.slice(0, 4);
   const additionalTechnologies = technologies.slice(4);
@@ -19,16 +27,10 @@ const TechnologiesSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
-            🎯 Подготовьтесь к собеседованию
+            {title}
           </h3>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Выберите технологию для изучения. В каждой карточке:
-            <br />
-            📚 Изучайте теорию с помощью карточек-вопросов
-            <br />
-            🎯 Отмечайте свой прогресс: "Учу", "Повторяю", "Знаю"
-            <br />
-            🔄 Практикуйтесь с разными уровнями сложности
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto whitespace-pre-line">
+            {description}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">

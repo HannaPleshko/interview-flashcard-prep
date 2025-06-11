@@ -3,12 +3,14 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Study from "./pages/Study";
-import Practice from "./pages/Practice";
-import NotFound from "./pages/NotFound";
+import Index from "@/pages/Index";
+import Study from "@/pages/Study";
+import Practice from "@/pages/Practice";
+import NotFound from "@/pages/NotFound";
 import Rate from "./pages/Rate";
 import Tasks from "@/pages/Tasks";
+import Interpreter from "@/pages/Interpreter";
+import Regex from "@/pages/Regex";
 
 const queryClient = new QueryClient();
 
@@ -20,10 +22,14 @@ const App = () => (
       <Router>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/study/:techId?" element={<Study />} />
-          <Route path="/practice/:techId?" element={<Practice />} />
+          <Route path="/study" element={<Study />} />
+          <Route path="/study/:techId" element={<Study />} />
+          <Route path="/practice" element={<Practice />} />
+          <Route path="/practice/:techId" element={<Practice />} />
           <Route path="/rate" element={<Rate />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/interpreter" element={<Interpreter />} />
+          <Route path="/regex" element={<Regex />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

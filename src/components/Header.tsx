@@ -1,6 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Play, ListTodo } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,8 +23,8 @@ const Header = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const isActive = (path: string) => {
-    if (path === '/practice') {
-      return location.pathname === '/' || location.pathname.startsWith('/practice');
+    if (path === "/") {
+      return location.pathname === "/";
     }
     return location.pathname.startsWith(path);
   };
@@ -40,69 +43,66 @@ const Header = () => {
       : `${baseClass} text-gray-700 hover:bg-purple-50 hover:text-purple-600`;
   };
 
+  const navItems = [
+    { path: "/study", icon: BookOpen, label: "Учебник" },
+    { path: "/", icon: Play, label: "Карточки теории" },
+    { path: "/tasks", icon: ListTodo, label: "Задачи" },
+    { path: "/interpreter", icon: Terminal, label: "Интерпретатор" },
+    { path: "/regex", icon: Regex, label: "RegEx" },
+  ];
+
   return (
     <>
-      <header className="backdrop-blur-xl bg-white/90 border-b border-purple-100 shadow-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link
-              to="/"
-              className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
-              onClick={() => isMenuOpen && toggleMenu()}
-            >
-              <div className="p-2 rounded-xl bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
-                <Code className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-                  Hschool
-                </h1>
-              </div>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/study"
-                className={getNavLinkClass('/study')}
-              >
-                <Brain className="h-4 w-4" />
-                Изучение теории
-              </Link>
-              <Link
-                to="/"
-                className={getNavLinkClass('/practice')}
-              >
-                <BookOpen className="h-4 w-4" />
-                Практиковать теорию
-              </Link>
-              <Link
-                to="/tasks"
-                className={getNavLinkClass('/tasks')}
-              >
-                <ClipboardList className="h-4 w-4" />
-                Задачи
-              </Link>
-              <Link
-                to="/rate"
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-gray-600 hover:text-purple-600 hover:bg-white/70 transition-all duration-300"
-                title="Оценить приложение"
-              >
-                <Star className="h-5 w-5 text-yellow-500" />
-              </Link>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={toggleMenu}
-                className="p-2 rounded-lg text-gray-700 hover:text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
-                aria-label="Toggle menu"
-              >
-                <Menu className="h-7 w-7" />
-              </button>
+      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
+        <div className="container flex h-16 items-center justify-between">
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="p-1.5 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
+              <Code className="h-5 w-5 text-white" />
             </div>
-          </div>
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                Hschool
+              </h1>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-2">
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                variant="ghost"
+                size="sm"
+                asChild
+                className={cn(
+                  "relative group transition-all duration-200",
+                  isActive(item.path) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+                )}
+              >
+                <Link to={item.path}>
+                  <item.icon className="mr-2 h-4 w-4" />
+                  {item.label}
+                  {isActive(item.path) && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
+                  )}
+                </Link>
+              </Button>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </Button>
         </div>
       </header>
 
@@ -130,38 +130,22 @@ const Header = () => {
           </div>
 
           <nav className="flex-grow mt-8 flex flex-col">
-            <Link
-              to="/study"
-              onClick={toggleMenu}
-              className={getMobileNavLinkClass('/study')}
-            >
-              <Brain className="h-5 w-5 text-purple-500" />
-              <span>Изучение теории</span>
-            </Link>
-            <Link
-              to="/"
-              onClick={toggleMenu}
-              className={getMobileNavLinkClass('/practice')}
-            >
-              <BookOpen className="h-5 w-5 text-blue-500" />
-              <span>Практиковать теорию</span>
-            </Link>
-            <Link
-              to="/tasks"
-              onClick={toggleMenu}
-              className={getMobileNavLinkClass('/tasks')}
-            >
-              <ClipboardList className="h-5 w-5 text-green-500" />
-              <span>Задачи</span>
-            </Link>
-            <Link
-              to="/rate"
-              onClick={toggleMenu}
-              className={getMobileNavLinkClass('/rate')}
-            >
-              <Star className="h-5 w-5 text-yellow-500" />
-              <span>Оценить</span>
-            </Link>
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                variant="ghost"
+                size="lg"
+                asChild
+                className={`w-full justify-start ${
+                  location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
+                }`}
+              >
+                <Link to={item.path} className="flex items-center gap-3">
+                  <item.icon className="h-5 w-5" />
+                  {item.label}
+                </Link>
+              </Button>
+            ))}
           </nav>
 
           <div className="p-6 text-center text-sm text-gray-500">

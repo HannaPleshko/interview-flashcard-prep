@@ -175,35 +175,6 @@ const Practice = () => {
     );
   }
 
-  if (!techId) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
-        <Header />
-        <div className="container mx-auto px-4 py-8 text-center flex-grow flex items-center justify-center">
-          <div className="max-w-md mx-auto">
-            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/20">
-              <div className="mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Code className="h-10 w-10 text-white" />
-                </div>
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-                  Выберите технологию для практики
-                </h1>
-                <p className="text-muted-foreground text-base sm:text-lg">
-                  Вернитесь на главную страницу, чтобы выбрать технологию
-                </p>
-              </div>
-              <Button asChild className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <Link to="/">Выбрать технологию</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   const currentQuestion = currentQuestions[currentIndex];
   const progressPercentage = currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
 

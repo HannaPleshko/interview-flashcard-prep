@@ -97,8 +97,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
           <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-blue-400/20 to-transparent rounded-tr-full"></div>
           
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-300px)]">
-            <div>
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-350px)] sm:max-h-[calc(100vh-300px)]">
+            <div className="flex-grow overflow-y-auto">
               <div className="flex justify-between items-start mb-4">
                 <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg transition-all duration-300 hover:scale-105`}>
                   {getDifficultyText(question.difficulty)}

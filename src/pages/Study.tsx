@@ -35,6 +35,17 @@ type ProgressData = {
 };
 
 const SortableQuestionCard = ({ question, index, ...props }: { question: Question; index: number } & any) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const {
     attributes,
     listeners,
@@ -42,7 +53,7 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: question.id });
+  } = useSortable({ id: question.id, disabled: isMobile });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -63,13 +74,15 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
       `}
     >
       <div className="relative">
-        <div 
-          {...attributes} 
-          {...listeners}
-          className="absolute top-2 right-2 p-2 rounded-lg cursor-grab active:cursor-grabbing hover:bg-white/50 transition-colors z-10"
-        >
-          <GripVertical className="h-5 w-5 text-gray-400" />
-        </div>
+        {!isMobile && (
+          <div 
+            {...attributes} 
+            {...listeners}
+            className="absolute top-2 right-2 p-2 rounded-lg cursor-grab active:cursor-grabbing hover:bg-white/50 transition-colors z-10"
+          >
+            <GripVertical className="h-5 w-5 text-gray-400" />
+          </div>
+        )}
         <QuestionCard {...props} question={question} />
       </div>
     </div>
@@ -77,6 +90,17 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
 };
 
 const SortableQuestionListItem = ({ question, ...props }: { question: Question } & any) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const {
     attributes,
     listeners,
@@ -84,7 +108,7 @@ const SortableQuestionListItem = ({ question, ...props }: { question: Question }
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: question.id });
+  } = useSortable({ id: question.id, disabled: isMobile });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -104,19 +128,21 @@ const SortableQuestionListItem = ({ question, ...props }: { question: Question }
         flex items-center gap-2
       `}
     >
-      <div 
-        {...attributes} 
-        {...listeners}
-        className="
-          cursor-grab p-2 
-          hover:bg-gray-100/50 
-          rounded-md 
-          transition-colors duration-150
-          active:cursor-grabbing
-        "
-      >
-        <GripVertical className="h-5 w-5 text-gray-400" />
-      </div>
+      {!isMobile && (
+        <div 
+          {...attributes} 
+          {...listeners}
+          className="
+            cursor-grab p-2 
+            hover:bg-gray-100/50 
+            rounded-md 
+            transition-colors duration-150
+            active:cursor-grabbing
+          "
+        >
+          <GripVertical className="h-5 w-5 text-gray-400" />
+        </div>
+      )}
       <div className="flex-grow">
         <QuestionListItem {...props} question={question} />
       </div>

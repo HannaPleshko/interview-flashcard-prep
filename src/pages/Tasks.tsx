@@ -329,13 +329,15 @@ const Tasks = () => {
       <Header />
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-              Практические задачи
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Решайте практические задачи для закрепления знаний
-            </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
+            <div className="flex items-center gap-4">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Практические задачи
+                </h1>
+                <p className="text-muted-foreground text-sm sm:text-base">Решайте практические задачи для закрепления знаний</p>
+              </div>
+            </div>
           </div>
 
           {/* Фильтры и поиск */}

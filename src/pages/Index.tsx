@@ -17,14 +17,20 @@ const Index = () => {
         <AnimatedSection delay={200}>
           <div className="relative">
             <DynamicBackground />
-            <HeroSection />
+            <HeroSection 
+              title="Подготовка к собеседованию стала проще"
+              description="Изучайте теорию, практикуйтесь и отслеживайте прогресс с помощью интерактивных карточек. Моя платформа поможет вам систематизировать знания и уверенно отвечать на вопросы технических интервью."
+            />
           </div>
         </AnimatedSection>
 
         {/* Technologies Grid */}
         <AnimatedSection delay={400}>
           <div className="bg-white">
-            <TechnologiesSection />
+            <TechnologiesSection 
+              title="Выберите технологию для изучения"
+              description="Изучайте теорию через карточки с вопросами, отслеживайте прогресс с помощью статусов 'Учу', 'Повторяю' и 'Знаю', практикуйтесь с разными уровнями сложности."
+            />
           </div>
         </AnimatedSection>
       </div>

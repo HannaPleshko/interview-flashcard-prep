@@ -1,11 +1,18 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Brain, Target } from "lucide-react";
 import FeaturesSection from "./FeaturesSection";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  title?: string;
+  description?: string;
+}
+
+const HeroSection = ({ 
+  title = "Готовься к собеседованиям",
+  description = "🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. Преврати подготовку в увлекательный путь к работе мечты!"
+}: HeroSectionProps) => {
   return (
     <section className="py-12 md:py-20 text-center relative overflow-hidden w-full">
       <div className="absolute inset-0 gradient-hero gradient-animated opacity-10"></div>
@@ -31,13 +38,12 @@ const HeroSection = () => {
         <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
           <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 text-purple-500 animate-pulse" />
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
-            Готовься к собеседованиям
+            {title}
           </h2>
           <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 text-blue-500 animate-pulse" />
         </div>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-          🚀 Изучай теоретические вопросы по популярным технологиям с помощью интерактивных карточек. 
-          Преврати подготовку в увлекательный путь к работе мечты!
+          {description}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover w-full sm:w-auto">
