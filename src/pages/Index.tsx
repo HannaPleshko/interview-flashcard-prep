@@ -1,3 +1,4 @@
+
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -5,6 +6,7 @@ import FloatingElements from "@/components/FloatingElements";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroSection from "@/components/HeroSection";
 import TechnologiesSection from "@/components/TechnologiesSection";
+import FeaturesSection from "@/components/FeaturesSection";
 
 const Index = () => {
   return (
