@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import DynamicBackground from "@/components/DynamicBackground";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -274,303 +273,298 @@ const DataGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative">
-      <DynamicBackground />
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
       
-      <div className="flex-1 relative z-10">
-        <div className="container mx-auto px-4 py-8">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-purple-200/30">
-              <Database className="h-5 w-5 text-purple-600" />
-              <span className="text-sm font-medium text-purple-700">Генератор данных</span>
+      <div className="container mx-auto px-4 py-8 flex-grow">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
+          <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                Генератор данных
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base">Создание тестовых данных</p>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-              Создание тестовых данных
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Мощный инструмент для генерации структурированных данных в различных форматах
-            </p>
           </div>
+        </div>
 
-          {/* Main Content */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-8">
-            {/* Configuration Panel */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-100 shadow-xl">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-purple-700">
-                  <Settings className="h-5 w-5" />
-                  Настройка структуры
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {/* Quick Fields */}
-                <div>
-                  <label className="text-sm font-medium text-gray-700 mb-3 block">Быстрые поля</label>
-                  <div className="flex flex-wrap gap-2">
-                    {TYPICAL_FIELDS.map((field) => (
-                      <Button
-                        key={field.name}
-                        variant="outline"
-                        size="sm"
-                        onClick={() => addTypicalField(field)}
-                        className="text-xs h-8 border-purple-200 hover:bg-purple-50"
-                      >
-                        <Plus className="h-3 w-3 mr-1" />
-                        {field.name}
-                      </Button>
-                    ))}
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          {/* Configuration Panel */}
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-purple-700">
+                <Settings className="h-5 w-5" />
+                Настройка структуры
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Quick Fields */}
+              <div>
+                <label className="text-sm font-medium text-gray-700 mb-3 block">Быстрые поля</label>
+                <div className="flex flex-wrap gap-2">
+                  {TYPICAL_FIELDS.map((field) => (
+                    <Button
+                      key={field.name}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => addTypicalField(field)}
+                      className="text-xs h-8 border-purple-200 hover:bg-purple-50"
+                    >
+                      <Plus className="h-3 w-3 mr-1" />
+                      {field.name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Current Fields */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <label className="text-sm font-medium text-gray-700">Поля структуры</label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => openFieldModal()}
+                      className="h-8 px-3 text-xs border-purple-200"
+                    >
+                      <Plus className="h-3 w-3 mr-1" />
+                      Добавить
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={clearColumns}
+                      className="h-8 px-3 text-xs border-red-200 text-red-600 hover:bg-red-50"
+                    >
+                      <Trash2 className="h-3 w-3 mr-1" />
+                      Очистить
+                    </Button>
                   </div>
                 </div>
-
-                {/* Current Fields */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="text-sm font-medium text-gray-700">Поля структуры</label>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => openFieldModal()}
-                        className="h-8 px-3 text-xs border-purple-200"
-                      >
-                        <Plus className="h-3 w-3 mr-1" />
-                        Добавить
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={clearColumns}
-                        className="h-8 px-3 text-xs border-red-200 text-red-600 hover:bg-red-50"
-                      >
-                        <Trash2 className="h-3 w-3 mr-1" />
-                        Очистить
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {columns.length === 0 ? (
-                      <div className="text-center py-8 text-gray-400">
-                        <Database className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                        <p>Добавьте поля для структуры данных</p>
-                      </div>
-                    ) : (
-                      columns.map((col, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-purple-100"
-                        >
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="font-medium text-sm">{col.name}</span>
-                              <Badge variant="secondary" className="text-xs">
-                                {col.type}
-                              </Badge>
-                            </div>
-                            {col.type === "enum" && col.options?.values && (
-                              <p className="text-xs text-gray-500 mt-1">
-                                [{col.options.values.join(", ")}]
-                              </p>
-                            )}
-                            {col.type === "number" && (col.options?.min || col.options?.max) && (
-                              <p className="text-xs text-gray-500 mt-1">
-                                {col.options?.min ?? "∞"} - {col.options?.max ?? "∞"}
-                              </p>
-                            )}
-                          </div>
-                          <div className="flex gap-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => openFieldModal(i)}
-                              className="h-7 w-7 p-0"
-                            >
-                              <Edit3 className="h-3 w-3" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => removeColumn(i)}
-                              className="h-7 w-7 p-0 text-red-500 hover:bg-red-50"
-                            >
-                              <Trash2 className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-
-                {/* Generation Settings */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Формат вывода</label>
-                    <Select value={outputType} onValueChange={setOutputType}>
-                      <SelectTrigger className="bg-white/70 border-purple-200 h-9">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="json">JSON</SelectItem>
-                        <SelectItem value="array">JS Array</SelectItem>
-                        <SelectItem value="text">Текст</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  {outputType !== "text" ? (
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">Количество</label>
-                      <Input
-                        type="number"
-                        min="1"
-                        max="1000"
-                        value={count}
-                        onChange={(e) => setCount(e.target.value)}
-                        className="bg-white/70 border-purple-200 h-9"
-                      />
+                
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  {columns.length === 0 ? (
+                    <div className="text-center py-8 text-gray-400">
+                      <Database className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                      <p>Добавьте поля для структуры данных</p>
                     </div>
                   ) : (
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">Длина текста</label>
-                      <Input
-                        type="number"
-                        min="1"
-                        max="10000"
-                        value={textLength}
-                        onChange={(e) => setTextLength(e.target.value)}
-                        className="bg-white/70 border-purple-200 h-9"
-                      />
-                    </div>
+                    columns.map((col, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-purple-100"
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-sm">{col.name}</span>
+                            <Badge variant="secondary" className="text-xs">
+                              {col.type}
+                            </Badge>
+                          </div>
+                          {col.type === "enum" && col.options?.values && (
+                            <p className="text-xs text-gray-500 mt-1">
+                              [{col.options.values.join(", ")}]
+                            </p>
+                          )}
+                          {col.type === "number" && (col.options?.min || col.options?.max) && (
+                            <p className="text-xs text-gray-500 mt-1">
+                              {col.options?.min ?? "∞"} - {col.options?.max ?? "∞"}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => openFieldModal(i)}
+                            className="h-7 w-7 p-0"
+                          >
+                            <Edit3 className="h-3 w-3" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeColumn(i)}
+                            className="h-7 w-7 p-0 text-red-500 hover:bg-red-50"
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))
                   )}
                 </div>
+              </div>
 
-                {outputType === "text" && (
+              {/* Generation Settings */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Формат вывода</label>
+                  <Select value={outputType} onValueChange={setOutputType}>
+                    <SelectTrigger className="bg-white/70 border-purple-200 h-9">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="json">JSON</SelectItem>
+                      <SelectItem value="array">JS Array</SelectItem>
+                      <SelectItem value="text">Текст</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {outputType !== "text" ? (
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Тип текста</label>
-                    <Select value={textType} onValueChange={setTextType}>
-                      <SelectTrigger className="bg-white/70 border-purple-200 h-9">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="lorem">Lorem Ipsum</SelectItem>
-                        <SelectItem value="random">Случайный текст</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
-
-                <Button
-                  onClick={generateData}
-                  className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white h-10"
-                  disabled={columns.length === 0 && outputType !== "text"}
-                >
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Сгенерировать данные
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Preview/Result Panel */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-100 shadow-xl">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-purple-700">
-                  <Eye className="h-5 w-5" />
-                  Результат
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {generatedData ? (
-                  <div className="space-y-4">
-                    <Tabs value={tab} onValueChange={(v) => setTab(v as any)}>
-                      <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="data" className="text-xs">
-                          <FileText className="h-3 w-3 mr-1" />
-                          Данные
-                        </TabsTrigger>
-                        {outputType === "array" && (
-                          <TabsTrigger value="ts" className="text-xs">
-                            <Code className="h-3 w-3 mr-1" />
-                            TypeScript
-                          </TabsTrigger>
-                        )}
-                        <TabsTrigger value="structure" className="text-xs">
-                          <Settings className="h-3 w-3 mr-1" />
-                          Структура
-                        </TabsTrigger>
-                      </TabsList>
-                      
-                      <TabsContent value="data" className="space-y-3">
-                        <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3" ref={scrollAreaRef}>
-                          <pre className="text-xs text-gray-800 whitespace-pre-wrap break-all font-mono">
-                            {generatedData}
-                          </pre>
-                        </ScrollArea>
-                      </TabsContent>
-                      
-                      {outputType === "array" && (
-                        <TabsContent value="ts" className="space-y-3">
-                          <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3">
-                            <pre className="text-xs text-gray-800 whitespace-pre-wrap font-mono">
-                              {getTSInterface()}
-                            </pre>
-                          </ScrollArea>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={copyTSInterface}
-                            className="w-full border-purple-200"
-                          >
-                            <Copy className="h-3 w-3 mr-1" />
-                            Копировать интерфейс
-                          </Button>
-                        </TabsContent>
-                      )}
-                      
-                      <TabsContent value="structure" className="space-y-3">
-                        <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3">
-                          <pre className="text-xs text-gray-800 whitespace-pre-wrap font-mono">
-                            {columns.map(col => 
-                              `${col.name}: ${col.type}${col.type === "enum" && col.options?.values ? ` [${col.options.values.join(", ")}]` : ""}`
-                            ).join("\n")}
-                          </pre>
-                        </ScrollArea>
-                      </TabsContent>
-                    </Tabs>
-
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={copyToClipboard}
-                        className="flex-1 border-purple-200"
-                      >
-                        <Copy className="h-3 w-3 mr-1" />
-                        Копировать
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={exportJSON}
-                        className="flex-1 border-purple-200"
-                      >
-                        <Download className="h-3 w-3 mr-1" />
-                        Скачать
-                      </Button>
-                    </div>
+                    <label className="text-sm font-medium text-gray-700 mb-2 block">Количество</label>
+                    <Input
+                      type="number"
+                      min="1"
+                      max="1000"
+                      value={count}
+                      onChange={(e) => setCount(e.target.value)}
+                      className="bg-white/70 border-purple-200 h-9"
+                    />
                   </div>
                 ) : (
-                  <div className="text-center py-16 text-gray-400">
-                    <Play className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium mb-2">Данные не сгенерированы</p>
-                    <p className="text-sm">Настройте структуру и нажмите "Сгенерировать данные"</p>
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 mb-2 block">Длина текста</label>
+                    <Input
+                      type="number"
+                      min="1"
+                      max="10000"
+                      value={textLength}
+                      onChange={(e) => setTextLength(e.target.value)}
+                      className="bg-white/70 border-purple-200 h-9"
+                    />
                   </div>
                 )}
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+
+              {outputType === "text" && (
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Тип текста</label>
+                  <Select value={textType} onValueChange={setTextType}>
+                    <SelectTrigger className="bg-white/70 border-purple-200 h-9">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="lorem">Lorem Ipsum</SelectItem>
+                      <SelectItem value="random">Случайный текст</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              <Button
+                onClick={generateData}
+                className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white h-10"
+                disabled={columns.length === 0 && outputType !== "text"}
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                Сгенерировать данные
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Preview/Result Panel */}
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-purple-700">
+                <Eye className="h-5 w-5" />
+                Результат
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {generatedData ? (
+                <div className="space-y-4">
+                  <Tabs value={tab} onValueChange={(v) => setTab(v as any)}>
+                    <TabsList className="grid w-full grid-cols-3">
+                      <TabsTrigger value="data" className="text-xs">
+                        <FileText className="h-3 w-3 mr-1" />
+                        Данные
+                      </TabsTrigger>
+                      {outputType === "array" && (
+                        <TabsTrigger value="ts" className="text-xs">
+                          <Code className="h-3 w-3 mr-1" />
+                          TypeScript
+                        </TabsTrigger>
+                      )}
+                      <TabsTrigger value="structure" className="text-xs">
+                        <Settings className="h-3 w-3 mr-1" />
+                        Структура
+                      </TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="data" className="space-y-3">
+                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3" ref={scrollAreaRef}>
+                        <pre className="text-xs text-gray-800 whitespace-pre-wrap break-all font-mono">
+                          {generatedData}
+                        </pre>
+                      </ScrollArea>
+                    </TabsContent>
+                    
+                    {outputType === "array" && (
+                      <TabsContent value="ts" className="space-y-3">
+                        <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3">
+                          <pre className="text-xs text-gray-800 whitespace-pre-wrap font-mono">
+                            {getTSInterface()}
+                          </pre>
+                        </ScrollArea>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={copyTSInterface}
+                          className="w-full border-purple-200"
+                        >
+                          <Copy className="h-3 w-3 mr-1" />
+                          Копировать интерфейс
+                        </Button>
+                      </TabsContent>
+                    )}
+                    
+                    <TabsContent value="structure" className="space-y-3">
+                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/90 p-3">
+                        <pre className="text-xs text-gray-800 whitespace-pre-wrap font-mono">
+                          {columns.map(col => 
+                            `${col.name}: ${col.type}${col.type === "enum" && col.options?.values ? ` [${col.options.values.join(", ")}]` : ""}`
+                          ).join("\n")}
+                        </pre>
+                      </ScrollArea>
+                    </TabsContent>
+                  </Tabs>
+
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={copyToClipboard}
+                      className="flex-1 border-purple-200"
+                    >
+                      <Copy className="h-3 w-3 mr-1" />
+                      Копировать
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={exportJSON}
+                      className="flex-1 border-purple-200"
+                    >
+                      <Download className="h-3 w-3 mr-1" />
+                      Скачать
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-16 text-gray-400">
+                  <Play className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-medium mb-2">Данные не сгенерированы</p>
+                  <p className="text-sm">Настройте структуру и нажмите "Сгенерировать данные"</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
 
