@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
@@ -54,10 +54,11 @@ const Header = () => {
     { path: "/data-types", icon: Database, label: "Типы данных", isNew: true },
   ];
 
-  const toolItems = [
+  const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
     { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
     { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
     { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
+    { path: "/api-client", icon: Send, label: "API Клиент", isNew: true },
   ];
 
   return (

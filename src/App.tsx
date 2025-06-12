@@ -13,6 +13,7 @@ import Regex from "@/pages/Regex";
 import Methods from "./pages/Methods";
 import DataGenerator from "./pages/DataGenerator";
 import DataTypes from "./pages/DataTypes";
+import ApiClient from "./pages/ApiClient";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/methods" element={<Methods />} />
           <Route path="/data-generator" element={<DataGenerator />} />
           <Route path="/data-types" element={<DataTypes />} />
+          <Route path="/api-client" element={<ApiClient />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
