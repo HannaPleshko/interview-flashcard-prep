@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { 
   Copy, RefreshCw, Plus, Trash2, Database, Code, FileText, 
-  Download, Settings, Sparkles, Play, Edit3, Eye
+  Download, Settings, Sparkles, Play, Edit3, Eye, FileJson
 } from "lucide-react";
 import toast from 'react-hot-toast';
 
@@ -52,6 +53,8 @@ const DataGenerator = () => {
   const [editFieldIndex, setEditFieldIndex] = useState<number | null>(null);
   const [fieldDraft, setFieldDraft] = useState<Column | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [jsonInput, setJsonInput] = useState("");
+  const [formattedJson, setFormattedJson] = useState("");
 
   const generateData = () => {
     try {
@@ -270,6 +273,27 @@ const DataGenerator = () => {
     setFieldModalOpen(false);
     setFieldDraft(null);
     setEditFieldIndex(null);
+  };
+
+  const formatJson = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      const formatted = JSON.stringify(parsed, null, 2);
+      setFormattedJson(formatted);
+      toast.success("JSON отформатирован");
+    } catch (error) {
+      toast.error("Некорректный JSON формат");
+    }
+  };
+
+  const copyFormattedJson = () => {
+    navigator.clipboard.writeText(formattedJson);
+    toast.success("Отформатированный JSON скопирован");
+  };
+
+  const clearJsonFormatter = () => {
+    setJsonInput("");
+    setFormattedJson("");
   };
 
   return (
@@ -566,6 +590,79 @@ const DataGenerator = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* JSON Formatter Section */}
+        <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
+          <CardHeader className="pb-4">
+            <CardTitle className="flex items-center gap-2 text-purple-700">
+              <FileJson className="h-5 w-5" />
+              JSON Форматировщик
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Input */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium text-gray-700">Неотформатированный JSON</label>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={clearJsonFormatter}
+                    className="h-8 px-3 text-xs border-red-200 text-red-600 hover:bg-red-50"
+                  >
+                    <Trash2 className="h-3 w-3 mr-1" />
+                    Очистить
+                  </Button>
+                </div>
+                <Textarea
+                  value={jsonInput}
+                  onChange={(e) => setJsonInput(e.target.value)}
+                  placeholder="Вставьте здесь неотформатированный JSON..."
+                  className="min-h-[200px] font-mono text-xs bg-white/70 border-purple-200"
+                />
+                <Button
+                  onClick={formatJson}
+                  className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white h-10"
+                  disabled={!jsonInput.trim()}
+                >
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Отформатировать JSON
+                </Button>
+              </div>
+
+              {/* Output */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium text-gray-700">Отформатированный JSON</label>
+                  {formattedJson && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={copyFormattedJson}
+                      className="h-8 px-3 text-xs border-purple-200"
+                    >
+                      <Copy className="h-3 w-3 mr-1" />
+                      Копировать
+                    </Button>
+                  )}
+                </div>
+                <ScrollArea className="h-[200px] w-full rounded-lg border bg-white/90 p-3">
+                  {formattedJson ? (
+                    <pre className="text-xs whitespace-pre-wrap font-mono text-gray-800">
+                      {formattedJson}
+                    </pre>
+                  ) : (
+                    <div className="text-center py-8 text-gray-400">
+                      <FileJson className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                      <p>Отформатированный JSON появится здесь</p>
+                    </div>
+                  )}
+                </ScrollArea>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <Footer />
