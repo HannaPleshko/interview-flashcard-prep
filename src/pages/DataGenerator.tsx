@@ -401,7 +401,7 @@ const DataGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
       
       <div className="container mx-auto px-4 py-8 flex-grow">
@@ -409,7 +409,7 @@ const DataGenerator = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 Генератор данных
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base">Создание тестовых данных</p>
@@ -418,7 +418,7 @@ const DataGenerator = () => {
         </div>
 
         {/* Templates Section */}
-        <Card className="mb-8">
+        <Card className="mb-8 bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Database className="h-5 w-5" />
@@ -426,7 +426,7 @@ const DataGenerator = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
               {TEMPLATES.map((template) => {
                 const IconComponent = template.icon;
                 return (
@@ -434,10 +434,10 @@ const DataGenerator = () => {
                     key={template.name}
                     variant="outline"
                     onClick={() => applyTemplate(template)}
-                    className="h-20 flex flex-col gap-2 hover:bg-accent"
+                    className="h-14 md:h-20 flex flex-col gap-1 md:gap-2 hover:bg-white/50 border-purple-200 text-purple-700"
                   >
-                    <IconComponent className="h-6 w-6" />
-                    <span className="text-sm">{template.name}</span>
+                    <IconComponent className="h-5 w-5 md:h-6 md:w-6" />
+                    <span className="text-xs md:text-sm">{template.name}</span>
                   </Button>
                 );
               })}
@@ -448,7 +448,7 @@ const DataGenerator = () => {
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Configuration Panel */}
-          <Card>
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <Settings className="h-5 w-5" />
@@ -466,7 +466,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => addTypicalField(field)}
-                      className="text-xs h-8"
+                      className="text-xs h-8 hover:bg-white/50 border-purple-200 text-purple-700"
                     >
                       <Plus className="h-3 w-3 mr-1" />
                       {field.name}
@@ -484,7 +484,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => openFieldModal()}
-                      className="h-8 px-3 text-xs"
+                      className="h-8 px-3 text-xs hover:bg-white/50 border-purple-200 text-purple-700"
                     >
                       <Plus className="h-3 w-3 mr-1" />
                       Добавить
@@ -493,7 +493,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={clearColumns}
-                      className="h-8 px-3 text-xs text-destructive hover:bg-destructive/10"
+                      className="h-8 px-3 text-xs text-destructive hover:bg-red-100 hover:text-red-600 border-red-200"
                     >
                       <Trash2 className="h-3 w-3 mr-1" />
                       Очистить
@@ -511,12 +511,12 @@ const DataGenerator = () => {
                     columns.map((col, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between p-3 bg-accent/50 rounded-lg border"
+                        className="flex items-center justify-between p-3 bg-white/70 rounded-lg border border-purple-200"
                       >
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-sm">{col.name}</span>
-                            <Badge variant="secondary" className="text-xs">
+                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700">
                               {col.type}
                             </Badge>
                           </div>
@@ -536,7 +536,7 @@ const DataGenerator = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => openFieldModal(i)}
-                            className="h-7 w-7 p-0"
+                            className="h-7 w-7 p-0 hover:bg-purple-100"
                           >
                             <Edit3 className="h-3 w-3" />
                           </Button>
@@ -544,7 +544,7 @@ const DataGenerator = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeColumn(i)}
-                            className="h-7 w-7 p-0 text-destructive hover:bg-destructive/10"
+                            className="h-7 w-7 p-0 text-destructive hover:bg-red-100 hover:text-red-600"
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
@@ -560,10 +560,10 @@ const DataGenerator = () => {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Формат вывода</label>
                   <Select value={outputType} onValueChange={setOutputType}>
-                    <SelectTrigger className="h-9">
+                    <SelectTrigger className="h-9 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
                       <SelectItem value="json">JSON</SelectItem>
                       <SelectItem value="array">JS Array</SelectItem>
                       <SelectItem value="sql">SQL INSERT</SelectItem>
@@ -581,7 +581,7 @@ const DataGenerator = () => {
                       max="1000"
                       value={count}
                       onChange={(e) => setCount(e.target.value)}
-                      className="h-9"
+                      className="h-9 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                     />
                   </div>
                 ) : (
@@ -593,7 +593,7 @@ const DataGenerator = () => {
                       max="10000"
                       value={textLength}
                       onChange={(e) => setTextLength(e.target.value)}
-                      className="h-9"
+                      className="h-9 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                     />
                   </div>
                 )}
@@ -603,10 +603,10 @@ const DataGenerator = () => {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Тип текста</label>
                   <Select value={textType} onValueChange={setTextType}>
-                    <SelectTrigger className="h-9">
+                    <SelectTrigger className="h-9 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
                       <SelectItem value="lorem">Lorem Ipsum</SelectItem>
                       <SelectItem value="random">Случайный текст</SelectItem>
                     </SelectContent>
@@ -616,7 +616,7 @@ const DataGenerator = () => {
 
               <Button
                 onClick={generateData}
-                className="w-full h-10"
+                className="w-full h-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                 disabled={columns.length === 0 && outputType !== "text"}
               >
                 <Sparkles className="h-4 w-4 mr-2" />
@@ -626,7 +626,7 @@ const DataGenerator = () => {
           </Card>
 
           {/* Preview/Result Panel */}
-          <Card>
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <Eye className="h-5 w-5" />
@@ -637,23 +637,23 @@ const DataGenerator = () => {
               {generatedData ? (
                 <div className="space-y-4">
                   <Tabs value={tab} onValueChange={(v) => setTab(v as any)}>
-                    <TabsList className="grid w-full grid-cols-3">
-                      <TabsTrigger value="data" className="text-xs">
+                    <TabsList className="grid w-full grid-cols-3 bg-white/70 border-purple-200">
+                      <TabsTrigger value="data" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
                         <FileText className="h-3 w-3 mr-1" />
                         Данные
                       </TabsTrigger>
-                      <TabsTrigger value="ts" className="text-xs">
+                      <TabsTrigger value="ts" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
                         <Code className="h-3 w-3 mr-1" />
                         TypeScript
                       </TabsTrigger>
-                      <TabsTrigger value="structure" className="text-xs">
+                      <TabsTrigger value="structure" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
                         <Settings className="h-3 w-3 mr-1" />
                         Структура
                       </TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="data" className="space-y-3">
-                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-muted/30 p-3" ref={scrollAreaRef}>
+                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3" ref={scrollAreaRef}>
                         <pre className="text-xs whitespace-pre-wrap break-all font-mono">
                           {generatedData}
                         </pre>
@@ -661,7 +661,7 @@ const DataGenerator = () => {
                     </TabsContent>
                     
                     <TabsContent value="ts" className="space-y-3">
-                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-muted/30 p-3">
+                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3">
                         <pre className="text-xs whitespace-pre-wrap font-mono">
                           {getTSInterface()}
                         </pre>
@@ -670,7 +670,7 @@ const DataGenerator = () => {
                         variant="outline"
                         size="sm"
                         onClick={copyTSInterface}
-                        className="w-full"
+                        className="w-full hover:bg-white/50 border-purple-200 text-purple-700"
                       >
                         <Copy className="h-3 w-3 mr-1" />
                         Копировать интерфейс
@@ -678,7 +678,7 @@ const DataGenerator = () => {
                     </TabsContent>
                     
                     <TabsContent value="structure" className="space-y-3">
-                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-muted/30 p-3">
+                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3">
                         <pre className="text-xs whitespace-pre-wrap font-mono">
                           {columns.map(col => 
                             `${col.name}: ${col.type}${col.type === "enum" && col.options?.values ? ` [${col.options.values.join(", ")}]` : ""}`
@@ -693,7 +693,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={copyToClipboard}
-                      className="flex-1"
+                      className="flex-1 hover:bg-white/50 border-purple-200 text-purple-700"
                     >
                       <Copy className="h-3 w-3 mr-1" />
                       Копировать
@@ -702,7 +702,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={exportJSON}
-                      className="flex-1"
+                      className="flex-1 hover:bg-white/50 border-purple-200 text-purple-700"
                     >
                       <Download className="h-3 w-3 mr-1" />
                       Скачать
@@ -723,7 +723,7 @@ const DataGenerator = () => {
         {/* Utility Tools */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* JSON Formatter Section */}
-          <Card>
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <FileJson className="h-5 w-5" />
@@ -740,7 +740,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={clearJsonFormatter}
-                      className="h-8 px-3 text-xs text-destructive hover:bg-destructive/10"
+                      className="h-8 px-3 text-xs text-destructive hover:bg-red-100 hover:text-red-600 border-red-200"
                     >
                       <Trash2 className="h-3 w-3 mr-1" />
                       Очистить
@@ -750,11 +750,11 @@ const DataGenerator = () => {
                     value={jsonInput}
                     onChange={(e) => setJsonInput(e.target.value)}
                     placeholder="Вставьте здесь неотформатированный JSON..."
-                    className="min-h-[120px] font-mono text-xs"
+                    className="min-h-[120px] font-mono text-xs bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
                   <Button
                     onClick={formatJson}
-                    className="w-full h-10"
+                    className="w-full h-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                     disabled={!jsonInput.trim()}
                   >
                     <Sparkles className="h-4 w-4 mr-2" />
@@ -771,14 +771,14 @@ const DataGenerator = () => {
                         variant="outline"
                         size="sm"
                         onClick={copyFormattedJson}
-                        className="h-8 px-3 text-xs"
+                        className="h-8 px-3 text-xs hover:bg-white/50 border-purple-200 text-purple-700"
                       >
                         <Copy className="h-3 w-3 mr-1" />
                         Копировать
                       </Button>
                     )}
                   </div>
-                  <ScrollArea className="h-[120px] w-full rounded-lg border bg-muted/30 p-3">
+                  <ScrollArea className="h-[120px] w-full rounded-lg border bg-white/70 p-3">
                     {formattedJson ? (
                       <pre className="text-xs whitespace-pre-wrap font-mono">
                         {formattedJson}
@@ -796,7 +796,7 @@ const DataGenerator = () => {
           </Card>
 
           {/* JSON Validator Section */}
-          <Card>
+          <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <Check className="h-5 w-5" />
@@ -812,7 +812,7 @@ const DataGenerator = () => {
                       variant="outline"
                       size="sm"
                       onClick={clearJsonValidator}
-                      className="h-8 px-3 text-xs text-destructive hover:bg-destructive/10"
+                      className="h-8 px-3 text-xs text-destructive hover:bg-red-100 hover:text-red-600 border-red-200"
                     >
                       <Trash2 className="h-3 w-3 mr-1" />
                       Очистить
@@ -822,11 +822,11 @@ const DataGenerator = () => {
                     value={jsonValidationInput}
                     onChange={(e) => setJsonValidationInput(e.target.value)}
                     placeholder="Вставьте JSON для валидации..."
-                    className="min-h-[120px] font-mono text-xs"
+                    className="min-h-[120px] font-mono text-xs bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
                   <Button
                     onClick={validateJson}
-                    className="w-full h-10"
+                    className="w-full h-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                     disabled={!jsonValidationInput.trim()}
                   >
                     <Check className="h-4 w-4 mr-2" />
@@ -869,7 +869,7 @@ const DataGenerator = () => {
       {/* Field Modal */}
       {fieldModalOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md shadow-2xl">
+          <Card className="w-full max-w-md shadow-2xl bg-white/95 backdrop-blur-md border-purple-200">
             <CardHeader>
               <CardTitle className="text-center">
                 {editFieldIndex !== null ? "Редактировать поле" : "Добавить поле"}
@@ -880,16 +880,17 @@ const DataGenerator = () => {
                 value={fieldDraft?.name || ""}
                 onChange={(e) => setFieldDraft(f => f ? { ...f, name: e.target.value } : f)}
                 placeholder="Имя поля"
+                className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
               />
               
               <Select
                 value={fieldDraft?.type || "string"}
                 onValueChange={(v) => setFieldDraft(f => f ? { ...f, type: v } : f)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
                   <SelectValue placeholder="Тип поля" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
                   <SelectItem value="string">Строка</SelectItem>
                   <SelectItem value="number">Число</SelectItem>
                   <SelectItem value="boolean">Булево</SelectItem>
@@ -910,6 +911,7 @@ const DataGenerator = () => {
                       options: { ...f.options, min: Number(e.target.value) } 
                     } : f)}
                     placeholder="Минимум"
+                    className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
                   <Input
                     type="number"
@@ -919,6 +921,7 @@ const DataGenerator = () => {
                       options: { ...f.options, max: Number(e.target.value) } 
                     } : f)}
                     placeholder="Максимум"
+                    className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
                 </div>
               )}
@@ -932,6 +935,7 @@ const DataGenerator = () => {
                     options: { ...f.options, length: Number(e.target.value) } 
                   } : f)}
                   placeholder="Длина строки"
+                  className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                 />
               )}
 
@@ -946,6 +950,7 @@ const DataGenerator = () => {
                     } 
                   } : f)}
                   placeholder="value1,value2,value3"
+                  className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                 />
               )}
 
@@ -953,13 +958,13 @@ const DataGenerator = () => {
                 <Button
                   variant="outline"
                   onClick={() => setFieldModalOpen(false)}
-                  className="flex-1"
+                  className="flex-1 hover:bg-white/50 border-purple-200 text-purple-700"
                 >
                   Отмена
                 </Button>
                 <Button
                   onClick={saveField}
-                  className="flex-1"
+                  className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                 >
                   Сохранить
                 </Button>
