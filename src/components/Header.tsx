@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
@@ -50,6 +50,7 @@ const Header = () => {
     { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
     { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
     { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
+    { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
   ];
 
   return (

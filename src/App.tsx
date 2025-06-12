@@ -11,6 +11,7 @@ import Tasks from "@/pages/Tasks";
 import Interpreter from "@/pages/Interpreter";
 import Regex from "@/pages/Regex";
 import Methods from "./pages/Methods";
+import DataGenerator from "./pages/DataGenerator";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/interpreter" element={<Interpreter />} />
           <Route path="/regex" element={<Regex />} />
           <Route path="/methods" element={<Methods />} />
+          <Route path="/data-generator" element={<DataGenerator />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
