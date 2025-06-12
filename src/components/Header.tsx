@@ -15,6 +15,7 @@ import { ChevronDown } from "lucide-react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const [taskCount, setTaskCount] = useState(0);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -27,6 +28,12 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    // Получаем количество задач из localStorage или устанавливаем начальное значение
+    const count = localStorage.getItem('taskCount') || '0';
+    setTaskCount(parseInt(count));
+  }, []);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const isActive = (path: string) => {
@@ -36,25 +43,15 @@ const Header = () => {
     return location.pathname.startsWith(path);
   };
 
-  const getNavLinkClass = (path: string) => {
-    const baseClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300";
-    return isActive(path)
-      ? `${baseClass} text-white bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md hover:shadow-lg hover:scale-105`
-      : `${baseClass} text-gray-600 hover:text-purple-600 hover:bg-white/70`;
-  };
-
-  const getMobileNavLinkClass = (path: string) => {
-    const baseClass = "flex items-center gap-3 py-3 px-6 text-base font-medium transition-colors duration-200";
-    return isActive(path)
-      ? `${baseClass} text-white bg-gradient-to-r from-purple-500 to-indigo-500`
-      : `${baseClass} text-gray-700 hover:bg-purple-50 hover:text-purple-600`;
-  };
-
   const navItems = [
-    { path: "/study", icon: BookOpen, label: "Учебник" },
+    { path: "/study", icon: BookOpen, label: "Учебник карточек" },
     { path: "/", icon: Play, label: "Карточки теории" },
-    { path: "/tasks", icon: ListTodo, label: "Задачи", isNew: true },
+    { path: "/tasks", icon: ListTodo, label: "Задачи" },
+  ];
+
+  const referenceItems = [
     { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
+    { path: "/data-types", icon: Database, label: "Типы данных", isNew: true },
   ];
 
   const toolItems = [
@@ -106,6 +103,44 @@ const Header = () => {
               </Button>
             ))}
 
+            {/* Reference Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "relative group transition-all duration-200",
+                    referenceItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+                  )}
+                >
+                  Справочник
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
+                {referenceItems.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link
+                      to={item.path}
+                      className={cn(
+                        "flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer",
+                        isActive(item.path) && "bg-purple-50 text-purple-700"
+                      )}
+                    >
+                      <item.icon className="h-4 w-4" />
+                      {item.label}
+                      {item.isNew && (
+                        <span className="ml-auto px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                          new
+                        </span>
+                      )}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* Tools Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -117,7 +152,6 @@ const Header = () => {
                     toolItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                   )}
                 >
-                  <Wrench className="mr-2 h-4 w-4" />
                   Инструменты
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
@@ -186,7 +220,7 @@ const Header = () => {
           </div>
 
           <nav className="flex-grow mt-8 flex flex-col">
-            {[...navItems, ...toolItems].map((item) => (
+            {navItems.map((item) => (
               <Button
                 key={item.path}
                 variant="ghost"
@@ -199,7 +233,7 @@ const Header = () => {
                 <Link to={item.path} className="flex items-center gap-3 relative">
                   <item.icon className="h-5 w-5" />
                   {item.label}
-                  {item.isNew && (
+                  {item?.isNew && (
                     <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
                       new
                     </span>
@@ -207,6 +241,56 @@ const Header = () => {
                 </Link>
               </Button>
             ))}
+
+            <div className="px-6 py-2">
+              <div className="text-sm font-medium text-gray-500 mb-2">Справочник</div>
+              {referenceItems.map((item) => (
+                <Button
+                  key={item.path}
+                  variant="ghost"
+                  size="lg"
+                  asChild
+                  className={`w-full justify-start ${
+                    location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
+                  }`}
+                >
+                  <Link to={item.path} className="flex items-center gap-3 relative">
+                    <item.icon className="h-5 w-5" />
+                    {item.label}
+                    {item.isNew && (
+                      <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                        new
+                      </span>
+                    )}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+
+            <div className="px-6 py-2">
+              <div className="text-sm font-medium text-gray-500 mb-2">Инструменты</div>
+              {toolItems.map((item) => (
+                <Button
+                  key={item.path}
+                  variant="ghost"
+                  size="lg"
+                  asChild
+                  className={`w-full justify-start ${
+                    location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
+                  }`}
+                >
+                  <Link to={item.path} className="flex items-center gap-3 relative">
+                    <item.icon className="h-5 w-5" />
+                    {item.label}
+                    {item.isNew && (
+                      <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                        new
+                      </span>
+                    )}
+                  </Link>
+                </Button>
+              ))}
+            </div>
           </nav>
 
           <div className="p-6 text-center text-sm text-gray-500">

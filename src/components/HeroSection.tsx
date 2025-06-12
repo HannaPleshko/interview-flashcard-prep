@@ -53,7 +53,7 @@ const HeroSection = ({
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50 w-full sm:w-auto">
-            <Link to="/practice" className="flex items-center justify-center gap-2">
+            <Link to="/practice/html" className="flex items-center justify-center gap-2">
               <Target className="h-5 w-5" />
               Попрактиковаться
             </Link>

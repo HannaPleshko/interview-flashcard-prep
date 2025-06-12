@@ -58,75 +58,73 @@ const Interpreter = () => {
       <Header />
       
       <div className="container mx-auto px-4 py-8 flex-grow">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
-            <div className="flex items-center gap-4">
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  JavaScript Интерпретатор
-                </h1>
-                <p className="text-muted-foreground text-sm sm:text-base">Напишите и запустите JavaScript код прямо в браузере</p>
-              </div>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
+          <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                JavaScript Интерпретатор
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base">Напишите и запустите JavaScript код прямо в браузере</p>
             </div>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Редактор кода */}
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold text-gray-700">Код</h2>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={copyCode}
-                    className="flex items-center gap-2"
-                  >
-                    {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {isCopied ? 'Скопировано' : 'Копировать'}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={clearCode}
-                    className="flex items-center gap-2 text-red-500 hover:text-red-600"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                    Очистить
-                  </Button>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Редактор кода */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-700">Код</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={copyCode}
+                  className="flex items-center gap-2"
+                >
+                  {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {isCopied ? 'Скопировано' : 'Копировать'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearCode}
+                  className="flex items-center gap-2 text-red-500 hover:text-red-600"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Очистить
+                </Button>
               </div>
-              <textarea
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                className="w-full h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-colors resize-none"
-                spellCheck="false"
-              />
-              <Button
-                onClick={runCode}
-                className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover"
-              >
-                <Play className="h-4 w-4 mr-2" />
-                Запустить код
-              </Button>
             </div>
+            <textarea
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="w-full h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-colors resize-none"
+              spellCheck="false"
+            />
+            <Button
+              onClick={runCode}
+              className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover"
+            >
+              <Play className="h-4 w-4 mr-2" />
+              Запустить код
+            </Button>
+          </div>
 
-            {/* Вывод */}
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
-              <h2 className="text-lg font-semibold text-gray-700 mb-4">Вывод</h2>
-              <div className="h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 overflow-y-auto">
-                {output.length === 0 ? (
-                  <div className="text-gray-400 italic">
-                    Вывод появится здесь после запуска кода
+          {/* Вывод */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
+            <h2 className="text-lg font-semibold text-gray-700 mb-4">Вывод</h2>
+            <div className="h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 overflow-y-auto">
+              {output.length === 0 ? (
+                <div className="text-gray-400 italic">
+                  Вывод появится здесь после запуска кода
+                </div>
+              ) : (
+                output.map((line, index) => (
+                  <div key={index} className="mb-1">
+                    {line}
                   </div>
-                ) : (
-                  output.map((line, index) => (
-                    <div key={index} className="mb-1">
-                      {line}
-                    </div>
-                  ))
-                )}
-              </div>
+                ))
+              )}
             </div>
           </div>
         </div>

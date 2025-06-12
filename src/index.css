@@ -418,7 +418,6 @@
 .animate-twinkle {
   animation: twinkle 4s ease-in-out infinite;
 }
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -437,3 +436,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #7c3aed, #2563eb);
 }
+
