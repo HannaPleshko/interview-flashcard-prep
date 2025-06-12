@@ -1,9 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,9 +54,12 @@ const Header = () => {
     { path: "/study", icon: BookOpen, label: "Учебник" },
     { path: "/", icon: Play, label: "Карточки теории" },
     { path: "/tasks", icon: ListTodo, label: "Задачи", isNew: true },
+    { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
+  ];
+
+  const toolItems = [
     { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
     { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
-    { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
     { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
   ];
 
@@ -95,6 +105,45 @@ const Header = () => {
                 </Link>
               </Button>
             ))}
+
+            {/* Tools Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "relative group transition-all duration-200",
+                    toolItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+                  )}
+                >
+                  <Wrench className="mr-2 h-4 w-4" />
+                  Инструменты
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
+                {toolItems.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link
+                      to={item.path}
+                      className={cn(
+                        "flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer",
+                        isActive(item.path) && "bg-purple-50 text-purple-700"
+                      )}
+                    >
+                      <item.icon className="h-4 w-4" />
+                      {item.label}
+                      {item.isNew && (
+                        <span className="ml-auto px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
+                          new
+                        </span>
+                      )}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -137,7 +186,7 @@ const Header = () => {
           </div>
 
           <nav className="flex-grow mt-8 flex flex-col">
-            {navItems.map((item) => (
+            {[...navItems, ...toolItems].map((item) => (
               <Button
                 key={item.path}
                 variant="ghost"
