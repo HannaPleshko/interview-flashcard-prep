@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -52,6 +53,7 @@ const Header = () => {
   const referenceItems = [
     { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
     { path: "/data-types", icon: Database, label: "Типы данных", isNew: true },
+    { path: "/functions", icon: Code, label: "Функции", isNew: true },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
