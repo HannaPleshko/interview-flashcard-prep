@@ -94,11 +94,6 @@ const Header = () => {
                 <Link to={item.path} className="relative">
                   <item.icon className="mr-2 h-4 w-4" />
                   {item.label}
-                  {item.isNew && (
-                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
-                      new
-                    </span>
-                  )}
                   {isActive(item.path) && (
                     <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
                   )}
@@ -236,11 +231,6 @@ const Header = () => {
                 <Link to={item.path} className="flex items-center gap-3 relative">
                   <item.icon className="h-5 w-5" />
                   {item.label}
-                  {item?.isNew && (
-                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
-                      new
-                    </span>
-                  )}
                 </Link>
               </Button>
             ))}
@@ -313,4 +303,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;

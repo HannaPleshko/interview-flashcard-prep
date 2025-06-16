@@ -2,7 +2,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-const Card = React.forwardRef<
+const UnifiedCard = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -15,9 +15,9 @@ const Card = React.forwardRef<
     {...props}
   />
 ))
-Card.displayName = "Card"
+UnifiedCard.displayName = "UnifiedCard"
 
-const CardHeader = React.forwardRef<
+const UnifiedCardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -27,9 +27,9 @@ const CardHeader = React.forwardRef<
     {...props}
   />
 ))
-CardHeader.displayName = "CardHeader"
+UnifiedCardHeader.displayName = "UnifiedCardHeader"
 
-const CardTitle = React.forwardRef<
+const UnifiedCardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
@@ -42,9 +42,9 @@ const CardTitle = React.forwardRef<
     {...props}
   />
 ))
-CardTitle.displayName = "CardTitle"
+UnifiedCardTitle.displayName = "UnifiedCardTitle"
 
-const CardDescription = React.forwardRef<
+const UnifiedCardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
@@ -54,17 +54,17 @@ const CardDescription = React.forwardRef<
     {...props}
   />
 ))
-CardDescription.displayName = "CardDescription"
+UnifiedCardDescription.displayName = "UnifiedCardDescription"
 
-const CardContent = React.forwardRef<
+const UnifiedCardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
 ))
-CardContent.displayName = "CardContent"
+UnifiedCardContent.displayName = "UnifiedCardContent"
 
-const CardFooter = React.forwardRef<
+const UnifiedCardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -74,6 +74,6 @@ const CardFooter = React.forwardRef<
     {...props}
   />
 ))
-CardFooter.displayName = "CardFooter"
+UnifiedCardFooter.displayName = "UnifiedCardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export { UnifiedCard, UnifiedCardHeader, UnifiedCardFooter, UnifiedCardTitle, UnifiedCardDescription, UnifiedCardContent }
