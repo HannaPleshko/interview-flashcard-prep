@@ -3,7 +3,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Copy, Code, BookOpen, Zap, Layers, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
@@ -21,9 +21,9 @@ const FunctionReference = () => {
   const functionTypes = [
     {
       id: "declaration",
+      icon: Code,
       title: "Function Declaration",
       description: "Объявление функции с ключевым словом function",
-      icon: <Code className="h-5 w-5" />,
       examples: [
         {
           title: "Базовое объявление",
@@ -37,25 +37,19 @@ console.log(greet("Анна")); // "Привет, Анна!"`,
         {
           title: "С параметрами по умолчанию",
           code: `function createUser(name, age = 18, role = "user") {
-  return {
-    name,
-    age,
-    role,
-    isAdult: age >= 18
-  };
+  return { name, age, role, isAdult: age >= 18 };
 }
 
-const user = createUser("Иван", 25);
-console.log(user);`,
+const user = createUser("Иван", 25);`,
           explanation: "Функция с параметрами по умолчанию и возвратом объекта."
         }
       ]
     },
     {
       id: "expression",
+      icon: Layers,
       title: "Function Expression",
       description: "Функция как выражение, присваиваемое переменной",
-      icon: <Layers className="h-5 w-5" />,
       examples: [
         {
           title: "Именованное выражение",
@@ -72,20 +66,18 @@ console.log(calculateArea(5, 3)); // 15`,
   return a * b;
 };
 
-const numbers = [1, 2, 3, 4];
-const doubled = numbers.map(function(n) {
+const doubled = [1, 2, 3, 4].map(function(n) {
   return n * 2;
-});
-console.log(doubled); // [2, 4, 6, 8]`,
+});`,
           explanation: "Анонимная функция, часто используется в колбэках."
         }
       ]
     },
     {
       id: "arrow",
+      icon: Zap,
       title: "Arrow Functions",
       description: "Современный синтаксис функций с лексическим this",
-      icon: <Zap className="h-5 w-5" />,
       examples: [
         {
           title: "Краткий синтаксис",
@@ -93,9 +85,7 @@ console.log(doubled); // [2, 4, 6, 8]`,
 const square = x => x * x;
 const sayHello = () => "Привет!";
 
-console.log(add(2, 3)); // 5
-console.log(square(4)); // 16
-console.log(sayHello()); // "Привет!"`,
+console.log(add(2, 3)); // 5`,
           explanation: "Краткий синтаксис для простых функций."
         },
         {
@@ -104,10 +94,7 @@ console.log(sayHello()); // "Привет!"`,
   const filtered = arr.filter(x => x > 0);
   const doubled = filtered.map(x => x * 2);
   return doubled.reduce((sum, x) => sum + x, 0);
-};
-
-const result = processArray([-1, 2, 3, -4, 5]);
-console.log(result); // 20`,
+};`,
           explanation: "Стрелочная функция с блоком кода и несколькими операциями."
         }
       ]
@@ -116,152 +103,15 @@ console.log(result); // 20`,
 
   const advancedConcepts = [
     {
-      id: "iife",
-      title: "IIFE",
-      subtitle: "Immediately Invoked Function Expression",
-      description: "Функция, которая выполняется сразу после создания",
-      icon: <Zap className="h-5 w-5 text-orange-500" />,
-      examples: [
-        {
-          title: "Классический IIFE",
-          code: `(function() {
-  const secret = "Это приватная переменная";
-  console.log("IIFE выполнен!");
-  
-  // Код здесь изолирован от глобальной области
-})();
-
-// secret недоступен здесь`,
-          explanation: "Создает изолированную область видимости, часто используется для инициализации."
-        },
-        {
-          title: "IIFE с параметрами",
-          code: `const result = (function(a, b) {
-  return a + b;
-})(5, 3);
-
-console.log(result); // 8
-
-// Модульный паттерн
-const MyModule = (function() {
-  let counter = 0;
-  
-  return {
-    increment: () => ++counter,
-    decrement: () => --counter,
-    getCount: () => counter
-  };
-})();`,
-          explanation: "IIFE может принимать параметры и возвращать значения."
-        }
-      ]
-    },
-    {
-      id: "currying",
-      title: "Каррирование",
-      subtitle: "Currying",
-      description: "Преобразование функции от многих аргументов в последовательность функций",
-      icon: <Layers className="h-5 w-5 text-blue-500" />,
-      examples: [
-        {
-          title: "Базовое каррирование",
-          code: `const multiply = (a) => (b) => (c) => a * b * c;
-
-const multiplyBy2 = multiply(2);
-const multiplyBy2And3 = multiplyBy2(3);
-const result = multiplyBy2And3(4); // 24
-
-// Или в одну строку
-const result2 = multiply(2)(3)(4); // 24`,
-          explanation: "Каждый вызов возвращает новую функцию до получения всех аргументов."
-        },
-        {
-          title: "Практическое применение",
-          code: `const log = (level) => (message) => {
-  console.log(\`[\${level.toUpperCase()}] \${message}\`);
-};
-
-const logError = log('error');
-const logInfo = log('info');
-
-logError('Произошла ошибка!'); // [ERROR] Произошла ошибка!
-logInfo('Операция завершена'); // [INFO] Операция завершена
-
-// Каррирование для фильтрации
-const filterBy = (property) => (value) => (array) => 
-  array.filter(item => item[property] === value);
-
-const filterByAge = filterBy('age');
-const adults = filterByAge(18)([
-  {name: 'Анна', age: 17},
-  {name: 'Петр', age: 25}
-]);`,
-          explanation: "Каррирование полезно для создания специализированных функций."
-        }
-      ]
-    },
-    {
-      id: "recursion",
-      title: "Рекурсия",
-      subtitle: "Recursion",
-      description: "Функция, которая вызывает сама себя",
-      icon: <RotateCcw className="h-5 w-5 text-green-500" />,
-      examples: [
-        {
-          title: "Факториал",
-          code: `function factorial(n) {
-  // Базовый случай
-  if (n <= 1) return 1;
-  
-  // Рекурсивный случай
-  return n * factorial(n - 1);
-}
-
-console.log(factorial(5)); // 120
-console.log(factorial(0)); // 1`,
-          explanation: "Классический пример рекурсии с базовым случаем для остановки."
-        },
-        {
-          title: "Обход дерева",
-          code: `const tree = {
-  value: 1,
-  children: [
-    { value: 2, children: [] },
-    { 
-      value: 3, 
-      children: [
-        { value: 4, children: [] },
-        { value: 5, children: [] }
-      ] 
-    }
-  ]
-};
-
-function traverseTree(node) {
-  console.log(node.value);
-  
-  node.children.forEach(child => {
-    traverseTree(child); // Рекурсивный вызов
-  });
-}
-
-traverseTree(tree); // 1, 2, 3, 4, 5`,
-          explanation: "Рекурсия идеально подходит для работы с древовидными структурами."
-        }
-      ]
-    },
-    {
       id: "closure",
-      title: "Замыкание",
-      subtitle: "Closure",
+      icon: BookOpen,
+      title: "Замыкание (Closure)",
       description: "Функция с доступом к переменным из внешней области видимости",
-      icon: <BookOpen className="h-5 w-5 text-purple-500" />,
       examples: [
         {
           title: "Счетчик",
           code: `function createCounter() {
   let count = 0;
-  
   return function() {
     count++;
     return count;
@@ -269,105 +119,90 @@ traverseTree(tree); // 1, 2, 3, 4, 5`,
 }
 
 const counter1 = createCounter();
-const counter2 = createCounter();
-
 console.log(counter1()); // 1
-console.log(counter1()); // 2
-console.log(counter2()); // 1 (независимый счетчик)`,
+console.log(counter1()); // 2`,
           explanation: "Внутренняя функция 'помнит' переменную count из внешней функции."
-        },
-        {
-          title: "Конфигуратор",
-          code: `function createMultiplier(multiplier) {
-  return function(number) {
-    return number * multiplier;
-  };
-}
-
-const double = createMultiplier(2);
-const triple = createMultiplier(3);
-
-console.log(double(5)); // 10
-console.log(triple(4)); // 12
-
-// Более сложный пример
-function createValidator(rules) {
-  return function(data) {
-    return rules.every(rule => rule(data));
-  };
-}
-
-const isValidUser = createValidator([
-  user => user.name && user.name.length > 0,
-  user => user.age && user.age >= 18,
-  user => user.email && user.email.includes('@')
-]);`,
-          explanation: "Замыкания позволяют создавать функции с предустановленной конфигурацией."
         }
       ]
     },
     {
-      id: "generator",
-      title: "Генераторы",
-      subtitle: "Generator Functions",
-      description: "Функции, которые могут приостанавливать и возобновлять выполнение",
-      icon: <Zap className="h-5 w-5 text-red-500" />,
+      id: "iife",
+      icon: Zap,
+      title: "IIFE",
+      description: "Immediately Invoked Function Expression",
       examples: [
         {
-          title: "Простой генератор",
-          code: `function* numberGenerator() {
-  yield 1;
-  yield 2;
-  yield 3;
-  return 'готово';
-}
+          title: "Классический IIFE",
+          code: `(function() {
+  const secret = "Это приватная переменная";
+  console.log("IIFE выполнен!");
+})();
 
-const gen = numberGenerator();
-console.log(gen.next()); // {value: 1, done: false}
-console.log(gen.next()); // {value: 2, done: false}
-console.log(gen.next()); // {value: 3, done: false}
-console.log(gen.next()); // {value: 'готово', done: true}
-
-// Использование в цикле
-for (const value of numberGenerator()) {
-  console.log(value); // 1, 2, 3
-}`,
-          explanation: "Генераторы позволяют создавать итерируемые последовательности."
-        },
+// secret недоступен здесь`,
+          explanation: "Создает изолированную область видимости."
+        }
+      ]
+    },
+    {
+      id: "currying",
+      icon: Layers,
+      title: "Каррирование",
+      description: "Преобразование функции от многих аргументов в последовательность функций",
+      examples: [
         {
-          title: "Бесконечная последовательность",
-          code: `function* fibonacci() {
-  let a = 0, b = 1;
-  while (true) {
-    yield a;
-    [a, b] = [b, a + b];
-  }
+          title: "Базовое каррирование",
+          code: `const multiply = (a) => (b) => (c) => a * b * c;
+
+const multiplyBy2 = multiply(2);
+const result = multiplyBy2(3)(4); // 24`,
+          explanation: "Каждый вызов возвращает новую функцию до получения всех аргументов."
+        }
+      ]
+    },
+    {
+      id: "recursion",
+      icon: RotateCcw,
+      title: "Рекурсия",
+      description: "Функция, которая вызывает сама себя",
+      examples: [
+        {
+          title: "Факториал",
+          code: `function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
 }
 
-const fib = fibonacci();
-console.log(fib.next().value); // 0
-console.log(fib.next().value); // 1
-console.log(fib.next().value); // 1
-console.log(fib.next().value); // 2
-console.log(fib.next().value); // 3
-
-// Получить первые N чисел Фибоначчи
-function* take(n, generator) {
-  let count = 0;
-  for (const value of generator) {
-    if (count >= n) break;
-    yield value;
-    count++;
-  }
-}
-
-const first10Fib = [...take(10, fibonacci())];
-console.log(first10Fib);`,
-          explanation: "Генераторы могут создавать бесконечные последовательности, вычисляя значения по требованию."
+console.log(factorial(5)); // 120`,
+          explanation: "Классический пример рекурсии с базовым случаем."
         }
       ]
     }
   ];
+
+  const renderExamples = (examples: any[], categoryTitle: string) => (
+    <div className="space-y-4">
+      {examples.map((example, index) => (
+        <div key={index} className="border rounded-lg p-4 bg-gray-50">
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="font-semibold text-gray-800">{example.title}</h4>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => copyToClipboard(example.code, example.title)}
+              className="flex items-center gap-2"
+            >
+              <Copy className="h-4 w-4" />
+              {copiedCode === example.title ? 'Скопировано!' : 'Копировать'}
+            </Button>
+          </div>
+          <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3">
+            <code>{example.code}</code>
+          </pre>
+          <p className="text-gray-600 text-sm">{example.explanation}</p>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -395,83 +230,74 @@ console.log(first10Fib);`,
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="types" className="space-y-6">
-            {functionTypes.map((type) => (
-              <Card key={type.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    {type.icon}
-                    {type.title}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {type.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {type.examples.map((example, index) => (
-                    <div key={index} className="border rounded-lg p-4 bg-gray-50">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold text-gray-800">{example.title}</h4>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => copyToClipboard(example.code, example.title)}
-                          className="flex items-center gap-2"
-                        >
-                          <Copy className="h-4 w-4" />
-                          {copiedCode === example.title ? 'Скопировано!' : 'Копировать'}
-                        </Button>
-                      </div>
-                      <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3">
-                        <code>{example.code}</code>
-                      </pre>
-                      <p className="text-gray-600 text-sm">{example.explanation}</p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
+          <TabsContent value="types">
+            <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Типы функций
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  {functionTypes.map((type) => {
+                    const IconComponent = type.icon;
+                    return (
+                      <AccordionItem key={type.id} value={type.id}>
+                        <AccordionTrigger className="text-left">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
+                              <IconComponent className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <div className="font-semibold">{type.title}</div>
+                              <div className="text-sm text-gray-600">{type.description}</div>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          {renderExamples(type.examples, type.title)}
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </CardContent>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="advanced" className="space-y-6">
-            {advancedConcepts.map((concept) => (
-              <Card key={concept.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    {concept.icon}
-                    <div>
-                      <div>{concept.title}</div>
-                      <div className="text-sm font-normal text-gray-500">{concept.subtitle}</div>
-                    </div>
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {concept.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {concept.examples.map((example, index) => (
-                    <div key={index} className="border rounded-lg p-4 bg-gray-50">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold text-gray-800">{example.title}</h4>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => copyToClipboard(example.code, example.title)}
-                          className="flex items-center gap-2"
-                        >
-                          <Copy className="h-4 w-4" />
-                          {copiedCode === example.title ? 'Скопировано!' : 'Копировать'}
-                        </Button>
-                      </div>
-                      <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3">
-                        <code>{example.code}</code>
-                      </pre>
-                      <p className="text-gray-600 text-sm">{example.explanation}</p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
+          <TabsContent value="advanced">
+            <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Продвинутые концепции
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  {advancedConcepts.map((concept) => {
+                    const IconComponent = concept.icon;
+                    return (
+                      <AccordionItem key={concept.id} value={concept.id}>
+                        <AccordionTrigger className="text-left">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
+                              <IconComponent className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <div className="font-semibold">{concept.title}</div>
+                              <div className="text-sm text-gray-600">{concept.description}</div>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          {renderExamples(concept.examples, concept.title)}
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
