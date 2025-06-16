@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import toast, { Toaster } from 'react-hot-toast';
+import { Textarea } from "@/components/ui/textarea";
 
 interface Task {
   id: string;
@@ -4989,11 +4990,11 @@ const Tasks = () => {
 
                           {/* Редактор кода */}
                           <div className="relative">
-                            <textarea
+                            <Textarea
                               value={code}
                               onChange={(e) => setCode(e.target.value)}
                               onKeyDown={handleKeyDown}
-                              className="w-full h-[400px] font-mono text-sm p-4 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                              className="w-full h-[400px] font-mono text-sm p-4 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl resize-none"
                               spellCheck="false"
                               placeholder="Введите ваш код здесь..."
                             />

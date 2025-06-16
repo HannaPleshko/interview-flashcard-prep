@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Trash2, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -95,10 +96,10 @@ const Interpreter = () => {
                 </Button>
               </div>
             </div>
-            <textarea
+            <Textarea
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="w-full h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-colors resize-none"
+              className="w-full h-[400px] p-4 font-mono text-sm bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl resize-none"
               spellCheck="false"
             />
             <Button

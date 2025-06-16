@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Check, X, Copy, ChevronDown, ChevronUp, Plus, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {
@@ -443,13 +444,12 @@ const Regex = () => {
                       return out;
                     })()}
                   </div>
-                  <textarea
+                  <Textarea
                     ref={textareaRef}
                     value={testString}
                     onChange={e => setTestString(e.target.value)}
                     placeholder="Введите строку для проверки"
-                    className="w-full min-h-[120px] sm:min-h-[180px] max-h-[300px] sm:max-h-[400px] text-sm sm:text-base rounded-lg border border-gray-200 bg-transparent p-3 focus:outline-none focus:ring-2 focus:ring-blue-200 resize-vertical shadow-sm relative z-10 text-transparent caret-blue-700"
-                    style={{ position: 'relative', background: 'transparent', fontFamily: 'inherit', color: 'transparent', lineHeight: 'inherit' }}
+                    className="w-full min-h-[120px] sm:min-h-[180px] max-h-[300px] sm:max-h-[400px] text-sm sm:text-base rounded-xl border border-purple-200 bg-white/70 p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:border-purple-400 resize-vertical shadow-sm relative z-10 font-mono text-foreground caret-blue-700"
                     spellCheck={false}
                     autoCorrect="off"
                     onScroll={e => {

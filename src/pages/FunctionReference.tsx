@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -182,30 +181,30 @@ console.log(factorial(5)); // 120`,
   const renderExamples = (examples: any[], categoryTitle: string) => (
     <div className="space-y-4">
       {examples.map((example, index) => (
-        <div key={index} className="border rounded-lg p-4 bg-gray-50">
+        <div key={index} className="border border-purple-200 rounded-2xl p-4 bg-white/60 backdrop-blur-sm shadow-md">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-semibold text-gray-800">{example.title}</h4>
+            <h4 className="font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent text-lg">{example.title}</h4>
             <Button
               variant="outline"
               size="sm"
               onClick={() => copyToClipboard(example.code, example.title)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 border-purple-200 text-purple-700 hover:bg-white/50"
             >
               <Copy className="h-4 w-4" />
               {copiedCode === example.title ? 'Скопировано!' : 'Копировать'}
             </Button>
           </div>
-          <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3">
+          <pre className="bg-white/80 border border-purple-100 rounded-xl p-4 overflow-x-auto text-sm mb-3 font-mono text-purple-900 shadow-inner">
             <code>{example.code}</code>
           </pre>
-          <p className="text-gray-600 text-sm">{example.explanation}</p>
+          <p className="text-muted-foreground text-sm">{example.explanation}</p>
         </div>
       ))}
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
