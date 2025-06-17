@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -28,6 +27,7 @@ const UnifiedReference = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("all");
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState("functions");
 
   const copyToClipboard = (code: string, title: string) => {
     navigator.clipboard.writeText(code);
@@ -104,6 +104,67 @@ const counter = createCounter();
 console.log(counter.increment()); // 1
 console.log(counter.get()); // 1`,
           tips: "Создает приватные переменные, основа для модульного программирования"
+        },
+        {
+          id: "iife",
+          title: "IIFE (Immediately Invoked Function Expression)",
+          level: "intermediate",
+          description: "Функция, которая выполняется сразу после объявления",
+          code: `// Классический синтаксис
+(function() {
+  console.log('IIFE выполнена!');
+})();
+
+// ES6+ синтаксис
+(() => {
+  console.log('Arrow IIFE!');
+})();`,
+          tips: "IIFE часто используют для создания изолированной области видимости"
+        },
+        {
+          id: "currying",
+          title: "Каррирование (Currying)",
+          level: "advanced",
+          description: "Преобразование функции с несколькими аргументами в последовательность функций по одному аргументу",
+          code: `function sum(a) {
+  return function(b) {
+    return function(c) {
+      return a + b + c;
+    };
+  };
+}
+
+console.log(sum(1)(2)(3)); // 6`,
+          tips: "Каррирование удобно для частичного применения и композиции функций"
+        },
+        {
+          id: "recursion",
+          title: "Рекурсия (Recursion)",
+          level: "intermediate",
+          description: "Функция, вызывающая саму себя для решения задачи",
+          code: `function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // 120`,
+          tips: "Рекурсия полезна для работы с деревьями, обхода структур данных и алгоритмов"
+        },
+        {
+          id: "generator",
+          title: "Генераторы (Generators)",
+          level: "advanced",
+          description: "Функции, которые могут приостанавливать и возобновлять выполнение",
+          code: `function* range(start, end) {
+    for (let i = start; i <= end; i++) {
+      yield i;
+    }
+  }
+
+  for (const num of range(1, 3)) {
+    console.log(num); // 1, 2, 3
+  }`,
+          tips: "Генераторы удобны для ленивых вычислений и работы с потоками данных"
         }
       ]
     },
@@ -113,90 +174,89 @@ console.log(counter.get()); // 1`,
       color: "from-green-500 to-teal-500",
       sections: [
         {
-          id: "classes",
-          title: "Классы ES6",
+          id: "class-basics",
+          title: "Основы классов",
           level: "basic",
-          description: "Современный синтаксис для создания объектов",
-          code: `class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  
-  greet() {
-    return \`Привет, я \${this.name}\`;
-  }
-  
-  get isAdult() {
-    return this.age >= 18;
-  }
-}
-
-const user = new User("Анна", 25);`,
-          tips: "Синтаксический сахар над прототипами, поддерживает наследование"
-        },
-        {
-          id: "inheritance",
-          title: "Наследование",
-          level: "intermediate",
-          description: "Расширение функциональности классов",
+          description: "Создание и использование классов в ES6+",
           code: `class Animal {
   constructor(name) {
     this.name = name;
   }
-  
   speak() {
     return \`\${this.name} издает звук\`;
   }
 }
 
-class Dog extends Animal {
-  constructor(name, breed) {
-    super(name);
-    this.breed = breed;
+const dog = new Animal('Шарик');
+dog.speak(); // 'Шарик издает звук'`,
+          tips: "Классы — синтаксический сахар над прототипами, поддерживают наследование и методы"
+        },
+        {
+          id: "static-methods",
+          title: "Статические методы",
+          level: "intermediate",
+          description: "Методы, доступные на самом классе, а не на экземплярах",
+          code: `class MathUtils {
+  static add(a, b) {
+    return a + b;
   }
-  
-  speak() {
-    return \`\${this.name} лает\`;
-  }
-}`,
-          tips: "Используйте super() для вызова родительского конструктора и методов"
+}
+
+console.log(MathUtils.add(2, 3)); // 5`,
+          tips: "Статические методы часто используют для утилитарных функций, не зависящих от состояния экземпляра"
+        },
+        {
+          id: "oop-principles",
+          title: "Принципы ООП",
+          level: "intermediate",
+          description: "Инкапсуляция, наследование, полиморфизм, абстракция",
+          code: `// Инкапсуляция
+class Counter {
+  #count = 0;
+  increment() { this.#count++; }
+  get value() { return this.#count; }
+}
+
+// Наследование
+class Animal { speak() { return 'Звук'; } }
+class Dog extends Animal { speak() { return 'Гав'; } }
+
+// Полиморфизм
+const animals = [new Animal(), new Dog()];
+animals.forEach(a => console.log(a.speak()));`,
+          tips: "ООП помогает структурировать код, облегчает повторное использование и расширяемость"
         },
         {
           id: "solid",
-          title: "SOLID принципы",
+          title: "SOLID",
           level: "advanced",
-          description: "Принципы проектирования для чистого кода",
-          code: `// Single Responsibility Principle
-class UserValidator {
-  validate(user) {
-    return user.name && user.email;
-  }
-}
+          description: "5 принципов проектирования для гибкого и поддерживаемого кода",
+          code: `// S — Single Responsibility
+class Logger { log(msg) { /* ... */ } }
+class UserService { /* ... */ }
 
-class UserRepository {
-  save(user) {
-    // сохранение в базу
-  }
-}
+// O — Open/Closed
+class Shape { area() { throw 'Not implemented'; } }
+class Circle extends Shape { area() { /* ... */ } }
 
-// Open/Closed Principle
-class Shape {
-  area() { throw new Error('Must implement'); }
-}
-
-class Rectangle extends Shape {
-  constructor(width, height) {
-    super();
-    this.width = width;
-    this.height = height;
-  }
-  
-  area() {
-    return this.width * this.height;
-  }
+// D — Dependency Inversion
+class DB { /* ... */ }
+class Service {
+  constructor(db) { this.db = db; }
 }`,
-          tips: "SOLID: Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion"
+          tips: "SOLID: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion"
+        },
+        {
+          id: "dry-kiss",
+          title: "DRY, KISS и другие принципы",
+          level: "basic",
+          description: "Кратко о принципах: DRY, KISS, YAGNI, и пр.",
+          code: `// DRY — Don't Repeat Yourself
+function sum(a, b) { return a + b; }
+// KISS — Keep It Simple, Stupid
+// YAGNI — You Aren't Gonna Need It
+// Принципы помогают писать чистый и поддерживаемый код`,
+          tips: "Следуйте этим принципам для простоты, читаемости и поддержки кода"
         }
       ]
     },
@@ -610,111 +670,234 @@ if (condition) {
           </CardContent>
         </Card>
 
-        {/* Основной контент */}
-        <Tabs defaultValue="functions" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-6">
-            {Object.entries(referenceData).map(([key, data]) => {
-              const IconComponent = data.icon;
-              return (
-                <TabsTrigger key={key} value={key} className="flex items-center gap-2">
-                  <IconComponent className="h-4 w-4" />
-                  <span className="hidden sm:inline">{data.title}</span>
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
-
-          {Object.entries(referenceData).map(([key, data]) => (
-            <TabsContent key={key} value={key}>
-              <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg bg-gradient-to-r ${data.color} shadow-lg`}>
-                      <data.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                      {data.title}
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    {filteredSections(data.sections).map((section, index) => (
-                      <AccordionItem key={section.id} value={section.id} className="border border-purple-100 rounded-xl mb-3">
-                        <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
-                          <div className="flex items-center justify-between w-full mr-4">
-                            <div>
-                              <div className="font-semibold text-lg text-foreground">{section.title}</div>
-                              <div className="text-sm text-gray-600 mt-1">{section.description}</div>
-                            </div>
-                            <Badge className={getLevelColor(section.level)}>
-                              {getLevelText(section.level)}
-                            </Badge>
+        {/* Sidebar navigation */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div className="lg:w-64 w-full mb-4 lg:mb-0">
+            <Card className="bg-white/90 border border-purple-100 rounded-2xl shadow-md">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base font-bold text-purple-700">Разделы</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-1 p-3">
+                {Object.entries(referenceData).map(([key, data]) => (
+                  <Button
+                    key={key}
+                    variant={selectedTab === key ? "default" : "ghost"}
+                    className={`justify-start w-full text-left px-3 py-2 rounded-lg transition-all text-sm font-medium ${selectedTab === key ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md" : "text-purple-700 hover:bg-purple-50"}`}
+                    onClick={() => setSelectedTab(key)}
+                  >
+                    <data.icon className="h-4 w-4 mr-2" />
+                    {data.title}
+                  </Button>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+          {/* Main content */}
+          <div className="flex-1">
+            <Tabs defaultValue="functions" className="w-full" value={selectedTab} onValueChange={setSelectedTab}>
+              {Object.entries(referenceData).map(([key, data]) => (
+                <TabsContent key={key} value={key}>
+                  <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg bg-gradient-to-r ${data.color} shadow-lg`}>
+                          <data.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                          {data.title}
+                        </CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      {key === 'functions' ? (
+                        <>
+                          {/* Виды функций */}
+                          <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">Виды функций</h3>
+                          <div className="mb-6">
+                            <Accordion type="single" collapsible className="w-full">
+                              {filteredSections(data.sections).filter(section =>
+                                ['declaration', 'expression', 'arrow'].includes(section.id)
+                              ).map((section, index) => (
+                                <AccordionItem key={section.id} value={section.id} className="border border-purple-100 rounded-xl mb-3">
+                                  <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
+                                    <div className="flex items-center justify-between w-full mr-4">
+                                      <div>
+                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
+                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
+                                      </div>
+                                      <Badge className={getLevelColor(section.level)}>
+                                        {getLevelText(section.level)}
+                                      </Badge>
+                                    </div>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-4 pb-4">
+                                    <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
+                                      <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
+                                        <Button
+                                          variant="ghost"
+                                          size="sm"
+                                          onClick={() => copyToClipboard(section.code, section.title)}
+                                          className="text-gray-600 hover:text-purple-600"
+                                        >
+                                          <Copy className="h-4 w-4 mr-2" />
+                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
+                                        </Button>
+                                      </div>
+                                      <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
+                                        <code>{section.code}</code>
+                                      </pre>
+                                    </div>
+                                    {section.tips && (
+                                      <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                        <div className="flex items-start gap-2">
+                                          <div className="p-1 rounded-full bg-blue-100">
+                                            <BookOpen className="h-4 w-4 text-blue-600" />
+                                          </div>
+                                          <div>
+                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
+                                            <p className="text-sm text-blue-700">{section.tips}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ))}
+                            </Accordion>
                           </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-4 pb-4">
-                          <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
-                            <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-                              <span className="text-sm font-medium text-gray-700">Пример кода</span>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => copyToClipboard(section.code, section.title)}
-                                className="text-gray-600 hover:text-purple-600"
-                              >
-                                <Copy className="h-4 w-4 mr-2" />
-                                {copiedCode === section.title ? "Скопировано!" : "Копировать"}
-                              </Button>
+                          {/* Остальные подтемы */}
+                          {filteredSections(data.sections).filter(section => !['declaration', 'expression', 'arrow'].includes(section.id)).map((section, idx) => (
+                            <div key={section.id} className="mb-6">
+                              <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">{section.title}</h3>
+                              <Accordion type="single" collapsible className="w-full">
+                                <AccordionItem value={section.id} className="border border-purple-100 rounded-xl mb-3">
+                                  <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
+                                    <div className="flex items-center justify-between w-full mr-4">
+                                      <div>
+                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
+                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
+                                      </div>
+                                      <Badge className={getLevelColor(section.level)}>
+                                        {getLevelText(section.level)}
+                                      </Badge>
+                                    </div>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-4 pb-4">
+                                    <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
+                                      <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
+                                        <Button
+                                          variant="ghost"
+                                          size="sm"
+                                          onClick={() => copyToClipboard(section.code, section.title)}
+                                          className="text-gray-600 hover:text-purple-600"
+                                        >
+                                          <Copy className="h-4 w-4 mr-2" />
+                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
+                                        </Button>
+                                      </div>
+                                      <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
+                                        <code>{section.code}</code>
+                                      </pre>
+                                    </div>
+                                    {section.tips && (
+                                      <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                        <div className="flex items-start gap-2">
+                                          <div className="p-1 rounded-full bg-blue-100">
+                                            <BookOpen className="h-4 w-4 text-blue-600" />
+                                          </div>
+                                          <div>
+                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
+                                            <p className="text-sm text-blue-700">{section.tips}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
                             </div>
-                            <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
-                              <code>{section.code}</code>
-                            </pre>
-                          </div>
-                          
-                          {section.tips && (
-                            <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                              <div className="flex items-start gap-2">
-                                <div className="p-1 rounded-full bg-blue-100">
-                                  <BookOpen className="h-4 w-4 text-blue-600" />
-                                </div>
-                                <div>
-                                  <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
-                                  <p className="text-sm text-blue-700">{section.tips}</p>
-                                </div>
-                              </div>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          {filteredSections(data.sections).map((section, idx) => (
+                            <div key={section.id} className="mb-6">
+                              <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">{section.title}</h3>
+                              <Accordion type="single" collapsible className="w-full">
+                                <AccordionItem value={section.id} className="border border-green-100 rounded-xl mb-3">
+                                  <AccordionTrigger className="text-left px-4 py-3 hover:bg-green-50 rounded-t-xl">
+                                    <div className="flex items-center justify-between w-full mr-4">
+                                      <div>
+                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
+                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
+                                      </div>
+                                      <Badge className={getLevelColor(section.level)}>
+                                        {getLevelText(section.level)}
+                                      </Badge>
+                                    </div>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-4 pb-4">
+                                    <div className="bg-white/80 rounded-lg border border-green-100 overflow-hidden">
+                                      <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
+                                        <Button
+                                          variant="ghost"
+                                          size="sm"
+                                          onClick={() => copyToClipboard(section.code, section.title)}
+                                          className="text-gray-600 hover:text-green-600"
+                                        >
+                                          <Copy className="h-4 w-4 mr-2" />
+                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
+                                        </Button>
+                                      </div>
+                                      <pre className="p-4 overflow-x-auto text-sm font-mono text-green-900 bg-white">
+                                        <code>{section.code}</code>
+                                      </pre>
+                                    </div>
+                                    {section.tips && (
+                                      <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                        <div className="flex items-start gap-2">
+                                          <div className="p-1 rounded-full bg-blue-100">
+                                            <BookOpen className="h-4 w-4 text-blue-600" />
+                                          </div>
+                                          <div>
+                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
+                                            <p className="text-sm text-blue-700">{section.tips}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
                             </div>
-                          )}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
+                          ))}
+                        </>
+                      )}
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              ))}
+            </Tabs>
 
-                  {filteredSections(data.sections).length === 0 && (
-                    <div className="text-center py-8 text-gray-500">
-                      <Search className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                      <p>Ничего не найдено по вашему запросу</p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-          ))}
-        </Tabs>
-
-        {/* Статистика */}
-        <Card className="mt-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-200">
-          <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
-              📚 Справочник содержит
-            </h3>
-            <div className="flex justify-center gap-8 text-sm text-gray-600">
-              <span><strong>6</strong> разделов</span>
-              <span><strong>{Object.values(referenceData).reduce((acc, data) => acc + data.sections.length, 0)}</strong> тем</span>
-              <span><strong>Интерактивные</strong> примеры</span>
-              <span><strong>Поиск</strong> и фильтры</span>
-            </div>
-          </CardContent>
-        </Card>
+            {/* Статистика */}
+            <Card className="mt-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-200">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                  📚 Справочник содержит
+                </h3>
+                <div className="flex justify-center gap-8 text-sm text-gray-600">
+                  <span><strong>6</strong> разделов</span>
+                  <span><strong>{Object.values(referenceData).reduce((acc, data) => acc + data.sections.length, 0)}</strong> тем</span>
+                  <span><strong>Интерактивные</strong> примеры</span>
+                  <span><strong>Поиск</strong> и фильтры</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
 
       <Footer />
