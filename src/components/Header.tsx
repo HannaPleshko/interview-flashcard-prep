@@ -1,16 +1,10 @@
+
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon, Package, MousePointer, Zap, Globe } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,20 +41,12 @@ const Header = () => {
     { path: "/study", icon: BookOpen, label: "Учебник карточек" },
     { path: "/", icon: Play, label: "Карточки теории" },
     { path: "/tasks", icon: ListTodo, label: "Задачи" },
-  ];
-
-  const referenceItems = [
-    { path: "/methods", icon: ClipboardList, label: "Методы" },
-    { path: "/data-types", icon: Database, label: "Типы данных" },
-    { path: "/functions", icon: Code, label: "Функции", isNew: true },
-    { path: "/oop", icon: Package, label: "ООП и SOLID", isNew: true },
-    { path: "/dom", icon: MousePointer, label: "DOM JS", isNew: true },
-    { path: "/async-js", icon: Zap, label: "Async JS", isNew: true },
-    { path: "/web-api", icon: Globe, label: "Web API", isNew: true },
-    { path: "/es6", icon: Star, label: "ES6+", isNew: true },
+    { path: "/reference", icon: Star, label: "Справочник JS" },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
+    { path: "/methods", icon: ClipboardList, label: "Методы" },
+    { path: "/data-types", icon: Database, label: "Типы данных" },
     { path: "/interpreter", icon: Terminal, label: "Интерпретатор" },
     { path: "/regex", icon: Regex, label: "RegEx" },
     { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
@@ -105,81 +91,27 @@ const Header = () => {
               </Button>
             ))}
 
-            {/* Reference Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(
-                    "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
-                    referenceItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+            {/* Tools as simple buttons */}
+            {toolItems.slice(0, 3).map((item) => (
+              <Button
+                key={item.path}
+                variant="ghost"
+                size="sm"
+                asChild
+                className={cn(
+                  "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
+                  isActive(item.path) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+                )}
+              >
+                <Link to={item.path} className="relative">
+                  <item.icon className="mr-2 h-4 w-4" />
+                  {item.label}
+                  {isActive(item.path) && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
                   )}
-                >
-                  Справочник
-                  <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
-                {referenceItems.map((item) => (
-                  <DropdownMenuItem key={item.path} asChild>
-                    <Link
-                      to={item.path}
-                      className={cn(
-                        "flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer",
-                        isActive(item.path) && "bg-purple-50 text-purple-700"
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                      {item.isNew && (
-                        <span className="ml-auto px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
-                          new
-                        </span>
-                      )}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Tools Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(
-                    "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
-                    toolItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
-                  )}
-                >
-                  Инструменты
-                  <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
-                {toolItems.map((item) => (
-                  <DropdownMenuItem key={item.path} asChild>
-                    <Link
-                      to={item.path}
-                      className={cn(
-                        "flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer",
-                        isActive(item.path) && "bg-purple-50 text-purple-700"
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                      {item.isNew && (
-                        <span className="ml-auto px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
-                          new
-                        </span>
-                      )}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </Link>
+              </Button>
+            ))}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -232,37 +164,12 @@ const Header = () => {
                   location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                 }`}
               >
-                <Link to={item.path} className="flex items-center gap-3 relative">
+                <Link to={item.path} className="flex items-center gap-3 relative" onClick={toggleMenu}>
                   <item.icon className="h-5 w-5" />
                   {item.label}
                 </Link>
               </Button>
             ))}
-
-            <div className="px-6 py-2">
-              <div className="text-sm font-medium text-gray-500 mb-2">Справочник</div>
-              {referenceItems.map((item) => (
-                <Button
-                  key={item.path}
-                  variant="ghost"
-                  size="lg"
-                  asChild
-                  className={`w-full justify-start text-[hsl(var(--foreground))] ${
-                    location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
-                  }`}
-                >
-                  <Link to={item.path} className="flex items-center gap-3 relative">
-                    <item.icon className="h-5 w-5" />
-                    {item.label}
-                    {item.isNew && (
-                      <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[10px] font-medium text-purple-600">
-                        new
-                      </span>
-                    )}
-                  </Link>
-                </Button>
-              ))}
-            </div>
 
             <div className="px-6 py-2">
               <div className="text-sm font-medium text-gray-500 mb-2">Инструменты</div>
@@ -276,7 +183,7 @@ const Header = () => {
                     location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                   }`}
                 >
-                  <Link to={item.path} className="flex items-center gap-3 relative">
+                  <Link to={item.path} className="flex items-center gap-3 relative" onClick={toggleMenu}>
                     <item.icon className="h-5 w-5" />
                     {item.label}
                     {item.isNew && (
