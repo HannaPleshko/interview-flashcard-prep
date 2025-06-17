@@ -39,7 +39,7 @@ const App = () => (
           <Route path="/data-types" element={<DataTypes />} />
           <Route path="/api-client" element={<ApiClient />} />
           <Route path="/reference" element={<UnifiedReference />} />
-          {/* Редиректы со старых страниц */}
+          {/* Редиректы со старых страниц справочников */}
           <Route path="/functions" element={<UnifiedReference />} />
           <Route path="/oop" element={<UnifiedReference />} />
           <Route path="/dom" element={<UnifiedReference />} />
