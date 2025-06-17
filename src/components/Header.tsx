@@ -1,10 +1,11 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,19 +40,20 @@ const Header = () => {
 
   const navItems = [
     { path: "/study", icon: BookOpen, label: "Учебник карточек" },
+    { path: "/practice", icon: Brain, label: "Практика" },
     { path: "/", icon: Play, label: "Карточки теории" },
     { path: "/tasks", icon: ListTodo, label: "Задачи" },
-    { path: "/reference", icon: Star, label: "Справочник JS" },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
-    { path: "/methods", icon: ClipboardList, label: "Методы" },
-    { path: "/data-types", icon: Database, label: "Типы данных" },
-    { path: "/interpreter", icon: Terminal, label: "Интерпретатор" },
-    { path: "/regex", icon: Regex, label: "RegEx" },
-    { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
-    { path: "/api-client", icon: Send, label: "API Клиент", isNew: true },
+    // { path: "/interpreter", icon: Terminal, label: "Интерпретатор" }, // убрано, теперь только в селекторе
+    // { path: "/regex", icon: Regex, label: "RegEx" }, // убрано, теперь только в селекторе
+    // { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true }, // убрано, теперь только в селекторе
+    // { path: "/api-client", icon: Send, label: "API Клиент", isNew: true }, // убрано, теперь только в селекторе
   ];
+
+  const isReferenceActive = ["/reference", "/methods", "/data-types"].some((path) => location.pathname.startsWith(path));
+  const isToolsActive = ["/interpreter", "/regex", "/data-generator", "/api-client"].some((path) => location.pathname.startsWith(path));
 
   return (
     <>
@@ -90,28 +92,79 @@ const Header = () => {
                 </Link>
               </Button>
             ))}
-
-            {/* Tools as simple buttons */}
-            {toolItems.slice(0, 3).map((item) => (
-              <Button
-                key={item.path}
-                variant="ghost"
-                size="sm"
-                asChild
-                className={cn(
-                  "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
-                  isActive(item.path) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
-                )}
-              >
-                <Link to={item.path} className="relative">
-                  <item.icon className="mr-2 h-4 w-4" />
-                  {item.label}
-                  {isActive(item.path) && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
+            {/* Dropdown for Справочник */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "flex items-center gap-2 text-[hsl(var(--foreground))]",
+                    isReferenceActive && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                   )}
-                </Link>
-              </Button>
-            ))}
+                >
+                  <Star className="mr-2 h-4 w-4" />
+                  Справочник
+                  <ChevronDown className="h-4 w-4 ml-1 opacity-60" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link to="/reference">
+                    <Star className="mr-2 h-4 w-4" />Справочник JS
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/methods">
+                    <ClipboardList className="mr-2 h-4 w-4" />Методы
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/data-types">
+                    <Database className="mr-2 h-4 w-4" />Типы данных
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* Dropdown for Инструменты */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "flex items-center gap-2 text-[hsl(var(--foreground))]",
+                    isToolsActive && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
+                  )}
+                >
+                  <Wrench className="mr-2 h-4 w-4" />
+                  Инструменты
+                  <ChevronDown className="h-4 w-4 ml-1 opacity-60" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link to="/interpreter">
+                    <Terminal className="mr-2 h-4 w-4" />Интерпретатор
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/regex">
+                    <Regex className="mr-2 h-4 w-4" />RegEx
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/data-generator">
+                    <Database className="mr-2 h-4 w-4" />Генератор данных
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/api-client">
+                    <Send className="mr-2 h-4 w-4" />API Клиент
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Mobile Menu Button */}

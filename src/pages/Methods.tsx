@@ -71,7 +71,31 @@ const DATA_TYPES = [
             description: 'Проверяет, является ли значение NaN',
             example: 'Number.isNaN(NaN) // true\nNumber.isNaN(42) // false',
             usage: 'Для проверки на NaN'
-          }
+          },
+          {
+            name: 'toFixed()',
+            description: 'Форматирует число с фиксированным количеством знаков после запятой',
+            example: 'const n = 3.14159;\nn.toFixed(2) // "3.14"',
+            usage: 'Для округления и форматирования числа как строки'
+          },
+          {
+            name: 'toString()',
+            description: 'Преобразует число в строку',
+            example: 'const n = 42;\nn.toString() // "42"',
+            usage: 'Для преобразования числа в строку'
+          },
+          {
+            name: 'parseInt()',
+            description: 'Преобразует строку в целое число',
+            example: 'parseInt("42.9") // 42',
+            usage: 'Для преобразования строки в число'
+          },
+          {
+            name: 'parseFloat()',
+            description: 'Преобразует строку в число с плавающей точкой',
+            example: 'parseFloat("3.14") // 3.14',
+            usage: 'Для преобразования строки в число с плавающей точкой'
+          },
         ]
       },
       {
@@ -167,7 +191,37 @@ const DATA_TYPES = [
             description: 'Удаляет пробелы в конце строки',
             example: '"hello  ".trimEnd() // "hello"',
             usage: 'Для удаления пробелов в конце'
-          }
+          },
+          {
+            name: 'charAt()',
+            description: 'Возвращает символ по индексу',
+            example: '"hello".charAt(1) // "e"',
+            usage: 'Для получения символа по индексу'
+          },
+          {
+            name: 'charCodeAt()',
+            description: 'Возвращает код символа по индексу',
+            example: '"abc".charCodeAt(0) // 97',
+            usage: 'Для получения кода символа'
+          },
+          {
+            name: 'padStart()',
+            description: 'Дополняет строку в начале до нужной длины',
+            example: '"5".padStart(3, "0") // "005"',
+            usage: 'Для дополнения строки слева'
+          },
+          {
+            name: 'padEnd()',
+            description: 'Дополняет строку в конце до нужной длины',
+            example: '"5".padEnd(3, "0") // "500"',
+            usage: 'Для дополнения строки справа'
+          },
+          {
+            name: 'repeat()',
+            description: 'Повторяет строку указанное количество раз',
+            example: '"ha".repeat(3) // "hahaha"',
+            usage: 'Для повторения строки'
+          },
         ]
       },
       {
@@ -271,6 +325,23 @@ const DATA_TYPES = [
     icon: List,
     color: 'from-purple-500 to-pink-500',
     methods: [
+      {
+        category: 'Базовые методы',
+        items: [
+          {
+            name: 'length',
+            description: 'Возвращает количество элементов в массиве',
+            example: '[1,2,3].length // 3',
+            usage: 'Для получения длины массива'
+          },
+          {
+            name: 'at()',
+            description: 'Возвращает элемент по индексу (поддерживает отрицательные индексы)',
+            example: '[1,2,3].at(-1) // 3',
+            usage: 'Для доступа к элементу по индексу'
+          },
+        ]
+      },
       {
         category: 'Методы изменения',
         items: [
@@ -386,7 +457,36 @@ const DATA_TYPES = [
             usage: 'Для изменения порядка'
           }
         ]
-      }
+      },
+      {
+        category: 'Итерация и поиск',
+        items: [
+          {
+            name: 'forEach()',
+            description: 'Выполняет функцию для каждого элемента массива',
+            example: '[1,2,3].forEach(x => console.log(x))',
+            usage: 'Для перебора элементов массива'
+          },
+          {
+            name: 'some()',
+            description: 'Проверяет, удовлетворяет ли хотя бы один элемент условию',
+            example: '[1,2,3].some(x => x > 2) // true',
+            usage: 'Для проверки хотя бы одного совпадения'
+          },
+          {
+            name: 'every()',
+            description: 'Проверяет, удовлетворяют ли все элементы условию',
+            example: '[1,2,3].every(x => x > 0) // true',
+            usage: 'Для проверки всех элементов'
+          },
+          {
+            name: 'find()',
+            description: 'Находит первый элемент, удовлетворяющий условию',
+            example: '[1,2,3].find(x => x > 1) // 2',
+            usage: 'Для поиска элемента'
+          },
+        ]
+      },
     ]
   },
   {
@@ -481,7 +581,13 @@ const DATA_TYPES = [
             description: 'Проверяет, содержит ли объект собственное свойство с указанным именем (на прототипе).',
             example: 'const obj = {a: 1}; obj.hasOwnProperty("a"); // true',
             usage: 'Для проверки наличия собственного свойства у объекта.'
-          }
+          },
+          {
+            name: 'toString()',
+            description: 'Возвращает строковое представление объекта',
+            example: '({a:1}).toString() // "[object Object]"',
+            usage: 'Для получения строки из объекта'
+          },
         ]
       }
     ]
@@ -492,6 +598,23 @@ const DATA_TYPES = [
     icon: Calendar,
     color: 'from-red-500 to-rose-500',
     methods: [
+      {
+        category: 'Базовые методы',
+        items: [
+          {
+            name: 'toISOString()',
+            description: 'Возвращает строку даты в формате ISO',
+            example: 'new Date().toISOString()',
+            usage: 'Для сериализации даты'
+          },
+          {
+            name: 'toLocaleString()',
+            description: 'Возвращает строку даты и времени в локальном формате',
+            example: 'new Date().toLocaleString()',
+            usage: 'Для локализации даты и времени'
+          },
+        ]
+      },
       {
         category: 'Методы работы с датами',
         items: [
@@ -594,6 +717,23 @@ const DATA_TYPES = [
     color: 'from-indigo-500 to-violet-500',
     methods: [
       {
+        category: 'Базовые методы',
+        items: [
+          {
+            name: 'name',
+            description: 'Имя функции',
+            example: 'function foo(){}; foo.name // "foo"',
+            usage: 'Для получения имени функции'
+          },
+          {
+            name: 'length',
+            description: 'Количество ожидаемых аргументов',
+            example: 'function f(a,b){}; f.length // 2',
+            usage: 'Для получения числа параметров функции'
+          },
+        ]
+      },
+      {
         category: 'Методы функций',
         items: [
           {
@@ -678,41 +818,13 @@ const Methods = () => {
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
       <div className="container mx-auto px-4 py-8 flex-grow">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
-          <div className="flex items-center gap-4">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                Методы JavaScript
-              </h1>
-              <p className="text-muted-foreground text-sm sm:text-base">Справочник по методам работы с различными типами данных</p>
-            </div>
-          </div>
-          <div className="w-full sm:w-auto flex justify-end">
-            <div className="relative w-56">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input
-                ref={searchInputRef}
-                type="text"
-                placeholder="Поиск методов..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-16 h-10 rounded-xl border border-purple-100 bg-white/90 text-foreground text-sm font-sans"
-              />
-              {searchQuery && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-purple-600"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
-          </div>
+        <div className="mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            Методы JavaScript
+          </h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Справочник по методам работы с различными типами данных</p>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-6">
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-2">
@@ -737,9 +849,33 @@ const Methods = () => {
               </div>
             </div>
           </div>
-
           {/* Main content */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            {/* Search input section */}
+            <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-4 w-full">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder="Поиск методов..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-9 pr-16 h-10 rounded-xl border border-purple-100 bg-white/90 text-foreground text-sm font-sans"
+                />
+                {searchQuery && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-purple-600"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+            </div>
+            {/* Справочник по выбранному типу данных */}
             <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-3 sm:p-4">
               {searchQuery ? (
                 <div className="space-y-4">
@@ -766,8 +902,13 @@ const Methods = () => {
                             value={`${type.id}-${index}`}
                             className="border border-purple-100 rounded-lg overflow-hidden"
                           >
-                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans">
-                              <span>{category.category}</span>
+                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans flex items-center justify-between">
+                              <div className="flex flex-col items-start">
+                                <span>{category.category}</span>
+                                {category.items && category.items.length > 0 && (
+                                  <span className="mt-0.5 text-xs text-gray-400 truncate max-w-full">{category.items.map(m => m.name).join(', ')}</span>
+                                )}
+                              </div>
                             </AccordionTrigger>
                             <AccordionContent className="p-2 space-y-2">
                               {category.items.map((method, methodIndex) => (
@@ -839,8 +980,13 @@ const Methods = () => {
                             value={`category-${index}`}
                             className="border border-purple-100 rounded-lg overflow-hidden"
                           >
-                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans">
-                              <span>{category.category}</span>
+                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans flex items-center justify-between">
+                              <div className="flex flex-col items-start">
+                                <span>{category.category}</span>
+                                {category.items && category.items.length > 0 && (
+                                  <span className="mt-0.5 text-xs text-gray-400 truncate max-w-full">{category.items.map(m => m.name).join(', ')}</span>
+                                )}
+                              </div>
                             </AccordionTrigger>
                             <AccordionContent className="p-2 space-y-2">
                               {category.items.map((method, methodIndex) => (
