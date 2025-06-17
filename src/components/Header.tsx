@@ -50,23 +50,23 @@ const Header = () => {
   ];
 
   const referenceItems = [
-    { path: "/methods", icon: ClipboardList, label: "Методы", isNew: true },
-    { path: "/data-types", icon: Database, label: "Типы данных", isNew: true },
+    { path: "/methods", icon: ClipboardList, label: "Методы" },
+    { path: "/data-types", icon: Database, label: "Типы данных" },
     { path: "/functions", icon: Code, label: "Функции", isNew: true },
     { path: "/oop", icon: Package, label: "ООП и SOLID", isNew: true },
     { path: "/dom", icon: MousePointer, label: "DOM JS", isNew: true },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
-    { path: "/interpreter", icon: Terminal, label: "Интерпретатор", isNew: true },
-    { path: "/regex", icon: Regex, label: "RegEx", isNew: true },
+    { path: "/interpreter", icon: Terminal, label: "Интерпретатор" },
+    { path: "/regex", icon: Regex, label: "RegEx" },
     { path: "/data-generator", icon: Database, label: "Генератор данных", isNew: true },
     { path: "/api-client", icon: Send, label: "API Клиент", isNew: true },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 w-full border-b bg-white backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <div className="p-1.5 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
@@ -88,7 +88,7 @@ const Header = () => {
                 size="sm"
                 asChild
                 className={cn(
-                  "relative group transition-all duration-200",
+                  "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
                   isActive(item.path) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                 )}
               >
@@ -109,7 +109,7 @@ const Header = () => {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "relative group transition-all duration-200",
+                    "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
                     referenceItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                   )}
                 >
@@ -147,7 +147,7 @@ const Header = () => {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "relative group transition-all duration-200",
+                    "relative group transition-all duration-200 text-[hsl(var(--foreground))]",
                     toolItems.some(item => isActive(item.path)) && "bg-gradient-to-r from-purple-600/10 to-blue-600/10"
                   )}
                 >
@@ -183,7 +183,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-[hsl(var(--foreground))]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -225,7 +225,7 @@ const Header = () => {
                 variant="ghost"
                 size="lg"
                 asChild
-                className={`w-full justify-start ${
+                className={`w-full justify-start text-[hsl(var(--foreground))] ${
                   location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                 }`}
               >
@@ -244,7 +244,7 @@ const Header = () => {
                   variant="ghost"
                   size="lg"
                   asChild
-                  className={`w-full justify-start ${
+                  className={`w-full justify-start text-[hsl(var(--foreground))] ${
                     location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                   }`}
                 >
@@ -269,7 +269,7 @@ const Header = () => {
                   variant="ghost"
                   size="lg"
                   asChild
-                  className={`w-full justify-start ${
+                  className={`w-full justify-start text-[hsl(var(--foreground))] ${
                     location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                   }`}
                 >

@@ -688,7 +688,7 @@ const Methods = () => {
             </div>
           </div>
           <div className="w-full sm:w-auto flex justify-end">
-            <div className="relative w-64">
+            <div className="relative w-56">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 ref={searchInputRef}
@@ -696,14 +696,14 @@ const Methods = () => {
                 placeholder="Поиск методов..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-20"
+                className="pl-9 pr-16 h-10 rounded-xl border border-purple-100 bg-white/90 text-foreground text-sm font-sans"
               />
               {searchQuery && (
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-purple-600"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -712,26 +712,26 @@ const Methods = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
-              <h2 className="text-lg font-semibold mb-4">Типы данных</h2>
-              <div className="space-y-2">
+            <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-2">
+              <h2 className="text-base font-semibold mb-2 font-sans text-foreground">Типы данных</h2>
+              <div className="space-y-1">
                 {DATA_TYPES.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedType(type.id)}
-                    className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${
+                    className={`w-full flex items-center gap-2 p-2 rounded-lg transition-colors text-sm font-sans font-medium ${
                       selectedType === type.id
                         ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
-                        : 'hover:bg-gray-100'
+                        : 'hover:bg-purple-50 text-foreground'
                     }`}
                   >
-                    <div className={`p-2 rounded-lg ${type.color}`}>
-                      <type.icon className={`h-5 w-5 ${selectedType === type.id ? 'text-white' : 'text-gray-500'}`} />
+                    <div className={`p-1 rounded-lg ${type.color}`}>
+                      <type.icon className={`h-4 w-4 ${selectedType === type.id ? 'text-white' : 'text-gray-500'}`} />
                     </div>
-                    <span className="font-medium">{type.name}</span>
+                    <span>{type.name}</span>
                   </button>
                 ))}
               </div>
@@ -739,60 +739,51 @@ const Methods = () => {
           </div>
 
           {/* Main content */}
-          <div className="lg:col-span-3">
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+          <div className="lg:col-span-4">
+            <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-3 sm:p-4">
               {searchQuery ? (
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {filteredDataTypes.map((type) => (
                     <div key={type.id}>
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${type.color}`}>
-                            <type.icon className="h-6 w-6 text-white" />
-                          </div>
-                          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                            {type.name}
-                          </h2>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className={`p-1 rounded-lg bg-gradient-to-r ${type.color}`}>
+                          <type.icon className="h-5 w-5 text-white" />
                         </div>
+                        <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent font-sans">
+                          {type.name}
+                        </h2>
+                        <span className="ml-2 text-xs text-gray-500 font-sans">Найдено методов: {type.methods.reduce((sum, category) => sum + category.items.length, 0)}</span>
                       </div>
-                      {searchQuery && (
-                        <p className="text-sm text-gray-500 -mt-4 mb-6">
-                          Найдено методов: {type.methods.reduce((sum, category) => 
-                            sum + category.items.length, 0
-                          )}
-                        </p>
-                      )}
-
                       <Accordion 
                         type="multiple" 
                         value={expandedCategories}
                         onValueChange={setExpandedCategories}
-                        className="space-y-4"
+                        className="space-y-2"
                       >
                         {type.methods.map((category, index) => (
                           <AccordionItem
                             key={index}
                             value={`${type.id}-${index}`}
-                            className="border border-gray-200 rounded-lg overflow-hidden"
+                            className="border border-purple-100 rounded-lg overflow-hidden"
                           >
-                            <AccordionTrigger className="px-4 py-3 bg-gray-50 hover:bg-gray-100">
-                              <span className="font-medium">{category.category}</span>
+                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans">
+                              <span>{category.category}</span>
                             </AccordionTrigger>
-                            <AccordionContent className="p-4 space-y-4">
+                            <AccordionContent className="p-2 space-y-2">
                               {category.items.map((method, methodIndex) => (
                                 <div
                                   key={methodIndex}
-                                  className="border border-gray-200 rounded-lg p-4"
+                                  className="border border-purple-100 rounded-lg p-2 bg-white"
                                 >
-                                  <div className="flex items-start justify-between gap-4">
+                                  <div className="flex items-start justify-between gap-2">
                                     <div>
-                                      <h3 className="font-medium text-gray-900 mb-2">
+                                      <h3 className="font-medium text-foreground mb-1 text-sm font-sans">
                                         {highlightText(method.name)}
                                       </h3>
-                                      <p className="text-sm text-gray-600 mb-3">
+                                      <p className="text-xs text-gray-600 mb-1 font-sans">
                                         {highlightText(method.description)}
                                       </p>
-                                      <p className="text-sm text-gray-500">
+                                      <p className="text-xs text-gray-500 font-sans">
                                         {highlightText(method.usage)}
                                       </p>
                                     </div>
@@ -814,8 +805,8 @@ const Methods = () => {
                                       </Tooltip>
                                     </TooltipProvider>
                                   </div>
-                                  <div className="mt-3 bg-gray-50 rounded p-3">
-                                    <pre className="text-sm font-mono text-blue-600 whitespace-pre-wrap">
+                                  <div className="mt-2 bg-purple-50 rounded p-2">
+                                    <pre className="text-xs font-mono text-blue-600 whitespace-pre-wrap font-sans">
                                       {highlightText(method.example)}
                                     </pre>
                                   </div>
@@ -832,43 +823,40 @@ const Methods = () => {
                 filteredDataTypes
                   .filter(type => type.id === selectedType)
                   .map((type) => (
-                    <div key={type.id} className="space-y-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${type.color}`}>
-                            <type.icon className="h-6 w-6 text-white" />
-                          </div>
-                          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                            {type.name}
-                          </h2>
+                    <div key={type.id} className="space-y-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className={`p-1 rounded-lg bg-gradient-to-r ${type.color}`}>
+                          <type.icon className="h-5 w-5 text-white" />
                         </div>
+                        <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent font-sans">
+                          {type.name}
+                        </h2>
                       </div>
-
-                      <Accordion type="single" collapsible className="space-y-4">
+                      <Accordion type="single" collapsible className="space-y-2">
                         {type.methods.map((category, index) => (
                           <AccordionItem
                             key={index}
                             value={`category-${index}`}
-                            className="border border-gray-200 rounded-lg overflow-hidden"
+                            className="border border-purple-100 rounded-lg overflow-hidden"
                           >
-                            <AccordionTrigger className="px-4 py-3 bg-gray-50 hover:bg-gray-100">
-                              <span className="font-medium">{category.category}</span>
+                            <AccordionTrigger className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-sm font-medium font-sans">
+                              <span>{category.category}</span>
                             </AccordionTrigger>
-                            <AccordionContent className="p-4 space-y-4">
+                            <AccordionContent className="p-2 space-y-2">
                               {category.items.map((method, methodIndex) => (
                                 <div
                                   key={methodIndex}
-                                  className="border border-gray-200 rounded-lg p-4"
+                                  className="border border-purple-100 rounded-lg p-2 bg-white"
                                 >
-                                  <div className="flex items-start justify-between gap-4">
+                                  <div className="flex items-start justify-between gap-2">
                                     <div>
-                                      <h3 className="font-medium text-gray-900 mb-2">
+                                      <h3 className="font-medium text-foreground mb-1 text-sm font-sans">
                                         {method.name}
                                       </h3>
-                                      <p className="text-sm text-gray-600 mb-3">
+                                      <p className="text-xs text-gray-600 mb-1 font-sans">
                                         {method.description}
                                       </p>
-                                      <p className="text-sm text-gray-500">
+                                      <p className="text-xs text-gray-500 font-sans">
                                         {method.usage}
                                       </p>
                                     </div>
@@ -890,8 +878,8 @@ const Methods = () => {
                                       </Tooltip>
                                     </TooltipProvider>
                                   </div>
-                                  <div className="mt-3 bg-gray-50 rounded p-3">
-                                    <pre className="text-sm font-mono text-blue-600 whitespace-pre-wrap">
+                                  <div className="mt-2 bg-purple-50 rounded p-2">
+                                    <pre className="text-xs font-mono text-blue-600 whitespace-pre-wrap font-sans">
                                       {method.example}
                                     </pre>
                                   </div>

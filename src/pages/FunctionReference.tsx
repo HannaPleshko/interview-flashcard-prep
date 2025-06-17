@@ -206,17 +206,23 @@ console.log(factorial(5)); // 120`,
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50">
       <Header />
-      
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-            Справочник функций JavaScript
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Полное руководство по функциям в JavaScript: от базовых типов до продвинутых концепций
-          </p>
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
+              <Code className="h-7 w-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
+                Справочник функций JavaScript
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base">Полное руководство по функциям в JavaScript: от базовых типов до продвинутых концепций</p>
+            </div>
+          </div>
         </div>
 
+        {/* Tabs Section */}
         <Tabs defaultValue="types" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="types" className="flex items-center gap-2">
@@ -232,29 +238,49 @@ console.log(factorial(5)); // 120`,
           <TabsContent value="types">
             <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   Типы функций
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
-                  {functionTypes.map((type) => {
+                  {functionTypes.map((type, idx) => {
                     const IconComponent = type.icon;
                     return (
-                      <AccordionItem key={type.id} value={type.id}>
-                        <AccordionTrigger className="text-left">
+                      <AccordionItem key={type.id} value={type.id} className="border border-purple-100 rounded-xl mb-2 transition-all duration-300">
+                        <AccordionTrigger className="text-left px-3 py-2 hover:bg-purple-50">
                           <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
                               <IconComponent className="h-4 w-4 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold">{type.title}</div>
-                              <div className="text-sm text-gray-600">{type.description}</div>
+                              <div className="font-semibold text-foreground">{type.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600">{type.description}</div>
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          {renderExamples(type.examples, type.title)}
+                        <AccordionContent className="p-3 space-y-4 animate-fade-in">
+                          <div className="mb-2 text-xs sm:text-sm text-gray-700 font-medium">{type.description}</div>
+                          {type.examples.map((example, i) => (
+                            <div key={i} className="border border-purple-100 rounded-lg p-3 bg-white/80 mb-2">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="inline-block bg-purple-100 text-purple-700 rounded-full px-2 py-0.5 text-xs font-bold">{i + 1}</span>
+                                <span className="font-semibold text-sm bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{example.title}</span>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => copyToClipboard(example.code, example.title)}
+                                  className="ml-auto text-gray-400 hover:text-blue-600"
+                                >
+                                  <Copy className="h-4 w-4" />
+                                </Button>
+                              </div>
+                              <pre className="bg-white/90 border border-purple-100 rounded p-3 overflow-x-auto text-xs sm:text-sm font-mono text-purple-900 shadow-inner mb-2">
+                                <code>{example.code}</code>
+                              </pre>
+                              <p className="text-xs sm:text-sm text-muted-foreground">{example.explanation}</p>
+                            </div>
+                          ))}
                         </AccordionContent>
                       </AccordionItem>
                     );
@@ -267,29 +293,49 @@ console.log(factorial(5)); // 120`,
           <TabsContent value="advanced">
             <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   Продвинутые концепции
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
-                  {advancedConcepts.map((concept) => {
+                  {advancedConcepts.map((concept, idx) => {
                     const IconComponent = concept.icon;
                     return (
-                      <AccordionItem key={concept.id} value={concept.id}>
-                        <AccordionTrigger className="text-left">
+                      <AccordionItem key={concept.id} value={concept.id} className="border border-purple-100 rounded-xl mb-2 transition-all duration-300">
+                        <AccordionTrigger className="text-left px-3 py-2 hover:bg-purple-50">
                           <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
                               <IconComponent className="h-4 w-4 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold">{concept.title}</div>
-                              <div className="text-sm text-gray-600">{concept.description}</div>
+                              <div className="font-semibold text-foreground">{concept.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600">{concept.description}</div>
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          {renderExamples(concept.examples, concept.title)}
+                        <AccordionContent className="p-3 space-y-4 animate-fade-in">
+                          <div className="mb-2 text-xs sm:text-sm text-gray-700 font-medium">{concept.description}</div>
+                          {concept.examples.map((example, i) => (
+                            <div key={i} className="border border-purple-100 rounded-lg p-3 bg-white/80 mb-2">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="inline-block bg-purple-100 text-purple-700 rounded-full px-2 py-0.5 text-xs font-bold">{i + 1}</span>
+                                <span className="font-semibold text-sm bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{example.title}</span>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => copyToClipboard(example.code, example.title)}
+                                  className="ml-auto text-gray-400 hover:text-blue-600"
+                                >
+                                  <Copy className="h-4 w-4" />
+                                </Button>
+                              </div>
+                              <pre className="bg-white/90 border border-purple-100 rounded p-3 overflow-x-auto text-xs sm:text-sm font-mono text-purple-900 shadow-inner mb-2">
+                                <code>{example.code}</code>
+                              </pre>
+                              <p className="text-xs sm:text-sm text-muted-foreground">{example.explanation}</p>
+                            </div>
+                          ))}
                         </AccordionContent>
                       </AccordionItem>
                     );

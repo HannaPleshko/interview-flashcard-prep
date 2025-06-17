@@ -59,10 +59,14 @@ const Interpreter = () => {
       <Header />
       
       <div className="container mx-auto px-4 py-8 flex-grow">
+        {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex items-center gap-4">
+            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
+              <Play className="h-7 w-7 text-white" />
+            </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
                 JavaScript Интерпретатор
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base">Напишите и запустите JavaScript код прямо в браузере</p>
@@ -72,15 +76,15 @@ const Interpreter = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Редактор кода */}
-          <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
+          <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-4 flex flex-col">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-700">Код</h2>
+              <h2 className="text-lg font-semibold text-foreground">Код</h2>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={copyCode}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 border-purple-200 text-purple-700 hover:bg-white/50"
                 >
                   {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   {isCopied ? 'Скопировано' : 'Копировать'}
@@ -89,7 +93,7 @@ const Interpreter = () => {
                   variant="outline"
                   size="sm"
                   onClick={clearCode}
-                  className="flex items-center gap-2 text-red-500 hover:text-red-600"
+                  className="flex items-center gap-2 text-red-500 hover:text-red-600 border-red-200"
                 >
                   <Trash2 className="h-4 w-4" />
                   Очистить
@@ -99,29 +103,30 @@ const Interpreter = () => {
             <Textarea
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="w-full h-[400px] p-4 font-mono text-sm bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl resize-none"
+              className="w-full h-[340px] p-4 font-mono text-sm bg-white/70 border border-purple-100 focus:border-purple-400 rounded-xl resize-none mb-2"
               spellCheck="false"
             />
             <Button
               onClick={runCode}
-              className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 glow-hover"
+              className="w-full mt-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 text-base font-semibold py-3 rounded-xl shadow-lg transition-all duration-200 glow-hover"
+              size="lg"
             >
-              <Play className="h-4 w-4 mr-2" />
+              <Play className="h-5 w-5 mr-2" />
               Запустить код
             </Button>
           </div>
 
           {/* Вывод */}
-          <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-4">
-            <h2 className="text-lg font-semibold text-gray-700 mb-4">Вывод</h2>
-            <div className="h-[400px] p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-200 overflow-y-auto">
+          <div className="bg-white/90 rounded-xl border border-purple-100 shadow p-4 flex flex-col">
+            <h2 className="text-lg font-semibold text-foreground mb-4">Вывод</h2>
+            <div className="h-[340px] p-4 font-mono text-sm bg-purple-50 rounded-xl border border-purple-100 overflow-y-auto transition-all duration-300 animate-fade-in">
               {output.length === 0 ? (
-                <div className="text-gray-400 italic">
+                <div className="text-gray-400 italic select-none flex items-center justify-center h-full">
                   Вывод появится здесь после запуска кода
                 </div>
               ) : (
                 output.map((line, index) => (
-                  <div key={index} className="mb-1">
+                  <div key={index} className="mb-1 animate-fade-in">
                     {line}
                   </div>
                 ))

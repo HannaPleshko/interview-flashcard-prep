@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -281,13 +280,18 @@ const viewportHeight = window.innerHeight;`
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-            Справочник DOM JavaScript
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Полное руководство по работе с Document Object Model в JavaScript
-          </p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
+              <MousePointer className="h-7 w-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
+                Справочник DOM JavaScript
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base">Полное руководство по работе с Document Object Model в JavaScript</p>
+            </div>
+          </div>
         </div>
 
         <Tabs defaultValue="selection" className="w-full">
@@ -309,30 +313,32 @@ const viewportHeight = window.innerHeight;`
           <TabsContent value="selection">
             <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   Поиск и создание элементов
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
-                  {selectionMethods.map((method) => {
+                  {selectionMethods.map((method, idx) => {
                     const IconComponent = method.icon;
                     return (
-                      <AccordionItem key={method.id} value={method.id}>
-                        <AccordionTrigger className="text-left">
+                      <AccordionItem key={method.id} value={method.id} className="border border-purple-100 rounded-xl mb-2 transition-all duration-300">
+                        <AccordionTrigger className="text-left px-3 py-2 hover:bg-purple-50">
                           <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
                               <IconComponent className="h-4 w-4 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold">{method.title}</div>
-                              <div className="text-sm text-gray-600">{method.description}</div>
+                              <div className="font-semibold text-foreground">{method.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600">{method.description}</div>
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="bg-gray-900 rounded-lg p-4 mt-4">
-                            <pre className="text-sm text-gray-100 overflow-x-auto">
+                        <AccordionContent className="p-3 animate-fade-in">
+                          <div className="mb-2 text-xs sm:text-sm text-gray-700 font-medium">{method.description}</div>
+                          <div className="border border-purple-100 rounded-lg p-3 bg-white/80 flex items-start gap-2">
+                            <span className="inline-block bg-purple-100 text-purple-700 rounded-full px-2 py-0.5 text-xs font-bold mt-1">{idx + 1}</span>
+                            <pre className="bg-white/90 border border-purple-100 rounded p-3 overflow-x-auto text-xs sm:text-sm font-mono text-purple-900 shadow-inner w-full">
                               <code>{method.example}</code>
                             </pre>
                           </div>
@@ -348,30 +354,32 @@ const viewportHeight = window.innerHeight;`
           <TabsContent value="events">
             <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   Работа с событиями
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
-                  {eventMethods.map((method) => {
+                  {eventMethods.map((method, idx) => {
                     const IconComponent = method.icon;
                     return (
-                      <AccordionItem key={method.id} value={method.id}>
-                        <AccordionTrigger className="text-left">
+                      <AccordionItem key={method.id} value={method.id} className="border border-purple-100 rounded-xl mb-2 transition-all duration-300">
+                        <AccordionTrigger className="text-left px-3 py-2 hover:bg-purple-50">
                           <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
                               <IconComponent className="h-4 w-4 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold">{method.title}</div>
-                              <div className="text-sm text-gray-600">{method.description}</div>
+                              <div className="font-semibold text-foreground">{method.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600">{method.description}</div>
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="bg-gray-900 rounded-lg p-4 mt-4">
-                            <pre className="text-sm text-gray-100 overflow-x-auto">
+                        <AccordionContent className="p-3 animate-fade-in">
+                          <div className="mb-2 text-xs sm:text-sm text-gray-700 font-medium">{method.description}</div>
+                          <div className="border border-purple-100 rounded-lg p-3 bg-white/80 flex items-start gap-2">
+                            <span className="inline-block bg-purple-100 text-purple-700 rounded-full px-2 py-0.5 text-xs font-bold mt-1">{idx + 1}</span>
+                            <pre className="bg-white/90 border border-purple-100 rounded p-3 overflow-x-auto text-xs sm:text-sm font-mono text-purple-900 shadow-inner w-full">
                               <code>{method.example}</code>
                             </pre>
                           </div>
@@ -387,30 +395,32 @@ const viewportHeight = window.innerHeight;`
           <TabsContent value="navigation">
             <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   Навигация и изменение DOM
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
-                  {navigationMethods.map((method) => {
+                  {navigationMethods.map((method, idx) => {
                     const IconComponent = method.icon;
                     return (
-                      <AccordionItem key={method.id} value={method.id}>
-                        <AccordionTrigger className="text-left">
+                      <AccordionItem key={method.id} value={method.id} className="border border-purple-100 rounded-xl mb-2 transition-all duration-300">
+                        <AccordionTrigger className="text-left px-3 py-2 hover:bg-purple-50">
                           <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
                               <IconComponent className="h-4 w-4 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold">{method.title}</div>
-                              <div className="text-sm text-gray-600">{method.description}</div>
+                              <div className="font-semibold text-foreground">{method.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600">{method.description}</div>
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="bg-gray-900 rounded-lg p-4 mt-4">
-                            <pre className="text-sm text-gray-100 overflow-x-auto">
+                        <AccordionContent className="p-3 animate-fade-in">
+                          <div className="mb-2 text-xs sm:text-sm text-gray-700 font-medium">{method.description}</div>
+                          <div className="border border-purple-100 rounded-lg p-3 bg-white/80 flex items-start gap-2">
+                            <span className="inline-block bg-purple-100 text-purple-700 rounded-full px-2 py-0.5 text-xs font-bold mt-1">{idx + 1}</span>
+                            <pre className="bg-white/90 border border-purple-100 rounded p-3 overflow-x-auto text-xs sm:text-sm font-mono text-purple-900 shadow-inner w-full">
                               <code>{method.example}</code>
                             </pre>
                           </div>
