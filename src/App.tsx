@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,9 @@ import ApiClient from "./pages/ApiClient";
 import FunctionReference from "./pages/FunctionReference";
 import OOPReference from "./pages/OOPReference";
 import DOMReference from "./pages/DOMReference";
+import AsyncJSReference from "./pages/AsyncJSReference";
+import WebAPIReference from "./pages/WebAPIReference";
+import ES6Reference from "./pages/ES6Reference";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +45,9 @@ const App = () => (
           <Route path="/functions" element={<FunctionReference />} />
           <Route path="/oop" element={<OOPReference />} />
           <Route path="/dom" element={<DOMReference />} />
+          <Route path="/async-js" element={<AsyncJSReference />} />
+          <Route path="/web-api" element={<WebAPIReference />} />
+          <Route path="/es6" element={<ES6Reference />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

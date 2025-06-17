@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon, Package, MousePointer } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon, Package, MousePointer, Zap, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
@@ -55,6 +55,9 @@ const Header = () => {
     { path: "/functions", icon: Code, label: "Функции", isNew: true },
     { path: "/oop", icon: Package, label: "ООП и SOLID", isNew: true },
     { path: "/dom", icon: MousePointer, label: "DOM JS", isNew: true },
+    { path: "/async-js", icon: Zap, label: "Async JS", isNew: true },
+    { path: "/web-api", icon: Globe, label: "Web API", isNew: true },
+    { path: "/es6", icon: Star, label: "ES6+", isNew: true },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [
