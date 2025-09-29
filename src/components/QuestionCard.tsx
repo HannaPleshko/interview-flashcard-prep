@@ -149,8 +149,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
               </div>
               <div className="relative">
                 <Sparkles className="h-5 w-5 text-green-400 absolute -left-6 top-1 opacity-60" />
-                <p className="text-foreground leading-relaxed font-medium">
-                  {question.answer}
+                <p className="text-foreground leading-relaxed font-medium" dangerouslySetInnerHTML={{__html: question.answer}}>
                 </p>
               </div>
             </div>

@@ -47,7 +47,7 @@ const QuestionListItem = ({ question, progressStatus, onProgressChange }: Questi
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-3 sm:px-6 pt-0 pb-3 sm:pb-4">
-          <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base">{question.answer}</p>
+          <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base" dangerouslySetInnerHTML={{__html: question.answer}}></p>
           <div className="flex flex-wrap justify-end items-center gap-2 mt-4">
             <span className="text-xs sm:text-sm font-medium text-muted-foreground mr-2">Мой прогресс:</span>
             <Button 
