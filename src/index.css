@@ -437,3 +437,36 @@
   background: linear-gradient(to bottom, #7c3aed, #2563eb);
 }
 
+/* Убираем outline у всех инпутов и селекторов */
+input, 
+select, 
+textarea, 
+button,
+[role="button"],
+[role="combobox"],
+[role="listbox"] {
+  outline: none !important;
+}
+
+/* Focus стили для инпутов и селекторов */
+input:focus, 
+select:focus, 
+textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.2) !important;
+}
+
+/* Стили для кнопок при фокусе */
+button:focus,
+[role="button"]:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.3) !important;
+}
+
+/* Стили для селекторов при фокусе */
+[role="combobox"]:focus,
+[role="listbox"]:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.2) !important;
+}
+

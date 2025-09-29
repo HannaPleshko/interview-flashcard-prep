@@ -881,21 +881,6 @@ if (condition) {
                 </TabsContent>
               ))}
             </Tabs>
-
-            {/* Статистика */}
-            <Card className="mt-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-200">
-              <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
-                  📚 Справочник содержит
-                </h3>
-                <div className="flex justify-center gap-8 text-sm text-gray-600">
-                  <span><strong>6</strong> разделов</span>
-                  <span><strong>{Object.values(referenceData).reduce((acc, data) => acc + data.sections.length, 0)}</strong> тем</span>
-                  <span><strong>Интерактивные</strong> примеры</span>
-                  <span><strong>Поиск</strong> и фильтры</span>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>

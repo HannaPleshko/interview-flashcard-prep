@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { questionsData } from "@/data/questions";
 import TechnologyCard from "./TechnologyCard";
-import { Globe, Layers, Zap, Code, Shield, BookOpen, Package, Database, Server } from "lucide-react";
+import { Globe, Layers, Zap, Code, Shield, BookOpen, Package, Database, Server, ArrowLeft, ArrowRight } from "lucide-react";
 
 interface TechnologiesSectionProps {
   title?: string;
@@ -14,7 +15,8 @@ const TechnologiesSection = ({
   description
 }: TechnologiesSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 6;
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const ITEMS_PER_PAGE = itemsPerPage;
   
   // Маппинг иконок для технологий
   const getTechIcon = (techId: string) => {
@@ -55,6 +57,11 @@ const TechnologiesSection = ({
     };
     return gradientMap[techId] || 'from-gray-400 to-gray-600';
   };
+  
+  // Сброс страницы при изменении количества элементов
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
   
   // Пагинация
   const totalPages = Math.ceil(questionsData.length / ITEMS_PER_PAGE);
@@ -114,46 +121,57 @@ const TechnologiesSection = ({
           })}
         </div>
         
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-8">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-3 py-1"
-            >
-              ←
-            </Button>
-            
-            <div className="flex gap-1">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 ${
-                    currentPage === page 
-                      ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white border-0' 
-                      : 'bg-white/70 border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  {page}
-                </Button>
-              ))}
+        {/* Pagination Controls */}
+        {questionsData.length > 0 && (
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
+            {/* Items per page selector - слева */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Показать:</span>
+              <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(parseInt(value))}>
+                <SelectTrigger className="w-20 h-8 bg-white/70 border-purple-200 focus:border-purple-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-lg shadow-xl">
+                  <SelectItem value="3" className="rounded-md hover:bg-purple-50">3</SelectItem>
+                  <SelectItem value="6" className="rounded-md hover:bg-purple-50">6</SelectItem>
+                  <SelectItem value="9" className="rounded-md hover:bg-purple-50">9</SelectItem>
+                  <SelectItem value="12" className="rounded-md hover:bg-purple-50">12</SelectItem>
+                  <SelectItem value="15" className="rounded-md hover:bg-purple-50">15</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className="text-sm text-muted-foreground">элементов</span>
             </div>
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1"
-            >
-              →
-            </Button>
+
+            {/* Pagination buttons - справа */}
+            {totalPages > 1 && (
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="hover:bg-white/50 border-purple-200 text-purple-700"
+                >
+                  <ArrowLeft className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Назад</span>
+                </Button>
+
+                <span className="text-muted-foreground font-medium text-sm hidden sm:block">
+                  Страница {currentPage} из {totalPages}
+                </span>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className="hover:bg-white/50 border-purple-200 text-purple-700"
+                >
+                  <span className="hidden sm:inline">Далее</span>
+                  <ArrowRight className="h-4 w-4 sm:ml-2" />
+                </Button>
+              </div>
+            )}
           </div>
         )}
       {/* </div> */}

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical, Globe, Layers, Zap, Code, Shield, Server } from "lucide-react";
+import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical, Globe, Layers, Zap, Code, Shield, Server, Package, Database } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import QuestionListItem from "@/components/QuestionListItem";
@@ -161,7 +161,8 @@ const Study = () => {
   const [progress, setProgress] = useState<ProgressData>({});
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('list');
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = viewMode === 'cards' ? 9 : 10;
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const ITEMS_PER_PAGE = itemsPerPage;
   
   // Маппинг иконок для технологий
   const getTechIcon = (techId: string) => {
@@ -169,9 +170,16 @@ const Study = () => {
       'html': Globe,
       'css': Layers,
       'javascript': Zap,
+      'oop': Package,
       'nextjs': Code,
+      'angular': Code,
+      'angularjs': Code,
       'typescript': Code,
-      'security': Shield
+      'nodejs': Server,
+      'sql': Database,
+      'mongodb': Database,
+      'security': Shield,
+      'csharp': Code
     };
     return iconMap[techId] || BookOpen;
   };
@@ -182,9 +190,16 @@ const Study = () => {
       'html': 'from-orange-400 to-orange-600',
       'css': 'from-blue-400 to-blue-600',
       'javascript': 'from-yellow-400 to-yellow-600',
+      'oop': 'from-green-500 to-green-700',
       'nextjs': 'from-gray-500 to-gray-700',
+      'angular': 'from-red-500 to-red-700',
+      'angularjs': 'from-red-400 to-red-600',
       'typescript': 'from-purple-500 to-purple-700',
-      'security': 'from-emerald-400 to-emerald-600'
+      'nodejs': 'from-green-400 to-green-600',
+      'sql': 'from-indigo-500 to-indigo-700',
+      'mongodb': 'from-green-600 to-green-800',
+      'security': 'from-emerald-400 to-emerald-600',
+      'csharp': 'from-blue-600 to-blue-800'
     };
     return gradientMap[techId] || 'from-gray-400 to-gray-600';
   };
@@ -209,7 +224,7 @@ const Study = () => {
   useEffect(() => {
     setCurrentPage(1);
     setFlippedCards(new Set());
-  }, [searchTerm, difficultyFilter, sortBy, progressFilter, viewMode]);
+  }, [searchTerm, difficultyFilter, sortBy, progressFilter, viewMode, itemsPerPage]);
 
   useEffect(() => {
     if (techId) {
@@ -399,8 +414,8 @@ const Study = () => {
         </div>
 
         {/* Technology Tags */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/20 shadow-lg">
-          <div className="flex flex-wrap gap-2 justify-center">
+        <div className="mb-8">
+          <div className="flex flex-wrap gap-3 justify-center">
             {questionsData.map((tech) => {
               const IconComponent = getTechIcon(tech.id);
               const isActive = techId === tech.id;
@@ -408,17 +423,18 @@ const Study = () => {
               return (
                 <Button
                   key={tech.id}
-                  variant={isActive ? "default" : "outline"}
+                  variant="ghost"
                   size="sm"
                   onClick={() => navigate(`/study/${tech.id}`)}
                   className={`
                     ${isActive 
-                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-md` 
-                      : 'bg-white/70 border-gray-200 hover:border-gray-400 hover:bg-gray-50'
+                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg hover:shadow-xl hover:text-white` 
+                      : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700'
                     }
-                    rounded-full px-4 py-2 text-sm font-medium
-                    transition-all duration-200 hover:scale-105
-                    flex items-center gap-2
+                    rounded-full px-6 py-3 text-sm font-medium
+                    transition-all duration-300 hover:scale-105
+                    flex items-center gap-2 backdrop-blur-sm
+                    focus:text-white active:text-white
                   `}
                 >
                   <IconComponent className="h-4 w-4" />
@@ -643,33 +659,56 @@ const Study = () => {
         )}
 
         {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 sm:gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="hover:bg-white/50 border-purple-200 text-purple-700"
-            >
-              <ArrowLeft className="h-4 w-4 sm:mr-2" />
-              <span className="hidden sm:inline">Назад</span>
-            </Button>
+        {filteredQuestions.length > 0 && (
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
+            {/* Items per page selector - слева */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Показать:</span>
+              <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(parseInt(value))}>
+                <SelectTrigger className="w-20 h-8 bg-white/70 border-purple-200 focus:border-purple-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-lg shadow-xl">
+                  <SelectItem value="5" className="rounded-md hover:bg-purple-50">5</SelectItem>
+                  <SelectItem value="10" className="rounded-md hover:bg-purple-50">10</SelectItem>
+                  <SelectItem value="15" className="rounded-md hover:bg-purple-50">15</SelectItem>
+                  <SelectItem value="20" className="rounded-md hover:bg-purple-50">20</SelectItem>
+                  <SelectItem value="25" className="rounded-md hover:bg-purple-50">25</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className="text-sm text-muted-foreground">элементов</span>
+            </div>
 
-            <span className="text-muted-foreground font-medium text-sm hidden sm:block">
-              Страница {currentPage} из {totalPages}
-            </span>
+            {/* Pagination buttons - справа */}
+            {totalPages > 1 && (
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="hover:bg-white/50 border-purple-200 text-purple-700"
+                >
+                  <ArrowLeft className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Назад</span>
+                </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="hover:bg-white/50 border-purple-200 text-purple-700"
-            >
-              <span className="hidden sm:inline">Далее</span>
-              <ArrowRight className="h-4 w-4 sm:ml-2" />
-            </Button>
+                <span className="text-muted-foreground font-medium text-sm hidden sm:block">
+                  Страница {currentPage} из {totalPages}
+                </span>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className="hover:bg-white/50 border-purple-200 text-purple-700"
+                >
+                  <span className="hidden sm:inline">Далее</span>
+                  <ArrowRight className="h-4 w-4 sm:ml-2" />
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
