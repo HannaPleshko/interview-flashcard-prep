@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { questionsData } from "@/data/questions";
@@ -14,6 +15,7 @@ const TechnologiesSection = ({
   title,
   description
 }: TechnologiesSectionProps) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const ITEMS_PER_PAGE = itemsPerPage;
@@ -86,7 +88,7 @@ const TechnologiesSection = ({
                   transition-all duration-200 hover:scale-[1.02] cursor-pointer
                   p-4 flex items-center justify-between
                 `}
-                onClick={() => window.location.href = `/practice/${tech.id}`}
+                onClick={() => navigate(`/practice/${tech.id}`)}
               >
                 <div className="flex items-center gap-4">
                   <div className={`
@@ -108,7 +110,7 @@ const TechnologiesSection = ({
                     `}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = `/study/${tech.id}`;
+                      navigate(`/study/${tech.id}`);
                     }}
                   >
                     Изучение
@@ -117,7 +119,7 @@ const TechnologiesSection = ({
                     className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = `/practice/${tech.id}`;
+                      navigate(`/practice/${tech.id}`);
                     }}
                   >
                     Практика
