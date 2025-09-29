@@ -20,21 +20,21 @@ export const questionsData: Technology[] = [
     questions: [
       {
         id: "html-1",
-        question: "Что такое HTML и для чего он используется?",
-        answer: "HTML (HyperText Markup Language) — это язык разметки, используемый для создания структуры веб-страниц. Он определяет содержимое и организацию элементов на странице с помощью тегов.",
+        question: "Что такое HTML и какие принципы лежат в его основе?",
+        answer: "HTML (от англ. HyperText Markup Language) - язык разметки гипертекста, который используется для создания и структурирования веб-страниц. Основными принципами, лежащими в основе HTML, являются иерархическая структура документа, использование тегов и атрибутов для определения структуры и содержания документа, а также основное правило, согласно которому каждый тег должен иметь начальный и конечный элементы.",
         difficulty: "easy"
       },
       {
         id: "html-2",
         question: "В чем разница между блочными и строчными элементами?",
         answer: "Блочные элементы (div, p, h1) занимают всю доступную ширину и начинаются с новой строки. Строчные элементы (span, a, strong) занимают только необходимое пространство и располагаются в одной строке.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "html-3",
         question: "Что такое семантические теги HTML5?",
         answer: "Семантические теги HTML5 (header, nav, main, article, section, aside, footer) придают смысловое значение содержимому, улучшая SEO и доступность сайта.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "html-4",
@@ -44,56 +44,59 @@ export const questionsData: Technology[] = [
       },
       {
         id: "html-5",
-        question: "В чем разница между <div> и <span>?",
-        answer: "<div> — блочный элемент для группировки контента, <span> — строчный элемент для стилизации части текста без переноса строки.",
+        question: "Какой тег используется для создания ссылок?",
+        answer: "Для создания ссылки используется тег <a>. Атрибут href определяет URL-адрес страницы, на которую нужно перейти при клике на ссылке. Также можно добавлять дополнительные атрибуты, такие как title и target.",
         difficulty: "easy"
       },
+      
       {
         id: "html-6",
-        question: "Что такое атрибут alt у изображений?",
-        answer: "Атрибут alt предоставляет альтернативный текст для изображения, который отображается при загрузке или для screen readers, улучшая доступность.",
+        question: "Какой тег используется для вставки изображений и какие атрибуты могут использоваться?",
+        answer: "Для вставки изображений используется тег <img>. Атрибуты, которые могут использоваться, включают в себя: src (указывает путь к файлу изображения), alt (определяет альтернативный текст, который будет отображаться, если изображение не будет загружено) и другие.",
         difficulty: "easy"
       },
       {
         id: "html-7",
-        question: "Объясните разницу между id и class",
-        answer: "id — уникальный идентификатор элемента (должен быть один на странице), class — класс для группы элементов с общими стилями.",
-        difficulty: "medium"
+        question: "Что такое атрибут и какие атрибуты могут использоваться с тегом? <a>",
+        answer: "Атрибут - это дополнительная характеристика, которая может быть назначена HTML-элементу. Атрибуты, которые могут использоваться с тегом <a>, включают в себя: href (определяет ссылку), title (определяет всплывающую подсказку), target (определяет целевое окно или фрейм).",
+        difficulty: "easy"
       },
       {
         id: "html-8",
-        question: "Что такое Web Components?",
-        answer: "Web Components — это набор веб-стандартов для создания переиспользуемых пользовательских элементов (Custom Elements, Shadow DOM, HTML Templates).",
-        difficulty: "hard"
+        question: "Что такое метатеги и зачем они используются?",
+        answer: "Метатеги (meta tags) - это HTML-элементы, которые указывают метаданные для веб-страницы, такие как описание, ключевые слова, автор, язык, кодировку и другие. Они используются для улучшения качества и читабельности кода, а также помогают улучшить SEO-оптимизацию веб-страниц.",
+        difficulty: "easy"
       },
       {
         id: "html-9",
-        question: "Как работает Local Storage?",
-        answer: "Local Storage позволяет хранить данные в браузере пользователя без истечения срока действия до явного удаления или очистки браузера.",
-        difficulty: "medium"
+        question: "Какой тег используется для создания списка и какие его виды существуют?",
+        answer: "Для создания списка можно использовать тег <ul> для неупорядоченного списка и тег <ol> для упорядоченного списка. Внутри этих тегов можно использовать тег <li>, который определяет элемент списка.",
+        difficulty: "easy"
       },
       {
         id: "html-10",
-        question: "Что такое Shadow DOM?",
-        answer: "Shadow DOM — это изолированное DOM-дерево, прикрепленное к элементу, которое скрывает разметку и стили от основного документа.",
-        difficulty: "hard"
+        question: "Что такое валидный HTML и почему это важно?",
+        answer: "Валидный HTML означает, что код HTML-страницы написан в соответствии с принятой структурой, правильным использование тегов и атрибутов и не содержит ошибок. Валидный HTML имеет большое значение для SEO-оптимизации и удобства создания и поддержки веб-страниц.",
+        difficulty: "easy"
       },
+    
       {
         id: "html-11",
-        question: "Объясните meta теги viewport",
+        question: "Объясните meta тег viewport",
         answer: "Meta viewport контролирует отображение страницы на мобильных устройствах: <meta name='viewport' content='width=device-width, initial-scale=1'>",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "html-12",
-        question: "Что такое Progressive Web Apps (PWA)?",
-        answer: "PWA — веб-приложения, которые используют современные веб-технологии для обеспечения нативного пользовательского опыта (Service Workers, Web App Manifest).",
-        difficulty: "hard"
+        question: "Почему используется атрибут alt при вставке изображений, и как он влияет на SEO?",
+        answer: "Атрибут alt используется для задания альтернативного текста для изображения. Этот текст будет отображаться в случае, если браузер по какой-то причине не сможет загрузить изображение, а также для пользователей, использующих программы чтения страниц для слабовидящих, которые не могут прочитать содержимое изображения. Атрибут alt также влияет на SEO, так как поисковые системы могут использовать его для индексации и ранжирования страниц.",
+        difficulty: "easy"
       },
+    
       {
         id: "html-13",
-        question: "В чем разница между sessionStorage и localStorage?",
-        answer: "localStorage хранит данные до явного удаления, sessionStorage — только на время сессии браузера (до закрытия вкладки).",
+        question: "Что такое data-атрибуты и как они могут использоваться в HTML?",
+        answer: "Data-атрибуты представляют собой атрибуты, имя которых начинается с префикса \"data-\". Они могут использоваться для хранения дополнительных данных, связанных с элементом, которые не отображаются на странице, но могут быть использованы JavaScript-скриптами для манипулирования содержимым страницы.",
         difficulty: "medium"
       },
       {
@@ -104,15 +107,15 @@ export const questionsData: Technology[] = [
       },
       {
         id: "html-15",
-        question: "Объясните HTML5 History API",
-        answer: "History API позволяет управлять историей браузера: pushState() добавляет записи, replaceState() заменяет, popstate события обрабатывают навигацию.",
-        difficulty: "hard"
+        question: "Опиши базовую структуру HTML-документа",
+        answer: "Базовая структура состоит из объявления типа документа <!DOCTYPE html>, корневого тега <html> с разделами <head> (для метаинформации) и <body> (для содержимого страницы).",
+        difficulty: "easy"
       },
       {
         id: "html-16",
-        question: "Что такое критический CSS?",
-        answer: "Критический CSS — это минимальный набор стилей, необходимый для отображения видимой части страницы, загружаемый inline для ускорения рендеринга.",
-        difficulty: "hard"
+        question: "Можно ли использовать более одного тега MAIN на странице и что будет происходить с их содержимым?",
+        answer: "В HTML5 может быть использован только один тег <main>. Если на странице есть более одного тега <main>, то только первый будет учитываться при интерпретации содержимого. Остальные будут проигнорированы.",
+        difficulty: "easy"
       },
       {
         id: "html-17",
@@ -126,78 +129,8 @@ export const questionsData: Technology[] = [
         answer: "async загружает скрипт асинхронно и выполняет сразу после загрузки, не блокируя парсинг HTML.",
         difficulty: "medium"
       },
-      {
-        id: "html-19",
-        question: "Объясните Content Security Policy (CSP)",
-        answer: "CSP — механизм безопасности, контролирующий ресурсы, которые может загружать страница, предотвращая XSS атаки.",
-        difficulty: "hard"
-      },
-      {
-        id: "html-20",
-        question: "Что такое preload и prefetch?",
-        answer: "preload — приоритетная загрузка критических ресурсов, prefetch — загрузка ресурсов с низким приоритетом для будущего использования.",
-        difficulty: "hard"
-      },
-      {
-        id: "html-21",
-        question: "Что такое data-атрибуты и как их использовать?",
-        answer: "data-атрибуты (data-*) позволяют хранить дополнительную информацию в HTML элементах. Доступны через dataset в JavaScript.",
-        difficulty: "easy"
-      },
-      {
-        id: "html-22",
-        question: "Объясните разницу между <section> и <article>",
-        answer: "<section> группирует тематически связанный контент. <article> представляет самодостаточный контент, который может быть независимо распределен.",
-        difficulty: "medium"
-      },
-      {
-        id: "html-23",
-        question: "Что такое HTML5 Canvas и когда его использовать?",
-        answer: "Canvas — элемент для рисования графики через JavaScript. Используется для игр, анимаций, визуализации данных, обработки изображений.",
-        difficulty: "medium"
-      },
-      {
-        id: "html-24",
-        question: "Объясните работу Web Workers",
-        answer: "Web Workers позволяют выполнять JavaScript в фоновом потоке, не блокируя основной поток. Используются для тяжелых вычислений.",
-        difficulty: "hard"
-      },
-      {
-        id: "html-25",
-        question: "Что такое WebSocket и как его использовать?",
-        answer: "WebSocket обеспечивает двустороннюю связь между клиентом и сервером в реальном времени. Используется для чатов, игр, уведомлений.",
-        difficulty: "hard"
-      },
-      {
-        id: "html-26",
-        question: "Объясните разницу между <iframe> и <object>",
-        answer: "<iframe> встраивает другой HTML документ. <object> встраивает внешние ресурсы (PDF, Flash, Java).",
-        difficulty: "medium"
-      },
-      {
-        id: "html-27",
-        question: "Что такое HTML5 Geolocation API?",
-        answer: "Geolocation API позволяет получить географическое положение пользователя через navigator.geolocation. Требует разрешения пользователя.",
-        difficulty: "medium"
-      },
-      {
-        id: "html-28",
-        question: "Объясните работу Drag and Drop API",
-        answer: "Drag and Drop API позволяет перетаскивать элементы через события dragstart, dragover, drop. Используется для интерактивных интерфейсов.",
-        difficulty: "medium"
-      },
-      {
-        id: "html-29",
-        question: "Что такое HTML5 Form Validation?",
-        answer: "Встроенная валидация форм через атрибуты required, pattern, min, max, type. Можно кастомизировать через JavaScript.",
-        difficulty: "medium"
-      },
-      {
-        id: "html-30",
-        question: "Объясните работу File API",
-        answer: "File API позволяет работать с файлами: чтение, загрузка, предпросмотр. Использует FileReader, FormData, Blob.",
-        difficulty: "hard"
-      }
+      
+
     ]
   },
   {
@@ -214,31 +147,25 @@ export const questionsData: Technology[] = [
         id: "css-2",
         question: "Объясните CSS Box Model",
         answer: "CSS Box Model описывает прямоугольные блоки, генерируемые для элементов. Состоит из: content (содержимое), padding (внутренние отступы), border (граница), margin (внешние отступы).",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-3",
         question: "В чем разница между position: absolute и position: relative?",
         answer: "position: relative позиционирует элемент относительно его нормального положения. position: absolute позиционирует элемент относительно ближайшего позиционированного предка.",
-        difficulty: "hard"
-      },
-      {
-        id: "css-4",
-        question: "Что такое CSS специфичность?",
-        answer: "Специфичность определяет приоритет CSS правил: inline стили (1000), ID (100), классы/атрибуты/псевдоклассы (10), элементы (1).",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-5",
         question: "Объясните Flexbox",
         answer: "Flexbox — одномерная система компоновки для выравнивания и распределения пространства между элементами в контейнере.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-6",
         question: "Что такое CSS Grid?",
         answer: "CSS Grid — двумерная система компоновки для создания сложных макетов с помощью строк и столбцов.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-7",
@@ -250,26 +177,27 @@ export const questionsData: Technology[] = [
         id: "css-8",
         question: "Что такое CSS переменные (custom properties)?",
         answer: "CSS переменные позволяют хранить значения для переиспользования: --main-color: blue; color: var(--main-color);",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-9",
         question: "Объясните z-index",
         answer: "z-index контролирует порядок наложения позиционированных элементов по оси Z. Элементы с большим z-index отображаются поверх элементов с меньшим.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-10",
-        question: "Что такое CSS-in-JS?",
-        answer: "CSS-in-JS — подход к стилизации, где CSS пишется внутри JavaScript, обеспечивая динамические стили и изоляцию компонентов.",
-        difficulty: "hard"
+        question: "Как работает специфичность в CSS?",
+        answer: "Специфичность в CSS определяет, какой стиль будет применен к элементу, если на него одновременно действуют несколько правил. Когда браузер сталкивается с несколькими правилами, определяется их приоритетность на основе специфичности, чтобы определить, какое правило будет применено.",
+        difficulty: "easy"
       },
       {
         id: "css-11",
-        question: "Объясните CSS критический путь рендеринга",
-        answer: "Критический путь — последовательность шагов браузера для отображения страницы: DOM → CSSOM → Render Tree → Layout → Paint.",
-        difficulty: "hard"
+        question: "Что такое БЭМ (Block-Element-Modifier)",
+        answer: "Методология БЭМ (Block-Element-Modifier) — это подход к организации CSS-кода через разделение интерфейса на независимые блоки, их внутренние элементы и модификаторы для изменения внешнего вида или состояния. Блок — это независимый компонент (например, menu), элемент — часть блока (например, menu__item), а модификатор — изменение блока/элемента (например, menu--hidden).",
+        difficulty: "easy"
       },
+     
       {
         id: "css-12",
         question: "Что такое медиа-запросы?",
@@ -280,110 +208,50 @@ export const questionsData: Technology[] = [
         id: "css-13",
         question: "Объясните CSS псевдоклассы и псевдоэлементы",
         answer: "Псевдоклассы (:hover, :focus) стилизуют состояния элементов. Псевдоэлементы (::before, ::after) создают виртуальные элементы.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-14",
         question: "Что такое CSS анимации?",
         answer: "CSS анимации позволяют плавно изменять свойства элементов с помощью @keyframes и animation свойств.",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-15",
         question: "Объясните CSS transforms",
         answer: "Transform позволяет изменять элементы: translate() (перемещение), rotate() (поворот), scale() (масштабирование), skew() (наклон).",
-        difficulty: "medium"
+        difficulty: "easy"
       },
       {
         id: "css-16",
-        question: "Что такое CSS Containment?",
-        answer: "CSS Containment позволяет изолировать части DOM для оптимизации рендеринга: contain: layout style paint size.",
-        difficulty: "hard"
+        question: "Как работают псевдоэлементы ::before и ::after?",
+        answer: "Псевдоэлементы ::before и ::after являются частью CSS и представляют собой виртуальные элементы, которые можно добавить к контенту выбранных элементов. Они позволяют вставлять дополнительный контент перед или после содержимого элемента без изменения его структуры в HTML.",
+        difficulty: "easy"
       },
-      {
+       {
         id: "css-17",
-        question: "Объясните CSS Houdini",
-        answer: "CSS Houdini — набор API для расширения CSS, позволяющий разработчикам создавать собственные CSS свойства и функции.",
-        difficulty: "hard"
+        question: "Какие основные свойства Flexbox контейнера и элементов?",
+        answer: "Основные свойства Flexbox для контейнера: display: flex создаёт flex-контейнер; flex-direction задаёт направление главной оси; flex-wrap управляет переносом элементов; justify-content выравнивает элементы по главной оси; align-items выравнивает по поперечной оси; align-content распределяет строки при переносе.",
+        difficulty: "easy"
       },
       {
         id: "css-18",
-        question: "Что такое CSS субпиксельное сглаживание?",
-        answer: "Субпиксельное сглаживание использует RGB субпиксели для более четкого отображения текста на LCD мониторах.",
-        difficulty: "hard"
+        question: "В каких случаях их следует использовать Grid?",
+        answer: "Для сложных двумерных макетов (дашборды, галереи, новостные ленты). Когда нужно точное позиционирование элементов в сетке. Для создания адаптивных макетов с перераспределением контента. Когда нужно управлять выравниванием и промежутками между элементами",
+        difficulty: "easy"
       },
       {
         id: "css-19",
-        question: "Объясните CSS логические свойства",
-        answer: "Логические свойства (margin-block-start вместо margin-top) адаптируются к направлению письма и языку документа.",
-        difficulty: "hard"
+        question: "Какие преимущества использования CSS-препроцессоров?",
+        answer: "CSS-препроцессоры добавляют переменные, вложенность, миксины и функции, что ускоряет разработку и упрощает поддержку кода.",
+        difficulty: "easy"
       },
       {
-        id: "css-20",
-        question: "Что такое CSS Container Queries?",
-        answer: "Container Queries позволяют применять стили на основе размера контейнера, а не viewport: @container (min-width: 300px) { ... }",
-        difficulty: "hard"
+        id: "css-",
+        question: "",
+        answer: "",
+        difficulty: "easy"
       },
-      {
-        id: "css-21",
-        question: "Что такое CSS Custom Properties (переменные)?",
-        answer: "CSS переменные позволяют хранить и переиспользовать значения: --main-color: blue; color: var(--main-color);",
-        difficulty: "medium"
-      },
-      {
-        id: "css-22",
-        question: "Объясните CSS Grid Layout",
-        answer: "Grid — двумерная система компоновки с строками и столбцами. Использует grid-template-columns, grid-template-rows, grid-area.",
-        difficulty: "medium"
-      },
-      {
-        id: "css-23",
-        question: "Что такое CSS Modules?",
-        answer: "CSS Modules — подход к изоляции стилей компонентов. Генерирует уникальные имена классов для предотвращения конфликтов.",
-        difficulty: "medium"
-      },
-      {
-        id: "css-24",
-        question: "Объясните CSS Scroll Snap",
-        answer: "Scroll Snap создает точки привязки при прокрутке. Использует scroll-snap-type и scroll-snap-align.",
-        difficulty: "medium"
-      },
-      {
-        id: "css-25",
-        question: "Что такое CSS Containment?",
-        answer: "Containment оптимизирует рендеринг через изоляцию частей DOM: contain: layout style paint size.",
-        difficulty: "hard"
-      },
-      {
-        id: "css-26",
-        question: "Объясните CSS Scrollbar Styling",
-        answer: "Стилизация скроллбара через ::-webkit-scrollbar, scrollbar-width, scrollbar-color. Поддержка браузеров ограничена.",
-        difficulty: "medium"
-      },
-      {
-        id: "css-27",
-        question: "Что такое CSS Scroll-driven Animations?",
-        answer: "Анимации, привязанные к прокрутке: @scroll-timeline, animation-timeline, scroll-timeline-axis.",
-        difficulty: "hard"
-      },
-      {
-        id: "css-28",
-        question: "Объясните CSS Container Queries",
-        answer: "Container Queries позволяют стилизовать элементы на основе размера их контейнера: @container (min-width: 300px).",
-        difficulty: "hard"
-      },
-      {
-        id: "css-29",
-        question: "Что такое CSS Logical Properties?",
-        answer: "Логические свойства адаптируются к направлению письма: margin-block-start вместо margin-top.",
-        difficulty: "medium"
-      },
-      {
-        id: "css-30",
-        question: "Объясните CSS Subgrid",
-        answer: "Subgrid позволяет вложенным grid элементам наследовать размеры родительского grid: grid-template-columns: subgrid.",
-        difficulty: "hard"
-      }
     ]
   },
   {
