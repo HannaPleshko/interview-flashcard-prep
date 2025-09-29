@@ -86,7 +86,7 @@ const TechnologiesSection = ({
                   transition-all duration-200 hover:scale-[1.02] cursor-pointer
                   p-4 flex items-center justify-between
                 `}
-                onClick={() => window.location.href = `/study/${tech.id}`}
+                onClick={() => window.location.href = `/practice/${tech.id}`}
               >
                 <div className="flex items-center gap-4">
                   <div className={`
@@ -101,9 +101,16 @@ const TechnologiesSection = ({
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className={`
-                    px-3 py-1.5 rounded-lg bg-gradient-to-r ${gradient} text-white text-sm font-medium
-                  `}>
+                  <div 
+                    className={`
+                      px-3 py-1.5 rounded-lg bg-gradient-to-r ${gradient} text-white text-sm font-medium
+                      hover:opacity-90 cursor-pointer transition-opacity
+                    `}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `/study/${tech.id}`;
+                    }}
+                  >
                     Изучение
                   </div>
                   <div 

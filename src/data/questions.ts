@@ -14,6 +14,494 @@ export interface Technology {
 }
 
 export const questionsData: Technology[] = [
+  // Общее
+  {
+    "id": "candidate_general_questions_answers",
+    "name": "Общие вопросы о кандидате",
+    "questions": [
+      {
+        "id": "q-1",
+        "question": "Расскажите немного о себе и своём профессиональном опыте.",
+        "answer": "Кратко опишите **ключевые этапы** карьеры (X лет опыта), вашу **основную специализацию** и 1-2 самых **значимых проекта** или достижения. Держите фокус на релевантном опыте.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-2",
+        "question": "Как вы пришли в профессию программиста?",
+        "answer": "Назовите **первый толчок** (самообучение, вуз, курсы) и объясните, что **удержало** вас в этой сфере (любопытство, решение проблем).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-3",
+        "question": "Чем вас привлекает IT-сфера?",
+        "answer": "Укажите на **непрерывное развитие**, возможность **решать сложные задачи** и **создавать ценность** (продукты, которыми пользуются люди).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-4",
+        "question": "Какие направления в разработке вам наиболее интересны?",
+        "answer": "Назовите 1-2 **конкретных направления** (например, бэкенд на C#, облачные сервисы, оптимизация) и объясните, почему они вас увлекают (например, сложность архитектуры).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-5",
+        "question": "Почему вы решили сменить текущее место работы?",
+        "answer": "Сфокусируйтесь на **мотивации к росту** и **поиске новых возможностей** (технологии, масштаб, продукт), а не на негативе (избегайте жалоб).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-6",
+        "question": "Что вам нравилось на прошлой работе, а что хотелось бы изменить?",
+        "answer": "**Позитив:** Назовите команду, продукт, или автономию. **Изменить:** Назовите отсутствие роста, устаревшие технологии или желание большего масштаба.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-7",
+        "question": "Что для вас важно при выборе новой компании?",
+        "answer": "Выберите **3 ключевых фактора** (например, профессиональный рост, интересные задачи, сильная команда) и кратко их обоснуйте.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-8",
+        "question": "Почему вы откликнулись именно на нашу вакансию?",
+        "answer": "Подчеркните **совпадение ваших навыков** с требованиями вакансии и ваш **интерес к продукту/отрасли** компании.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-9",
+        "question": "Какие задачи вам интересны, а какие — наоборот утомляют?",
+        "answer": "**Интересны:** Новые вызовы, оптимизация, архитектура. **Утомляют (но выполнимы):** Рутинный легаси-саппорт, избыточная бюрократия (смягчите формулировку).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-10",
+        "question": "Как вы видите своё профессиональное развитие через 2–3 года?",
+        "answer": "Опишите желаемую **роль** (Senior/Team Lead/Архитектор) и **конкретные навыки**, которые вы планируете освоить для достижения этой роли.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-11",
+        "question": "Какие новые технологии или навыки хотели бы освоить?",
+        "answer": "Назовите **2-3 актуальные технологии**, связанные с вакансией (например, Kafka, gRPC, новые версии .NET), и поясните их ценность.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-12",
+        "question": "Насколько для вас важно обучение и развитие в компании?",
+        "answer": "Ответьте **«Очень важно»** и приведите пример того, как вы учитесь сами (конференции, сертификаты).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-13",
+        "question": "Есть ли у вас долгосрочные карьерные цели?",
+        "answer": "Подтвердите наличие целей и свяжите их с **ценностью для бизнеса** (например, стать ведущим экспертом, влиять на техническую стратегию).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-14",
+        "question": "В какой команде вам комфортнее работать: маленькой или большой?",
+        "answer": "Ответ должен быть **гибким**: в малой — больше автономии, в большой — больше экспертизы. Выбирайте то, что ближе к вакансии.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-15",
+        "question": "Вы предпочитаете гибкий график или фиксированный?",
+        "answer": "Если компания ищет гибкость, подтвердите, что цените **гибкость** при условии соблюдения **тайм-зоны команды** и дедлайнов.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-16",
+        "question": "Нравится ли вам работать удалённо или предпочтительнее офис?",
+        "answer": "Выберите **предпочтительный для вакансии вариант**, но подчеркните, что главное — это **эффективность и коммуникация**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-17",
+        "question": "Что для вас важно в командной работе?",
+        "answer": "Назовите **открытую коммуникацию**, **взаимное уважение** и **общее видение цели** (цель важнее личных амбиций).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-18",
+        "question": "Какой менеджмент вам ближе: строгий контроль или больше свободы?",
+        "answer": "Скажите, что цените **доверие и свободу**, но при этом осознаёте необходимость **ответственности** и **прозрачности отчетности**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-19",
+        "question": "Что вас мотивирует на работе?",
+        "answer": "Назовите **нематериальные** факторы: решение сложных задач, видимый результат, профессиональный рост, а затем добавьте **финансовую компенсацию**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-20",
+        "question": "Какие факторы делают проект для вас интересным?",
+        "answer": "Укажите на **технологическую сложность**, **новизну** и **влияние на конечного пользователя** (ценность продукта).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-21",
+        "question": "Что для вас важнее: деньги, технологии или команда?",
+        "answer": "Ответьте, что важен **баланс**, но если нужно выбрать, поставьте **команду/технологии** на первое место, так как они обеспечивают долгосрочный рост и удовольствие от работы.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-22",
+        "question": "Какие ценности компании для вас особенно значимы?",
+        "answer": "Изучите ценности компании (например, инновации, клиентоориентированность) и выберите **1-2, которые совпадают** с вашими.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-23",
+        "question": "Как вы обычно решаете конфликтные ситуации в команде?",
+        "answer": "Подчеркните подход **«проблема, а не личность»**. Всегда ищите **техническое решение** или **компромисс** через диалог.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-24",
+        "question": "Как вы реагируете на критику?",
+        "answer": "Скажите, что воспринимаете критику как **возможность для роста**; просите **конкретные примеры** и **предложения по улучшению**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-25",
+        "question": "Предпочитаете ли вы больше общаться устно или письменно?",
+        "answer": "Предпочтите **письменно для документации** (логи, решения) и **устно для быстрого решения** сложных, срочных вопросов.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-26",
+        "question": "Как часто вам комфортно получать обратную связь?",
+        "answer": "Скажите, что цените **регулярную, неформальную** обратную связь (например, после завершения задачи или раз в месяц), а не только раз в полгода.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-27",
+        "question": "Когда вы могли бы выйти на работу?",
+        "answer": "Назовите **реалистичный срок** с учетом отработки на текущем месте (например, «через 2 недели» или «согласно трудовому кодексу»).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-28",
+        "question": "Какие у вас ожидания по зарплате?",
+        "answer": "Назовите **диапазон**, а не фиксированное число, или дайте ответ в формате «Рыночный уровень для моей квалификации, около X».",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-29",
+        "question": "Какой формат работы для вас предпочтителен (офис, гибрид, удалёнка)?",
+        "answer": "Назовите **предпочтительный для вас формат**, который при этом **соответствует формату вакансии**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-30",
+        "question": "Есть ли у вас текущие предложения от других компаний?",
+        "answer": "Отвечайте **честно, но кратко**. Если есть, это подтверждает вашу востребованность. Если нет, сфокусируйтесь на сильном интересе к этой вакансии.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-31",
+        "question": "Насколько вам важны соцпакет, страховка, гибкий график?",
+        "answer": "Подтвердите, что это **важные, но вторичные** факторы; приоритет — интересные задачи и рост.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-32",
+        "question": "Что вы считаете своими сильными сторонами?",
+        "answer": "Назовите **3 профессиональных качества**, подкреплённых **кратким примером** (например, «системное мышление, что помогло при декомпозиции архитектуры»).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-33",
+        "question": "А над чем хотели бы поработать и развить в себе?",
+        "answer": "Назовите **контролируемый недостаток** (например, «иногда слишком глубоко погружаюсь в детали») и **план его исправления** (например, «использую технику Pomodoro»).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-34",
+        "question": "Как вы обычно справляетесь со стрессом и дедлайнами?",
+        "answer": "Опишите **структурный подход**: приоритизация задач, декомпозиция, своевременное оповещение команды о рисках.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "q-35",
+        "question": "Есть ли у вас хобби или увлечения вне работы?",
+        "answer": "Назовите **хобби**, которое демонстрирует **дополнительные качества** (например, спорт — дисциплина, настолки — командная игра, чтение — саморазвитие).",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  // English
+  {
+    "id": "english_language_assessment_questions_full",
+    "name": "Questions for English",
+    "questions": [
+      {
+        "id": "en-1",
+        "question": "Can you tell me a little bit about yourself?",
+        "answer": "I'm a **Mid-level Software Developer** with **5 years of experience**, primarily focused on **C#/.NET back-end development** for scalable **e-commerce platforms**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-2",
+        "question": "How would you describe your background in software development?",
+        "answer": "My background is solid: I have a **Master's degree** in CS, and I've spent the last few years specializing in **cloud-native solutions** using **Azure and Kubernetes**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-3",
+        "question": "What motivated you to become a programmer?",
+        "answer": "I've always been motivated by **problem-solving** and the process of **building things**. It's satisfying to take a complex idea and turn it into **working, efficient code**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-4",
+        "question": "How long have you been working in IT?",
+        "answer": "I've been working professionally in the IT industry for **six years**, focusing exclusively on development roles in the last five.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-5",
+        "question": "Could you walk me through your career path so far?",
+        "answer": "I started as a **Junior Developer** focused on testing and maintenance. I then moved to my current role, where I became the **lead developer** for a specific **microservice**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-6",
+        "question": "Why are you looking for a new job right now?",
+        "answer": "I'm seeking a role with **greater technical challenges** and a **larger scope** for architectural decisions, which this position seems to offer.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-7",
+        "question": "What do you like the most about your current position?",
+        "answer": "I truly enjoy the **team collaboration**; we have a very strong culture of **code review** and mutual support.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-8",
+        "question": "What do you find challenging or frustrating in your current job?",
+        "answer": "The main challenge is the **lack of budget for technology upgrades**. I'm eager to work with more **modern stacks** to improve **scalability**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-9",
+        "question": "Why did you decide to leave your last company?",
+        "answer": "I was ready for a **new level of complexity** and a chance to work with **distributed systems**, which wasn't available there.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-10",
+        "question": "What are you looking for in your next role?",
+        "answer": "I'm looking for a role where I can **drive technical excellence**, contribute to a **large-scale product**, and **mentor junior developers**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-11",
+        "question": "Why are you interested in our company?",
+        "answer": "I am very impressed by your work on **[Product Name]** and your focus on **[Specific Technology Mentioned in Vacancy]**. It aligns perfectly with my specialization.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-12",
+        "question": "What attracted you to this position?",
+        "answer": "The opportunity to lead development on the **payment gateway service** is highly appealing, as it's an area where I have extensive experience in **optimizing latency**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-13",
+        "question": "What do you know about our company?",
+        "answer": "I know you are a **market leader** in **FinTech solutions**, and you recently expanded your focus into **AI-driven personalization**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-14",
+        "question": "How do you think you could contribute to our team?",
+        "answer": "I can immediately contribute my expertise in **back-end performance tuning** and help implement better **CI/CD pipelines** using my experience with **GitHub Actions**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-15",
+        "question": "What expectations do you have from this role?",
+        "answer": "I expect to be given **autonomy** to solve technical problems, clear **feedback**, and opportunities for **continuous technical training**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-16",
+        "question": "Where do you see yourself in two or three years?",
+        "answer": "I see myself as a **Senior Developer** or **Tech Lead** here, capable of influencing the **architectural direction** of a major product line.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-17",
+        "question": "What skills or technologies would you like to improve?",
+        "answer": "I definitely want to deepen my skills in **Go language** for high-performance computing, and improve my knowledge of **event sourcing patterns**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-18",
+        "question": "Do you prefer to grow as a specialist or move into management in the future?",
+        "answer": "My primary focus is on **technical mastery** right now. I want to become a **Staff Engineer** before considering a management track.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-19",
+        "question": "How do you usually keep your skills up to date?",
+        "answer": "I follow key figures in the **.NET community**, attend the **DevOps conference** annually, and dedicate time to **side projects**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-20",
+        "question": "Have you taken any courses or certifications recently?",
+        "answer": "Yes, I recently completed the **AWS Certified Solutions Architect** course, which gave me new insights into **cost optimization**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-21",
+        "question": "Do you prefer working alone or in a team? Why?",
+        "answer": "I am most effective **collaborating in a team**, especially during **design and code review**. But I need focused **solo time for coding** and deep work.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-22",
+        "question": "How do you usually organize your workday?",
+        "answer": "I start with **prioritizing tasks** in the morning. I allocate specific blocks for **deep work** (no meetings) and check communication channels later in the day.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-23",
+        "question": "How do you handle working under tight deadlines?",
+        "answer": "I immediately **break the task down** into smaller, **deliverable chunks**, communicate the **minimum viable product (MVP)** scope, and inform the manager if the deadline is unrealistic.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-24",
+        "question": "How do you usually deal with conflicts in a team?",
+        "answer": "I focus on the **technical issue, not the personality**. I try to **mediate** by asking for **data or best practices** to support the solution.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-25",
+        "question": "What do you value the most in teamwork?",
+        "answer": "I value **transparency** and **psychological safety**. It's crucial that everyone feels comfortable pointing out errors without fear of criticism.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-26",
+        "question": "How do you usually handle feedback from your manager?",
+        "answer": "I always **welcome constructive criticism** as a tool for growth. I usually **ask clarifying questions** and then create an **action plan** to address the feedback points.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-27",
+        "question": "Can you describe a situation when you had to explain a technical topic to a non-technical person?",
+        "answer": "I once had to explain **database sharding** to the marketing team. I used the analogy of **different warehouses** for different geographical regions to keep it simple.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-28",
+        "question": "Do you feel comfortable communicating in English during daily stand-ups?",
+        "answer": "Yes, absolutely. I’ve used English daily for the past three years for **meetings, documentation, and chat communication**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-29",
+        "question": "Have you ever worked with international teams before?",
+        "answer": "Yes, in my last company, I worked closely with colleagues in **Germany and India**. It taught me the importance of **clear written communication** and being mindful of **time zones**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-30",
+        "question": "How do you usually collaborate with remote colleagues?",
+        "answer": "We rely heavily on **Slack for asynchronous updates**, use **Zoom for screen-sharing**, and ensure all key decisions are **documented in Confluence**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-31",
+        "question": "When would you be available to start?",
+        "answer": "I have a **two-week notice period** with my current employer, so I could start approximately **October 15th**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-32",
+        "question": "What is your salary expectation?",
+        "answer": "Based on my experience and the industry average for this role in **[City/Region]**, I am looking for a range between **X and Y**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-33",
+        "question": "Are you open to relocation?",
+        "answer": "I am open to the possibility, but I would primarily prefer a **fully remote or hybrid** arrangement, as noted in my application.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-34",
+        "question": "Do you prefer remote work or office work?",
+        "answer": "I prefer a **hybrid model**—I value the **focus of remote work** but also the spontaneous collaboration you get in the office once or twice a week.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-35",
+        "question": "What do you usually do in your free time?",
+        "answer": "I like to **hike** on weekends to disconnect, and I'm currently learning to play the **electric guitar**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-36",
+        "question": "Do you have any hobbies?",
+        "answer": "Yes, my main hobby is **competitive cycling**; it helps me maintain discipline and focus.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-37",
+        "question": "What kind of books or blogs do you like to read?",
+        "answer": "I primarily follow blogs on **software architecture** (like Martin Fowler) and enjoy reading classic **sci-fi novels** for relaxation.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-38",
+        "question": "How was your weekend?",
+        "answer": "It was great, thank you. I spent Saturday **refactoring some old code** for my personal project, and Sunday was just for family and relaxation.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-39",
+        "question": "What do you usually do after work to relax?",
+        "answer": "I usually go to the gym or spend time reading. It helps me **switch my brain off** from complex tasks.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-40",
+        "question": "Have you traveled recently?",
+        "answer": "Yes, I took a short trip to **Prague** last month. I really enjoyed exploring the historical architecture there.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-41",
+        "question": "Do you like working from home?",
+        "answer": "I do like the **flexibility** and the lack of commute, but I make an effort to **socialize with my team** regularly to avoid isolation.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-42",
+        "question": "What’s your favorite way to learn new things?",
+        "answer": "I prefer **hands-on learning**. I usually start with a new technology by building a **small proof-of-concept application**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-43",
+        "question": "Do you follow any tech podcasts or YouTube channels?",
+        "answer": "Yes, I regularly listen to **The Changelog** podcast and follow **Fireship** on YouTube for quick updates on new frameworks.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "en-44",
+        "question": "Can you tell me about the last movie or TV show you watched?",
+        "answer": "I recently watched the series **'Severance'**. I found the blend of **technology and human psychology** fascinating.",
+        "difficulty": "easy"
+      }
+    ]
+  },
   // html
   {
     id: "html",
