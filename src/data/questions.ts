@@ -998,7 +998,7 @@ export const questionsData: Technology[] = [
   // OOP
   {
     "id": "oop",
-    "name": "Object-Oriented Programming (OOP)",
+    "name": "OOP",
     "questions": [
       {
         "id": "oop-1",
@@ -1720,7 +1720,7 @@ export const questionsData: Technology[] = [
   // SQL
   {
     "id": "sql",
-    "name": "SQL (Structured Query Language)",
+    "name": "SQL",
     "questions": [
       {
         "id": "sql-1",
@@ -1817,7 +1817,7 @@ export const questionsData: Technology[] = [
   // MongoDB
   {
     "id": "mongodb",
-    "name": "MongoDB (NoSQL Document Database)",
+    "name": "MongoDB",
     "questions": [
       {
         "id": "mdb-1",

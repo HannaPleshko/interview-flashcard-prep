@@ -68,7 +68,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
   };
 
   return (
-    <div className="flip-card w-full h-[calc(100vh-350px)] sm:h-80 relative group" style={{ perspective: '1000px' }}>
+    <div className="flip-card w-full h-[calc(100vh-250px)] sm:h-[28rem] relative group" style={{ perspective: '1000px' }}>
       
       {/* Floating particles effect - скрываем во время переворота */}
       {!isFlipping && (
@@ -97,7 +97,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
           <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-blue-400/20 to-transparent rounded-tr-full"></div>
           
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-350px)] sm:max-h-[calc(100vh-300px)]">
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-250px)] sm:max-h-[calc(100vh-200px)]">
             <div className="flex-grow overflow-y-auto">
               <div className="flex justify-between items-start mb-4">
                 <Badge className={`bg-gradient-to-r ${getDifficultyColor(question.difficulty)} text-white border-0 shadow-lg transition-all duration-300 hover:scale-105`}>
@@ -113,7 +113,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
                 {question.question}
               </h3>
             </div>
-            <div className="text-center">
+            <div>
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3 bg-gradient-to-r from-purple-50 to-blue-50 px-4 py-2 rounded-full">
                 <Sparkles className="h-4 w-4 text-purple-500 animate-pulse" />
                 <span className="font-medium">Нажмите, чтобы увидеть ответ</span>
@@ -136,7 +136,7 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
           <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-transparent rounded-br-full"></div>
           <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-cyan-400/20 to-transparent rounded-tl-full"></div>
           
-          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-300px)]">
+          <CardContent className="p-6 h-full flex flex-col justify-between relative z-10 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-150px)]">
             <div className="flex-grow overflow-y-auto">
               <div className="flex justify-between items-start mb-4">
                 <Badge className="bg-gradient-to-r from-green-500 to-blue-500 text-white border-0 shadow-lg hover:scale-105 transition-all duration-300">

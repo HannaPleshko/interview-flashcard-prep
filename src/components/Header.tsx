@@ -39,9 +39,8 @@ const Header = () => {
   };
 
   const navItems = [
-    { path: "/study", icon: BookOpen, label: "Учебник карточек" },
-    { path: "/practice", icon: Brain, label: "Практика" },
-    { path: "/", icon: Play, label: "Карточки теории" },
+    { path: "/study", icon: BookOpen, label: "Учебник" },
+    { path: "/", icon: Play, label: "Практика теории" },
     { path: "/tasks", icon: ListTodo, label: "Задачи" },
   ];
 

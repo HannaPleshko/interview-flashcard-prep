@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical } from "lucide-react";
+import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical, Globe, Layers, Zap, Code, Shield, Server } from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import QuestionListItem from "@/components/QuestionListItem";
@@ -162,6 +162,32 @@ const Study = () => {
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('list');
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = viewMode === 'cards' ? 9 : 10;
+  
+  // Маппинг иконок для технологий
+  const getTechIcon = (techId: string) => {
+    const iconMap: { [key: string]: any } = {
+      'html': Globe,
+      'css': Layers,
+      'javascript': Zap,
+      'nextjs': Code,
+      'typescript': Code,
+      'security': Shield
+    };
+    return iconMap[techId] || BookOpen;
+  };
+  
+  // Маппинг градиентов для технологий
+  const getTechGradient = (techId: string) => {
+    const gradientMap: { [key: string]: string } = {
+      'html': 'from-orange-400 to-orange-600',
+      'css': 'from-blue-400 to-blue-600',
+      'javascript': 'from-yellow-400 to-yellow-600',
+      'nextjs': 'from-gray-500 to-gray-700',
+      'typescript': 'from-purple-500 to-purple-700',
+      'security': 'from-emerald-400 to-emerald-600'
+    };
+    return gradientMap[techId] || 'from-gray-400 to-gray-600';
+  };
   
   const technology = questionsData.find(t => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : [];
@@ -368,39 +394,45 @@ const Study = () => {
                 <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                {technology?.name || "Выберите технологию"}
-              </h1>
-              <p className="text-muted-foreground text-sm sm:text-base">Изучение материалов</p>
-            </div>
+          
           </div>
         </div>
 
+        {/* Technology Tags */}
+        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/20 shadow-lg">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {questionsData.map((tech) => {
+              const IconComponent = getTechIcon(tech.id);
+              const isActive = techId === tech.id;
+              
+              return (
+                <Button
+                  key={tech.id}
+                  variant={isActive ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => navigate(`/study/${tech.id}`)}
+                  className={`
+                    ${isActive 
+                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-md` 
+                      : 'bg-white/70 border-gray-200 hover:border-gray-400 hover:bg-gray-50'
+                    }
+                    rounded-full px-4 py-2 text-sm font-medium
+                    transition-all duration-200 hover:scale-105
+                    flex items-center gap-2
+                  `}
+                >
+                  <IconComponent className="h-4 w-4" />
+                  {tech.name}
+                </Button>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Search and Filter Controls */}
         <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/20 shadow-lg">
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-              {/* Technology Selector */}
-              <div className="relative lg:col-span-1">
-                <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 z-10" />
-                <Select
-                  value={techId || ""}
-                  onValueChange={(value) => navigate(`/study/${value}`)}
-                >
-                  <SelectTrigger className="pl-10 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
-                    <SelectValue placeholder="Выберите технологию..." />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
-                    {questionsData.map((tech) => (
-                      <SelectItem key={tech.id} value={tech.id} className="rounded-lg hover:bg-purple-50">
-                        {tech.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
