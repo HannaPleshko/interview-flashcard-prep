@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Question, ProgressStatus } from "@/data/questions";
 import { Sparkles, Eye, EyeOff, Brain, Lightbulb, Star, Check, RefreshCw, Book } from "lucide-react";
+import { formatQuestionText } from "@/lib/utils";
 
 interface QuestionCardProps {
   question: Question;
@@ -149,8 +150,8 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
               </div>
               <div className="relative">
                 <Sparkles className="h-5 w-5 text-green-400 absolute -left-6 top-1 opacity-60" />
-                <p className="text-foreground leading-relaxed font-medium" dangerouslySetInnerHTML={{__html: question.answer}}>
-                </p>
+                <div className="text-foreground leading-relaxed font-medium" dangerouslySetInnerHTML={{__html: formatQuestionText(question.answer)}}>
+                </div>
               </div>
             </div>
             <div className="space-y-3 mt-4">

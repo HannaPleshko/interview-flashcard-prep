@@ -303,13 +303,6 @@ const Study = () => {
     setCurrentPage(1);
   };
 
-  const getDifficultyStats = () => {
-    const stats = { easy: 0, medium: 0, hard: 0 };
-    filteredQuestions.forEach(q => {
-      stats[q.difficulty as keyof typeof stats]++;
-    });
-    return stats;
-  };
   
   const getProgressStats = () => {
     const stats: { [key in ProgressStatus | 'not_started']: number } = {
@@ -450,7 +443,7 @@ const Study = () => {
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
               {/* Search */}
-              <div className="relative">
+              <div className="relative sm:col-span-2">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Поиск по вопросам..."
@@ -484,22 +477,7 @@ const Study = () => {
                 </Select>
               </div>
 
-              {/* Progress Filter */}
-              <div className="relative">
-                <Check className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 z-10" />
-                <Select value={progressFilter} onValueChange={setProgressFilter}>
-                  <SelectTrigger className="pl-10 bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
-                    <SelectValue placeholder="Фильтр по прогрессу" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-xl shadow-xl">
-                    <SelectItem value="all" className="rounded-lg hover:bg-purple-50">Все статусы</SelectItem>
-                    <SelectItem value="not_started" className="rounded-lg hover:bg-gray-50">Не начато</SelectItem>
-                    <SelectItem value="learning" className="rounded-lg hover:bg-blue-50">📘 Учу</SelectItem>
-                    <SelectItem value="review" className="rounded-lg hover:bg-yellow-50">🔄 Повторяю</SelectItem>
-                    <SelectItem value="known" className="rounded-lg hover:bg-green-50">✅ Знаю</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+           
 
               {/* Sort */}
               <div className="relative">

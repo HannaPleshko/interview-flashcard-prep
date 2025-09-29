@@ -463,6 +463,53 @@ button:focus,
   box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.3) !important;
 }
 
+/* Убираем фиолетовую границу для AccordionTrigger */
+[data-radix-accordion-trigger]:focus,
+[data-radix-accordion-trigger]:focus-visible,
+[data-radix-accordion-trigger][data-state="open"]:focus,
+[data-radix-accordion-trigger][data-state="closed"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Дополнительно убираем все возможные стили фокуса */
+.accordion-trigger:focus,
+.accordion-trigger:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Убираем все стили фокуса для всех элементов accordion */
+[data-radix-accordion-item] *:focus,
+[data-radix-accordion-item] *:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Убираем стили фокуса для всех кнопок внутри accordion */
+[data-radix-accordion-item] button:focus,
+[data-radix-accordion-item] button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Максимально специфичный селектор для AccordionTrigger */
+[data-radix-accordion-trigger][data-state="open"]:focus,
+[data-radix-accordion-trigger][data-state="closed"]:focus,
+[data-radix-accordion-trigger][data-state="open"]:focus-visible,
+[data-radix-accordion-trigger][data-state="closed"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  ring: 0 !important;
+  ring-width: 0 !important;
+  ring-color: transparent !important;
+}
+
 /* Стили для селекторов при фокусе */
 [role="combobox"]:focus,
 [role="listbox"]:focus {

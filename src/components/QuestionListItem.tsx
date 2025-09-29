@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Question, ProgressStatus } from "@/data/questions";
 import { Check, RefreshCw, Book } from "lucide-react";
+import { formatQuestionText } from "@/lib/utils";
 
 interface QuestionListItemProps {
   question: Question;
@@ -37,7 +38,7 @@ const QuestionListItem = ({ question, progressStatus, onProgressChange }: Questi
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value={question.id} className={`bg-white/70 rounded-xl shadow-md backdrop-blur-sm border-white/20 transition-all duration-300 ${getProgressBorder(progressStatus)}`}>
-        <AccordionTrigger className="px-3 sm:px-6 py-3 sm:py-4 hover:no-underline text-left">
+        <AccordionTrigger className="accordion-trigger px-3 sm:px-6 py-3 sm:py-4 hover:no-underline text-left focus:outline-none focus:ring-0 focus:shadow-none focus:border-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2 sm:gap-4">
             <span className="flex-1 font-medium text-foreground text-sm sm:text-base">{question.question}</span>
             <Badge variant={
@@ -47,7 +48,7 @@ const QuestionListItem = ({ question, progressStatus, onProgressChange }: Questi
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-3 sm:px-6 pt-0 pb-3 sm:pb-4">
-          <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base" dangerouslySetInnerHTML={{__html: question.answer}}></p>
+          <div className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base" dangerouslySetInnerHTML={{__html: formatQuestionText(question.answer)}}></div>
           <div className="flex flex-wrap justify-end items-center gap-2 mt-4">
             <span className="text-xs sm:text-sm font-medium text-muted-foreground mr-2">Мой прогресс:</span>
             <Button 
