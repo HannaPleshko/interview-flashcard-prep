@@ -14,6 +14,7 @@ export interface Technology {
 }
 
 export const questionsData: Technology[] = [
+  // html
   {
     id: "html",
     name: "HTML",
@@ -200,6 +201,7 @@ export const questionsData: Technology[] = [
       }
     ]
   },
+  // css
   {
     id: "css",
     name: "CSS",
@@ -806,1110 +808,1110 @@ export const questionsData: Technology[] = [
       }
     ]
   },
+  // JS
   {
     id: "javascript",
     name: "JavaScript",
     questions: [
       {
         id: "js-1",
-        question: "Что такое замыкания (closures) в JavaScript?",
-        answer: "Замыкание — это функция, которая имеет доступ к переменным из внешней области видимости даже после того, как внешняя функция завершила выполнение. Это позволяет создавать приватные переменные и методы.",
-        difficulty: "hard"
+        question: "Какие типы данных существуют в JavaScript?",
+        answer: "В JavaScript есть примитивные и ссылочные типы данных.<br/><br/>Примитивные типы:<br/>• Boolean — логические значения true/false<br/>• Null — отсутствие значения<br/>• Undefined — переменная объявлена, но не инициализирована<br/>• Number — числовые значения<br/>• BigInt — целые числа произвольной точности<br/>• String — строки<br/>• Symbol — уникальные идентификаторы<br/><br/>Ссылочные типы:<br/>• Object — коллекции пар ключ-значение<br/>• Function — вызываемые объекты<br/>• Array, Date, RegExp — специальные объекты",
+        difficulty: "easy"
       },
       {
         id: "js-2",
-        question: "В чем разница между var, let и const?",
-        answer: "var имеет функциональную область видимости и поднимается. let и const имеют блочную область видимости. const нельзя переназначить, но объекты и массивы можно изменять.",
-        difficulty: "medium"
+        question: "В чём разница между null и undefined?",
+        answer: "null — намеренное отсутствие значения:<br/>• Явно присваивается разработчиком<br/>• Означает \"пустое\" или \"несуществующее\" значение<br/>• typeof null возвращает 'object' (историческая ошибка)<br/><br/>undefined — отсутствие инициализации:<br/>• Переменная объявлена, но не инициализирована<br/>• Свойство объекта не существует<br/>• Функция не возвращает значение<br/>• Параметр функции не передан<br/><br/>При сравнении:<br/>• null == undefined // true<br/>• null === undefined // false",
+        difficulty: "easy"
       },
       {
         id: "js-3",
-        question: "Что такое Event Loop в JavaScript?",
-        answer: "Event Loop — это механизм, который позволяет JavaScript выполнять неблокирующие операции, перемещая колбэки из очереди задач в стек вызовов, когда стек становится пустым.",
-        difficulty: "hard"
+        question: "Что такое приведение типов (type coercion)?",
+        answer: "Приведение типов — автоматическое преобразование значений из одного типа в другой.<br/><br/>Явное приведение:<br/>• Number('5') // 5<br/>• String(123) // '123'<br/>• Boolean(1) // true<br/><br/>Неявное приведение:<br/>• '5' - 3 // 2 (строка преобразуется в число)<br/>• '5' + 3 // '53' (число преобразуется в строку)<br/>• if ('hello') // true (строка в boolean)<br/><br/>Правила:<br/>• В математических операциях (кроме +) строки → числа<br/>• При конкатенации (+) числа → строки<br/>• В логическом контексте всё → boolean",
+        difficulty: "easy"
       },
       {
         id: "js-4",
-        question: "Объясните hoisting в JavaScript",
-        answer: "Hoisting — это поднятие объявлений переменных и функций в начало их области видимости во время компиляции.",
+        question: "Что такое поднятие (hoisting)?",
+        answer: "Hoisting — механизм JavaScript, при котором объявления переменных и функций перемещаются в начало их области видимости во время компиляции.<br/><br/>Переменные var:<br/>• Поднимается объявление, но не инициализация<br/>• До инициализации имеют значение undefined<br/><br/>Функции:<br/>• Function declaration поднимается полностью<br/>• Можно вызывать до объявления<br/><br/>let и const:<br/>• Поднимаются, но находятся в temporal dead zone<br/>• Нельзя использовать до объявления<br/>• ReferenceError при попытке доступа<br/><br/>Пример:<br/>console.log(x); // undefined<br/>var x = 5;<br/>sayHi(); // работает<br/>function sayHi() { console.log('Hi'); }",
         difficulty: "medium"
       },
       {
         id: "js-5",
-        question: "Что такое this в JavaScript?",
-        answer: "this — ключевое слово, которое ссылается на объект, в контексте которого выполняется функция. Значение this зависит от способа вызова функции.",
-        difficulty: "medium"
+        question: "Какие типы областей видимости существуют в JavaScript?",
+        answer: "Глобальная область видимости:<br/>• Переменные доступны везде в программе<br/>• Объявлены вне функций и блоков<br/>• В браузере привязаны к объекту window<br/><br/>Функциональная область видимости:<br/>• Переменные доступны только внутри функции<br/>• var имеет функциональную область видимости<br/><br/>Блочная область видимости (ES6):<br/>• Переменные доступны только внутри блока {}<br/>• let и const имеют блочную область видимости<br/>• Включает циклы, условия, любые блоки кода<br/><br/>Лексическая область видимости:<br/>• Вложенные функции имеют доступ к переменным внешних функций<br/>• Определяется местом написания кода",
+        difficulty: "easy"
       },
       {
         id: "js-6",
-        question: "В чем разница между == и ===?",
-        answer: "== выполняет приведение типов перед сравнением, === сравнивает без приведения типов (строгое равенство).",
+        question: "В чём разница между == и ===?",
+        answer: "== (нестрогое равенство):<br/>• Сравнивает только значения<br/>• Выполняет приведение типов<br/>• '5' == 5 // true<br/>• null == undefined // true<br/>• 0 == false // true<br/><br/>=== (строгое равенство):<br/>• Сравнивает значения и типы<br/>• Без приведения типов<br/>• '5' === 5 // false<br/>• null === undefined // false<br/>• 0 === false // false<br/><br/>Рекомендация:<br/>• Всегда используйте === для предсказуемости<br/>• == только когда нужна проверка null/undefined",
         difficulty: "easy"
       },
       {
         id: "js-7",
-        question: "Что такое Promise в JavaScript?",
-        answer: "Promise — объект, представляющий результат асинхронной операции. Может быть в состоянии pending, fulfilled или rejected.",
+        question: "Что такое замыкание (closure)?",
+        answer: "Замыкание — функция, имеющая доступ к переменным внешней функции даже после её завершения.<br/><br/>Компоненты замыкания:<br/>• Внешняя функция с локальными переменными<br/>• Внутренняя функция, использующая эти переменные<br/>• Возврат внутренней функции<br/><br/>Пример:<br/>function counter() {<br/>&nbsp;&nbsp;let count = 0;<br/>&nbsp;&nbsp;return function() {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return ++count;<br/>&nbsp;&nbsp;};<br/>}<br/>const myCounter = counter();<br/>myCounter(); // 1<br/>myCounter(); // 2<br/><br/>Применение:<br/>• Приватные переменные<br/>• Модульный паттерн<br/>• Обработчики событий<br/>• Каррирование функций",
         difficulty: "medium"
       },
       {
         id: "js-8",
-        question: "Объясните async/await",
-        answer: "async/await — синтаксический сахар для работы с Promise. async функция возвращает Promise, await приостанавливает выполнение до разрешения Promise.",
+        question: "Как работает ключевое слово this?",
+        answer: "this указывает на контекст выполнения функции.<br/><br/>В глобальной области:<br/>• Браузер: window<br/>• Node.js: global<br/>• Строгий режим: undefined<br/><br/>В методе объекта:<br/>• this = объект, вызвавший метод<br/><br/>В обычной функции:<br/>• Нестрогий режим: window/global<br/>• Строгий режим: undefined<br/><br/>В стрелочной функции:<br/>• this берётся из внешнего контекста<br/>• Не имеет собственного this<br/><br/>С call/apply/bind:<br/>• this явно задаётся первым аргументом<br/><br/>В конструкторе (new):<br/>• this = новый создаваемый объект",
         difficulty: "medium"
       },
       {
         id: "js-9",
-        question: "Что такое прототипы в JavaScript?",
-        answer: "Каждый объект в JavaScript имеет прототип — другой объект, от которого он наследует свойства и методы через prototype chain.",
-        difficulty: "hard"
+        question: "В чём разница между обычными и стрелочными функциями?",
+        answer: "Синтаксис:<br/>• Обычная: function name() {}<br/>• Стрелочная: () => {}<br/><br/>Контекст this:<br/>• Обычная: собственный this, зависит от вызова<br/>• Стрелочная: наследует this из внешнего контекста<br/><br/>arguments:<br/>• Обычная: имеет объект arguments<br/>• Стрелочная: не имеет arguments<br/><br/>Конструктор:<br/>• Обычная: можно использовать с new<br/>• Стрелочная: нельзя использовать с new<br/><br/>Hoisting:<br/>• Обычная (declaration): поднимается<br/>• Стрелочная: не поднимается<br/><br/>Когда использовать стрелочные:<br/>• Коллбэки и обработчики<br/>• Методы массивов (map, filter)<br/>• Когда нужен внешний this",
+        difficulty: "easy"
       },
       {
         id: "js-10",
-        question: "Объясните методы call, apply и bind",
-        answer: "call и apply вызывают функцию с заданным this, различаются передачей аргументов. bind создает новую функцию с привязанным this.",
-        difficulty: "hard"
+        question: "Что такое шаблонные литералы (template literals)?",
+        answer: "Шаблонные литералы — способ создания строк с использованием обратных кавычек ``.<br/><br/>Возможности:<br/>• Интерполяция выражений: ${variable}<br/>• Многострочные строки без \\n<br/>• Теговые шаблоны для обработки<br/><br/>Примеры:<br/>const name = 'Иван';<br/>const greeting = `Привет, ${name}!`;<br/><br/>const multiline = `<br/>&nbsp;&nbsp;Первая строка<br/>&nbsp;&nbsp;Вторая строка<br/>`;<br/><br/>const calc = `Сумма: ${2 + 2}`;<br/><br/>Преимущества:<br/>• Читаемость кода<br/>• Удобная конкатенация<br/>• Вычисление выражений внутри строк",
+        difficulty: "easy"
       },
       {
         id: "js-11",
-        question: "Что такое модули в JavaScript?",
-        answer: "Модули позволяют организовать код в отдельные файлы с помощью export/import, обеспечивая инкапсуляцию и переиспользование.",
+        question: "Что такое функции высшего порядка?",
+        answer: "Функция высшего порядка — функция, которая принимает другие функции как аргументы или возвращает функцию.<br/><br/>Характеристики:<br/>• Принимает функции как параметры<br/>• Возвращает функции как результат<br/>• Или то и другое<br/><br/>Встроенные примеры:<br/>• map() — преобразует элементы<br/>• filter() — фильтрует элементы<br/>• reduce() — сворачивает массив<br/>• forEach() — перебирает элементы<br/>• setTimeout() — отложенное выполнение<br/><br/>Пример создания:<br/>function multiplier(factor) {<br/>&nbsp;&nbsp;return num => num * factor;<br/>}<br/>const double = multiplier(2);<br/>double(5); // 10<br/><br/>Применение:<br/>• Композиция функций<br/>• Каррирование<br/>• Декораторы",
         difficulty: "medium"
       },
       {
         id: "js-12",
-        question: "Объясните деструктуризацию",
-        answer: "Деструктуризация позволяет извлекать значения из массивов или объектов в отдельные переменные: const {name, age} = person;",
+        question: "Являются ли функции в JavaScript объектами первого класса?",
+        answer: "Да, функции в JavaScript — объекты первого класса (first-class citizens).<br/><br/>Это означает, что функции можно:<br/>• Присваивать переменным<br/>• Передавать как аргументы<br/>• Возвращать из других функций<br/>• Хранить в структурах данных<br/>• Создавать динамически<br/>• Иметь свойства и методы<br/><br/>Примеры:<br/>// Присваивание переменной<br/>const greet = function() { };<br/><br/>// Передача как аргумент<br/>array.map(function(x) { return x * 2; });<br/><br/>// Возврат из функции<br/>function createFunction() {<br/>&nbsp;&nbsp;return function() { };<br/>}<br/><br/>// Свойства функции<br/>greet.customProp = 'value';",
         difficulty: "easy"
       },
       {
         id: "js-13",
-        question: "Что такое spread и rest операторы?",
-        answer: "Spread (...) распаковывает элементы, rest (...) собирает элементы в массив. Spread используется при вызове, rest в параметрах.",
+        question: "Какие концепции функционального программирования есть в JavaScript?",
+        answer: "Основные концепции ФП в JavaScript:<br/><br/>Чистые функции:<br/>• Без побочных эффектов<br/>• Детерминированные результаты<br/>• Не изменяют внешнее состояние<br/><br/>Иммутабельность:<br/>• Не изменять существующие данные<br/>• Создавать новые версии<br/>• Использовать spread, Object.assign()<br/><br/>Функции высшего порядка:<br/>• map, filter, reduce<br/>• Композиция функций<br/>• Каррирование<br/><br/>Рекурсия:<br/>• Альтернатива циклам<br/>• Хвостовая рекурсия<br/><br/>Декларативный стиль:<br/>• Описываем \"что\", а не \"как\"<br/>• Цепочки методов<br/>• Функциональные выражения",
         difficulty: "medium"
       },
       {
         id: "js-14",
-        question: "Объясните WeakMap и WeakSet",
-        answer: "WeakMap и WeakSet хранят слабые ссылки на объекты, позволяя сборщику мусора удалять неиспользуемые объекты.",
-        difficulty: "hard"
+        question: "Что такое IIFE (Immediately Invoked Function Expression)?",
+        answer: "IIFE — функция, которая выполняется сразу после создания.<br/><br/>Синтаксис:<br/>(function() {<br/>&nbsp;&nbsp;// код<br/>})();<br/><br/>или<br/><br/>(function() {<br/>&nbsp;&nbsp;// код<br/>}());<br/><br/>С параметрами:<br/>(function(name) {<br/>&nbsp;&nbsp;console.log(name);<br/>})('Иван');<br/><br/>Преимущества:<br/>• Изоляция области видимости<br/>• Избежание загрязнения глобальной области<br/>• Создание приватных переменных<br/>• Однократное выполнение кода<br/><br/>Применение:<br/>• Модульный паттерн<br/>• Инициализация приложения<br/>• Полифиллы и плагины<br/>• Избежание конфликтов имён",
+        difficulty: "medium"
       },
       {
         id: "js-15",
-        question: "Что такое Proxy в JavaScript?",
-        answer: "Proxy позволяет перехватывать и переопределять операции с объектами (get, set, has, deleteProperty и др.).",
-        difficulty: "hard"
+        question: "Как создать приватные переменные в JavaScript?",
+        answer: "Способы создания приватных переменных:<br/><br/>1. Замыкания:<br/>function Counter() {<br/>&nbsp;&nbsp;let count = 0; // приватная<br/>&nbsp;&nbsp;this.increment = () => ++count;<br/>&nbsp;&nbsp;this.getCount = () => count;<br/>}<br/><br/>2. IIFE и модульный паттерн:<br/>const module = (() => {<br/>&nbsp;&nbsp;let private = 0;<br/>&nbsp;&nbsp;return {<br/>&nbsp;&nbsp;&nbsp;&nbsp;getPrivate: () => private<br/>&nbsp;&nbsp;};<br/>})();<br/><br/>3. WeakMap для классов:<br/>const privateData = new WeakMap();<br/>class MyClass {<br/>&nbsp;&nbsp;constructor() {<br/>&nbsp;&nbsp;&nbsp;&nbsp;privateData.set(this, {secret: 42});<br/>&nbsp;&nbsp;}<br/>}<br/><br/>4. Символы (условно приватные):<br/>const _private = Symbol('private');<br/>obj[_private] = 'секрет';<br/><br/>5. Приватные поля классов (ES2022):<br/>class MyClass {<br/>&nbsp;&nbsp;#privateField = 42;<br/>}",
+        difficulty: "medium"
       },
       {
         id: "js-16",
-        question: "Объясните Symbol в JavaScript",
-        answer: "Symbol — примитивный тип данных для создания уникальных идентификаторов, часто используется для приватных свойств.",
+        question: "Что такое Event Loop и как он работает?",
+        answer: "Event Loop — механизм, позволяющий JavaScript выполнять асинхронный код несмотря на однопоточность.<br/><br/>Компоненты:<br/>• Call Stack — стек вызовов функций<br/>• Web APIs — браузерные API (setTimeout, fetch)<br/>• Callback Queue — очередь коллбэков<br/>• Microtask Queue — очередь микрозадач (Promise)<br/>• Event Loop — цикл событий<br/><br/>Порядок выполнения:<br/>1. Синхронный код (Call Stack)<br/>2. Микрозадачи (Promise, queueMicrotask)<br/>3. Макрозадачи (setTimeout, setInterval)<br/><br/>Процесс:<br/>1. Выполняется весь синхронный код<br/>2. Проверяется очередь микрозадач<br/>3. Выполняется одна макрозадача<br/>4. Снова проверяются микрозадачи<br/>5. Цикл повторяется",
         difficulty: "hard"
       },
       {
         id: "js-17",
-        question: "Что такое генераторы (generators)?",
-        answer: "Генераторы — функции, которые могут приостанавливать и возобновлять выполнение с помощью yield, возвращая итератор.",
-        difficulty: "hard"
-      },
-      {
-        id: "js-18",
-        question: "Объясните Map и Set",
-        answer: "Map — коллекция ключ-значение с любыми типами ключей. Set — коллекция уникальных значений любого типа.",
+        question: "Что такое прототипное наследование?",
+        answer: "Прототипное наследование — механизм, при котором объекты наследуют свойства и методы от других объектов через цепочку прототипов.<br/><br/>Основные концепции:<br/>• Каждый объект имеет [[Prototype]]<br/>• Доступ через __proto__ или Object.getPrototypeOf()<br/>• Функции имеют свойство prototype<br/><br/>Создание наследования:<br/>function Animal(name) {<br/>&nbsp;&nbsp;this.name = name;<br/>}<br/>Animal.prototype.speak = function() {<br/>&nbsp;&nbsp;console.log(this.name + ' издаёт звук');<br/>};<br/><br/>function Dog(name) {<br/>&nbsp;&nbsp;Animal.call(this, name);<br/>}<br/>Dog.prototype = Object.create(Animal.prototype);<br/>Dog.prototype.constructor = Dog;<br/><br/>ES6 классы:<br/>• Синтаксический сахар над прототипами<br/>• class, extends, super",
         difficulty: "medium"
       },
       {
+        id: "js-18",
+        question: "В чём разница между var, let и const?",
+        answer: "var:<br/>• Функциональная область видимости<br/>• Поднимается с undefined<br/>• Можно переобъявлять<br/>• Можно изменять значение<br/>• Добавляется в window (глобально)<br/><br/>let:<br/>• Блочная область видимости<br/>• Temporal Dead Zone<br/>• Нельзя переобъявлять<br/>• Можно изменять значение<br/>• Не добавляется в window<br/><br/>const:<br/>• Блочная область видимости<br/>• Temporal Dead Zone<br/>• Нельзя переобъявлять<br/>• Нельзя переприсваивать<br/>• Объекты и массивы остаются мутабельными<br/>• Не добавляется в window<br/><br/>Рекомендации:<br/>• Используйте const по умолчанию<br/>• let когда нужно изменить значение<br/>• Избегайте var",
+        difficulty: "easy"
+      },
+      {
         id: "js-19",
-        question: "Что такое temporal dead zone?",
-        answer: "Temporal Dead Zone — период между началом блока и инициализацией let/const переменной, где обращение к ней вызывает ReferenceError.",
-        difficulty: "hard"
+        question: "Что такое деструктуризация?",
+        answer: "Деструктуризация — синтаксис для извлечения значений из массивов и объектов в отдельные переменные.<br/><br/>Массивы:<br/>const [a, b] = [1, 2];<br/>const [first, ...rest] = [1, 2, 3, 4];<br/>const [x, , z] = [1, 2, 3]; // пропуск<br/><br/>Объекты:<br/>const {name, age} = person;<br/>const {name: userName} = user; // переименование<br/>const {name = 'Guest'} = user; // значение по умолчанию<br/><br/>Вложенная деструктуризация:<br/>const {address: {city}} = person;<br/><br/>В параметрах функции:<br/>function greet({name, age}) {<br/>&nbsp;&nbsp;console.log(name, age);<br/>}<br/><br/>Обмен значениями:<br/>[a, b] = [b, a];",
+        difficulty: "easy"
       },
       {
         id: "js-20",
-        question: "Объясните microtasks и macrotasks",
-        answer: "Microtasks (Promise, queueMicrotask) имеют более высокий приоритет чем macrotasks (setTimeout, setInterval) в Event Loop.",
-        difficulty: "hard"
+        question: "Что такое spread и rest операторы?",
+        answer: "Spread (...) — разворачивает итерируемые объекты:<br/><br/>Массивы:<br/>const arr = [1, 2, 3];<br/>const newArr = [...arr, 4, 5];<br/>const copy = [...arr];<br/>Math.max(...arr);<br/><br/>Объекты:<br/>const obj = {a: 1, b: 2};<br/>const newObj = {...obj, c: 3};<br/>const clone = {...obj};<br/><br/>Rest (...) — собирает остаточные элементы:<br/><br/>В функциях:<br/>function sum(...numbers) {<br/>&nbsp;&nbsp;return numbers.reduce((a, b) => a + b);<br/>}<br/><br/>В деструктуризации:<br/>const [first, ...rest] = [1, 2, 3, 4];<br/>const {a, ...others} = {a: 1, b: 2, c: 3};<br/><br/>Отличия:<br/>• Spread разворачивает<br/>• Rest собирает",
+        difficulty: "easy"
       },
       {
         id: "js-21",
-        question: "Что такое Web Workers и как их использовать?",
-        answer: "Web Workers выполняют JavaScript в фоновом потоке. Создаются через new Worker(), общаются через postMessage().",
-        difficulty: "hard"
+        question: "Что такое Promise и как с ними работать?",
+        answer: "Promise — объект для работы с асинхронными операциями.<br/><br/>Состояния:<br/>• Pending — ожидание<br/>• Fulfilled — выполнено успешно<br/>• Rejected — отклонено с ошибкой<br/><br/>Создание:<br/>const promise = new Promise((resolve, reject) => {<br/>&nbsp;&nbsp;if (success) resolve(value);<br/>&nbsp;&nbsp;else reject(error);<br/>});<br/><br/>Использование:<br/>promise<br/>&nbsp;&nbsp;.then(result => console.log(result))<br/>&nbsp;&nbsp;.catch(error => console.error(error))<br/>&nbsp;&nbsp;.finally(() => console.log('Готово'));<br/><br/>Методы:<br/>• Promise.all() — все промисы<br/>• Promise.race() — первый выполненный<br/>• Promise.allSettled() — все результаты<br/>• Promise.any() — первый успешный",
+        difficulty: "medium"
       },
       {
         id: "js-22",
-        question: "Объясните работу Service Workers",
-        answer: "Service Workers — прокси между приложением и сетью. Используются для кэширования, офлайн-работы, push-уведомлений.",
-        difficulty: "hard"
+        question: "Что такое async/await?",
+        answer: "Async/await — синтаксический сахар для работы с промисами.<br/><br/>async функция:<br/>• Всегда возвращает Promise<br/>• Позволяет использовать await внутри<br/><br/>await:<br/>• Приостанавливает выполнение до разрешения промиса<br/>• Работает только в async функциях<br/>• Возвращает результат промиса<br/><br/>Пример:<br/>async function fetchData() {<br/>&nbsp;&nbsp;try {<br/>&nbsp;&nbsp;&nbsp;&nbsp;const response = await fetch(url);<br/>&nbsp;&nbsp;&nbsp;&nbsp;const data = await response.json();<br/>&nbsp;&nbsp;&nbsp;&nbsp;return data;<br/>&nbsp;&nbsp;} catch (error) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;console.error(error);<br/>&nbsp;&nbsp;}<br/>}<br/><br/>Преимущества:<br/>• Читаемый синхронный стиль<br/>• Удобная обработка ошибок<br/>• Избежание callback hell",
+        difficulty: "medium"
       },
       {
         id: "js-23",
-        question: "Что такое WebAssembly?",
-        answer: "WebAssembly — бинарный формат для выполнения кода в браузере. Позволяет запускать код на C++, Rust с высокой производительностью.",
-        difficulty: "hard"
+        question: "Как работают методы call, apply и bind?",
+        answer: "call() — вызывает функцию с заданным this:<br/>func.call(thisArg, arg1, arg2);<br/>• Аргументы передаются через запятую<br/>• Вызывает функцию сразу<br/><br/>apply() — вызывает функцию с заданным this:<br/>func.apply(thisArg, [arg1, arg2]);<br/>• Аргументы передаются массивом<br/>• Вызывает функцию сразу<br/><br/>bind() — создаёт новую функцию с привязанным this:<br/>const newFunc = func.bind(thisArg, arg1, arg2);<br/>• Возвращает новую функцию<br/>• Не вызывает сразу<br/>• Можно частично применять аргументы<br/><br/>Примеры:<br/>const person = { name: 'Иван' };<br/>function greet(greeting) {<br/>&nbsp;&nbsp;console.log(`${greeting}, ${this.name}`);<br/>}<br/>greet.call(person, 'Привет');<br/>greet.apply(person, ['Привет']);<br/>const boundGreet = greet.bind(person);<br/>boundGreet('Привет');",
+        difficulty: "medium"
       },
       {
         id: "js-24",
-        question: "Объясните работу WebSocket API",
-        answer: "WebSocket API обеспечивает двустороннюю связь: new WebSocket(), onopen, onmessage, send(), close().",
+        question: "Что такое каррирование функций?",
+        answer: "Каррирование — преобразование функции с множественными аргументами в последовательность функций с одним аргументом.<br/><br/>Обычная функция:<br/>function add(a, b, c) {<br/>&nbsp;&nbsp;return a + b + c;<br/>}<br/>add(1, 2, 3); // 6<br/><br/>Каррированная функция:<br/>function curry(a) {<br/>&nbsp;&nbsp;return function(b) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return function(c) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a + b + c;<br/>&nbsp;&nbsp;&nbsp;&nbsp;};<br/>&nbsp;&nbsp;};<br/>}<br/>curry(1)(2)(3); // 6<br/><br/>Универсальное каррирование:<br/>const curry = (fn) => {<br/>&nbsp;&nbsp;return function curried(...args) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;if (args.length >= fn.length) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return fn.apply(this, args);<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;return (...nextArgs) => curried(...args, ...nextArgs);<br/>&nbsp;&nbsp;};<br/>};<br/><br/>Применение:<br/>• Частичное применение функций<br/>• Переиспользование логики<br/>• Композиция функций",
         difficulty: "hard"
       },
       {
         id: "js-25",
-        question: "Что такое IndexedDB?",
-        answer: "IndexedDB — низкоуровневое API для хранения больших объемов данных в браузере. Поддерживает индексы, транзакции, версионирование.",
+        question: "Что такое мемоизация?",
+        answer: "Мемоизация — техника оптимизации, сохраняющая результаты вызовов функции для повторного использования.<br/><br/>Простая мемоизация:<br/>function memoize(fn) {<br/>&nbsp;&nbsp;const cache = {};<br/>&nbsp;&nbsp;return function(...args) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;const key = JSON.stringify(args);<br/>&nbsp;&nbsp;&nbsp;&nbsp;if (key in cache) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cache[key];<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;const result = fn.apply(this, args);<br/>&nbsp;&nbsp;&nbsp;&nbsp;cache[key] = result;<br/>&nbsp;&nbsp;&nbsp;&nbsp;return result;<br/>&nbsp;&nbsp;};<br/>}<br/><br/>Пример использования:<br/>const fibonacci = memoize(n => {<br/>&nbsp;&nbsp;if (n <= 1) return n;<br/>&nbsp;&nbsp;return fibonacci(n - 1) + fibonacci(n - 2);<br/>});<br/><br/>Когда применять:<br/>• Чистые функции<br/>• Дорогие вычисления<br/>• Частые повторные вызовы<br/>• Рекурсивные алгоритмы",
         difficulty: "hard"
       },
       {
         id: "js-26",
-        question: "Объясните работу Intersection Observer API",
-        answer: "Intersection Observer отслеживает появление элементов в viewport: new IntersectionObserver(callback, options).",
-        difficulty: "medium"
+        question: "Что такое генераторы в JavaScript?",
+        answer: "Генераторы — функции, которые могут приостанавливать и возобновлять выполнение.<br/><br/>Синтаксис:<br/>function* generator() {<br/>&nbsp;&nbsp;yield 1;<br/>&nbsp;&nbsp;yield 2;<br/>&nbsp;&nbsp;return 3;<br/>}<br/><br/>const gen = generator();<br/>gen.next(); // {value: 1, done: false}<br/>gen.next(); // {value: 2, done: false}<br/>gen.next(); // {value: 3, done: true}<br/><br/>Бесконечные последовательности:<br/>function* infiniteNumbers() {<br/>&nbsp;&nbsp;let i = 0;<br/>&nbsp;&nbsp;while (true) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;yield i++;<br/>&nbsp;&nbsp;}<br/>}<br/><br/>Итерация:<br/>for (const value of generator()) {<br/>&nbsp;&nbsp;console.log(value); // 1, 2<br/>}<br/><br/>Применение:<br/>• Ленивые вычисления<br/>• Итераторы<br/>• Управление асинхронным потоком<br/>• Бесконечные последовательности",
+        difficulty: "hard"
       },
       {
         id: "js-27",
-        question: "Что такое ResizeObserver?",
-        answer: "ResizeObserver отслеживает изменения размеров элементов: new ResizeObserver(callback).",
+        question: "Что такое Symbol в JavaScript?",
+        answer: "Symbol — примитивный тип для создания уникальных идентификаторов.<br/><br/>Создание:<br/>const sym1 = Symbol();<br/>const sym2 = Symbol('описание');<br/>sym1 === sym2; // false (всегда уникальны)<br/><br/>Глобальные символы:<br/>const globalSym = Symbol.for('app.id');<br/>const sameSym = Symbol.for('app.id');<br/>globalSym === sameSym; // true<br/><br/>Использование в объектах:<br/>const obj = {<br/>&nbsp;&nbsp;[Symbol('private')]: 'секрет',<br/>&nbsp;&nbsp;public: 'открыто'<br/>};<br/><br/>Встроенные символы:<br/>• Symbol.iterator — итератор<br/>• Symbol.toStringTag — [object Type]<br/>• Symbol.hasInstance — instanceof<br/><br/>Особенности:<br/>• Не перечисляются в for...in<br/>• Не видны в Object.keys()<br/>• Используются для приватных свойств",
         difficulty: "medium"
       },
       {
         id: "js-28",
-        question: "Объясните работу Performance API",
-        answer: "Performance API измеряет производительность: performance.now(), performance.mark(), performance.measure().",
-        difficulty: "hard"
+        question: "Что такое Map и Set в JavaScript?",
+        answer: "Map — коллекция пар ключ-значение:<br/>• Любые типы ключей (включая объекты)<br/>• Сохраняет порядок вставки<br/>• size для получения размера<br/><br/>const map = new Map();<br/>map.set('key', 'value');<br/>map.set(obj, 'object as key');<br/>map.get('key'); // 'value'<br/>map.has('key'); // true<br/>map.delete('key');<br/>map.clear();<br/><br/>Set — коллекция уникальных значений:<br/>• Только уникальные значения<br/>• Сохраняет порядок вставки<br/>• Проверка наличия O(1)<br/><br/>const set = new Set([1, 2, 2, 3]);<br/>set.add(4);<br/>set.has(2); // true<br/>set.delete(2);<br/>set.size; // 3<br/><br/>WeakMap и WeakSet:<br/>• Только объекты как ключи<br/>• Слабые ссылки<br/>• Автоматическая сборка мусора",
+        difficulty: "medium"
       },
       {
         id: "js-29",
-        question: "Что такое Web Audio API?",
-        answer: "Web Audio API создает и обрабатывает звук: AudioContext, OscillatorNode, GainNode, AudioBuffer.",
+        question: "Что такое Proxy в JavaScript?",
+        answer: "Proxy — объект-обёртка для перехвата и переопределения операций с объектом.<br/><br/>Создание:<br/>const proxy = new Proxy(target, handler);<br/><br/>Ловушки (traps):<br/>• get — чтение свойства<br/>• set — запись свойства<br/>• has — проверка in<br/>• deleteProperty — удаление<br/>• apply — вызов функции<br/><br/>Пример валидации:<br/>const user = new Proxy({}, {<br/>&nbsp;&nbsp;set(target, prop, value) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;if (prop === 'age' && value < 0) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new Error('Возраст не может быть отрицательным');<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;target[prop] = value;<br/>&nbsp;&nbsp;&nbsp;&nbsp;return true;<br/>&nbsp;&nbsp;}<br/>});<br/><br/>Применение:<br/>• Валидация данных<br/>• Отслеживание изменений<br/>• Виртуальные свойства<br/>• Логирование доступа",
         difficulty: "hard"
       },
       {
         id: "js-30",
-        question: "Объясните работу WebRTC",
-        answer: "WebRTC обеспечивает peer-to-peer связь: getUserMedia(), RTCPeerConnection, RTCDataChannel.",
+        question: "Что такое Web Workers?",
+        answer: "Web Workers — API для выполнения JavaScript в фоновых потоках.<br/><br/>Основной поток:<br/>const worker = new Worker('worker.js');<br/>worker.postMessage({cmd: 'start', data: [1, 2, 3]});<br/>worker.onmessage = (e) => {<br/>&nbsp;&nbsp;console.log('Результат:', e.data);<br/>};<br/><br/>Worker файл (worker.js):<br/>self.onmessage = (e) => {<br/>&nbsp;&nbsp;const result = processData(e.data);<br/>&nbsp;&nbsp;self.postMessage(result);<br/>};<br/><br/>Ограничения:<br/>• Нет доступа к DOM<br/>• Нет доступа к window<br/>• Отдельный контекст выполнения<br/><br/>Типы воркеров:<br/>• Dedicated Workers — для одной страницы<br/>• Shared Workers — для нескольких страниц<br/>• Service Workers — для офлайн и кеширования<br/><br/>Применение:<br/>• Тяжёлые вычисления<br/>• Обработка больших данных<br/>• Фоновая синхронизация",
         difficulty: "hard"
-      },
-      {
-        id: "js-31",
-        question: "Что такое строгий режим ('use strict')?",
-        answer: "Строгий режим включает дополнительные проверки и ограничения в JavaScript: запрещает неявное создание глобальных переменных, дублирование параметров, использование this без контекста.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-32",
-        question: "Как работает оператор typeof?",
-        answer: "typeof возвращает строку с типом операнда: 'number', 'string', 'boolean', 'undefined', 'object', 'function'. Имеет особенности с null (возвращает 'object') и массивом (возвращает 'object').",
-        difficulty: "easy"
-      },
-      {
-        id: "js-33",
-        question: "В чем разница между null и undefined?",
-        answer: "undefined — переменная объявлена, но не инициализирована. null — явное отсутствие значения. typeof undefined возвращает 'undefined', typeof null возвращает 'object'.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-34",
-        question: "Как работает оператор instanceof?",
-        answer: "instanceof проверяет, является ли объект экземпляром класса или конструктора: obj instanceof Class. Проверяет цепочку прототипов.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-35",
-        question: "Что такое NaN и как его проверить?",
-        answer: "NaN (Not a Number) — результат некорректной математической операции. Проверяется через isNaN() или Number.isNaN(). NaN не равен самому себе.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-36",
-        question: "Как работает оператор spread (...) в массивах?",
-        answer: "Spread оператор распаковывает элементы массива: [...arr1, ...arr2] объединяет массивы, [...arr] создает копию массива.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-37",
-        question: "Что такое деструктуризация массивов?",
-        answer: "Деструктуризация позволяет извлекать элементы массива в переменные: const [first, second] = arr. Можно использовать значения по умолчанию и пропускать элементы.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-38",
-        question: "Как работает метод map()?",
-        answer: "map() создает новый массив, применяя функцию к каждому элементу: arr.map(x => x * 2). Не изменяет исходный массив.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-39",
-        question: "В чем разница между forEach и map?",
-        answer: "forEach выполняет функцию для каждого элемента, но не возвращает новый массив. map создает новый массив с результатами вызова функции.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-40",
-        question: "Как работает метод filter()?",
-        answer: "filter() создает новый массив с элементами, прошедшими проверку: arr.filter(x => x > 5). Возвращает пустой массив, если ни один элемент не прошел проверку.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-41",
-        question: "Что такое метод reduce()?",
-        answer: "reduce() применяет функцию к каждому элементу, накапливая результат: arr.reduce((acc, curr) => acc + curr, 0). Второй аргумент — начальное значение.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-42",
-        question: "Как работает оператор rest (...) в параметрах функции?",
-        answer: "Rest оператор собирает оставшиеся аргументы в массив: function sum(...args). Позволяет работать с произвольным количеством аргументов.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-43",
-        question: "Что такое стрелочные функции?",
-        answer: "Стрелочные функции — короткий синтаксис для функций: const add = (a, b) => a + b. Не имеют своего this, arguments, super.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-44",
-        question: "Как работает метод slice()?",
-        answer: "slice() создает копию части массива: arr.slice(1, 3). Не изменяет исходный массив. Без аргументов создает полную копию.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-45",
-        question: "В чем разница между slice() и splice()?",
-        answer: "slice() создает копию части массива, не изменяя исходный. splice() изменяет исходный массив, удаляя или добавляя элементы.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-46",
-        question: "Как работает метод concat()?",
-        answer: "concat() объединяет массивы: arr1.concat(arr2). Не изменяет исходные массивы. Может принимать несколько аргументов.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-47",
-        question: "Что такое метод includes()?",
-        answer: "includes() проверяет наличие элемента в массиве: arr.includes(5). Возвращает true/false. Работает с примитивами и объектами.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-48",
-        question: "Как работает метод indexOf()?",
-        answer: "indexOf() возвращает индекс первого вхождения элемента: arr.indexOf(5). Возвращает -1, если элемент не найден.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-49",
-        question: "Что такое метод find()?",
-        answer: "find() возвращает первый элемент, удовлетворяющий условию: arr.find(x => x > 5). Возвращает undefined, если элемент не найден.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-50",
-        question: "Как работает метод some()?",
-        answer: "some() проверяет, удовлетворяет ли хотя бы один элемент условию: arr.some(x => x > 5). Возвращает true/false.",
-        difficulty: "easy"
-      },
-      {
-        id: "js-51",
-        question: "Что такое прототипное наследование в JavaScript?",
-        answer: "Прототипное наследование — механизм, при котором объекты наследуют свойства и методы от других объектов через цепочку прототипов. Каждый объект имеет скрытое свойство [[Prototype]], которое ссылается на его прототип.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-52",
-        question: "Как работает Object.create()?",
-        answer: "Object.create() создает новый объект с указанным прототипом: Object.create(proto, propertiesObject). Позволяет создавать объекты без конструкторов и настраивать их свойства.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-53",
-        question: "Что такое дескрипторы свойств в JavaScript?",
-        answer: "Дескрипторы свойств определяют поведение свойства: value, writable, enumerable, configurable. Доступны через Object.getOwnPropertyDescriptor() и Object.defineProperty().",
-        difficulty: "medium"
-      },
-      {
-        id: "js-54",
-        question: "Объясните работу Promise.all() и Promise.race()",
-        answer: "Promise.all() ждет выполнения всех промисов и возвращает массив результатов. Promise.race() возвращает результат первого выполненного промиса. Оба возвращают Promise.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-55",
-        question: "Что такое async/await и как обрабатывать ошибки?",
-        answer: "async/await — синтаксический сахар для работы с Promise. Ошибки обрабатываются через try/catch. async функция всегда возвращает Promise.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-56",
-        question: "Как работает Event Loop в JavaScript?",
-        answer: "Event Loop обрабатывает асинхронные операции: сначала выполняет синхронный код, затем microtasks (Promise), затем macrotasks (setTimeout, setInterval).",
-        difficulty: "medium"
-      },
-      {
-        id: "js-57",
-        question: "Что такое замыкания (closures) и как они работают?",
-        answer: "Замыкание — функция, которая имеет доступ к переменным из внешней области видимости. Сохраняет ссылку на переменные даже после завершения выполнения внешней функции.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-58",
-        question: "Объясните работу this в JavaScript",
-        answer: "this — контекст выполнения функции. Зависит от способа вызова: в методе объекта — сам объект, в обычной функции — window/undefined, в стрелочной — внешний контекст.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-59",
-        question: "Что такое WeakMap и WeakSet?",
-        answer: "WeakMap и WeakSet хранят слабые ссылки на объекты, позволяя сборщику мусора удалять неиспользуемые объекты. Не итерируемы, ключи WeakMap — только объекты.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-60",
-        question: "Как работает Proxy в JavaScript?",
-        answer: "Proxy — объект-обертка, перехватывающий операции с объектом: get, set, has, deleteProperty и др. Позволяет кастомизировать поведение объекта.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-61",
-        question: "Что такое Symbol в JavaScript?",
-        answer: "Symbol — примитивный тип данных для создания уникальных идентификаторов. Используется для создания приватных свойств и специальных методов объектов.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-62",
-        question: "Объясните работу генераторов (generators)",
-        answer: "Генераторы — функции, которые могут приостанавливать выполнение через yield. Возвращают итератор. Позволяют создавать асинхронный код в синхронном стиле.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-63",
-        question: "Что такое декораторы в JavaScript?",
-        answer: "Декораторы — функции, которые модифицируют классы, методы или свойства. Используются для добавления функциональности без изменения исходного кода.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-64",
-        question: "Как работает Object.freeze() и Object.seal()?",
-        answer: "Object.freeze() делает объект неизменяемым. Object.seal() запрещает добавлять/удалять свойства, но позволяет изменять существующие. Оба возвращают модифицированный объект.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-65",
-        question: "Что такое Reflect в JavaScript?",
-        answer: "Reflect — встроенный объект, предоставляющий методы для перехватываемых операций. Используется с Proxy для создания более предсказуемого поведения.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-66",
-        question: "Объясните работу async итераторов",
-        answer: "Async итераторы позволяют асинхронно перебирать данные. Используют Symbol.asyncIterator и методы next(), return(), throw(). Поддерживаются в for await...of.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-67",
-        question: "Что такое BigInt в JavaScript?",
-        answer: "BigInt — тип данных для работы с целыми числами произвольной точности. Создается через n суффикс или BigInt(). Нельзя смешивать с обычными числами.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-68",
-        question: "Как работает Optional Chaining (?.)",
-        answer: "Optional Chaining позволяет безопасно обращаться к вложенным свойствам объекта. Возвращает undefined вместо ошибки, если промежуточное свойство null или undefined.",
-        difficulty: "medium"
-      },
-      {
-        id: "js-69",
-        question: "Что такое Nullish Coalescing (??)?",
-        answer: "Nullish Coalescing возвращает правый операнд, если левый равен null или undefined. В отличие от ||, не заменяет другие falsy значения (0, '', false).",
-        difficulty: "medium"
-      },
-      {
-        id: "js-70",
-        question: "Объясните работу Intl API",
-        answer: "Intl API предоставляет интернационализацию: форматирование дат, чисел, строк, сортировку. Использует Intl.DateTimeFormat, Intl.NumberFormat, Intl.Collator.",
-        difficulty: "medium"
       }
     ]
   },
+  // OOP
   {
-    id: "react",
+    "id": "oop",
+    "name": "Object-Oriented Programming (OOP)",
+    "questions": [
+      {
+        "id": "oop-1",
+        "question": "Что такое ООП и назовите его 4 основных столпа.",
+        "answer": "**Объектно-Ориентированное Программирование (ООП)** — это парадигма, которая организует код вокруг **объектов**, объединяющих данные (свойства) и поведение (методы). Это позволяет создавать более модульный, гибкий и повторно используемый код. \n\n**4 основных столпа (принципа) ООП:**\n1. **Инкапсуляция (Encapsulation)**\n2. **Наследование (Inheritance)**\n3. **Полиморфизм (Polymorphism)**\n4. **Абстракция (Abstraction)**",
+        "difficulty": "easy"
+      },
+      {
+        "id": "oop-2",
+        "question": "Объясните концепции Классов (Classes) и Объектов (Objects).",
+        "answer": "* **Класс (Class):** Это **шаблон** или **чертеж** для создания объектов. Он определяет общие свойства (атрибуты) и поведение (методы), которыми будут обладать все его экземпляры.\n* **Объект (Object):** Это конкретный **экземпляр** класса. У каждого объекта есть своя уникальная идентичность, состояние (текущие значения свойств) и поведение.\n\n**Пример (TS):**\n```typescript\nclass Car { /* Класс */\n  model: string;\n  constructor(model: string) { this.model = model; }\n}\nconst myCar = new Car('Tesla'); // Объект (экземпляр)\n```",
+        "difficulty": "easy"
+      },
+      {
+        "id": "oop-3",
+        "question": "Что такое Инкапсуляция и как она реализуется в TypeScript/JavaScript?",
+        "answer": "**Инкапсуляция** — это объединение данных и методов, работающих с этими данными, в единый блок (Класс), а также **скрытие** внутренней реализации (состояния) от внешнего доступа. Это обеспечивает **целостность данных**.\n\nВ **TypeScript** это реализуется через модификаторы доступа: `public`, `private`, `protected`. В **JavaScript** (до приватных полей `#`): через соглашения (префикс `_`) или замыкания.\n\n**Пример (TS с `private`):**\n```typescript\nclass Account {\n  private balance: number = 0; \n  public deposit(amount: number) { \n    if (amount > 0) this.balance += amount; \n  }\n  public getBalance(): number { return this.balance; }\n}\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-4",
+        "question": "Что такое Наследование и как оно работает в JavaScript/TypeScript?",
+        "answer": "**Наследование** — это механизм, который позволяет новому классу (**дочернему/наследнику**) приобретать свойства и методы существующего класса (**родительского/базового**). Оно устанавливает отношение **\"является-чем-то\" (is-a)** и способствует повторному использованию кода.\n\nВ JS/TS для этого используется ключевое слово **`extends`** и вызов **`super()`** в конструкторе наследника.\n\n**Пример (JS):**\n```javascript\nclass Animal { \n  constructor(name) { this.name = name; }\n  makeSound() { console.log('Some sound'); }\n}\nclass Dog extends Animal {\n  makeSound() { console.log('Woof'); } // Переопределение\n}\nconst dog = new Dog('Buddy');\ndog.makeSound(); // Output: Woof\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-5",
+        "question": "Что такое Полиморфизм и какие его типы существуют?",
+        "answer": "**Полиморфизм** (многообразие форм) позволяет объектам из разных классов отвечать на одно и то же сообщение (вызов метода) **по-разному**, при этом сохраняя общий интерфейс. Это позволяет писать более общий и гибкий код.\n\n**Типы полиморфизма:**\n1. **Наследование (Runtime Polymorphism):** Достигается через **переопределение (Method Overriding)** метода родительского класса в дочернем (как в примере выше).\n2. **Интерфейсы/Абстрактные классы:** Объекты, реализующие один и тот же интерфейс, могут быть обработаны одинаково.\n\n**Пример (TS с интерфейсом):**\n```typescript\ninterface Speaker { speak(): void; }\nclass Cat implements Speaker { speak() { console.log('Meow'); } }\nclass Duck implements Speaker { speak() { console.log('Quack'); } }\n// Функция принимает любой объект, реализующий Speaker\nfunction animalSpeak(animal: Speaker) { animal.speak(); }\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-6",
+        "question": "Что такое Абстракция и как она реализуется в TypeScript?",
+        "answer": "**Абстракция** — это процесс сосредоточения на **существенных** характеристиках объекта, игнорируя незначительные детали реализации. Она предоставляет **простой интерфейс** для сложных внутренних систем.\n\nВ **TypeScript** она реализуется через **Интерфейсы (`interface`)** и **Абстрактные Классы (`abstract class`)**.\n\n**Пример (TS с абстрактным классом):**\n```typescript\nabstract class Geometry {\n  abstract calculateArea(): number; // Метод должен быть реализован наследниками\n  display() { console.log('Calculating geometry...'); }\n}\nclass Circle extends Geometry {\n  constructor(private radius: number) { super(); }\n  calculateArea() { return Math.PI * this.radius * this.radius; }\n}\n// let shape = new Geometry(); // Ошибка, абстрактный класс нельзя инстанцировать\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-7",
+        "question": "Какова роль Конструктора (Constructor)?",
+        "answer": "**Конструктор** — это специальный метод внутри класса, который **автоматически вызывается** при создании (инстанцировании) нового объекта. Его основная роль — **инициализировать** состояние нового объекта, присваивая начальные значения его свойствам.\n\nВ JS/TS используется метод с именем **`constructor`**.\n\n**Пример (JS):**\n```javascript\nclass Person {\n  constructor(firstName, lastName) { // Конструктор\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.fullName = `${firstName} ${lastName}`;\n  }\n}\n```",
+        "difficulty": "easy"
+      },
+      {
+        "id": "oop-8",
+        "question": "В чем разница между Методом (Method) и Функцией (Function)?",
+        "answer": "* **Функция:** Блок кода, который может быть вызван **самостоятельно**, независимо от какого-либо объекта.\n* **Метод:** Это **функция, определенная внутри класса** (или объекта) и связанная с ним. Метод всегда вызывается в контексте объекта и имеет доступ к его данным через ключевое слово **`this`**.\n\n**Пример (JS):**\n```javascript\nfunction standaloneLog(msg) { console.log(msg); } // Функция\n\nclass Logger {\n  log(msg) { console.log(this.prefix + msg); } // Метод\n}\n```",
+        "difficulty": "easy"
+      },
+      {
+        "id": "oop-9",
+        "question": "Что такое «Согласованность» (Cohesion) и «Связность» (Coupling) в ООП?",
+        "answer": "* **Согласованность (Cohesion):** Мера того, насколько тесно связаны и сфокусированы на одной задаче методы и свойства внутри **одного класса**. **Высокая согласованность** (класс делает одно дело, и делает его хорошо) — это хорошо.\n* **Связность (Coupling):** Мера зависимости **двух разных классов** или модулей друг от друга. **Низкая связность** (классы минимально зависят друг от друга) — это хорошо, так как упрощает изменения и тестирование.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-10",
+        "question": "Что такое Интерфейс (Interface) в TypeScript?",
+        "answer": "**Интерфейс (`interface`)** — это мощная функция TypeScript, которая определяет **контракт** на структуру объекта. Он описывает, какие свойства и методы должен иметь объект, который его реализует, но **не содержит никакой реализации**.\n\n**Использование:** Обеспечивает строгую типизацию, используется для полиморфизма и как описание API.\n\n**Пример (TS):**\n```typescript\ninterface User {\n  id: number;\n  email: string;\n  logAccess(): void;\n}\n\nclass Admin implements User { \n  id: number = 1;\n  email: string = 'admin@';\n  logAccess() { console.log('Admin logged in.'); }\n}\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-11",
+        "question": "Объясните разницу между Композицией и Агрегацией.",
+        "answer": "Обе концепции описывают отношение **\"имеет-в-себе\" (has-a)**, но различаются силой связи:\n* **Композиция (Composition):** **Сильная** зависимость. Части **не могут существовать** без целого. При уничтожении целого, части также уничтожаются.\n* **Агрегация (Aggregation):** **Слабая** зависимость. Части могут **продолжать существовать** независимо от целого. Целое использует части, но не управляет их жизненным циклом.\n\n**Пример Композиции (JS):** Класс `Engine` создается внутри класса `Car` (двигатель не может существовать сам по себе).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-12",
+        "question": "Как в JavaScript/TypeScript создать статическое свойство или метод?",
+        "answer": "Статические члены класса принадлежат **самому классу**, а не его экземплярам (объектам). Они полезны для служебных функций, которые не зависят от состояния конкретного объекта (например, фабричные методы, константы).\n\nДля создания статических членов используется ключевое слово **`static`**.\n\n**Пример (TS):**\n```typescript\nclass Validator {\n  static MIN_LENGTH: number = 5; // Статическое свойство\n\n  static validate(input: string): boolean { // Статический метод\n    return input.length >= Validator.MIN_LENGTH;\n  }\n}\n\nconsole.log(Validator.validate('hello')); // Вызов через класс\n// const v = new Validator(); v.validate() // Ошибка\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-13",
+        "question": "Что такое перегрузка (Overloading) и поддерживает ли ее JavaScript/TypeScript?",
+        "answer": "**Перегрузка метода (Method Overloading)** — это возможность определить **несколько методов** с **одним и тем же именем**, но с **разными сигнатурами** (разное количество или типы параметров).\n\n* **JavaScript:** **Не поддерживает** перегрузку, так как функции определяются только по имени (последняя определенная функция переписывает предыдущие).\n* **TypeScript:** **Эмулирует** перегрузку для целей типизации (объявления нескольких сигнатур), но фактическая реализация метода должна быть **одна**, обрабатывающая все возможные сигнатуры.\n\n**Пример эмуляции в TS:**\n```typescript\nfunction sum(a: number, b: number): number;\nfunction sum(a: number, b: number, c: number): number;\nfunction sum(a: number, b: number, c?: number): number { // Единая реализация\n  return a + b + (c || 0);\n}\n```",
+        "difficulty": "hard"
+      },
+      {
+        "id": "oop-14",
+        "question": "Как работают геттеры (Getters) и сеттеры (Setters) в JS/TS?",
+        "answer": "**Геттеры и Сеттеры** используются для **контролируемого доступа** к свойствам объекта (реализуя инкапсуляцию).\n\n* **Геттер (`get`):** Специальный метод, который вызывается при **чтении** свойства. Он позволяет выполнить дополнительную логику перед возвратом значения.\n* **Сеттер (`set`):** Специальный метод, который вызывается при **записи** значения в свойство. Он позволяет выполнять валидацию или другую логику перед изменением внутреннего состояния.\n\n**Пример (JS):**\n```javascript\nclass Box {\n  constructor(w) { this._width = w; }\n  get width() { return this._width; } // Чтение\n  set width(newW) { \n    if (newW > 0) this._width = newW; // Валидация\n  }\n}\nconst box = new Box(10);\nbox.width = -5; // Вызов сеттера, не изменяет _width\n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "oop-15",
+        "question": "В чем главное отличие между ООП и Процедурным Программированием?",
+        "answer": "**Процедурное Программирование:** Сосредоточено на **функциях** (процедурах) и **логике** последовательного выполнения шагов. Данные и функции обычно разделены (фокус на *что* делать).\n\n**ООП:** Сосредоточено на **объектах**, которые объединяют данные и методы. Данные и поведение неразрывно связаны (фокус на *кто* это делает).\n\nООП лучше подходит для больших, сложных систем, где необходимы **инкапсуляция** и **иерархия** (наследование).",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  // react
+  {
+    id: "react-web",
     name: "React",
     questions: [
       {
-        id: "react-1",
-        question: "Что такое JSX?",
-        answer: "JSX (JavaScript XML) — это синтаксическое расширение JavaScript, позволяющее писать HTML-подобный код в JavaScript. Babel транспилирует JSX в вызовы React.createElement().",
+        id: "rct-1",
+        question: "Что такое React и каковы его ключевые концепции?",
+        answer: "**React** — это front-end JavaScript-библиотека с открытым исходным кодом, предназначенная для создания пользовательских интерфейсов, основанных на переиспользуемых компонентах.<br/><br/>**Ключевые концепции:**<br/>1. **Виртуальный DOM (Virtual DOM):** Легковесное представление реального DOM в памяти. React сравнивает его при изменениях и обновляет только измененные части реального DOM, что обеспечивает высокую производительность.<br/>2. **Компоненты:** Модульные, переиспользуемые блоки, инкапсулирующие логику и внешний вид. Бывают **классовые** и **функциональные** (с Хуками).<br/>3. **Однонаправленный поток данных (Unidirectional Data-flow):** Данные передаются от родительского компонента к дочернему через **пропсы** (props). Это упрощает отслеживание изменений и отладку.<br/>4. **JSX:** Синтаксическое расширение JavaScript, позволяющее писать HTML-подобный код прямо в файлах JS для декларативного описания UI.",
         difficulty: "easy"
       },
       {
-        id: "react-2",
-        question: "Объясните разницу между состоянием (state) и пропсами (props)",
-        answer: "Props — это неизменяемые данные, передаваемые от родительского компонента к дочернему. State — это локальные изменяемые данные компонента, которые могут обновляться с помощью setState или useState.",
+        id: "rct-2",
+        question: "Объясните концепцию Виртуального DOM (Virtual DOM) и как она влияет на производительность.",
+        answer: "**Виртуальный DOM** — это абстракция или легкое, находящееся в памяти, представление реального **DOM (Document Object Model)** браузера.<br/><br/>**Принцип работы:**<br/>1. **Инициализация/Изменение состояния:** При старте или изменении состояния (`state`/`props`) React создает новое дерево Виртуального DOM.<br/>2. **Реконсиляция (Reconciliation):** React сравнивает новое дерево с предыдущим состоянием (теневой копией), чтобы определить, какие узлы были изменены. Это называется **Диффинг (Diffing)**.<br/>3. **Пакетное обновление (Batched Update):** React собирает минимальный набор необходимых изменений и применяет их одним пакетом к **реальному DOM**.<br/><br/>Это **значительно повышает производительность**, так как прямые манипуляции с реальным DOM (которые являются дорогостоящими операциями) минимизируются, а обновления происходят максимально эффективно.",
         difficulty: "medium"
       },
       {
-        id: "react-3",
-        question: "Что такое хуки (hooks) в React?",
-        answer: "Хуки — это функции, которые позволяют использовать состояние и другие возможности React в функциональных компонентах. Примеры: useState, useEffect, useContext, useMemo.",
+        id: "rct-3",
+        question: "В чем разница между Классовыми (Class) и Функциональными (Functional) компонентами?",
+        answer: "Основное различие исторически заключалось в управлении состоянием и жизненным циклом, но **Хуки (Hooks)**, представленные в React 16.8, уравняли их возможности.<br/><br/>| Аспект | Классовый Компонент | Функциональный Компонент |<br/>| :--- | :--- | :--- |<br/>| **Определение** | Использует `class ... extends Component` | Использует `function` или стрелочную функцию |<br/>| **Состояние** | Управляется через `this.state` и `this.setState()` | Управляется через Хук `useState()` |<br/>| **Жизненный цикл** | Использует методы жизненного цикла (`componentDidMount`, `shouldComponentUpdate` и т.д.) | Управляется через Хук `useEffect()` |<br/>| **`this` контекст** | Используется (нужна привязка методов) | Не используется |<br/><br/>**Современная практика** предпочитает **функциональные компоненты с Хуками** за их простоту, меньшую многословность и лучшую переиспользуемость логики.",
         difficulty: "medium"
       },
       {
-        id: "react-4",
-        question: "Объясните жизненный цикл компонентов React",
-        answer: "Жизненный цикл включает: Mounting (componentDidMount), Updating (componentDidUpdate), Unmounting (componentWillUnmount). В функциональных компонентах используется useEffect.",
+        id: "rct-4",
+        question: "Что такое JSX и зачем его использовать в React?",
+        answer: "**JSX (JavaScript XML)** — это синтаксическое расширение для JavaScript, которое позволяет разработчикам описывать UI с помощью знакомого **HTML-подобного синтаксиса** внутри JavaScript-кода.<br/><br/>**Преимущества:**<br/>1. **Читаемость:** Код становится более понятным и декларативным, так как структура UI визуально напоминает HTML.<br/>2. **Компактность:** Позволяет избежать длинных вызовов `React.createElement()`, в которые JSX транспилируется.<br/>3. **Эффективность разработки:** Современные IDE и линтеры (ESLint) обеспечивают лучшую поддержку автодополнения и проверки типов при работе с JSX.<br/><br/>**Транспиляция:** Babel автоматически преобразует JSX-код (например, `<h1>Hello</h1>`) в вызовы чистого JavaScript (например, `React.createElement('h1', null, 'Hello')`), понятные браузеру.",
+        difficulty: "easy"
+      },
+      {
+        id: "rct-5",
+        question: "В чем разница между Props и State в React?",
+        answer: "И **Пропсы (Props)**, и **Состояние (State)** используются для хранения данных в компоненте, но выполняют разные роли.<br/><br/>| Аспект | Props (Свойства) | State (Состояние) |<br/>| :--- | :--- | :--- |<br/>| **Назначение** | Передача данных от родителя к дочернему компоненту. | Управление данными внутри самого компонента. |<br/>| **Изменяемость** | **Неизменяемы (Immutable)**; доступны только для чтения дочерним компонентом. | **Изменяемы (Mutable)**; компонент может изменять свое состояние. |<br/>| **Инициализация** | Задаются родительским компонентом. | Инициализируется внутри компонента (`this.state` или `useState`). |<br/>| **Перерисовка** | Изменение пропсов родителя вызывает перерисовку дочернего. | Изменение состояния компонента вызывает его перерисовку. |<br/><br/>**Правило:** Используйте **пропсы** для данных, которые приходят извне и не меняются. Используйте **состояние** для данных, которые должны меняться со временем в ответ на действия пользователя или запросы.",
+        difficulty: "easy"
+      },
+      {
+        id: "rct-6",
+        question: "Как происходит обработка событий (Event Handling) в React?",
+        answer: "React унифицирует систему событий браузеров через механизм **Синтетических Событий (Synthetic Events)**.<br/><br/>**Ключевые моменты:**<br/>1. **Кроссбраузерность:** Синтетические события оборачивают нативные события браузера, обеспечивая согласованный интерфейс и поведение во всех браузерах.<br/>2. **Именование:** В React события именуются в **`camelCase`** (например, `onClick` вместо `onclick` в HTML).<br/>3. **Привязка:** Функция-обработчик передается как пропс к элементу (`<button onClick={handleClick}>`).<br/>4. **Предотвращение по умолчанию:** Чтобы остановить поведение браузера по умолчанию (например, отправку формы), используется метод `event.preventDefault()` внутри обработчика, как в примере ниже.<br/><br/>```javascript<br/>// Пример обработки события формы<br/>handleSubmit(event) {<br/>&nbsp;&nbsp;event.preventDefault(); // Предотвращает перезагрузку страницы<br/>&nbsp;&nbsp;alert('Форма отправлена!');<br/>}<br/><br/>// В render<br/>return (<br/>&nbsp;&nbsp;<form onSubmit={this.handleSubmit}><br/>&nbsp;&nbsp;&nbsp;&nbsp;<button type=\"submit\">Отправить</button><br/>&nbsp;&nbsp;</form><br/>);<br/>```",
         difficulty: "medium"
       },
       {
-        id: "react-5",
-        question: "Что такое Virtual DOM?",
-        answer: "Virtual DOM — это JavaScript представление реального DOM в памяти. React использует его для оптимизации обновлений, сравнивая изменения и обновляя только необходимые элементы.",
+        id: "rct-7",
+        question: "Что такое Хук useState() и как он используется в функциональных компонентах?",
+        answer: "**`useState`** — это встроенный **React Хук**, который позволяет функциональным компонентам иметь **локальное состояние**.<br/><br/>**Использование:**<br/>Он возвращает массив из двух элементов: текущее значение состояния и функцию-сеттер для его обновления.<br/><br/>```javascript<br/>import React, { useState } from 'react';<br/><br/>const Counter = () => {<br/>&nbsp;&nbsp;// [Текущее значение, Функция для обновления]<br/>&nbsp;&nbsp;const [count, setCount] = useState(0); // 0 — начальное значение<br/><br/>&nbsp;&nbsp;return (<br/>&nbsp;&nbsp;&nbsp;&nbsp;<div><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>Счет: {count}</p><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Вызов сеттера для обновления состояния и перерисовки<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={() => setCount(count + 1)}>Инкремент</button><br/>&nbsp;&nbsp;&nbsp;&nbsp;</div><br/>&nbsp;&nbsp;);<br/>};<br/>```<br/><br/>**Ключевой момент:** При вызове функции-сеттера (`setCount`), React **перерисовывает** компонент с новым значением состояния.",
+        difficulty: "easy"
+      },
+      {
+        id: "rct-8",
+        question: "Как дочерний компонент может обновить состояние родительского компонента?",
+        answer: "React придерживается **однонаправленного потока данных (Parent-to-Child)**. Чтобы дочерний компонент мог изменить состояние родителя, необходимо использовать **паттерн Callback-функции через пропсы**.<br/><br/>**Механизм:**<br/>1. **Родительский компонент** определяет функцию, которая обновляет его состояние.<br/>2. Эта функция **передается как пропс** дочернему компоненту.<br/>3. **Дочерний компонент** вызывает эту функцию-пропс (callback) в ответ на событие (например, нажатие кнопки), передавая ей новое значение.<br/><br/>**Пример:**<br/>```javascript<br/>// В Родительском компоненте<br/>function Parent() {<br/>&nbsp;&nbsp;const [data, setData] = useState('');<br/>&nbsp;&nbsp;const updateState = (newData) => setData(newData); // Функция для обновления<br/>&nbsp;&nbsp;return <Child onDataChange={updateState} />;<br/>}<br/><br/>// В Дочернем компоненте<br/>function Child({ onDataChange }) {<br/>&nbsp;&nbsp;const handleClick = () => {<br/>&nbsp;&nbsp;&nbsp;&nbsp;onDataChange('Новые данные от дочернего компонента'); // Вызов callback<br/>&nbsp;&nbsp;};<br/>&nbsp;&nbsp;return <button onClick={handleClick}>Обновить Родителя</button>;<br/>}<br/>```",
         difficulty: "medium"
       },
       {
-        id: "react-6",
-        question: "Объясните useEffect хук",
-        answer: "useEffect выполняет побочные эффекты в функциональных компонентах: запросы к API, подписки, изменение DOM. Может имитировать componentDidMount, componentDidUpdate, componentWillUnmount.",
+        id: "rct-9",
+        question: "Что такое 'Поднятие состояния' (Lifting State Up) и когда это необходимо?",
+        answer: "**Поднятие состояния (Lifting State Up)** — это архитектурный паттерн в React, при котором локальное состояние нескольких дочерних компонентов перемещается (поднимается) в их ближайший общий **родительский компонент**.<br/><br/>**Необходимость:**<br/>Паттерн необходим, когда **два или более компонента-брата** должны быть **синхронизированы** и совместно использовать или влиять на одни и те же данные. Если данные должны быть общими, они должны жить в их ближайшем общем предке.<br/><br/>**Принцип:**<br/>1. **Родитель** хранит общее состояние.<br/>2. **Родитель** передает данные вниз как **пропсы**.<br/>3. **Родитель** передает функции для изменения состояния вниз как **пропсы-callback**.<br/><br/>*Пример: Калькулятор, где два поля ввода (длина и ширина) должны влиять на один компонент результата (площадь). Состояние длины и ширины поднимается в общий компонент-калькулятор.*",
         difficulty: "medium"
       },
       {
-        id: "react-7",
-        question: "Что такое Context API?",
-        answer: "Context API позволяет передавать данные через дерево компонентов без прокидывания props через все уровни. Используется для глобального состояния.",
-        difficulty: "medium"
-      },
-      {
-        id: "react-8",
-        question: "В чем разница между useMemo и useCallback?",
-        answer: "useMemo мемоизирует результат вычислений, useCallback мемоизирует саму функцию. Оба используются для оптимизации производительности.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-9",
-        question: "Что такое reconciliation в React?",
-        answer: "Reconciliation — процесс сравнения нового Virtual DOM с предыдущим и определения минимальных изменений для обновления реального DOM.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-10",
-        question: "Объясните useReducer хук",
-        answer: "useReducer — альтернатива useState для сложного состояния. Принимает reducer функцию и начальное состояние, возвращает текущее состояние и dispatch функцию.",
-        difficulty: "medium"
-      },
-      {
-        id: "react-11",
-        question: "Что такое HOC (Higher-Order Components)?",
-        answer: "HOC — функция, которая принимает компонент и возвращает новый компонент с дополнительными свойствами или поведением.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-12",
-        question: "Объясните render props паттерн",
-        answer: "Render props — техника совместного использования кода между компонентами с помощью prop, значение которого является функцией.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-13",
-        question: "Что такое React.memo?",
-        answer: "React.memo — HOC для мемоизации функциональных компонентов. Предотвращает ненужные перерендеры, если props не изменились.",
-        difficulty: "medium"
-      },
-      {
-        id: "react-14",
-        question: "Объясните useRef хук",
-        answer: "useRef возвращает изменяемый ref объект, который сохраняет значение между рендерами. Используется для доступа к DOM элементам или хранения значений.",
-        difficulty: "medium"
-      },
-      {
-        id: "react-15",
-        question: "Что такое Suspense в React?",
-        answer: "Suspense позволяет компонентам 'ждать' что-то перед рендерингом, показывая fallback UI во время загрузки данных или кода.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-16",
-        question: "Объясните Error Boundaries",
-        answer: "Error Boundaries — компоненты, которые перехватывают JavaScript ошибки в дереве компонентов и отображают fallback UI вместо краха приложения.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-17",
-        question: "Что такое React Fiber?",
-        answer: "React Fiber — новая архитектура reconciler в React 16+, позволяющая прерывать, приостанавливать и возобновлять работу для лучшей производительности.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-18",
-        question: "Объясните Concurrent Features в React 18",
-        answer: "Concurrent Features включают автоматический батчинг, Suspense для SSR, useTransition и useDeferredValue для оптимизации производительности.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-19",
-        question: "Что такое React Server Components?",
-        answer: "Server Components рендерятся на сервере, позволяя уменьшить размер бандла и улучшить производительность за счет серверного рендеринга части компонентов.",
-        difficulty: "hard"
-      },
-      {
-        id: "react-20",
-        question: "Объясните useLayoutEffect",
-        answer: "useLayoutEffect работает синхронно после всех DOM мутаций, но до отрисовки браузером. Используется для измерений DOM и предотвращения мерцания.",
+        id: "rct-10",
+        question: "Сравните Redux и Context API для управления глобальным состоянием.",
+        answer: "Оба инструмента решают проблему **Prop Drilling** (передачи пропсов через множество уровней), но имеют разную сложность и цели.<br/><br/>| Аспект | Context API | Redux |<br/>| :--- | :--- | :--- |<br/>| **Сложность** | Проще, встроен в React, минимум кода. | Сложнее, требует установки библиотеки, **Actions, Reducers, Store**.<br/>| **Производительность** | При изменении провайдера **все** подписанные компоненты перерисовываются (может быть медленно). | Высокая, перерисовывает только компоненты, подписанные на **конкретные части** состояния. |<br/>| **Прогнозируемость** | Менее строгий поток, что может усложнить отладку. | **Строгий, предсказуемый** однонаправленный поток (идеально для крупных команд/проектов). |<br/>| **Инструменты** | Минимум отладочных инструментов. | **Redux DevTools** — мощный инструмент для \"путешествия во времени\" и отслеживания изменений. |<br/><br/>**Вывод:**<br/>* **Context API:** Идеален для **нечасто меняющегося** и **некритичного** состояния (тема приложения, язык пользователя).<br/>* **Redux:** Идеален для **сложного, часто меняющегося** состояния в **крупных** корпоративных приложениях.",
         difficulty: "hard"
       }
     ]
   },
+  // react native 
+  {
+    id: "react-native",
+    name: "React Native",
+    questions: [
+      {
+        id: "rn-1",
+        question: "Что такое React Native и в чем его ключевое отличие от React?",
+        answer: "**React Native** — фреймворк, который расширяет возможности React, позволяя создавать **нативные мобильные приложения** для iOS и Android с использованием JavaScript и React. <br/><br/>**Ключевые отличия от React (Web):**<br/>• **Платформа:** React – для веба (браузер), React Native – для мобильных устройств.<br/>• **Рендеринг:** React использует **DOM** браузера, React Native рендерит с помощью **нативных компонентов** (через Bridge).<br/>• **Компоненты:** Используются специфичные нативные компоненты, например, `<View>`, `<Text>`, `<Button>`, вместо веб-элементов (`<div>`, `<span>`, `<button>`).<br/>• **API:** React Native имеет доступ к нативным API устройства (Камера, GPS, Сенсоры).<br/><br/>**Пример (кнопка):**<br/>В React (Web):<br/>```javascript<br/>// Используется HTML-элемент<br/>return <button onClick={...}>Click</button>;<br/>```<br/>В React Native:<br/>```javascript<br/>import { Button } from 'react-native';<br/>// Используется нативный компонент<br/>return <Button title=\"Click\" onPress={...} />;<br/>```",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-2",
+        question: "Объясните концепцию 'Learn Once, Write Anywhere' в контексте React Native.",
+        answer: "Это означает **повторное использование логики** и архитектуры React на разных платформах. Главная идея — **Code Reusability** (переиспользование кода), а не 100% общность кода.<br/><br/>**Ключевые аспекты:**<br/>1. **Общая бизнес-логика:** Функциональные компоненты, хуки, Redux-логика и большая часть JavaScript-кода могут быть общими.<br/>2. **Адаптация:** Нативный внешний вид (UI/UX) и взаимодействие с устройством (Permissions) могут потребовать платформо-специфичного кода.<br/><br/>**Механизмы адаптации:**<br/>• **Platform API:** Использование `Platform.OS === 'ios'` для логических ветвлений.<br/>• **Специфичные файлы:** Создание файлов с расширением `.ios.js` или `.android.js` (например, `Header.ios.js`), чтобы импортировать нужный модуль автоматически.",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-3",
+        question: "Каковы основные шаги для создания базового приложения React Native?",
+        answer: "Процесс создания включает настройку окружения и инициализацию проекта. Обычно используют **Expo CLI** (для простоты) или **React Native CLI** (для сложных проектов с нативными модулями).<br/><br/>**Шаги с React Native CLI:**<br/>1. **Установка зависимостей:** Убедиться, что установлены **Node.js**, **JDK** и необходимые инструменты iOS/Android.<br/>2. **Инициализация проекта:**<br/>```bash<br/>npx react-native init MyApp<br/>cd MyApp<br/>```<br/>3. **Запуск:**<br/>```bash<br/>npx react-native run-android<br/># или<br/>npx react-native run-ios<br/>```<br/>**Структура проекта:**<br/>• `index.js` или `App.js`: Точка входа в приложение.<br/>• `android/` и `ios/`: Содержат нативные проекты.<br/>• `package.json`: Управление зависимостями.<br/><br/>*Я использую Expo для быстрого прототипирования, так как он упрощает настройку нативного окружения.*",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-4",
+        question: "Какие типы компонентов существуют в React Native? Приведите пример кастомного компонента.",
+        answer: "В React Native компоненты делятся на две основные группы:<br/><br/>1. **Базовые (Core Components):** Встроенные элементы, которые напрямую соответствуют нативным UI-блокам. Они являются основой для всего: `<View>`, `<Text>`, `<Image>`, `<Button>`, `<TextInput>`.<br/>2. **Кастомные (Custom Components):** Компоненты, созданные разработчиком. Они обычно состоят из базовых компонентов и инкапсулируют сложную логику, стили и поведение. Они обеспечивают **модульность** и **переиспользование**.<br/><br/>**Пример кастомного компонента:**<br/>```javascript<br/>// CustomButton.js<br/>import { TouchableOpacity, Text, StyleSheet } from 'react-native';<br/><br/>const CustomButton = ({ title, onPress }) => (<br/>&nbsp;&nbsp;<TouchableOpacity style={styles.button} onPress={onPress}><br/>&nbsp;&nbsp;&nbsp;&nbsp;<Text style={styles.text}>{title}</Text><br/>&nbsp;&nbsp;</TouchableOpacity><br/>);<br/><br/>// Кастомный компонент инкапсулирует TouchableOpacity<br/>// и Text, предоставляя простой интерфейс (props: title, onPress).<br/>```",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-5",
+        question: "Для чего нужна функция render() в компонентах React Native (и React)?",
+        answer: "Функция **`render()`** (или её тело в функциональных компонентах) является обязательным методом и отвечает за **описание визуального вывода** компонента. <br/><br/>**Назначение:**<br/>• **Возврат JSX:** Она принимает пропсы и стейт и возвращает **JSX** — декларативный «чертеж» пользовательского интерфейса.<br/>• **Виртуальный DOM:** Когда состояние (`state`) или пропсы (`props`) компонента изменяются, `render()` вызывается снова. Результат сравнивается с предыдущим состоянием **Виртуального DOM**, и только необходимые изменения применяются к нативному UI.<br/>• **Условный рендеринг:** Позволяет динамически решать, какие элементы показывать пользователю (например, скрывать список, если он пуст).<br/><br/>*В функциональных компонентах роль `render()` выполняет сама функция, возвращая JSX.*",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-6",
+        question: "Что такое JSX в React Native и как он обрабатывается?",
+        answer: "**JSX (JavaScript XML)** — это синтаксическое расширение JavaScript, которое позволяет писать HTML-подобную структуру прямо в файлах JS.<br/><br/>**Роль в RN:** JSX используется для декларативного описания UI-дерева из нативных компонентов (`<View>`, `<Text>`).<br/><br/>**Обработка (Транспиляция):**<br/>1. Разработчик пишет JSX.<br/>2. **Babel** (транспайлер) преобразует JSX в чистый JavaScript, используя вызовы `React.createElement()`.<br/>3. **React Native Bridge** получает эту структуру и преобразует ее в соответствующие **нативные представления** (iOS: `UIView`, Android: `android.view`).<br/><br/>**Пример транспайлинга:**<br/>JSX:<br/>```jsx<br/>return <Text>Hello</Text>;<br/>```<br/>Транспайлинг в JS:<br/>```javascript<br/>return React.createElement(Text, null, \"Hello\");<br/>```",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-7",
+        question: "Назовите 5-7 ключевых (Core) компонентов React Native и их назначение.",
+        answer: "Ключевые компоненты (Core Components) являются основой для построения любого интерфейса в React Native. Они напрямую мапятся на нативные элементы:<br/><br/>1. **`<View>`:** Самый базовый контейнер для построения UI. Поддерживает стили, Flexbox и служит 'блоком' разметки. Аналог `div` в вебе.<br/>2. **`<Text>`:** Используется исключительно для отображения текста и его стилизации. Все текстовые узлы должны быть внутри этого компонента.<br/>3. **`<Image>`:** Отображает изображения, локальные или сетевые.<br/>4. **`<Button>` / `<TouchableOpacity>`:** Элементы для обработки нажатий. `<Button>` — базовый нативный, `<TouchableOpacity>` — более гибкий, уменьшающий прозрачность при касании.<br/>5. **`<TextInput>`:** Компонент для ввода текста (однострочного или многострочного).<br/>6. **`<ScrollView>`:** Контейнер, который позволяет прокручивать содержимое, если оно превышает размер экрана.<br/>7. **`<FlatList>` / `<SectionList>`:** Высокопроизводительные, 'виртуализированные' компоненты для эффективного рендеринга больших списков данных (отличаются способом группировки).",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-8",
+        question: "Как осуществляется управление состоянием (State Management) в React Native?",
+        answer: "Управление состоянием делится на локальное и глобальное.<br/><br/>**Локальное состояние (Local State):**<br/>• Используется для данных, нужных только одному компоненту (например, состояние открытого модального окна, значение в поле ввода).<br/>• Применяется **хук `useState`**.<br/>```javascript<br/>const [count, setCount] = useState(0);<br/>```<br/><br/>**Глобальное состояние (Global/Shared State):**<br/>• Используется для данных, общих для многих компонентов (например, данные пользователя, тема приложения, корзина).<br/>• **Context API:** Встроенный инструмент для передачи состояния глубоко по дереву компонентов. Часто используется вместе с `useReducer` для сложной логики.<br/>• **Внешние библиотеки:** **Redux, Zustand, Recoil** и другие для более масштабируемых, предсказуемых и отлаживаемых решений.",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-9",
+        question: "Что такое Props и почему они важны для компонентов RN?",
+        answer: "**Props (Properties)** — это объект, который содержит данные, передаваемые **сверху вниз** (от родительского компонента к дочернему).<br/><br/>**Важность:**<br/>1. **Однонаправленный поток данных:** Обеспечивает предсказуемость, так как данные текут только в одном направлении, делая отладку проще.<br/>2. **Инкапсуляция и переиспользование:** Позволяют настраивать поведение и внешний вид дочернего компонента без изменения его внутреннего кода, создавая универсальные блоки.<br/>3. **Иммутабельность:** Дочерний компонент **не должен** изменять пропсы, которые он получает. Они доступны только для чтения, что обеспечивает **Single Source of Truth**.<br/><br/>**Пример использования Prop Types:**<br/>Использование библиотеки `prop-types` (или TypeScript) для статической проверки типов пропсов в разработке, что повышает надежность кода.<br/>```javascript<br/>// Указываем, что 'name' должен быть строкой и обязателен<br/>MyComponent.propTypes = {<br/>&nbsp;&nbsp;name: PropTypes.string.isRequired,<br/>};<br/>```",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-10",
+        question: "Как работает Flexbox в React Native и в чем его отличие от веба?",
+        answer: "**Flexbox** — это система CSS-стилей для компоновки, которая является **основным механизмом разметки** в React Native.<br/><br/>**Как работает:**<br/>• Используется для распределения пространства, выравнивания и упорядочивания элементов внутри контейнера (`<View>`).<br/>• Все компоненты, которые поддерживают стили, могут быть Flex-контейнерами или Flex-элементами.<br/><br/>**Ключевые отличия от Web (CSS):**<br/>1. **Направление по умолчанию:** В React Native по умолчанию используется `flexDirection: 'column'` (элементы располагаются вертикально), в отличие от веба, где по умолчанию `row`.<br/>2. **`flex` свойство:** В RN `flex: 1` означает, что элемент займет всё доступное пространство контейнера (аналог `flex-grow: 1`).<br/><br/>**Пример (вертикальная разметка):**<br/>```javascript<br/>const styles = StyleSheet.create({<br/>&nbsp;&nbsp;container: {<br/>&nbsp;&nbsp;&nbsp;&nbsp;flex: 1, // Занять весь экран<br/>&nbsp;&nbsp;&nbsp;&nbsp;flexDirection: 'column', // По умолчанию<br/>&nbsp;&nbsp;&nbsp;&nbsp;justifyContent: 'center', // Выравнивание по вертикали<br/>&nbsp;&nbsp;},<br/>});<br/>```",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-11",
+        question: "Какие основные инструменты и стратегии вы используете для отладки (Debugging) приложений React Native?",
+        answer: "Отладка в RN требует сочетания традиционных и специфических инструментов, поскольку код выполняется в разных средах.<br/><br/>**Инструменты:**<br/>1. **React Native Debugger / Flipper:** Единый инструмент, объединяющий инспектор компонентов (React DevTools) и консоль (Chrome DevTools) для просмотра сетевых запросов, логов и состояния Redux.<br/>2. **Консольное логирование:** Использую `console.log/warn/error` для быстрого вывода информации. `console.assert` для условных проверок.<br/>3. **Эмуляторы/Симуляторы и физические устройства:** Обязательное тестирование, так как баги могут проявляться только на конкретном устройстве.<br/>4. **Redux DevTools:** Для отслеживания изменений глобального состояния.<br/><br/>**Стратегии:**<br/>• **Изоляция:** В случае сложного бага временно удаляю или комментирую части кода (использую принцип 'бинарного поиска') до нахождения источника проблемы.<br/>• **Защита от `undefined`:** Активно использую оператор опциональной цепочки (`?.`) и условный рендеринг, чтобы избежать ошибок при доступе к несуществующим свойствам.<br/>• **HMR (Hot Module Replacement):** Использую горячую перезагрузку для сохранения состояния приложения при внесении изменений в код, что ускоряет процесс отладки.",
+        difficulty: "medium"
+      },
+      {
+        id: "rn-12",
+        question: "Объясните разницу между Hot Reloading и Live Reloading (Full Reloading).",
+        answer: "Оба механизма используются для ускорения разработки, но работают по-разному:<br/><br/>| Механизм | Описание | Сохранение состояния | Скорость | Применение |<br/>| :--- | :--- | :--- | :--- | :--- |<br/>| **Hot Reloading** | Заменяет только измененные модули в реальном времени. | **Да** | Быстро | Изменения стилей/логики |<br/>| **Live Reloading** | Перезагружает всё приложение с нуля. | **Нет** | Медленно | Изменения, влияющие на нативный код |<br/><br/>**Hot Reloading (HMR):**<br/>• **Преимущество:** Сохраняет текущее состояние компонента (например, текст в поле ввода, положение в списке).<br/>• **Недостаток:** Может не сработать для некоторых изменений (например, нативного кода или глобальных переменных).<br/><br/>**Live Reloading (Полная перезагрузка):**<br/>• **Преимущество:** Гарантированно отражает все изменения, включая нативные модули.<br/>• **Недостаток:** Теряется текущее состояние, что замедляет тестирование интерактивных элементов.",
+        difficulty: "easy"
+      },
+      {
+        id: "rn-13",
+        question: "Опишите базовые компоненты React Native для обработки пользовательского ввода (Text Input, Picker, Touchables).",
+        answer: "React Native предоставляет специфические компоненты для обработки ввода, которые используют нативные элементы платформ.<br/><br/>**1. `<TextInput>`:**<br/>• Для ввода текста (аналог `<input type='text'>` или `<textarea>`).<br/>• Поддерживает **`onChangeText`** для отслеживания ввода и **`value`** для контролируемого компонента.<br/>• Имеет свойства для клавиатуры (`keyboardType`), автозаполнения (`autoCompleteType`) и безопасности ввода (`secureTextEntry`).<br/><br/>**2. `<Picker>`:**<br/>• Компонент для выбора одного значения из дискретного набора опций (аналог `<select>`).<br/>• На iOS и Android может выглядеть и работать по-разному, используя нативные элементы выбора.<br/><br/>**3. Touchables (Обработка касаний):**<br/>• Базовый `<Button>` слишком ограничен.<br/>• **`<TouchableOpacity>`:** Снижает прозрачность области при нажатии, давая визуальный отклик. Наиболее часто используемый.<br/>• **`<TouchableHighlight>`:** Подсвечивает область, меняя фон. Используется реже.<br/>• **`<TouchableWithoutFeedback>`:** Реагирует на касание, но не дает визуального отклика.",
+        difficulty: "medium"
+      }
+    ]
+  },
+  // Next
+  {
+    id: "nextjs",
+    name: "Next.js",
+    questions: [
+      {
+        id: "nj-1",
+        question: "Что такое Next.js и каковы его основные возможности?",
+        answer: "**Next.js** — это полнофункциональный **React-фреймворк** для создания продакшн-приложений. Он предоставляет набор инструментов и конфигураций, которые упрощают разработку современных, высокопроизводительных веб-приложений.<br/><br/>**Основные возможности (Rendering Strategies):**<br/>1. **Server-Side Rendering (SSR):** Генерация HTML на сервере при каждом запросе.<br/>2. **Static Site Generation (SSG):** Пре-рендеринг HTML во время сборки (`build time`).<br/>3. **Incremental Static Regeneration (ISR):** Обновление статических страниц через заданный интервал.<br/>4. **Гибридный рендеринг:** Возможность использовать разные стратегии для разных страниц.<br/><br/>**Дополнительные функции:**<br/>• **Маршрутизация на основе файловой системы (File-system routing).**<br/>• **Автоматическое разделение кода (Code Splitting).**<br/>• **API Routes** для создания бэкенд-эндпоинтов.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-2",
+        question: "Сравните Next.js и Create React App (CRA).",
+        answer: "Основное различие в том, что **CRA** — это инструмент для быстрого старта **клиентских** приложений (SPA), а **Next.js** — это **фреймворк для полного стека (Full-stack)**, который включает серверный рендеринг.<br/><br/>| Аспект | Next.js | Create React App (CRA) |<br/>| :--- | :--- | :--- |<br/>| **Рендеринг** | Встроенные SSR, SSG, ISR и CSR. | **Только CSR** (Client-Side Rendering). |<br/>| **SEO** | Отличное, благодаря SSG/SSR, контент виден поисковикам сразу. | Плохое, требует сторонних библиотек (например, React Helmet) или SSR-оберток. |<br/>| **Маршрутизация** | **Автоматическая**, на основе файловой системы (`pages/`). | **Ручная**, требует установки и настройки `react-router-dom`. |<br/>| **API** | Встроенные **API Routes** для создания бэкенда. | Отсутствуют, нужно развертывать отдельный сервер (Express, Node.js). |<br/>| **Конфигурация** | Фреймворк с 'батарейками в комплекте' и гибкой конфигурацией. | Набор скриптов с жесткой конфигурацией (сложно 'эджектить'). |",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-3",
+        question: "Как создать новое Next.js приложение?",
+        answer: "Самый простой и рекомендуемый способ создать новое Next.js приложение — использовать команду **`create-next-app`** через `npx` (для Node.js 12+):<br/><br/>```bash<br/>npx create-next-app my-next-app<br/>```<br/><br/>**`npx`** выполнит последнюю версию пакета, даже если он не установлен глобально. Вместо `my-next-app` укажите имя вашей рабочей директории. Этот скрипт автоматически настроит базовую файловую структуру, включая каталог `pages/`, и установит все необходимые зависимости.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-4",
+        question: "Объясните Server-Side Rendering (SSR) в контексте Next.js.",
+        answer: "**Server-Side Rendering (SSR)** — это метод рендеринга, при котором HTML для страницы генерируется **на сервере при каждом запросе** пользователя. Это обеспечивает отображение актуальных данных.<br/><br/>**Механизм:**<br/>1. Пользователь запрашивает URL.<br/>2. Сервер Next.js выполняет функцию **`getServerSideProps`** на запрошенной странице.<br/>3. Сервер генерирует полную HTML-страницу, включая актуальные данные, и отправляет ее браузеру.<br/>4. После загрузки HTML, клиентский JS 'оживляет' страницу (процесс **гидратации**).<br/><br/>**Использование:** Для активации SSR на странице необходимо **экспортировать** асинхронную функцию **`getServerSideProps`**.",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-5",
+        question: "Каталог `pages` в Next.js: его роль и как он сопоставляется с маршрутами?",
+        answer: "Каталог **`pages`** служит основным **инструментом определения маршрутов** в Next.js. Каждая компонента-страница, расположенная внутри этого каталога, автоматически становится URL-маршрутом (Page-based routing).<br/><br/>**Ключевые сопоставления:**<br/>• **Корневой маршрут:** `pages/index.js` $\rightarrow$ `/`<br/>• **Вложенный маршрут:** `pages/about.js` $\rightarrow$ `/about`<br/>• **Маршрут секции:** `pages/posts/index.js` $\rightarrow$ `/posts`<br/>• **Динамический маршрут:** `pages/posts/[id].js` $\rightarrow$ `/posts/:id`<br/><br/>**Специальные файлы:**<br/>• **`_app.js`:** Главная компонента, обертывающая все страницы (для глобальных стилей, контекста).<br/>• **`_document.js`:** Настраивает серверный рендеринг HTML-документа (теги `<html>`, `<body>`).<br/>• **`404.js`:** Пользовательская страница для обработки 404 ошибок.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-6",
+        question: "Как реализовать Server-Side Rendering (SSR) на конкретной странице?",
+        answer: "Для реализации SSR на странице необходимо **экспортировать** асинхронную функцию **`getServerSideProps`** из файла страницы.<br/><br/>**Принцип работы `getServerSideProps`:**<br/>1. Эта функция запускается **при каждом запросе** к странице.<br/>2. Она выполняется **исключительно на сервере** и никогда не попадает в клиентский бандл.<br/>3. Возвращает объект с ключом `props`, которые передаются в компонент страницы.<br/><br/>**Пример:**<br/>```javascript<br/>export default function ServerSide({ time }) {<br/>&nbsp;&nbsp;return <p>Current time: {time}</p>;<br/>}<br/>export async function getServerSideProps() {<br/>&nbsp;&nbsp;// Получение данных при каждом запросе<br/>&nbsp;&nbsp;return {<br/>&nbsp;&nbsp;&nbsp;&nbsp;props: {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time: new Date().toISOString(), // Актуальное время<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;};<br/>}<br/>```",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-7",
+        question: "Какие расширения файлов поддерживаются для страниц и компонентов в Next.js?",
+        answer: "Next.js имеет встроенную поддержку различных файловых расширений для компонентов страниц, стилей и других ресурсов:<br/><br/>**Страницы/Компоненты:**<br/>• **`.js`** или **`.jsx`** (стандартный JavaScript/React)<br/>• **`.ts`** или **`.tsx`** (TypeScript/React)<br/>• **`.mdx`** (Markdown с возможностью встраивания JSX/React компонентов)<br/><br/>**Стилизация:**<br/>• **`.css`** (Стандартный CSS)<br/>• **`.module.css`** (CSS Modules для локальной области видимости)<br/>• **`.scss`** или **`.sass`** (при установке `sass`)<br/><br/>Благодаря этой гибкости разработчики могут использовать предпочтительные инструменты, включая TypeScript, без дополнительной сложной настройки.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-8",
+        question: "Как используются переменные окружения (Environment Variables) в Next.js?",
+        answer: "Переменные окружения используются для настройки параметров приложения в зависимости от среды (разработка, тестирование, продакшн) и хранения **конфиденциальных данных**.<br/><br/>**Механизм:**<br/>1. **Файлы:** Переменные объявляются в файлах `.env.local` (или `.env.development`, `.env.production`).<br/>2. **Доступ:** Доступ к ним осуществляется через `process.env.<VARIABLE_NAME>`.<br/><br/>**Видимость (Критически важно):**<br/>• **Серверные:** По умолчанию переменные доступны **только на сервере** (ключи БД, секреты API).<br/>• **Клиентские:** Чтобы сделать переменную доступной **в браузере**, ей нужно добавить префикс **`NEXT_PUBLIC_`** (например, `NEXT_PUBLIC_GA_KEY`). **Никогда** не храните секретные ключи с этим префиксом.",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-9",
+        question: "Что такое Automatic Static Optimization (Автоматическая статическая оптимизация) в Next.js?",
+        answer: "**Automatic Static Optimization** — это механизм, при котором Next.js **автоматически** определяет, какие страницы можно преобразовать в статический HTML **во время сборки**, если они **не** используют методы серверного рендеринга (`getServerSideProps`) и **не** запрашивают данные.<br/><br/>**Принцип работы:**<br/>Next.js сканирует страницы; если страница может быть отрендерена без данных, которые нужно получать во время запроса, она статически оптимизируется. Это обеспечивает **максимальную скорость загрузки**, так как страница обслуживается CDN без необходимости запускать Node.js сервер.<br/><br/>*Пример: Страница `/about` или `/contact`, которая не требует динамических данных.*",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-10",
+        question: "Объясните File-based routing в Next.js.",
+        answer: "**File-based routing** (маршрутизация на основе файловой системы) — это основной механизм маршрутизации в Next.js. Структура каталогов и файлов внутри папки **`pages`** напрямую определяет URL-адреса приложения.<br/><br/>**Пример структуры:**<br/>```<br/>pages/<br/>├── index.js // /<br/>├── cart.js // /cart<br/>└── products/<br/>    ├── index.js // /products<br/>    └── [product-id].js // /products/:product-id<br/>```<br/><br/>**Преимущество:** Это упрощает организацию кода, поскольку вы видите структуру URL-адресов прямо в файловой системе. Не требуется ручная настройка маршрутов.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-11",
+        question: "Что такое Dynamic Routes (Динамические маршруты) и как их настроить?",
+        answer: "**Динамические маршруты** позволяют URL-адресу иметь переменные сегменты, которые могут быть получены страницей для загрузки соответствующего контента (например, статьи, товары).<br/><br/>**Настройка:**<br/>Используйте **квадратные скобки** вокруг имени параметра в имени файла.<br/>• **Один параметр:** `pages/post/[id].js` $\rightarrow$ извлекается `router.query.id`.<br/>• **Catch-All (Перехватывающий) маршрут:** Используется синтаксис **`pages/doc/[...slug].js`**.<br/>&nbsp;&nbsp;&nbsp;&nbsp;Он перехватывает **все вложенные пути** (например, `/doc/intro/setup`) и возвращает их как массив строк (`router.query.slug`).",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-12",
+        question: "Как получить параметры URL (Query Parameters) в компоненте страницы Next.js?",
+        answer: "Для доступа к параметрам URL (как динамическим сегментам, так и query-параметрам) используется **Хук `useRouter`** из `next/router`.<br/><br/>**Шаги:**<br/>1. Импортировать `useRouter`.<br/>2. Вызвать хук для получения объекта `router`.<br/>3. Доступ к параметрам через **`router.query`**.<br/><br/>**Пример:** Если URL `/products/123?sort=price`<br/>```javascript<br/>import { useRouter } from 'next/router';<br/>// ...<br/>const router = useRouter();<br/>const { id, sort } = router.query; // id=123, sort=price<br/>```",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-13",
+        question: "Для чего используется компонент `<Link>` в Next.js?",
+        answer: "Компонент **`<Link>`** из `next/link` — это основной инструмент для **клиентской навигации** внутри Next.js приложения. Он улучшает производительность и пользовательский опыт.<br/><br/>**Ключевые функции:**<br/>1. **Клиентская навигация:** Предотвращает полную перезагрузку страницы, обеспечивая мгновенные переходы.<br/>2. **Предварительная загрузка (Prefetching):** Автоматически загружает JavaScript-бандл целевой страницы при появлении ссылки в области просмотра, ускоряя переход.<br/>3. **Code Splitting:** Работает с автоматическим разделением кода, загружая только нужный код.",
+        difficulty: "easy"
+      },
+      {
+        id: "nj-14",
+        question: "Что такое Catch-All Routes (Перехватывающие маршруты) и когда они используются?",
+        answer: "**Catch-All Routes** (маршруты 'поймать все') позволяют динамическому маршруту сопоставляться **с любым количеством сегментов пути**.<br/><br/>**Настройка:** Используется синтаксис **`pages/dir/[...slug].js`**.<br/><br/>**Использование:**<br/>• **Сложные URL:** Идеально подходят для секций документации или блогов, где статьи могут иметь вложенные пути (например, `/docs/guide/introduction`).<br/>• **Обработка 404:** Могут служить для создания пользовательских обработчиков неизвестных путей внутри определенной директории.<br/><br/>Маршрутизатор возвращает параметры как **массив строк** в `router.query.slug`.",
+        difficulty: "medium"
+      },
+      {
+        id: "nj-15",
+        question: "Что такое `getStaticProps` и когда его следует использовать?",
+        answer: "**`getStaticProps`** — это асинхронная функция, которая выполняется **только на сервере во время сборки (`build time`)** для предварительной загрузки данных.<br/><br/>**Ключевые особенности:**<br/>1. **Стратегия рендеринга:** Включает **Static Site Generation (SSG)**. Страница становится статичным HTML-файлом.<br/>2. **`revalidate`:** Может возвращать поле `revalidate: N` для включения **Incremental Static Regeneration (ISR)**, обновляя статическую страницу через `N` секунд без пересборки.<br/><br/>**Использование:**<br/>Идеально подходит для страниц, контент которых **не меняется часто** (блоги, документация, страницы товаров), так как обеспечивает максимальную скорость и отличное **SEO**.",
+        difficulty: "medium"
+      }
+    ]
+  },
+  // Angular
+  {
+    "id": "angular",
+    "name": "Angular",
+    "questions": [
+      {
+        "id": "ang-1",
+        "question": "Что такое Angular и каковы его ключевые особенности?",
+        "answer": "**Angular** — это структурная, **TypeScript-ориентированная** платформа с открытым исходным кодом для создания **одностраничных приложений (SPA)**. Ключевые особенности: **Компонентная архитектура**, **Модульность** (через NG Modules), **Внедрение зависимостей (DI)**, **Шаблоны (Templates)**, **Директивы**, и работа с **Observables** для асинхронных операций.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-2",
+        "question": "Объясните концепцию связывания данных (Data Binding) в Angular и его типы.",
+        "answer": "**Связывание данных** — это механизм, который синхронизирует данные между **Компонентом (модель)** и **DOM (представление)**.\n\n**Типы связывания:**\n1. **Одностороннее (One-Way):** Интерполяция `{{ value }}`, Связывание свойств `[property]=\"value\"`, Связывание событий `(event)=\"handler()\"`.\n2. **Двустороннее (Two-Way):** Использует синтаксис **`[(ngModel)]`** для синхронизации в обе стороны (особенно в формах).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-3",
+        "question": "Опишите архитектуру приложения Angular.",
+        "answer": "Архитектура Angular основана на **модульности** и **компонентах**. Она состоит из четырех основных элементов:\n1. **Модули (NG Modules):** Контейнеры, группирующие функциональность.\n2. **Компоненты (Components):** Основные строительные блоки UI.\n3. **Сервисы (Services):** Классы для общей, переиспользуемой логики (работа с API, управление данными).\n4. **Маршрутизатор (Router):** Модуль для управления навигацией.\nДанные обычно следуют **однонаправленным потоком** через `@Input()` и `@Output()`.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-4",
+        "question": "Что такое Компонент (Component) в Angular?",
+        "answer": "**Компонент** — это фундаментальный строительный блок Angular, представляющий собой часть пользовательского интерфейса. Каждый компонент состоит из:\n• **Класса (TypeScript)**: Содержит логику и данные, помечен декоратором **`@Component()`**.\n• **Шаблона (Template)**: HTML-код, определяющий структуру UI.\n• **Стилей (Styles)**: CSS-код, который по умолчанию **изолирован** и применяется только к данному компоненту. Компоненты образуют **Дерево Компонентов (Component Tree)**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-5",
+        "question": "Что такое Директивы (Directives) и их типы?",
+        "answer": "**Директивы** — это маркеры на элементе DOM, которые предписывают Angular прикрепить к этому элементу особое поведение или трансформировать его структуру.\n\n**Типы директив:**\n1. **Компоненты (`@Component`)**.\n2. **Структурные (`*`):** Изменяют структуру DOM. Примеры: **`*ngIf`**, **`*ngFor`**.\n3. **Атрибутные (`@Directive`):** Изменяют внешний вид или поведение элемента. Примеры: **`[ngStyle]`**, **`[ngClass]`**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-6",
+        "question": "Какова роль Сервисов (Services) в Angular?",
+        "answer": "**Сервисы** используются для **разделения ответственности** и **повторного использования кода (DRY)**. Они содержат бизнес-логику, общие данные или логику работы с HTTP. Сервисы являются **синглтонами** (по умолчанию, если предоставлены в `providedIn: 'root'`) и внедряются в компоненты или другие сервисы с помощью **Внедрения Зависимостей (DI)**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-7",
+        "question": "Что такое Внедрение Зависимостей (Dependency Injection - DI) в Angular?",
+        "answer": "**DI** — это основной шаблон проектирования, который позволяет компонентам или сервисам получать свои зависимости (другие сервисы) **извне**.\n\n**Механизм:**\n1. **Регистрация:** Сервис регистрируется как **провайдер** (например, в `@Injectable({ providedIn: 'root' })`).\n2. **Инжектирование:** Angular автоматически создает и предоставляет нужный экземпляр сервиса в **конструктор** компонента. Это обеспечивает модульность и тестируемость.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-8",
+        "question": "Что такое Модули (Modules) в Angular и их типы?",
+        "answer": "**Модуль (NG Module)** — это контейнер, определенный декоратором **`@NgModule`**, который группирует логически связанные компоненты, директивы, сервисы и пайпы. Они помогают организовать приложение.\n\n**Типы модулей:**\n1. **Корневой Модуль (Root Module):** (`AppModule`) — входная точка приложения.\n2. **Модули Функций (Feature Modules):** Группируют функциональность по конкретной теме. Могут быть **лениво загружаемыми (Lazy-Loaded)** для оптимизации времени запуска.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-9",
+        "question": "Как обрабатываются события (Events) в Angular?",
+        "answer": "События обрабатываются с помощью **связывания событий (Event Binding)** в шаблоне, используя синтаксис **`(event)=\"handler($event)\"`**.\n\nAngular слушает DOM-событие (например, `click`) и вызывает соответствующий метод в классе компонента, передавая при необходимости объект события **`$event`**. Это **декларативный подход**. Также возможен **императивный подход** через `ViewChild` и `addEventListener`.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-10",
+        "question": "Как реализовать двустороннее связывание данных (Two-Way Binding)?",
+        "answer": "Двустороннее связывание в Angular реализуется с помощью директивы **`[(ngModel)]`** (синтаксис 'banana in a box').\n\n**Требования:**\n1. Импортировать **`FormsModule`** в модуль.\n2. Использовать `[(ngModel)]` на элементе ввода, привязанном к свойству компонента: `<input [(ngModel)]=\"name\" name=\"inputName\" />`",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-11",
+        "question": "В чем разница между Компонентами и Директивами?",
+        "answer": "**Компоненты** (`@Component`) — это **основные строительные блоки UI**, которые **всегда имеют свой шаблон и стили**.\n\n**Директивы** (`@Directive`) — это **маркеры**, которые **добавляют поведение** или **трансформируют** существующие элементы DOM или компоненты. Они могут не иметь своего шаблона (например, атрибутные директивы, как `ngClass`).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-12",
+        "question": "Что такое Пайпы (Pipes) в Angular?",
+        "answer": "**Пайпы** — это классы, помеченные декоратором `@Pipe`, которые используются для **трансформации данных** (форматирования) прямо в шаблоне для отображения пользователю. Они не меняют исходные данные компонента. \n\n**Синтаксис:** `{{ value | pipeName: param1 }}`. Примеры: **`date`**, **`currency`**, **`uppercase`**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-13",
+        "question": "Сравните Template-Driven Forms и Reactive Forms.",
+        "answer": "**Template-Driven Forms (TDF):** Логика управляется директивами в **HTML-шаблоне**. Проще для простых форм.\n\n**Reactive Forms (RF):** Форма и ее элементы создаются **программно** в **классе компонента** (`FormGroup`, `FormControl`). Рекомендуется для сложных форм из-за лучшего контроля, масштабируемости и тестируемости.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-14",
+        "question": "Какова роль Angular CLI?",
+        "answer": "**Angular CLI (Command Line Interface)** — это мощный инструмент командной строки, который **автоматизирует** и **ускоряет** разработку Angular-приложений.\n\n**Ключевые возможности:** Инициализация проекта (`ng new`), **Генерация кода** (`ng generate component`), запуск сервера (`ng serve`), **Сборка для продакшна** с оптимизацией (`ng build --prod`).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-15",
+        "question": "Как выполнять HTTP-запросы в Angular?",
+        "answer": "HTTP-запросы выполняются с помощью встроенного сервиса **`HttpClient`**, который необходимо **инжектировать** в конструктор (обычно в сервисном классе).\n\n**Шаги:**\n1. Импортировать **`HttpClientModule`** в модуль.\n2. Инжектировать **`HttpClient`**.\n3. Использовать методы `this.http.get()`, `post()`, `put()`, `delete()`, которые возвращают **Observable** (требуют подписки **`.subscribe()`**).",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  // AngularJS
+  {
+    "id": "angularjs",
+    "name": "AngularJS",
+    "questions": [
+      {
+        "id": "ajs-1",
+        "question": "Что такое AngularJS и каковы его ключевые особенности?",
+        "answer": "**AngularJS** — это JavaScript-фреймворк с открытым исходным кодом (версия 1.x), разработанный Google для создания **одностраничных приложений (SPA)**. Ключевые особенности:\n1. **Двустороннее связывание данных (Two-Way Data Binding).**\n2. **MVC-архитектура.**\n3. **Внедрение зависимостей (DI).**\n4. **Директивы** (для расширения HTML).\n5. Концепция **Scope**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-2",
+        "question": "Как AngularJS реализует двустороннее связывание данных?",
+        "answer": "Двустороннее связывание данных обеспечивает автоматическую синхронизацию между **Моделью (данные в `$scope`)** и **Представлением (HTML/UI)**. Когда данные в модели изменяются, представление обновляется, и наоборот. Это реализуется через директиву **`ngModel`** и цикл **`$digest`**.\n\n**Преимущество:** Значительно уменьшает необходимость ручной манипуляции с DOM и обработки событий.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-3",
+        "question": "Что такое Директивы (Directives) в AngularJS и приведите примеры основных директив.",
+        "answer": "**Директивы** — это маркеры в DOM-элементе (атрибуты, элементы, комментарии или классы), которые сообщают компилятору AngularJS о необходимости прикрепить к этому элементу особое поведение или трансформировать DOM.\n\n**Примеры:**\n* **`ng-app`**: Определяет корневой элемент приложения.\n* **`ng-controller`**: Привязывает контроллер к представлению.\n* **`ng-model`**: Реализует двустороннее связывание данных.\n* **`ng-repeat`**: Итерация по коллекциям.\n* **`ng-click`**: Обработка событий клика.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-4",
+        "question": "Объясните механизм Цикла `$digest` в AngularJS.",
+        "answer": "Цикл **`$digest`** — это ядро механизма двустороннего связывания. Он отвечает за синхронизацию Модели и Представления. Цикл запускается автоматически при стандартных событиях (например, `ng-click`, HTTP-ответы).\n\n**Механизм:**\n1. AngularJS запускает **Грязную Проверку (Dirty-Checking)**, перебирая все **`$watch`**-выражения.\n2. Сравниваются текущие значения модели с предыдущими.\n3. Если обнаружено изменение, соответствующее **Представление** обновляется, а цикл повторяется.\n\nЦикл продолжается до стабилизации (не обнаружено больше изменений) или достижения лимита итераций (для предотвращения бесконечных циклов).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-5",
+        "question": "Когда и как можно вручную запустить Цикл `$digest`?",
+        "answer": "Цикл `$digest` запускается вручную, когда изменения в Модели происходят **вне контекста AngularJS** (например, в колбэках сторонних библиотек, `setTimeout`, или нативных обработчиках DOM-событий).\n\n**Методы запуска:**\n1. **`$scope.$apply()`:** Рекомендуемый способ. Он запускает цикл `$digest` от **`$rootScope`** вниз по иерархии. Если изменения произошли вне Angular, используйте `$apply()`.\n2. **`$scope.$digest()`:** Запускает цикл `$digest` только на **текущей области видимости (`$scope`) и ее дочерних** областях. Используется, когда вы уверены, что изменения произошли в рамках Angular, но нужно более локальное обновление.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-6",
+        "question": "Какова роль `Controller` в AngularJS?",
+        "answer": "**Контроллер** — это JavaScript-функция (класс), которая содержит **бизнес-логику** и **инициализирует `$scope`**, который связывает Модель (данные) с Представлением (HTML).\n\n**Ключевые обязанности:**\n1. **Управление `$scope`:** Прикрепление свойств и функций к `$scope`.\n2. **Обработка данных:** Загрузка начальных данных и обработка ввода пользователя.\n3. **Обработка событий:** Реагирование на события DOM (через директивы типа `ng-click`).\n\nКонтроллер привязывается к представлению с помощью директивы **`ng-controller`**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-7",
+        "question": "Что такое `Scope` в AngularJS?",
+        "answer": "**`$scope`** — это объект, который служит **клеем** между **Контроллером** и **Представлением (View)**. Он представляет собой контекст выполнения выражений и является двусторонним мостом для данных.\n\n**Особенности:**\n* Имеет иерархическую структуру (**Scope Hierarchy**), наследуя свойства от родительских областей.\n* Содержит **watchers**, которые отслеживаются циклом `$digest`.\n* Управляется жизненным циклом (создается при привязке контроллера и уничтожается при удалении элемента DOM).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-8",
+        "question": "Объясните Иерархию Scope (Scope Hierarchy) в AngularJS.",
+        "answer": "Иерархия Scope — это **древовидная структура** областей видимости в приложении AngularJS. Она повторяет структуру DOM, к которой привязаны контроллеры или директивы.\n\n1. **`$rootScope`:** **Глобальная** область видимости, родитель всех остальных областей.\n2. **`$scope`:** Создается для каждого контроллера. Наследует свойства от родительского scope (прототипное наследование).\n\n**Поток данных:** По умолчанию дочерние scope могут считывать свойства родителя, но запись (примитивных типов) создает новое свойство в дочернем scope. Рекомендуется использовать **'dot' rule** (привязывать данные к объекту, например, `user.name`) для избежания проблем наследования.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-9",
+        "question": "Что такое `$rootScope` и почему следует избегать его частого использования?",
+        "answer": "**`$rootScope`** — это **самый верхний Scope** в иерархии, доступный во всем приложении. Он используется для хранения данных или функций, которые должны быть доступны **глобально**.\n\n**Почему следует избегать частого использования:**\n1. **Проблемы отладки:** Глобальное состояние усложняет отслеживание источника изменений.\n2. **Производительность:** Любое изменение в `$rootScope` запускает цикл `$digest` по всему приложению.\n3. **Тестирование:** Снижает модульность и усложняет изолированное тестирование.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-10",
+        "question": "Какова роль директивы `ng-app`?",
+        "answer": "**`ng-app`** — это директива, которая **инициализирует (бутстрапит)** приложение AngularJS. Она:\n1. Определяет **корневой элемент** приложения (чаще всего на `<html>` или `<body>`).\n2. **Автоматически** загружает соответствующий **модуль** AngularJS (если указано имя модуля, например, `ng-app=\"myApp\"`).\n3. Создает **`$rootScope`**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-11",
+        "question": "Для чего используется директива `ng-model`?",
+        "answer": "**`ng-model`** — это основная директива для **двустороннего связывания данных** в элементах формы (input, select, textarea).\n\n**Функции:**\n1. Связывает значение элемента формы со свойством в `$scope`.\n2. Предоставляет информацию о **валидности** поля формы (через `$error` и классы CSS, такие как `ng-invalid`).\n3. Отслеживает изменения, чтобы инициировать цикл `$digest`.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ajs-12",
+        "question": "Как можно обмениваться данными между контроллерами в AngularJS?",
+        "answer": "Для обмена данными между контроллерами используются три основных механизма:\n\n1. **Сервисы (Services):** Рекомендуемый способ. Создайте **синглтон-сервис**, который будет хранить и управлять общими данными. Контроллеры инжектируют этот сервис для доступа к данным.\n2. **События Scope:** Используйте **`$emit`** (событие вверх по иерархии) и **`$broadcast`** (событие вниз по иерархии) для уведомления других контроллеров об изменениях.\n3. **Наследование (Parent-Child):** Если контроллеры находятся в иерархии, дочерний контроллер может считывать свойства родительского scope.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-13",
+        "question": "Назовите основные встроенные Сервисы (Services) в AngularJS.",
+        "answer": "**Сервисы** — это синглтон-объекты, которые предоставляют общие функциональные возможности.\n\n**Основные встроенные сервисы:**\n* **`$http`**: Для асинхронной связи с удаленными серверами (AJAX/RESTful API).\n* **`$scope`**: Объект, связывающий Модель и Представление.\n* **`$rootScope`**: Глобальный Scope.\n* **`$location`**: Для работы с URL-адресом браузера и его изменения.\n* **`$timeout`**: Обертка для нативного `setTimeout()`.\n* **`$interval`**: Обертка для нативного `setInterval()`.\n* **`$q`**: Для работы с асинхронными операциями и Promises.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-14",
+        "question": "Как определить пользовательский сервис в AngularJS (Factory, Service, Provider)?",
+        "answer": "Пользовательские сервисы можно создать тремя способами:\n\n1. **`.factory(name, func)`:** Самый распространенный. Функция `func` выполняется один раз и **возвращает объект**, который будет инжектирован. Позволяет создавать сложные объекты и инжектировать другие зависимости.\n2. **`.service(name, func)`:** Функция `func` — это **конструктор**. AngularJS вызывает его с помощью оператора `new` и инжектирует полученный экземпляр.\n3. **`.provider(name, func)`:** Наиболее гибкий. Позволяет **конфигурировать сервис** до начала работы приложения с помощью метода `$get`.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ajs-15",
+        "question": "Как определяется и используется метод контроллера в AngularJS?",
+        "answer": "Метод контроллера — это функция, прикрепленная к объекту `$scope` внутри контроллера.\n\n**Определение:**\n```javascript\napp.controller('MyController', function($scope) {\n  $scope.userName = 'Гость';\n  $scope.greet = function(name) {\n    alert('Привет, ' + name);\n  };\n});\n```\n\n**Использование в HTML:**\nМетод вызывается с помощью директив событий, например, **`ng-click`**:\n```html\n<div ng-controller=\"MyController\">\n  <input type=\"text\" ng-model=\"userName\" />\n  <button ng-click=\"greet(userName)\">Поприветствовать</button>\n</div>\n```",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  // TS
   {
     id: "typescript",
     name: "TypeScript",
     questions: [
       {
         id: "ts-1",
-        question: "Что такое TypeScript и зачем он нужен?",
-        answer: "TypeScript — это надмножество JavaScript, добавляющее статическую типизацию. Он помогает обнаруживать ошибки на этапе разработки и улучшает IntelliSense.",
+        question: "Что такое TypeScript и каковы его основные преимущества?",
+        answer: "**TypeScript** — это статически типизированный (statically-typed) **суперсет (Superset) JavaScript**, разработанный Microsoft. Весь код TypeScript компилируется (транспилируется) в обычный, исполняемый браузерами JavaScript.<br/><br/>**Основные преимущества:**<br/>1. **Статическая типизация:** Позволяет определять типы переменных, параметров и возвращаемых значений, что помогает **отлавливать ошибки на этапе компиляции**, а не в рантайме.<br/>2. **Улучшенный инструментарий (Tooling):** Обеспечивает более качественное автодополнение (autocompletion), рефакторинг и навигацию по коду в IDE (VS Code).<br/>3. **Совместимость с ES:** Поддерживает все современные функции ECMAScript (ES6+) и может компилировать код для разных версий JS.<br/>4. **Читаемость и поддерживаемость:** Благодаря явным типам и структуре, код становится более понятным и легче масштабируется на больших проектах.",
         difficulty: "easy"
       },
       {
         id: "ts-2",
-        question: "Объясните основные типы данных в TypeScript",
-        answer: "Основные типы: number, string, boolean, array, tuple, enum, any, void, null, undefined, never, object.",
+        question: "Почему TypeScript называют 'суперсетом JavaScript'?",
+        answer: "TypeScript является 'суперсетом JavaScript', потому что **любой валидный JavaScript-код также является валидным TypeScript-кодом**.<br/><br/>Это означает, что TypeScript включает в себя весь синтаксис и функциональность JavaScript и **добавляет свои собственные функции поверх** него, не нарушая существующий код.<br/><br/>**Ключевые добавления:**<br/>• **Аннотации типов:** Возможность явного указания типов (`let num: number = 5;`).<br/>• **Интерфейсы, Дженерики, Декораторы** и другие продвинутые концепции.<br/>• **Функции ES следующего поколения** (например, `private`/`public` модификаторы в классах).<br/><br/>Эта особенность обеспечивает плавный переход при миграции существующих JavaScript-кодовых баз на TypeScript.",
         difficulty: "easy"
       },
       {
         id: "ts-3",
-        question: "Что такое интерфейсы в TypeScript?",
-        answer: "Интерфейсы определяют структуру объектов, описывая какие свойства и методы должны быть у объекта. Они используются для типизации.",
-        difficulty: "medium"
+        question: "Назовите основные базовые типы данных в TypeScript.",
+        answer: "TypeScript предоставляет богатый набор примитивных и структурных типов для обеспечения строгой типизации:<br/><br/>1. **Примитивные типы:**<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`number`**: Для всех чисел (целых и с плавающей точкой).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`string`**: Для текстовых данных.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`boolean`**: Для логических значений (`true` / `false`).<br/>2. **Специальные типы:**<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Array` / `number[]`**: Для массивов.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Tuple`**: Для массивов с фиксированным количеством элементов и известными типами каждого элемента (например, `[string, number]`).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Enum`**: Набор именованных констант (например, `enum HttpMethods { GET, POST }`).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Any`**: Динамический тип, который отключает проверку типов (следует избегать).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Void`**: Тип возвращаемого значения для функций, которые ничего не возвращают.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`Never`**: Тип для значений, которые никогда не могут возникнуть (например, функция, которая всегда выбрасывает исключение).",
+        difficulty: "easy"
       },
       {
         id: "ts-4",
-        question: "В чем разница между interface и type?",
-        answer: "Interface может быть расширен и объединен, type более гибкий для union/intersection типов. Interface лучше для объектов, type для сложных типов.",
-        difficulty: "medium"
+        question: "Объясните использование let, const и var для объявления переменных в TypeScript.",
+        answer: "TypeScript использует стандартные методы объявления переменных из ECMAScript 2015 (ES6), дополняя их статической типизацией.<br/><br/>| Ключевое слово | Область видимости (Scope) | Переназначаемость (Reassignable) | Рекомендация |<br/>| :--- | :--- | :--- | :--- |<br/>| **`const`** | Блочная (`{...}`) | **Нет (Immutable reference)** | Используйте по умолчанию, чтобы предотвратить случайное изменение. |<br/>| **`let`** | Блочная (`{...}`) | **Да (Mutable)** | Используйте, когда переменная должна быть переназначена. |<br/>| **`var`** | Функциональная или Глобальная | Да | Избегайте, так как приводит к 'подъему' (`hoisting`) и непредсказуемости. |<br/><br/>**Типизация:** В TypeScript вы можете явно указать тип (`let name: string = 'Alice';`) или позволить компилятору **инферировать** тип на основе присвоенного значения (`let age = 30;` -> `age` будет `number`).",
+        difficulty: "easy"
       },
       {
         id: "ts-5",
-        question: "Что такое дженерики (generics)?",
-        answer: "Дженерики позволяют создавать переиспользуемые компоненты, работающие с различными типами, сохраняя типизацию: function identity<T>(arg: T): T",
+        question: "Что такое Interface (Интерфейс) в TypeScript и для чего он используется?",
+        answer: "**Интерфейс (`Interface`)** в TypeScript — это мощная конструкция, которая определяет **контракт** на структуру объекта (или класса, или функции). Он используется исключительно на этапе компиляции для проверки типов и не генерирует JavaScript-код.<br/><br/>**Ключевые возможности:**<br/>1. **Определение структуры объекта:** Гарантирует, что объект имеет определенный набор свойств и методов с нужными типами.<br/>2. **Необязательные свойства:** Свойства можно пометить как необязательные с помощью символа `?` (например, `age?: number`).<br/>3. **Свойства только для чтения:** Используется ключевое слово `readonly` (например, `readonly id: number`).<br/>4. **Контракт для классов:** Класс может `implements` (реализовывать) интерфейс, обязуясь предоставить все его члены.<br/><br/>**Пример:**<br/>```typescript<br/>interface Point {<br/>&nbsp;&nbsp;x: number;<br/>&nbsp;&nbsp;y: number;<br/>}<br/><br/>// Функция принимает только объекты, соответствующие структуре Point<br/>function printPoint(p: Point) { ... }<br/>```",
         difficulty: "medium"
       },
       {
         id: "ts-6",
-        question: "Объясните Union и Intersection типы",
-        answer: "Union (A | B) означает 'либо A, либо B'. Intersection (A & B) означает 'и A, и B одновременно'.",
+        question: "Что такое Enum (Перечисления) в TypeScript и в каких случаях их используют?",
+        answer: "**Enum (Перечисление)** — это тип данных, который позволяет определить набор **именованных констант**. Он повышает читаемость кода, заменяя 'магические числа' или строки осмысленными именами.<br/><br/>**Виды Enums:**<br/>1. **Числовые (Standard Enum):** Значения по умолчанию начинаются с 0, но могут быть переопределены.<br/>```typescript<br/>enum Direction { Up, Down, Left, Right }<br/>let move = Direction.Up; // move === 0<br/>```<br/>2. **Строковые (String Enum):** Значениям явно присваиваются строки. Это обеспечивает лучшую читаемость и отладку в рантайме.<br/>```typescript<br/>enum MediaTypes { Image = 'image', Video = 'video' }<br/>const selected = MediaTypes.Image; // selected === 'image'<br/>```<br/><br/>**Использование:** Enums идеальны для **дискретных, фиксированных наборов значений**, таких как режимы, статусы, HTTP-методы или дни недели. Они обеспечивают **типобезопасность** при работе с этими константами.",
         difficulty: "medium"
       },
       {
         id: "ts-7",
-        question: "Что такое Type Guards?",
-        answer: "Type Guards — это функции или выражения, которые сужают тип в определенном блоке кода: typeof, instanceof, in оператор.",
-        difficulty: "hard"
+        question: "Как определяется функция в TypeScript? Расскажите об основных элементах сигнатуры.",
+        answer: "Определение функции в TypeScript включает строгую типизацию ее **сигнатуры** (параметров) и **возвращаемого значения**.<br/><br/>**Элементы сигнатуры функции:**<br/>1. **Имена и типы параметров:** Каждый параметр явно типизируется.<br/>2. **Тип возвращаемого значения:** Указывается после списка параметров через двоеточие (`: type`). Если функция ничего не возвращает, используется тип **`void`**.<br/>3. **Необязательные (`?`) и Параметры по умолчанию:**<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **Необязательные:** `function func(name: string, title?: string)`.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **По умолчанию:** `function func(name: string = \"Гость\")`.<br/>4. **Rest-параметры:** Позволяют функции принимать любое количество аргументов определенного типа, используя синтаксис `...names: string[]`.<br/><br/>**Пример:**<br/>```typescript<br/>// Имена: string, id: number; Возвращаемый тип: boolean<br/>function isValidUser(name: string, id: number): boolean {<br/>&nbsp;&nbsp;if (id > 0) return true;<br/>&nbsp;&nbsp;return false;<br/>}<br/>```",
+        difficulty: "medium"
       },
       {
         id: "ts-8",
-        question: "Объясните Mapped Types",
-        answer: "Mapped Types создают новые типы, преобразуя каждое свойство существующего типа: type Readonly<T> = { readonly [P in keyof T]: T[P] }",
-        difficulty: "hard"
+        question: "Что такое Type Inference (Инференция типов) и как она работает?",
+        answer: "**Инференция типов (Type Inference)** — это ключевая особенность TypeScript, позволяющая компилятору **автоматически определять тип** переменной, выражения или возвращаемого значения функции на основе его присвоенного значения или контекста, без необходимости явного указания типа разработчиком.<br/><br/>**Принцип работы:**<br/>• Когда переменная объявляется и сразу инициализируется, TypeScript использует тип инициализирующего значения.<br/>• **Пример:** `let price = 100;` $\rightarrow$ TypeScript инферирует `price` как `number`.<br/>• **Пример:** `let names = ['Alice', 'Bob'];` $\rightarrow$ TypeScript инферирует `names` как `string[]`.<br/><br/>**Преимущество:** Это позволяет писать более **лаконичный и чистый код**, при этом сохраняя все преимущества статической типизации (компилятор все равно будет проверять на ошибки).",
+        difficulty: "easy"
       },
       {
         id: "ts-9",
-        question: "Что такое Conditional Types?",
-        answer: "Conditional Types позволяют создавать типы на основе условий: T extends U ? X : Y",
-        difficulty: "hard"
+        question: "Опишите процесс компиляции TypeScript в JavaScript и роль tsconfig.json.",
+        answer: "Процесс компиляции (транспиляции) преобразует файлы TypeScript (`.ts` или `.tsx`) в чистый JavaScript (`.js`), который может быть выполнен браузером или Node.js.<br/><br/>**Шаги процесса:**<br/>1. **Конфигурация (`tsconfig.json`):** Это основной файл конфигурации, который указывает **компилятору TypeScript (`tsc`)**:<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **Какие файлы** включить и исключить.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **Целевой стандарт JS** (`\"target\": \"ES5\"` или `\"ES2020\"`).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **Систему модулей** (`\"module\": \"commonjs\"` или `\"esnext\"`).<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **Каталог для выходных файлов** (`\"outDir\": \"dist\"`).<br/>2. **Выполнение (`tsc`):** Разработчик запускает команду `tsc` (TypeScript Compiler).<br/>3. **Компиляция:** Компилятор читает файлы, проверяет типы, применяет все указанные настройки и генерирует соответствующие JavaScript-файлы.",
+        difficulty: "medium"
       },
       {
         id: "ts-10",
-        question: "Объясните keyof оператор",
-        answer: "keyof создает union тип из всех ключей объектного типа: keyof { a: number, b: string } дает 'a' | 'b'",
+        question: "Какие уникальные особенности классов есть в TypeScript по сравнению с ES6 классами?",
+        answer: "TypeScript расширяет стандартный синтаксис классов ES6, добавляя функции, специфичные для объектно-ориентированного программирования и типизации:<br/><br/>1. **Модификаторы доступа (`Access Modifiers`):**<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`public`** (по умолчанию): Доступен везде.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`private`**: Доступен только внутри объявляющего класса.<br/>&nbsp;&nbsp;&nbsp;&nbsp;• **`protected`**: Доступен внутри класса и его подклассов.<br/>2. **Абстрактные классы (`Abstract Classes`):** Классы, которые нельзя инстанциировать напрямую, служат 'чертежом' для других классов и могут содержать **абстрактные методы** (без реализации).<br/>3. **Свойства только для чтения (`readonly`):** Свойство, которое может быть установлено только при объявлении или в конструкторе.<br/>4. **Параметры свойств в конструкторе:** Сокращенный синтаксис для создания и инициализации свойства класса прямо в аргументах конструктора (например, `constructor(private name: string)`).",
         difficulty: "medium"
       },
       {
         id: "ts-11",
-        question: "Что такое утилитарные типы (Utility Types)?",
-        answer: "Встроенные типы для трансформации: Partial<T>, Required<T>, Pick<T,K>, Omit<T,K>, Record<K,T>, Exclude<T,U>, Extract<T,U>",
+        question: "Как работает наследование (Inheritance) классов в TypeScript?",
+        answer: "TypeScript использует ключевое слово **`extends`** из ES6 для реализации классического, основанного на классах, наследования.<br/><br/>**Ключевые принципы:**<br/>1. **Наследование:** Дочерний класс (`extends`) наследует все методы и свойства родительского класса.<br/>2. **Конструктор (`constructor`):** Дочерний класс, который имеет собственный конструктор, должен обязательно вызвать конструктор родителя с помощью ключевого слова **`super()`**.<br/>3. **Переопределение (`Override`):** Дочерний класс может переопределить метод, который существует в родительском классе, используя то же имя и сигнатуру. При этом внутри переопределенного метода можно вызвать метод родителя через `super.methodName()`.<br/><br/>**Пример:**<br/>```typescript<br/>class Animal { /* ... */ }<br/>class Snake extends Animal {<br/>&nbsp;&nbsp;constructor(name: string) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;super(name); // Обязательный вызов родительского конструктора<br/>&nbsp;&nbsp;}<br/>&nbsp;&nbsp;move() {<br/>&nbsp;&nbsp;&nbsp;&nbsp;super.move(5); // Вызов метода родителя<br/>&nbsp;&nbsp;}<br/>}<br/>```",
         difficulty: "medium"
       },
       {
         id: "ts-12",
-        question: "Объясните декораторы в TypeScript",
-        answer: "Декораторы — это метафункции, которые могут изменять классы, методы, свойства или параметры во время объявления.",
-        difficulty: "hard"
+        question: "Что такое Access Modifiers (Модификаторы доступа) и как они используются в классах?",
+        answer: "**Модификаторы доступа** в TypeScript используются для контроля **видимости** и **доступности** членов класса (свойств и методов). Это ключевой элемент, обеспечивающий **инкапсуляцию** (сокрытие данных).<br/><br/>**Три основных модификатора:**<br/>1. **`public`:** Член доступен отовсюду: изнутри класса, извне и в подклассах. Это **модификатор по умолчанию**.<br/>2. **`protected`:** Член доступен только **внутри класса** и **внутри всех его подклассов** (помогают в реализации отношений 'является-чем-то', 'is-a').<br/>3. **`private`:** Член доступен **только внутри объявляющего класса**. Он полностью скрыт от внешнего мира и от подклассов.<br/><br/>**На заметку:** Модификаторы доступа TypeScript не гарантируют 100% защиты в скомпилированном JavaScript (так как JS не имеет нативной поддержки), но они **принудительно проверяются на этапе компиляции**, что является критичным для поддержания порядка в коде.",
+        difficulty: "medium"
       },
       {
         id: "ts-13",
-        question: "Что такое модули в TypeScript?",
-        answer: "Модули организуют код в отдельные файлы с помощью export/import. TypeScript поддерживает CommonJS, AMD, ES6 модули.",
-        difficulty: "medium"
-      },
-      {
-        id: "ts-14",
-        question: "Объясните namespace в TypeScript",
-        answer: "Namespace группирует связанный код в именованные области видимости, предотвращая конфликты имен в глобальной области.",
-        difficulty: "medium"
-      },
-      {
-        id: "ts-15",
-        question: "Что такое Declaration Merging?",
-        answer: "Declaration Merging позволяет объединять несколько объявлений с одинаковым именем в одно определение.",
-        difficulty: "hard"
-      },
-      {
-        id: "ts-16",
-        question: "Объясните Template Literal Types",
-        answer: "Template Literal Types создают новые строковые типы на основе шаблонных строк: type Greeting = `hello ${string}`",
-        difficulty: "hard"
-      },
-      {
-        id: "ts-17",
-        question: "Что такое Nominal Typing vs Structural Typing?",
-        answer: "TypeScript использует structural typing (совместимость по структуре), в отличие от nominal typing (совместимость по имени типа).",
-        difficulty: "hard"
-      },
-      {
-        id: "ts-18",
-        question: "Объясните const assertions",
-        answer: "Const assertions (as const) делают типы более точными, превращая массивы в readonly tuples, а объекты в readonly.",
-        difficulty: "medium"
-      },
-      {
-        id: "ts-19",
-        question: "Что такое Abstract Classes?",
-        answer: "Abstract классы не могут быть инстанцированы напрямую и могут содержать абстрактные методы, которые должны быть реализованы в наследниках.",
-        difficulty: "medium"
-      },
-      {
-        id: "ts-20",
-        question: "Объясните Variance в TypeScript",
-        answer: "Variance определяет как наследование типов влияет на их совместимость: covariance (T<A> <: T<B> если A <: B), contravariance (обратное).",
+        question: "Объясните концепцию Abstract Classes (Абстрактных классов) в TypeScript.",
+        answer: "**Абстрактный класс** — это класс-**чертеж** или **шаблон**, который предназначен для наследования другими классами и **не может быть инстанциирован** (создан объект) самостоятельно.<br/><br/>**Ключевые особенности:**<br/>1. **Ключевое слово `abstract`:** Используется при объявлении класса и его абстрактных методов.<br/>2. **Абстрактные методы:** Методы, которые объявлены (`abstract someMethod(): void;`) **без реализации**. Любой класс, который наследует абстрактный класс, **обязан** предоставить конкретную реализацию для всех абстрактных методов.<br/>3. **Обычные методы/свойства:** Абстрактный класс может также содержать полностью реализованные методы и свойства, которые наследуются как обычно.<br/><br/>**Использование:** Абстрактные классы используются для **обеспечения общего контракта** и логики для группы тесно связанных подклассов, гарантируя, что каждый подкласс реализует определенные, критически важные функции.",
         difficulty: "hard"
       }
     ]
   },
+  // node.js
   {
-    id: "nodejs",
-    name: "Node.js",
-    questions: [
+    "id": "nodejs",
+    "name": "Node.js",
+    "questions": [
       {
-        id: "node-1",
-        question: "Что такое Node.js?",
-        answer: "Node.js — это серверная платформа, построенная на движке V8, позволяющая выполнять JavaScript код вне браузера для создания серверных приложений.",
-        difficulty: "easy"
+        "id": "node-1",
+        "question": "Что такое Node.js и каковы его ключевые особенности?",
+        "answer": "**Node.js** — это кроссплатформенная **среда выполнения JavaScript** с открытым исходным кодом, предназначенная для выполнения кода вне браузера (обычно на сервере). Она построена на движке **V8 Google Chrome**.\n\n**Ключевые особенности:**\n1. **Асинхронность и неблокирующий I/O**.\n2. **Однопоточная модель** с использованием цикла событий (Event Loop).\n3. Обширная экосистема **NPM (Node Package Manager)**.\n4. Идеально подходит для создания **высоконагруженных, I/O-интенсивных** приложений (чаты, API-серверы, стриминг данных).",
+        "difficulty": "easy"
       },
       {
-        id: "node-2",
-        question: "Объясните Event Loop в Node.js",
-        answer: "Event Loop обрабатывает асинхронные операции в Node.js, используя фазы: timers, pending callbacks, idle/prepare, poll, check, close callbacks.",
-        difficulty: "hard"
+        "id": "node-2",
+        "question": "Как Node.js достигает высокой производительности с использованием одного потока?",
+        "answer": "Node.js использует **однопоточную модель** для основного кода, но полагается на **неблокирующий I/O** и **Цикл Событий (Event Loop)**. \n\nКогда Node.js сталкивается с I/O-операцией (например, чтение файла, запрос к базе данных), он **не блокирует основной поток**, а передает задачу системе и продолжает обрабатывать новые запросы. По завершении I/O-операции, результат возвращается в Event Loop через **очередь колбэков**.\n\nДля **CPU-интенсивных задач** Node.js использует **пул потоков libuv** (или **Worker Threads**), чтобы не блокировать Event Loop.",
+        "difficulty": "medium"
       },
       {
-        id: "node-3",
-        question: "Что такое npm?",
-        answer: "npm (Node Package Manager) — это пакетный менеджер для Node.js, позволяющий устанавливать, управлять и публиковать JavaScript пакеты.",
-        difficulty: "easy"
+        "id": "node-3",
+        "question": "Объясните концепцию Event Loop в Node.js.",
+        "answer": "**Event Loop** — это основной механизм, который позволяет Node.js выполнять **неблокирующие I/O-операции**, несмотря на то, что JavaScript является однопоточным. \n\nОн постоянно проверяет **Call Stack** и **Очередь колбэков (Callback Queue)**. Если Call Stack пуст, Event Loop переносит задачи из очереди колбэков в Call Stack для выполнения. Он имеет несколько фаз (timers, pending callbacks, poll, check, close), которые определяют порядок выполнения асинхронных задач.",
+        "difficulty": "medium"
       },
       {
-        id: "node-4",
-        question: "В чем разница между require() и import?",
-        answer: "require() — CommonJS синтаксис, синхронный, работает во время выполнения. import — ES6 модули, поддерживает tree-shaking, статический анализ.",
-        difficulty: "medium"
+        "id": "node-4",
+        "question": "В чем разница между блокирующим и неблокирующим I/O?",
+        "answer": "**Блокирующий I/O (Синхронный):** Процесс **останавливается** и ждет завершения I/O-операции (например, завершения чтения файла) перед тем, как перейти к следующей задаче. Это снижает производительность сервера.\n\n**Неблокирующий I/O (Асинхронный):** Процесс **не ждет** завершения I/O-операции. Он отправляет запрос, продолжает выполнять другие задачи и использует **колбэк (callback)** для обработки результата, когда операция завершится. Node.js использует неблокирующий I/O по умолчанию (например, `fs.readFile` вместо `fs.readFileSync`).",
+        "difficulty": "easy"
       },
       {
-        id: "node-5",
-        question: "Что такое middleware в Express.js?",
-        answer: "Middleware — функции, которые выполняются между запросом и ответом, имеют доступ к req, res объектам и next() функции для передачи управления.",
-        difficulty: "medium"
+        "id": "node-5",
+        "question": "Что такое `process.nextTick()` и как он взаимодействует с Event Loop?",
+        "answer": "`process.nextTick()` помещает колбэк в **Microtask Queue** (или `nextTick` Queue) — **наиболее приоритетную** очередь в Node.js.\n\nКолбэки из `process.nextTick()` выполняются **сразу после завершения текущей фазы** Event Loop (или рекурсивно до ее опустошения), но **до** начала следующей фазы (и до **Macrotask Queue**, куда попадают `setTimeout` и `setImmediate`). Он используется для асинхронного, но максимально быстрого выполнения кода.",
+        "difficulty": "hard"
       },
       {
-        id: "node-6",
-        question: "Объясните streams в Node.js",
-        answer: "Streams позволяют читать/записывать данные по частям: Readable (чтение), Writable (запись), Duplex (чтение+запись), Transform (преобразование).",
-        difficulty: "hard"
+        "id": "node-6",
+        "question": "Объясните, что такое NPM (Node Package Manager) и его основные функции.",
+        "answer": "**NPM** — это **стандартный менеджер пакетов** для Node.js и самая большая в мире библиотека программного обеспечения. \n\n**Основные функции:**\n1. **Установка пакетов:** Устанавливает зависимости для проекта (`npm install [package]`).\n2. **Управление зависимостями:** Управляет версиями и зависимостями, указанными в **`package.json`**.\n3. **Реестр (Registry):** Центральное хранилище для публикации и поиска модулей.\n4. **Скрипты:** Позволяет определять пользовательские команды (например, `npm run start`) в файле `package.json`.",
+        "difficulty": "easy"
       },
       {
-        id: "node-7",
-        question: "Что такое Buffer в Node.js?",
-        answer: "Buffer — это глобальный класс для работы с бинарными данными в Node.js, представляет фиксированный размер памяти вне V8 heap.",
-        difficulty: "medium"
+        "id": "node-7",
+        "question": "Какова роль файла `package.json`?",
+        "answer": "`package.json` — это **манифест** проекта Node.js. Он содержит **метаданные** о проекте и является основным файлом для управления зависимостями и скриптами.\n\n**Ключевые элементы:**\n* **`name`** и **`version`**.\n* **`main`**: Точка входа в приложение.\n* **`scripts`**: Пользовательские команды (например, для запуска, тестирования, сборки).\n* **`dependencies`**: Пакеты, необходимые для **продакшна**.\n* **`devDependencies`**: Пакеты, необходимые только для **разработки** (тестирование, линтинг и т.д.).",
+        "difficulty": "easy"
       },
       {
-        id: "node-8",
-        question: "Объясните процесс child_process",
-        answer: "child_process модуль позволяет создавать дочерние процессы: spawn(), exec(), execFile(), fork() для выполнения внешних команд.",
-        difficulty: "hard"
+        "id": "node-8",
+        "question": "Что такое `package-lock.json` и зачем он нужен?",
+        "answer": "**`package-lock.json`** (или `yarn.lock` для Yarn) — это файл, который автоматически генерируется менеджером пакетов и **фиксирует точные версии** всех установленных зависимостей (включая подзависимости).\n\n**Назначение:** Обеспечить **детерминированность** и **воспроизводимость** сборок. Гарантирует, что при установке пакетов на другом компьютере или в другой среде (CI/CD) будут установлены **абсолютно те же самые** версии, предотвращая конфликты, вызванные незначительными обновлениями пакетов.",
+        "difficulty": "medium"
       },
       {
-        id: "node-9",
-        question: "Что такое cluster в Node.js?",
-        answer: "Cluster модуль позволяет создавать дочерние процессы, разделяющие серверные порты, для использования всех CPU ядер.",
-        difficulty: "hard"
+        "id": "node-9",
+        "question": "Назовите 5 основных встроенных (Core) модулей Node.js.",
+        "answer": "Встроенные модули не требуют установки через NPM и доступны по умолчанию через функцию `require()`.\n\n1. **`http/https`**: Для создания веб-серверов и клиентов, работы с HTTP/HTTPS-протоколами.\n2. **`fs` (File System)**: Для работы с файловой системой (чтение, запись, удаление файлов).\n3. **`path`**: Для работы с путями к файлам и каталогам.\n4. **`os`**: Предоставляет информацию об операционной системе (память, CPU, сетевые интерфейсы).\n5. **`events`**: Реализует паттерн 'EventEmitter' (для работы с событиями).",
+        "difficulty": "easy"
       },
       {
-        id: "node-10",
-        question: "Объясните callback, Promise и async/await",
-        answer: "Callback — функция обратного вызова. Promise — объект для асинхронных операций. async/await — синтаксический сахар для Promise.",
-        difficulty: "medium"
+        "id": "node-10",
+        "question": "Как создать простой HTTP-сервер в Node.js?",
+        "answer": "Для создания HTTP-сервера используется встроенный модуль **`http`**.\n\n**Шаги:**\n1. Импортировать модуль `http`.\n2. Вызвать `http.createServer()` с колбэком, который принимает объекты **`req`** (запрос) и **`res`** (ответ).\n3. Использовать `res.writeHead()` для установки заголовков и `res.end()` для отправки ответа.\n4. Вызвать `.listen()` для указания порта, который будет прослушивать сервер.\n\n```javascript\nconst http = require('http');\nhttp.createServer((req, res) => {\n  res.writeHead(200, { 'Content-Type': 'text/plain' });\n  res.end('Hello Node.js!');\n}).listen(3000);\n```",
+        "difficulty": "easy"
       },
       {
-        id: "node-11",
-        question: "Что такое worker_threads в Node.js?",
-        answer: "Worker threads позволяют выполнять JavaScript код в параллельных потоках, полезно для CPU-интенсивных задач.",
-        difficulty: "hard"
+        "id": "node-11",
+        "question": "Как модуль `fs` работает с файлами (синхронно vs. асинхронно)?",
+        "answer": "Модуль **`fs`** предоставляет как **синхронные**, так и **асинхронные** методы для операций с файловой системой.\n\n* **Асинхронные методы (рекомендуемые):** Используют колбэк (или Promises) и **не блокируют Event Loop** (например, `fs.readFile()`). Это необходимо для масштабируемых серверных приложений.\n* **Синхронные методы:** Блокируют выполнение всего основного потока до завершения операции (например, `fs.readFileSync()`). Их следует использовать только в простых скриптах или во время инициализации, где блокировка допустима.",
+        "difficulty": "medium"
       },
       {
-        id: "node-12",
-        question: "Объясните process объект",
-        answer: "process — глобальный объект, предоставляющий информацию о текущем Node.js процессе: argv, env, exit(), cwd(), platform.",
-        difficulty: "medium"
+        "id": "node-12",
+        "question": "Что такое EventEmitter в Node.js?",
+        "answer": "**`EventEmitter`** — это класс, реализующий **паттерн Наблюдатель (Observer pattern)**. Он позволяет объектам испускать (emit) именованные события, а другим объектам — подписываться на эти события и реагировать на них (слушать, on).\n\n**Применение:** Является основой для многих встроенных модулей (например, Streams, HTTP) и необходим для создания **событийно-ориентированного** кода.\n\n```javascript\nconst EventEmitter = require('events');\nconst emitter = new EventEmitter();\nemitter.on('data', (data) => console.log(data));\nemitter.emit('data', 'Received!');\n```",
+        "difficulty": "easy"
       },
       {
-        id: "node-13",
-        question: "Что такое REPL в Node.js?",
-        answer: "REPL (Read-Eval-Print Loop) — интерактивная оболочка для выполнения JavaScript команд в реальном времени.",
-        difficulty: "easy"
+        "id": "node-13",
+        "question": "Что такое Streams (Потоки) в Node.js и их типы?",
+        "answer": "**Streams** — это абстрактный интерфейс, предназначенный для **эффективной обработки I/O-данных** (например, чтение/запись больших файлов, обработка HTTP-запросов). Они передают данные **порциями (chunks)**, что уменьшает потребление памяти и позволяет начать обработку до того, как все данные будут доступны.\n\n**Типы Streams:**\n1. **Readable (Читаемый):** Источник данных (например, `fs.createReadStream`).\n2. **Writable (Записываемый):** Приемник данных (например, `fs.createWriteStream`).\n3. **Duplex (Дуплексный):** Читаемый и записываемый (например, сетевой сокет `net.Socket`).\n4. **Transform (Преобразующий):** Дуплексный, который может изменять данные по мере их прохождения (например, `zlib.createGzip`).",
+        "difficulty": "medium"
       },
       {
-        id: "node-14",
-        question: "Объясните разницу между process.nextTick() и setImmediate()",
-        answer: "process.nextTick() выполняется в начале следующей итерации Event Loop, setImmediate() — в check фазе текущей итерации.",
-        difficulty: "hard"
+        "id": "node-14",
+        "question": "Для чего используется класс `Buffer` в Node.js?",
+        "answer": "**`Buffer`** — это встроенный класс, предназначенный для работы с **сырыми двоичными данными (raw binary data)**, которые хранятся как последовательность октетов (байтов).\n\n**Назначение:**\n* Является основным объектом для взаимодействия с **I/O-операциями** (файлы, сеть, Streams).\n* Используется для работы с двоичными протоколами, криптографией или кодировками (UTF-8, Base64).\n* **Буферы имеют фиксированный размер** после создания и не могут быть изменены.",
+        "difficulty": "medium"
       },
       {
-        id: "node-15",
-        question: "Что такое libuv?",
-        answer: "libuv — C библиотека, обеспечивающая асинхронный I/O в Node.js через Event Loop, thread pool и работу с файловой системой.",
-        difficulty: "hard"
-      },
-      {
-        id: "node-16",
-        question: "Объясните модуль fs",
-        answer: "fs модуль предоставляет API для работы с файловой системой: readFile(), writeFile(), mkdir(), stat() и их синхронные версии.",
-        difficulty: "medium"
-      },
-      {
-        id: "node-17",
-        question: "Что такое CommonJS?",
-        answer: "CommonJS — стандарт модульной системы для JavaScript, использующий require() для импорта и module.exports для экспорта.",
-        difficulty: "medium"
-      },
-      {
-        id: "node-18",
-        question: "Объясните http модуль",
-        answer: "http модуль позволяет создавать HTTP серверы и клиенты: createServer(), request(), response объекты для обработки запросов.",
-        difficulty: "medium"
-      },
-      {
-        id: "node-19",
-        question: "Что такое package.json?",
-        answer: "package.json — файл конфигурации проекта, содержащий метаданные: название, версию, зависимости, скрипты, точку входа.",
-        difficulty: "easy"
-      },
-      {
-        id: "node-20",
-        question: "Объясните память и garbage collection в Node.js",
-        answer: "Node.js использует V8 garbage collector: young generation (Scavenge), old generation (Mark-Sweep-Compact), память делится на heap и stack.",
-        difficulty: "hard"
-      },
-      {
-        id: "node-21",
-        question: "Что такое PM2 и зачем он нужен?",
-        answer: "PM2 — это менеджер процессов для Node.js приложений, обеспечивающий балансировку нагрузки, автоматический перезапуск, логирование и мониторинг.",
-        difficulty: "medium"
-      },
-      {
-        id: "node-22",
-        question: "Объясните разницу между process.env и dotenv",
-        answer: "process.env — глобальный объект с переменными окружения. dotenv — пакет для загрузки переменных из .env файла в process.env.",
-        difficulty: "easy"
-      },
-      {
-        id: "node-23",
-        question: "Что такое JWT и как его использовать в Node.js?",
-        answer: "JWT (JSON Web Token) — стандарт для создания токенов доступа. В Node.js используется для аутентификации через jsonwebtoken пакет.",
-        difficulty: "medium"
-      },
-      {
-        id: "node-24",
-        question: "Объясните паттерн Repository в Node.js",
-        answer: "Repository паттерн абстрагирует доступ к данным, инкапсулируя логику работы с базой данных в отдельном слое.",
-        difficulty: "hard"
-      },
-      {
-        id: "node-25",
-        question: "Что такое Rate Limiting и как его реализовать?",
-        answer: "Rate Limiting ограничивает количество запросов от клиента. Реализуется через middleware с использованием Redis или in-memory хранилища.",
-        difficulty: "medium"
+        "id": "node-15",
+        "question": "Как работают `setTimeout`, `setImmediate` и `process.nextTick` относительно Event Loop?",
+        "answer": "Все три функции асинхронны, но имеют разный приоритет:\n\n1. **`process.nextTick()`:** Выполняется в **Microtask Queue**, имеет **наивысший приоритет**. Выполняется **до** начала следующей фазы Event Loop.\n2. **Promises (resolve/then):** Выполняются в **Microtask Queue**, имеют высокий приоритет, но после `nextTick()`.\n3. **`setImmediate()`:** Выполняется в фазе **Check** (сразу после фазы Poll), обычно выполняется **перед** `setTimeout(() => {}, 0)`.\n4. **`setTimeout(..., 0)`:** Выполняется в фазе **Timers**. Выполняется после `nextTick()` и `Promise`, и, в зависимости от загрузки системы, может выполниться позже или раньше `setImmediate()` (но `setImmediate` гарантированно выполнится в следующей итерации).",
+        "difficulty": "hard"
       }
     ]
   },
+  // SQL
   {
-    id: "database",
-    name: "Базы данных",
-    questions: [
+    "id": "sql",
+    "name": "SQL (Structured Query Language)",
+    "questions": [
       {
-        id: "db-1",
-        question: "В чем разница между SQL и NoSQL базами данных?",
-        answer: "SQL — реляционные БД с фиксированной схемой и ACID. NoSQL — нереляционные БД с гибкой схемой, высокой производительностью и масштабируемостью.",
-        difficulty: "medium"
+        "id": "sql-1",
+        "question": "Что такое SQL и назовите четыре основные категории команд SQL.",
+        "answer": "**SQL (Structured Query Language)** — это декларативный язык, используемый для управления данными в **реляционных базах данных (RDBMS)**. Это стандартный язык для извлечения, манипулирования и определения структуры данных.\n\n**Четыре основные категории команд:**\n1. **DQL** (Data Query Language): **SELECT** (Извлечение данных).\n2. **DDL** (Data Definition Language): **CREATE, ALTER, DROP, TRUNCATE** (Определение и изменение структуры).\n3. **DML** (Data Manipulation Language): **INSERT, UPDATE, DELETE** (Манипуляции с данными).\n4. **DCL** (Data Control Language): **GRANT, REVOKE** (Управление правами доступа).",
+        "difficulty": "easy"
       },
       {
-        id: "db-2",
-        question: "Что такое индексы в базах данных?",
-        answer: "Индексы — структуры данных, ускоряющие поиск записей. Улучшают производительность SELECT, но замедляют INSERT/UPDATE/DELETE.",
-        difficulty: "medium"
+        "id": "sql-2",
+        "question": "Объясните разницу между Primary Key (Первичный ключ) и Foreign Key (Внешний ключ).",
+        "answer": "* **Primary Key (Первичный ключ):** Уникально идентифицирует **каждую строку** в **одной таблице**. Он должен быть **уникальным** и **NOT NULL**. Обеспечивает **целостность сущности**.\n\n* **Foreign Key (Внешний ключ):** Столбец (или набор столбцов) в **дочерней таблице**, который ссылается на **Primary Key** или **Unique Key** в **родительской таблице**. Он устанавливает связь между таблицами и обеспечивает **референциальную целостность**.\n\n**Пример:** В таблице `Orders` поле `CustomerID` является внешним ключом, ссылающимся на первичный ключ `ID` в таблице `Customers`.",
+        "difficulty": "easy"
       },
       {
-        id: "db-3",
-        question: "Объясните нормализацию баз данных",
-        answer: "Нормализация — процесс организации данных для минимизации избыточности: 1NF (атомарность), 2NF (зависимость от ключа), 3NF (транзитивная зависимость).",
-        difficulty: "hard"
+        "id": "sql-3",
+        "question": "Объясните разницу между WHERE и HAVING.",
+        "answer": "Оба оператора используются для фильтрации, но на **разных этапах** выполнения запроса:\n\n* **WHERE:** Используется для фильтрации **отдельных строк** **ДО** их группировки. Он не может работать с агрегирующими функциями (`SUM`, `COUNT`, `AVG`).\n* **HAVING:** Используется для фильтрации **групп строк** **ПОСЛЕ** их создания с помощью `GROUP BY`. Он **обязательно** работает с агрегирующими функциями.\n\n**Пример:**\n```sql\nSELECT Region, COUNT(ID)\nFROM Sales\nWHERE Amount > 100 -- 1. Фильтрация строк > 100\nGROUP BY Region\nHAVING COUNT(ID) > 5; -- 2. Фильтрация групп, где записей > 5\n```",
+        "difficulty": "medium"
       },
       {
-        id: "db-4",
-        question: "Что такое транзакции и ACID?",
-        answer: "ACID: Atomicity (атомарность), Consistency (согласованность), Isolation (изоляция), Durability (долговечность). Транзакции обеспечивают целостность данных.",
-        difficulty: "medium"
+        "id": "sql-4",
+        "question": "Назовите и кратко опишите 4 основных типа JOIN.",
+        "answer": "**JOIN** используется для объединения строк из двух или более таблиц на основе связанного столбца.\n\n1. **INNER JOIN:** Возвращает **только те строки**, для которых есть совпадения в **обеих** таблицах.\n2. **LEFT (OUTER) JOIN:** Возвращает **все строки** из **левой** таблицы и совпадающие строки из правой. Если совпадений нет, правые столбцы заполняются `NULL`.\n3. **RIGHT (OUTER) JOIN:** Возвращает **все строки** из **правой** таблицы и совпадающие строки из левой. Несовпадающие левые столбцы заполняются `NULL`.\n4. **FULL (OUTER) JOIN:** Возвращает **все строки** из **обеих** таблиц, объединяя совпадающие. Несовпадающие значения заполняются `NULL`.\n\n**Синтаксис:** `SELECT * FROM TableA JOIN_TYPE TableB ON TableA.Key = TableB.Key;`",
+        "difficulty": "medium"
       },
       {
-        id: "db-5",
-        question: "Объясните разницу между MongoDB и PostgreSQL",
-        answer: "MongoDB — документоориентированная NoSQL БД, гибкая схема. PostgreSQL — реляционная SQL БД с поддержкой JSON и сложных запросов.",
-        difficulty: "medium"
+        "id": "sql-5",
+        "question": "Что такое Индекс (Index) и как он влияет на производительность?",
+        "answer": "**Индекс** — это структура данных, которая улучшает скорость операций извлечения данных в таблице. Он похож на оглавление книги: позволяет СУБД быстро находить строки, не сканируя всю таблицу.\n\n**Влияние на производительность:**\n* **Положительное (Чтение):** Резко ускоряет запросы **SELECT** с условиями `WHERE`, `JOIN` и `ORDER BY`.\n* **Отрицательное (Запись):** Снижает скорость операций **INSERT, UPDATE, DELETE**, так как при изменении данных необходимо также обновить и сам индекс.",
+        "difficulty": "medium"
       },
       {
-        id: "db-6",
-        question: "Что такое Redis и когда его использовать?",
-        answer: "Redis — in-memory хранилище данных типа ключ-значение. Используется для кэширования, сессий, очередей, pub/sub.",
-        difficulty: "medium"
+        "id": "sql-6",
+        "question": "Объясните концепцию Нормализации данных и ее цель.",
+        "answer": "**Нормализация** — это процесс проектирования реляционной базы данных с целью **уменьшения избыточности** данных и улучшения их **целостности**. Она разбивает большие таблицы на более мелкие и устанавливает между ними связи.\n\n**Основные цели:**\n1. **Избежать аномалий:** Предотвращение проблем при вставке, обновлении и удалении данных (аномалии модификации).\n2. **Экономия места:** Исключение дублирования данных.\n\nНаиболее распространенные формы: **1NF, 2NF, 3NF**.",
+        "difficulty": "medium"
       },
       {
-        id: "db-7",
-        question: "Объясните шардирование баз данных",
-        answer: "Шардирование — горизонтальное разделение данных между несколькими серверами для масштабирования и распределения нагрузки.",
-        difficulty: "hard"
+        "id": "sql-7",
+        "question": "Что такое 3-я Нормальная Форма (3NF)?",
+        "answer": "Таблица находится в **3NF**, если она удовлетворяет условиям **2NF** и **не содержит транзитивных зависимостей**. \n\n**Транзитивная зависимость** означает, что неключевой столбец зависит от другого неключевого столбца, а не напрямую от первичного ключа.\n\n**Пример нарушения 3NF:** В таблице `Employees` поле `DepartmentName` зависит от `DepartmentID`, а не от первичного ключа `EmployeeID`. Решение — вынести `DepartmentName` и `DepartmentID` в отдельную таблицу `Departments`.",
+        "difficulty": "hard"
       },
       {
-        id: "db-8",
-        question: "Что такое репликация в базах данных?",
-        answer: "Репликация — копирование данных между серверами для отказоустойчивости, балансировки нагрузки и географического распределения.",
-        difficulty: "medium"
+        "id": "sql-8",
+        "question": "Что такое Денормализация и когда она оправдана?",
+        "answer": "**Денормализация** — это процесс добавления избыточных данных в нормализованную структуру. Это делается **намеренно** для **оптимизации производительности** чтения (за счет более медленной записи и потенциальной избыточности).\n\n**Оправдана, когда:**\n* **Приложения, ориентированные на чтение:** Системы, где операции чтения доминируют над записью (отчетность, аналитика).\n* **Снижение JOIN'ов:** Уменьшение количества сложных и дорогих операций `JOIN` в запросах, что ускоряет их выполнение.",
+        "difficulty": "medium"
       },
       {
-        id: "db-9",
-        question: "Объясните разницу между LEFT, RIGHT и INNER JOIN",
-        answer: "INNER JOIN — только совпадающие записи. LEFT JOIN — все записи из левой таблицы. RIGHT JOIN — все записи из правой таблицы.",
-        difficulty: "medium"
+        "id": "sql-9",
+        "question": "Что такое Хранимая Процедура (Stored Procedure)?",
+        "answer": "**Хранимая Процедура** — это набор предварительно скомпилированных SQL-операторов, сохраненных в базе данных. Она выполняется как единый блок кода.\n\n**Преимущества:**\n1. **Производительность:** Скомпилированный код выполняется быстрее.\n2. **Безопасность:** Помогает предотвратить **SQL-инъекции** (если используется безопасно).\n3. **Повторное использование:** Снижает дублирование кода бизнес-логики.\n4. **Трафик:** Уменьшает сетевой трафик между приложением и СУБД.",
+        "difficulty": "medium"
       },
       {
-        id: "db-10",
-        question: "Что такое ORM и зачем он нужен?",
-        answer: "ORM (Object-Relational Mapping) — технология для работы с БД через объекты. Примеры: Sequelize, TypeORM, Mongoose.",
-        difficulty: "medium"
+        "id": "sql-10",
+        "question": "Объясните разницу между DROP, DELETE и TRUNCATE.",
+        "answer": "Все три команды удаляют данные, но различаются по DDL/DML категории, влиянию на структуру и возможности отката:\n\n* **DELETE (DML):** Удаляет **строки** из таблицы. Может иметь условие `WHERE`. Является **транзакционной** операцией (можно откатить - `ROLLBACK`). **Оставляет** структуру таблицы.\n* **TRUNCATE (DDL):** Удаляет **все строки** из таблицы **быстрее**, чем `DELETE`, так как не записывает каждое удаление в лог транзакций. **Оставляет** структуру таблицы. **Нельзя** откатить (в большинстве СУБД).\n* **DROP (DDL):** Удаляет **всю таблицу** (структуру и данные) из базы данных. **Нельзя** откатить.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "sql-11",
+        "question": "Что такое Агрегирующие Функции (Aggregate Functions)? Приведите примеры.",
+        "answer": "**Агрегирующие функции** выполняют вычисление над **набором (группой) строк** и возвращают **одно результирующее значение**.\n\nОни часто используются вместе с оператором `GROUP BY`.\n\n**Примеры:**\n* **`COUNT()`:** Считает количество строк или значений.\n* **`SUM()`:** Вычисляет сумму значений в столбце.\n* **`AVG()`:** Вычисляет среднее значение.\n* **`MIN()`/`MAX()`:** Находит минимальное/максимальное значение.\n\n**Пример:** `SELECT AVG(Price) FROM Products;`",
+        "difficulty": "easy"
+      },
+      {
+        "id": "sql-12",
+        "question": "Что такое VIEW (Представление)?",
+        "answer": "**VIEW (Представление)** — это **виртуальная таблица**, основанная на результате запроса `SELECT`. Оно не хранит данные самостоятельно, а является просто сохраненным запросом.\n\n**Использование:**\n* **Безопасность:** Можно предоставить пользователю доступ только к определенным столбцам или строкам, скрывая остальную часть базовой таблицы.\n* **Упрощение сложных запросов:** Сложный `JOIN` или подзапрос можно сохранить как `VIEW`, чтобы затем обращаться к нему как к обычной таблице.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "sql-13",
+        "question": "Что такое SQL-инъекция и как ей противодействовать?",
+        "answer": "**SQL-инъекция** — это уязвимость безопасности, при которой злоумышленник внедряет вредоносный SQL-код во входные данные приложения (например, в поля формы). Это может привести к несанкционированному доступу, изменению или удалению данных.\n\n**Противодействие (Основной метод):**\n* **Параметризованные Запросы (Prepared Statements):** Это самый эффективный метод. Приложение отправляет шаблон SQL-запроса в СУБД, а затем отдельно передает входные данные. СУБД всегда рассматривает входные данные как **значения**, а не как исполняемый код.\n\n**Пример (псевдокод):**\n```sql\n// Плохо: SQL и данные смешаны\nquery = 'SELECT * FROM users WHERE username = \\'' + userInput + '\\'';\n\n// Хорошо: Параметризованный запрос\nquery = 'SELECT * FROM users WHERE username = ?';\nexecute(query, [userInput]); \n```",
+        "difficulty": "medium"
+      },
+      {
+        "id": "sql-14",
+        "question": "Объясните ключевые свойства ACID в контексте транзакций.",
+        "answer": "**ACID** — это набор свойств, гарантирующих, что транзакции в базе данных обрабатываются надежно и последовательно. \n\n* **A (Atomicity, Атомарность):** Транзакция должна быть выполнена **полностью** или **не выполнена вовсе**. Нет частичных результатов.\n* **C (Consistency, Согласованность):** Транзакция переводит базу данных из одного **корректного** состояния в другое. Сохраняются все правила и ограничения (NOT NULL, Foreign Key).\n* **I (Isolation, Изолированность):** Результаты выполняющейся транзакции **невидимы** для других одновременных транзакций до ее завершения (`COMMIT`).\n* **D (Durability, Долговечность):** Результаты зафиксированной (`COMMITTED`) транзакции являются **постоянными** и сохранятся даже в случае сбоя системы.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "sql-15",
+        "question": "Что такое подзапрос (Subquery)?",
+        "answer": "**Подзапрос** (или внутренний запрос, вложенный запрос) — это запрос `SELECT`, вложенный внутрь другого запроса SQL (запроса `SELECT`, `INSERT`, `UPDATE`, `DELETE`) или внутри агрегирующей функции.\n\n**Использование:**\n1. **Сравнение:** Сравнение значения с результатом другого запроса (например, `WHERE price > (SELECT AVG(price) FROM Products)`).\n2. **Список:** Используется в операторах `IN`, `NOT IN`, `EXISTS`.\n3. **Временная таблица:** Используется в качестве источника данных во фразе `FROM` (часто называется **CTE** или **Derived Table**).\n\n**Пример:**\n```sql\nSELECT Name \nFROM Employees \nWHERE Salary = (\n    SELECT MAX(Salary) FROM Employees\n);\n```",
+        "difficulty": "medium"
       }
     ]
   },
+  // MongoDB
   {
-    id: "sql",
-    name: "SQL",
-    questions: [
+    "id": "mongodb",
+    "name": "MongoDB (NoSQL Document Database)",
+    "questions": [
       {
-        id: "sql-1",
-        question: "Что такое SQL и какие основные команды он включает?",
-        answer: "SQL (Structured Query Language) — язык для работы с реляционными базами данных. Основные команды: SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP.",
-        difficulty: "easy"
+        "id": "mdb-1",
+        "question": "Что такое MongoDB и какой тип базы данных она представляет?",
+        "answer": "**MongoDB** — это кроссплатформенная, документоориентированная база данных **NoSQL**. Она использует гибкую схему и хранит данные в формате **BSON (Binary JSON)**. MongoDB разработана для высокой производительности, доступности и горизонтальной масштабируемости.\n\n**Ключевые особенности:** Схема без жесткой структуры, масштабирование через **шардинг** (Sharding), высокая доступность через **реплика-сеты** (Replica Sets).",
+        "difficulty": "easy"
       },
       {
-        id: "sql-2",
-        question: "Объясните разницу между INNER JOIN и LEFT JOIN",
-        answer: "INNER JOIN возвращает только совпадающие записи из обеих таблиц. LEFT JOIN возвращает все записи из левой таблицы и совпадающие из правой.",
-        difficulty: "medium"
+        "id": "mdb-2",
+        "question": "Объясните иерархию хранения данных в MongoDB, сравнив ее с SQL.",
+        "answer": "В MongoDB данные организованы следующим образом:\n\n* **Database (База данных):** Эквивалентно базе данных в SQL.\n* **Collection (Коллекция):** Эквивалентно **Таблице** в SQL. Коллекция — это группа документов.\n* **Document (Документ):** Эквивалентно **Строке** (Row) в SQL. Документ — это основная единица хранения данных, состоящая из пар ключ-значение (подобно JSON-объекту).\n* **Field (Поле):** Эквивалентно **Столбцу** (Column) в SQL. Поле представляет собой отдельный атрибут данных внутри документа.",
+        "difficulty": "easy"
       },
       {
-        id: "sql-3",
-        question: "Что такое индексы в SQL?",
-        answer: "Индексы — структуры данных, ускоряющие поиск записей. Улучшают производительность SELECT, но замедляют INSERT/UPDATE/DELETE.",
-        difficulty: "medium"
+        "id": "mdb-3",
+        "question": "Что такое **_id** в MongoDB и каковы его свойства?",
+        "answer": "**_id** — это **первичный ключ** каждого документа в коллекции. Он должен быть **уникальным** в пределах коллекции и является **обязательным**.\n\nПо умолчанию MongoDB генерирует **ObjectId**, который представляет собой 12-байтовое BSON-значение, состоящее из:\n1. **Timestamp** (отметка времени).\n2. **ID машины** (Machine ID).\n3. **ID процесса** (Process ID).\n4. **Счетчик** (Incrementing counter).\n\n**Свойство:** Благодаря включенному Timestamp, ObjectId'ы обеспечивают **естественный порядок сортировки по времени** создания документа.",
+        "difficulty": "medium"
       },
       {
-        id: "sql-4",
-        question: "Объясните нормализацию баз данных",
-        answer: "Нормализация — процесс организации данных для минимизации избыточности: 1NF (атомарность), 2NF (зависимость от ключа), 3NF (транзитивная зависимость).",
-        difficulty: "hard"
+        "id": "mdb-4",
+        "question": "Как MongoDB реализует отношения между данными (Relations)? Назовите два подхода.",
+        "answer": "В отличие от SQL с явными JOIN'ами, MongoDB использует подходы, основанные на гибкости документов:\n\n1. **Встраивание (Embedding):** Связанные данные хранятся **внутри** одного родительского документа (например, список комментариев внутри документа поста). **Плюсы:** Быстрое чтение (не требуется JOIN), атомарность на уровне документа. **Минусы:** Рост размера документа (ограничение 16 МБ).\n2. **Ссылки (Referencing):** В одном документе хранится **_id** другого документа (подобно Foreign Key в SQL). **Плюсы:** Уменьшение размера документов, лучшая нормализация. **Минусы:** Требуются дополнительные запросы для \"разрешения\" ссылок (эмулирование JOIN).",
+        "difficulty": "medium"
       },
       {
-        id: "sql-5",
-        question: "Что такое транзакции и ACID?",
-        answer: "ACID: Atomicity (атомарность), Consistency (согласованность), Isolation (изоляция), Durability (долговечность). Транзакции обеспечивают целостность данных.",
-        difficulty: "medium"
+        "id": "mdb-5",
+        "question": "Что такое Replica Set (Реплика-сет) и для чего он нужен?",
+        "answer": "**Replica Set** — это группа процессов MongoDB (серверов), обеспечивающих **высокую доступность (High Availability)** и **избыточность данных (Redundancy)**.\n\n**Состав:**\n* **Primary (Первичный):** Сервер, который принимает все операции записи. Чтение может идти как с Primary, так и с Secondary.\n* **Secondary (Вторичный):** Серверы, которые реплицируют данные с Primary. Используются для чтения, а также для автоматического **Failover** (переключения) в случае сбоя Primary.\n\n**Цель:** Обеспечение **автоматического переключения на резервный сервер** в случае отказа основного.",
+        "difficulty": "medium"
       },
       {
-        id: "sql-6",
-        question: "Как работает GROUP BY?",
-        answer: "GROUP BY группирует строки по указанным столбцам. Используется с агрегатными функциями (COUNT, SUM, AVG, MAX, MIN).",
-        difficulty: "medium"
+        "id": "mdb-6",
+        "question": "Что такое Sharding (Шардинг) и в каких случаях он используется?",
+        "answer": "**Sharding (Шардирование)** — это метод **горизонтального масштабирования** MongoDB, при котором данные распределяются между несколькими независимыми серверами (шардами). Это позволяет обрабатывать огромные объемы данных и высокую нагрузку, которая не умещается на одном сервере.\n\n**Используется, когда:**\n1. Объем данных **превышает** возможности хранения одного сервера.\n2. Требуется **высокая пропускная способность** операций чтения/записи, которую не может обеспечить один сервер.\n\n**Ключевой элемент:** **Shard Key (Ключ шардирования)**, который определяет, на какой шард попадет документ.",
+        "difficulty": "hard"
       },
       {
-        id: "sql-7",
-        question: "Что такое подзапросы (subqueries)?",
-        answer: "Подзапросы — запросы внутри других запросов. Могут быть в WHERE, FROM, SELECT. Используются для сложной фильтрации и агрегации.",
-        difficulty: "medium"
+        "id": "mdb-7",
+        "question": "Что такое **Aggregation Pipeline** (Конвейер Агрегации)?",
+        "answer": "**Aggregation Pipeline** — это основной инструмент MongoDB для выполнения сложных **операций ETL** (Extract, Transform, Load) и аналитики. Это **многоступенчатый процесс**, где документы проходят через последовательность операторов (стадий).\n\n**Основные стадии (примеры):**\n* **`$match`:** Фильтрует документы (аналог `WHERE`).\n* **`$group`:** Группирует документы и вычисляет агрегированные значения (аналог `GROUP BY`).\n* **`$project`:** Выбирает, переименовывает или создает новые поля.\n* **`$sort`:** Сортирует документы.\n\n**Пример:** `db.orders.aggregate([ { $match: { status: 'A' } }, { $group: { _id: '$cust_id', total: { $sum: '$amount' } } } ])`",
+        "difficulty": "medium"
       },
       {
-        id: "sql-8",
-        question: "Объясните разницу между HAVING и WHERE",
-        answer: "WHERE фильтрует строки до группировки, HAVING — после. HAVING используется с GROUP BY для фильтрации групп.",
-        difficulty: "medium"
+        "id": "mdb-8",
+        "question": "Каково ограничение на размер документа в MongoDB?",
+        "answer": "Максимальный размер **BSON-документа** в MongoDB составляет **16 мегабайт (16 MB)**. Это ограничение существует для обеспечения того, чтобы документ не использовал чрезмерное количество оперативной памяти при передаче или обработке, а также для предотвращения неэффективных схем встраивания (Embedding).",
+        "difficulty": "easy"
       },
       {
-        id: "sql-9",
-        question: "Что такое оконные функции?",
-        answer: "Оконные функции выполняют вычисления над набором строк: ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(). Используют OVER().",
-        difficulty: "hard"
+        "id": "mdb-9",
+        "question": "Объясните атомарность в MongoDB.",
+        "answer": "MongoDB гарантирует **атомарность** для операций **на уровне одного документа**. Это означает, что если вы вносите несколько изменений в один документ, либо все изменения будут успешно применены, либо ни одно из них. Это обеспечивает **целостность данных** внутри одного документа.\n\nДля обеспечения атомарности **множества документов** (Multi-Document Transactions) используются **многодокументные транзакции**, доступные с версии MongoDB 4.0 (для Replica Sets) и 4.2 (для Sharded Clusters), которые обеспечивают гарантии **ACID**.",
+        "difficulty": "medium"
       },
       {
-        id: "sql-10",
-        question: "Как работает UNION?",
-        answer: "UNION объединяет результаты нескольких SELECT запросов. Удаляет дубликаты. UNION ALL сохраняет дубликаты.",
-        difficulty: "medium"
+        "id": "mdb-10",
+        "question": "Как работают индексы в MongoDB и на что они влияют?",
+        "answer": "**Индексы** в MongoDB работают так же, как и в SQL: они хранят упорядоченный набор значений полей, позволяя СУБД быстро находить документы, не сканируя всю коллекцию.\n\n**Влияние:**\n* **Положительное (Чтение):** Ускоряют запросы `find()`, `$sort` и `$group` по индексированным полям.\n* **Отрицательное (Запись):** Замедляют операции `insert`, `update` и `delete`, так как при изменении документа необходимо обновить и соответствующие индексы.",
+        "difficulty": "medium"
       },
       {
-        id: "sql-11",
-        question: "Что такое внешние ключи (foreign keys)?",
-        answer: "Внешние ключи обеспечивают ссылочную целостность между таблицами. Создаются через FOREIGN KEY CONSTRAINT.",
-        difficulty: "medium"
+        "id": "mdb-11",
+        "question": "Приведите пример команды для вставки одного и множества документов в MongoDB Shell.",
+        "answer": "**Вставка одного документа (Insert One):**\n```javascript\ndb.users.insertOne({\n  name: 'Alice',\n  age: 30,\n  status: 'active'\n});\n```\n**Вставка множества документов (Insert Many):**\n```javascript\ndb.users.insertMany([\n  { name: 'Bob', age: 25 },\n  { name: 'Charlie', age: 40 }\n]);\n```",
+        "difficulty": "easy"
       },
       {
-        id: "sql-12",
-        question: "Объясните разницу между DELETE и TRUNCATE",
-        answer: "DELETE удаляет строки с возможностью отката. TRUNCATE удаляет все строки без возможности отката, сбрасывает автоинкремент.",
-        difficulty: "medium"
+        "id": "mdb-12",
+        "question": "Приведите пример команды для чтения (поиска) документов, где возраст больше 30.",
+        "answer": "Для поиска используется метод `find()`. Условие `{ age: { $gt: 30 } }` — это фильтр, использующий **оператор сравнения `$gt` (greater than)**.\n\n```javascript\ndb.users.find({\n  age: { $gt: 30 } \n});\n```\n**Дополнительно (Проекция):** Чтобы вернуть только поля `name` и `age`, исключив `_id`:\n```javascript\ndb.users.find(\n  { age: { $gt: 30 } },\n  { name: 1, age: 1, _id: 0 }\n);\n```",
+        "difficulty": "easy"
       },
       {
-        id: "sql-13",
-        question: "Что такое представления (views)?",
-        answer: "Представления — виртуальные таблицы на основе SELECT запроса. Упрощают сложные запросы, обеспечивают безопасность данных.",
-        difficulty: "medium"
+        "id": "mdb-13",
+        "question": "Приведите пример команды для обновления поля (только имени) в одном документе.",
+        "answer": "Для выборочного обновления используется метод **`updateOne()`** с **оператором `$set`**.\n\n```javascript\ndb.users.updateOne(\n  { name: 'Alice' }, // Фильтр (какой документ обновить)\n  { $set: { email: 'alice.new@example.com' } } // Операция обновления\n);\n```",
+        "difficulty": "medium"
       },
       {
-        id: "sql-14",
-        question: "Как работает EXISTS?",
-        answer: "EXISTS проверяет наличие записей в подзапросе. Возвращает TRUE, если подзапрос возвращает хотя бы одну строку.",
-        difficulty: "medium"
+        "id": "mdb-14",
+        "question": "Объясните разницу между `$set` и `$push` при обновлении.",
+        "answer": "* **`$set`:** Используется для **установки** значения поля. Если поле существует, оно обновляется; если нет — создается. Используется для скалярных значений (строки, числа) или для **замены** всего массива/встроенного объекта.\n* **`$push`:** Используется для **добавления** элемента в **конец массива**. Если поле не является массивом, `update` выдаст ошибку.\n\n**Пример `$push`:**\n```javascript\ndb.users.updateOne(\n  { name: 'Alice' },\n  { $push: { hobbies: 'Gardening' } } // Добавить 'Gardening' в массив hobbies\n);\n```",
+        "difficulty": "medium"
       },
       {
-        id: "sql-15",
-        question: "Что такое хранимые процедуры?",
-        answer: "Хранимые процедуры — набор SQL команд, сохраненных в базе данных. Улучшают производительность, безопасность, переиспользуемость кода.",
-        difficulty: "hard"
-      },
-      {
-        id: "sql-16",
-        question: "Объясните разницу между CHAR и VARCHAR",
-        answer: "CHAR имеет фиксированную длину, дополняется пробелами. VARCHAR имеет переменную длину, занимает только необходимое пространство.",
-        difficulty: "easy"
-      },
-      {
-        id: "sql-17",
-        question: "Что такое триггеры?",
-        answer: "Триггеры — процедуры, автоматически выполняемые при определенных событиях (INSERT, UPDATE, DELETE).",
-        difficulty: "hard"
-      },
-      {
-        id: "sql-18",
-        question: "Как работает CASE в SQL?",
-        answer: "CASE — условный оператор: CASE WHEN condition THEN result ELSE default END. Используется для условной логики в запросах.",
-        difficulty: "medium"
-      },
-      {
-        id: "sql-19",
-        question: "Что такое CTE (Common Table Expressions)?",
-        answer: "CTE — временные результаты запроса, доступные в рамках одного запроса. Создаются через WITH. Улучшают читаемость сложных запросов.",
-        difficulty: "hard"
-      },
-      {
-        id: "sql-20",
-        question: "Объясните разницу между IN и EXISTS",
-        answer: "IN проверяет наличие значения в списке. EXISTS проверяет наличие записей в подзапросе. EXISTS обычно эффективнее для больших наборов данных.",
-        difficulty: "medium"
-      },
-      {
-        id: "sql-21",
-        question: "Что такое партиционирование таблиц?",
-        answer: "Партиционирование — разделение таблицы на логические части. Улучшает производительность запросов и управление данными.",
-        difficulty: "hard"
-      },
-      {
-        id: "sql-22",
-        question: "Как работает FULL OUTER JOIN?",
-        answer: "FULL OUTER JOIN возвращает все записи из обеих таблиц. Если нет совпадения, заполняет NULL. Эквивалентен UNION LEFT и RIGHT JOIN.",
-        difficulty: "medium"
+        "id": "mdb-15",
+        "question": "В чем главное отличие MongoDB от традиционных SQL-баз данных?",
+        "answer": "Главное отличие в **модели данных и схеме**:\n\n| Критерий | MongoDB (NoSQL) | SQL (Relational) |\n| :--- | :--- | :--- |\n| **Модель данных** | Документы (JSON-like) | Таблицы (Строки и столбцы) |\n| **Схема** | **Гибкая/Динамическая** (Schema-less) | **Жесткая/Предварительно определенная** |\n| **Связи** | Встраивание (Embedding) или Ссылки (Referencing) | Явные **Foreign Keys** и **JOIN** |\n| **Масштабирование** | Горизонтальное (Sharding) | Традиционно вертикальное (наращивание мощности) |",
+        "difficulty": "medium"
       }
     ]
   },
-  {
-    id: "testing",
-    name: "Тестирование",
-    questions: [
-      {
-        id: "test-1",
-        question: "В чем разница между unit, integration и e2e тестами?",
-        answer: "Unit тесты проверяют отдельные компоненты. Integration тесты проверяют взаимодействие компонентов. E2E тесты проверяют весь процесс от начала до конца.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-2",
-        question: "Что такое TDD и BDD?",
-        answer: "TDD (Test-Driven Development) — разработка через тестирование. BDD (Behavior-Driven Development) — разработка через описание поведения.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-3",
-        question: "Объясните моки и стабы в тестировании",
-        answer: "Моки — объекты, имитирующие поведение реальных объектов. Стабы — объекты, возвращающие предопределенные ответы.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-4",
-        question: "Что такое Jest и как его использовать?",
-        answer: "Jest — фреймворк для тестирования JavaScript. Поддерживает моки, снапшоты, асинхронное тестирование и покрытие кода.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-5",
-        question: "Объясните тестирование асинхронного кода",
-        answer: "Асинхронное тестирование использует async/await, done callback или возврат Promise. Важно правильно обрабатывать таймауты и ошибки.",
-        difficulty: "hard"
-      },
-      {
-        id: "test-6",
-        question: "Что такое CI/CD и как его настроить?",
-        answer: "CI (Continuous Integration) — автоматическая сборка и тестирование. CD (Continuous Deployment) — автоматический деплой. Настраивается через GitHub Actions, Jenkins, GitLab CI.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-7",
-        question: "Объясните тестирование React компонентов",
-        answer: "React компоненты тестируются с помощью React Testing Library и Jest. Проверяются рендеринг, события, состояние и пропсы.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-8",
-        question: "Что такое snapshot тестирование?",
-        answer: "Snapshot тестирование сохраняет результат рендеринга компонента и сравнивает его с предыдущими версиями при следующих тестах.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-9",
-        question: "Объясните тестирование API",
-        answer: "API тестирование проверяет эндпоинты, статусы, заголовки, тело ответа. Используются инструменты: Postman, Supertest, Jest.",
-        difficulty: "medium"
-      },
-      {
-        id: "test-10",
-        question: "Что такое performance тестирование?",
-        answer: "Performance тестирование проверяет скорость, отзывчивость, стабильность и масштабируемость приложения под нагрузкой.",
-        difficulty: "hard"
-      }
-    ]
-  },
+  // security
   {
     id: "security",
     name: "Безопасность",
@@ -1973,6 +1975,103 @@ export const questionsData: Technology[] = [
         question: "Объясните безопасное хранение паролей",
         answer: "Пароли хешируются с солью через bcrypt, Argon2. Никогда не хранятся в открытом виде. Используется много итераций.",
         difficulty: "medium"
+      }
+    ]
+  },
+  // C#
+  {
+    "id": "csharp",
+    "name": "C# Fundamentals",
+    "questions": [
+      {
+        "id": "cs-1",
+        "question": "Что такое C# и каковы его основные характеристики?",
+        "answer": "**C# (Си-шарп)** — это современный, объектно-ориентированный (ООП) и типобезопасный язык программирования, разработанный Microsoft в рамках платформы **.NET**. \n\n**Основные характеристики:**\n1. **Объектно-ориентированный:** Поддерживает инкапсуляцию, наследование, полиморфизм.\n2. **Типобезопасность:** Проверка типов происходит на этапе компиляции, минимизируя ошибки в рантайме.\n3. **Автоматическое управление памятью:** Использует **сборщик мусора (Garbage Collector, GC)**.\n4. **Интероперабельность:** Легко взаимодействует с кодом, написанным на других языках .NET.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "cs-2",
+        "question": "Объясните разницу между Value Types (Значимые типы) и Reference Types (Ссылочные типы).",
+        "answer": "**Значимые типы (Value Types):**\n* Хранят свои данные **напрямую в стеке** (или внутри объекта/структуры).\n* При присваивании создается **полная копия значения**.\n* Примеры: `int`, `char`, `bool`, `struct`, `enum`.\n\n**Ссылочные типы (Reference Types):**\n* Хранят **ссылку (адрес)** на данные, которые расположены **в управляемой куче (Managed Heap)**.\n* При присваивании создается **копия ссылки**, и обе переменные указывают на один и тот же объект.\n* Примеры: `class`, `string`, `array`, `delegate`, `object`.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-3",
+        "question": "Что такое Boxing (Упаковка) и Unboxing (Распаковка) и каковы их последствия для производительности?",
+        "answer": "* **Boxing (Упаковка):** Процесс **неявного** преобразования **значимого типа** (например, `int`) в **ссылочный тип** (`object` или интерфейс).\n* **Unboxing (Распаковка):** Процесс **явного** преобразования **ссылочного типа** (содержащего упакованное значение) обратно в **значимый тип**.\n\n**Последствия для производительности:** Оба процесса являются **ресурсоемкими** операциями, так как Boxing требует **выделения памяти в куче**, а Unboxing требует **проверки типа** в рантайме. Чрезмерное использование Boxing/Unboxing приводит к замедлению работы и дополнительной нагрузке на сборщик мусора.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-4",
+        "question": "Объясните назначение ключевых слов `using` (директива) и `using` (оператор/блок).",
+        "answer": "В C# ключевое слово `using` используется в двух разных контекстах:\n\n1. **Директива `using` (в начале файла):** Используется для **импорта пространств имен** (`Namespaces`), чтобы можно было обращаться к типам без указания их полного имени.\n   * *Пример:* `using System.Collections.Generic;`\n\n2. **Оператор `using` (блок):** Используется для **автоматического и гарантированного освобождения неуправляемых ресурсов** (например, файловых потоков, подключений к БД). Тип, используемый в блоке `using`, должен реализовывать интерфейс **`IDisposable`**.\n   * *Пример:* `using (var file = new FileStream(...)) { ... }` (метод `Dispose()` будет вызван автоматически).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-5",
+        "question": "В чем разница между `const` и `readonly`?",
+        "answer": "Оба ключевых слова используются для создания неизменяемых (иммутабельных) полей, но имеют важные отличия:\n\n| Критерий | `const` | `readonly` |\n| :--- | :--- | :--- |\n| **Время инициализации** | **Compile-time** (во время компиляции) | **Run-time** (во время выполнения) |\n| **Где инициализируется** | Только в момент объявления поля | В момент объявления ИЛИ в **конструкторе** |\n| **Типы** | Ограничен примитивами, `string` и `null` | Любые типы (Value и Reference Types) |\n| **Область видимости** | **Статическое** поле по умолчанию (значение одно для всех экземпляров) | Может быть **полем экземпляра** (значение может быть разным для каждого объекта) |",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-6",
+        "question": "Что такое `namespace` (пространство имен) и для чего оно используется?",
+        "answer": "**Namespace** — это механизм C# для **организации кода** и **предотвращения конфликтов имен** (Name Collisions). Он служит логическим контейнером для группировки связанных классов, структур, интерфейсов и других типов.\n\n**Пример:** Два разных разработчика могут создать класс с именем `Logger`. Если они помещены в разные пространства имен (`MyCompany.App1` и `MyCompany.App2`), то их можно использовать одновременно без конфликтов.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "cs-7",
+        "question": "Объясните работу сборщика мусора (Garbage Collector, GC) в .NET.",
+        "answer": "**Сборщик мусора (GC)** — это часть **CLR (Common Language Runtime)**, которая автоматически управляет памятью **кучи (Heap)**, выделенной для ссылочных типов. \n\n**Принцип работы (Mark and Sweep):**\n1. **Определение достижимости (Marking):** GC определяет, какие объекты в куче **достижимы** (то есть, на них есть ссылки из стека или других корней).\n2. **Сборка (Sweeping):** GC освобождает память, занятую **недостижимыми** объектами.\n3. **Компактизация (Compacting):** После освобождения памяти GC может переместить оставшиеся объекты, чтобы устранить фрагментацию памяти.\n\nGC использует **поколения (Generations 0, 1, 2)**: новые объекты создаются в Gen 0, и чем дольше объект \"живет\", тем выше его поколение, и тем реже GC его проверяет.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-8",
+        "question": "Какое ключевое слово используется для явного освобождения неуправляемых ресурсов, и какой интерфейс должен быть реализован?",
+        "answer": "Для явного освобождения **неуправляемых ресурсов** (таких как файловые потоки, сетевые подключения, хэндлы ОС) используется паттерн **`IDisposable`**.\n\n* **Интерфейс:** Должен быть реализован интерфейс **`System.IDisposable`**, который содержит единственный метод **`Dispose()`**.\n* **Использование:** Ресурсы, реализующие `IDisposable`, должны быть использованы внутри блока **`using`**, который гарантированно вызывает метод `Dispose()`, даже если внутри блока произойдет исключение.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-9",
+        "question": "В чем разница между оператором `==` и методом `.Equals()`?",
+        "answer": "Поведение зависит от типа:\n\n* **Для значимых типов (`int`, `struct`):** И `==`, и `.Equals()` по умолчанию сравнивают **сами значения**.\n* **Для ссылочных типов (`class`, `object`):**\n    * **`==`:** По умолчанию сравнивает **ссылки** (проверяет, указывают ли две переменные на **один и тот же объект** в памяти).\n    * **`.Equals()`:** По умолчанию (в базовом классе `object`) также сравнивает ссылки. Однако этот метод **часто переопределяется** (например, в `string` или ваших кастомных классах), чтобы сравнивать **фактическое содержимое/значение** объектов.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-10",
+        "question": "Для чего используется ключевое слово `var`?",
+        "answer": "Ключевое слово **`var`** используется для **неявной типизации** локальных переменных. Это означает, что тип переменной определяется (выводится) **компилятором** на основе типа выражения, используемого для инициализации.\n\n**Особенности:**\n* **Не является динамическим типом:** Тип фиксируется во время компиляции (C# остается строго типизированным).\n* **Обязательна инициализация:** Переменная должна быть инициализирована в момент объявления.\n* **Используется для анонимных типов:** Обязателен при работе с **анонимными типами** в **LINQ**.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "cs-11",
+        "question": "Что такое `struct` и чем он отличается от `class`?",
+        "answer": "**`struct` (Структура)** — это пользовательский **значимый тип (Value Type)**, который обычно используется для представления небольших, связанных групп данных, где важна производительность и семантика копирования.\n\n**Отличия от `class`:**\n1. **Тип:** `struct` — значимый тип (стек); `class` — ссылочный тип (куча).\n2. **Наследование:** Структуры **не поддерживают наследование** (не могут наследоваться от другого класса/структуры, кроме `System.ValueType`). Классы поддерживают наследование.\n3. **Конструктор по умолчанию:** До C# 10 структуры **не могли** объявлять конструктор без параметров (по умолчанию всегда был конструктор с нулевыми значениями). Классы могут.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-12",
+        "question": "Объясните назначение ключевых слов `checked` и `unchecked`.",
+        "answer": "Эти ключевые слова управляют поведением C# при **переполнении (Overflow)** целочисленных арифметических операций.\n\n* **`checked`:** Инструктирует CLR генерировать **`OverflowException`** при переполнении. Это обеспечивает безопасные, но более медленные вычисления.\n* **`unchecked`:** Инструктирует CLR игнорировать переполнение, позволяя результату **\"заворачиваться\"** (например, `int.MaxValue + 1` станет `int.MinValue`). Это быстрее, но потенциально небезопасно.\n\nПоведение по умолчанию зависит от контекста: в консольных приложениях и библиотеках обычно `unchecked`, в константах итераторов — `checked`.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "cs-13",
+        "question": "Что такое Nullable Types (Обнуляемые типы)?",
+        "answer": "**Nullable Types** позволяют **значимым типам (Value Types)** принимать значение **`null`** в дополнение к их обычному диапазону значений. Значимые типы по умолчанию не могут быть `null`.\n\n**Синтаксис:** Добавление вопросительного знака `?` после имени типа (например, `int?`, `DateTime?`).\n\n**Реализация:** `Nullable<T>` — это структура, которая имеет два поля: `Value` (само значение) и `HasValue` (логический флаг, указывающий, присвоено ли значение, или же это `null`).",
+        "difficulty": "easy"
+      },
+      {
+        "id": "cs-14",
+        "question": "Что такое `ref`, `out` и `in` параметры и в чем их ключевые различия?",
+        "answer": "Эти модификаторы используются для передачи аргументов по ссылке:\n\n| Модификатор | Назначение | Инициализация аргумента |\n| :--- | :--- | :--- |\n| **`ref`** | Передача по ссылке (двунаправленная) | Должен быть **инициализирован** вызывающим кодом **до** вызова метода. |\n| **`out`** | Передача по ссылке (выходное значение) | **Не должен** быть инициализирован до вызова. Метод **обязан** присвоить ему значение. |\n| **`in`** | Передача по ссылке (только для чтения) | Должен быть инициализирован до вызова. Метод **не может** изменить его значение (гарантия иммутабельности внутри метода). |",
+        "difficulty": "hard"
+      },
+      {
+        "id": "cs-15",
+        "question": "Объясните концепцию LINQ.",
+        "answer": "**LINQ (Language Integrated Query)** — это набор технологий, введенных в C# 3.0, которые позволяют писать **запросы** непосредственно внутри языка C# (или VB.NET) к различным источникам данных. \n\n**Источники данных (LINQ Providers):**\n* **LINQ to Objects:** Запросы к коллекциям в памяти (`List<T>`, массивы).\n* **LINQ to SQL / LINQ to Entities:** Запросы к реляционным базам данных (преобразуются в SQL).\n* **LINQ to XML:** Запросы к XML-документам.\n\n**Преимущество:** Обеспечивает единый, типобезопасный синтаксис запросов (например, `from c in customers where c.City == \"London\" select c`).",
+        "difficulty": "medium"
       }
     ]
   }
