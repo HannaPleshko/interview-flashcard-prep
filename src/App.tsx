@@ -26,7 +26,7 @@ const App = () => (
       <Sonner />
       <Router>
         <Routes>
-          <Route path="/" element={<Study />} />
+          <Route path="/" element={<Navigate to="/study/candidate_general_questions_answers" replace />} />
           <Route path="/study/:techId" element={<Study />} />
           <Route path="/allpractice" element={<Index />} />
           <Route path="/practice" element={<Practice />} />
