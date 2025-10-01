@@ -8,13 +8,14 @@ import { formatQuestionText } from "@/lib/utils";
 
 interface QuestionCardProps {
   question: Question;
+  index?: number;
   isFlipped?: boolean;
   onFlip?: () => void;
   progressStatus?: ProgressStatus;
   onProgressChange?: (status: ProgressStatus) => void;
 }
 
-const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onProgressChange }: QuestionCardProps) => {
+const QuestionCard = ({ question, index, isFlipped = false, onFlip, progressStatus, onProgressChange }: QuestionCardProps) => {
   const [localFlipped, setLocalFlipped] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
   
@@ -111,6 +112,11 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
               </div>
               <h3 className="text-lg font-semibold text-foreground leading-relaxed mb-4 relative">
                 <Star className="h-5 w-5 text-yellow-400 absolute -left-6 top-1 opacity-60" />
+                {index !== undefined && (
+                  <span className="text-gray-500 font-normal text-base mr-2">
+                    {index + 1}.
+                  </span>
+                )}
                 {question.question}
               </h3>
             </div>
@@ -158,24 +164,24 @@ const QuestionCard = ({ question, isFlipped = false, onFlip, progressStatus, onP
               <div className="progress-buttons flex justify-center gap-2">
                 <Button
                   size="sm" 
-                  variant={progressStatus === 'learning' ? 'default' : 'outline'}
-                  className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200"
+                  variant="outline"
+                  className={`${progressStatus === 'learning' ? 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 ring-2 ring-blue-500 focus:ring-blue-500' : 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 focus:ring-blue-500'}`}
                   onClick={() => onProgressChange?.('learning')}
                 >
                   <Book className="h-4 w-4 mr-1.5" /> Учу
                 </Button>
                 <Button
                   size="sm" 
-                  variant={progressStatus === 'review' ? 'default' : 'outline'}
-                  className="bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200"
+                  variant="outline"
+                  className={`${progressStatus === 'review' ? 'bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200 ring-2 ring-yellow-500 focus:ring-yellow-500' : 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100 focus:ring-yellow-500'}`}
                   onClick={() => onProgressChange?.('review')}
                 >
                   <RefreshCw className="h-4 w-4 mr-1.5" /> Повторить
                 </Button>
                 <Button
                   size="sm" 
-                  variant={progressStatus === 'known' ? 'default' : 'outline'}
-                  className="bg-green-100 text-green-800 border-green-200 hover:bg-green-200"
+                  variant="outline"
+                  className={`${progressStatus === 'known' ? 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200 ring-2 ring-green-500 focus:ring-green-500' : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100 focus:ring-green-500'}`}
                   onClick={() => onProgressChange?.('known')}
                 >
                   <Check className="h-4 w-4 mr-1.5" /> Знаю

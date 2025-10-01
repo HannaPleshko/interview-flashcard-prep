@@ -12,6 +12,7 @@ import { formatQuestionText } from "@/lib/utils";
 
 interface QuestionListItemProps {
   question: Question;
+  index?: number;
   progressStatus?: ProgressStatus;
   onProgressChange: (status: ProgressStatus) => void;
 }
@@ -25,7 +26,7 @@ const getDifficultyClass = (difficulty: string) => {
   }
 };
 
-const QuestionListItem = ({ question, progressStatus, onProgressChange }: QuestionListItemProps) => {
+const QuestionListItem = ({ question, index, progressStatus, onProgressChange }: QuestionListItemProps) => {
   const getProgressBorder = (status?: ProgressStatus) => {
     switch (status) {
       case 'known': return 'border-l-4 border-green-400';
@@ -40,7 +41,16 @@ const QuestionListItem = ({ question, progressStatus, onProgressChange }: Questi
       <AccordionItem value={question.id} className={`bg-white/70 rounded-xl shadow-md backdrop-blur-sm border-white/20 transition-all duration-300 ${getProgressBorder(progressStatus)}`}>
         <AccordionTrigger className="accordion-trigger px-3 sm:px-6 py-3 sm:py-4 hover:no-underline text-left focus:outline-none focus:ring-0 focus:shadow-none focus:border-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2 sm:gap-4">
-            <span className="flex-1 font-medium text-foreground text-sm sm:text-base">{question.question}</span>
+            <div className="flex items-start gap-3 flex-1">
+              <span className="font-medium text-foreground text-sm sm:text-base">
+                {index !== undefined && (
+                  <span className="text-gray-500 font-normal mr-2">
+                    {index + 1}.
+                  </span>
+                )}
+                {question.question}
+              </span>
+            </div>
             <Badge variant={
               question.difficulty === 'easy' ? 'default' :
               question.difficulty === 'medium' ? 'secondary' : 'destructive'
@@ -53,24 +63,24 @@ const QuestionListItem = ({ question, progressStatus, onProgressChange }: Questi
             <span className="text-xs sm:text-sm font-medium text-muted-foreground mr-2">Мой прогресс:</span>
             <Button 
               size="sm" 
-              variant={progressStatus === 'learning' ? 'default' : 'outline'}
-              className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 text-xs sm:text-sm"
+              variant="outline"
+              className={`${progressStatus === 'learning' ? 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 ring-2 ring-blue-500 focus:ring-blue-500' : 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 focus:ring-blue-500'} text-xs sm:text-sm`}
               onClick={() => onProgressChange('learning')}
             >
               <Book className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" /> Учу
             </Button>
             <Button 
               size="sm" 
-              variant={progressStatus === 'review' ? 'default' : 'outline'}
-              className="bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200 text-xs sm:text-sm"
+              variant="outline"
+              className={`${progressStatus === 'review' ? 'bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200 ring-2 ring-yellow-500 focus:ring-yellow-500' : 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100 focus:ring-yellow-500'} text-xs sm:text-sm`}
               onClick={() => onProgressChange('review')}
             >
               <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" /> Повторить
             </Button>
             <Button 
               size="sm" 
-              variant={progressStatus === 'known' ? 'default' : 'outline'}
-              className="bg-green-100 text-green-800 border-green-200 hover:bg-green-200 text-xs sm:text-sm"
+              variant="outline"
+              className={`${progressStatus === 'known' ? 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200 ring-2 ring-green-500 focus:ring-green-500' : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100 focus:ring-green-500'} text-xs sm:text-sm`}
               onClick={() => onProgressChange('known')}
             >
               <Check className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" /> Знаю

@@ -153,12 +153,13 @@ const Index = () => {
                     onClick={() => toggleTechnology(tech.id)}
                     className={`
                       ${isSelected 
-                        ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-md hover:shadow-lg hover:text-white focus:text-white active:text-white` 
-                        : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 focus:text-gray-700 active:text-gray-700'
+                        ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-md` 
+                        : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105 focus:text-gray-700 active:text-gray-700'
                       }
                       rounded-full px-4 py-2 text-sm font-medium
-                      transition-all duration-300 hover:scale-105
+                      transition-all duration-300
                       flex items-center gap-2 backdrop-blur-sm
+                      focus:ring-0 focus:ring-offset-0
                     `}
                   >
                     <IconComponent className="h-4 w-4" />
@@ -174,7 +175,7 @@ const Index = () => {
             <Button
               onClick={generateRandomInterview}
               disabled={selectedTechnologies.length === 0}
-              className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Shuffle className="h-5 w-5 mr-2" />
               Сгенерировать рандомное интервью

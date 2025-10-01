@@ -83,13 +83,13 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
             <GripVertical className="h-5 w-5 text-gray-400" />
           </div>
         )}
-        <QuestionCard {...props} question={question} />
+        <QuestionCard {...props} question={question} index={index} />
       </div>
     </div>
   );
 };
 
-const SortableQuestionListItem = ({ question, ...props }: { question: Question } & any) => {
+const SortableQuestionListItem = ({ question, index, ...props }: { question: Question; index?: number } & any) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -144,7 +144,7 @@ const SortableQuestionListItem = ({ question, ...props }: { question: Question }
         </div>
       )}
       <div className="flex-grow">
-        <QuestionListItem {...props} question={question} />
+        <QuestionListItem {...props} question={question} index={index} />
       </div>
     </div>
   );
@@ -421,11 +421,11 @@ const Study = () => {
                   onClick={() => navigate(`/study/${tech.id}`)}
                   className={`
                     ${isActive 
-                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg hover:shadow-xl hover:text-white` 
-                      : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700'
+                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg` 
+                      : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105'
                     }
                     rounded-full px-6 py-3 text-sm font-medium
-                    transition-all duration-300 hover:scale-105
+                    transition-all duration-300
                     flex items-center gap-2 backdrop-blur-sm
                     focus:text-white active:text-white
                   `}
@@ -538,7 +538,7 @@ const Study = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <div 
             className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === 'all' ? 'bg-purple-100 ring-2 ring-purple-500' : 'bg-white/60 backdrop-blur-sm border border-white/20'
+              progressFilter === 'all' ? 'bg-gray-100 ring-2 ring-gray-500' : 'bg-white/60 backdrop-blur-sm border border-white/20'
             }`}
             onClick={() => setProgressFilter('all')}
           >
@@ -606,10 +606,11 @@ const Study = () => {
                 strategy={verticalListSortingStrategy}
               >
                 <div className="space-y-4">
-                  {currentQuestions.map((question) => (
+                  {currentQuestions.map((question, index) => (
                     <SortableQuestionListItem
                       key={question.id}
                       question={question}
+                      index={indexOfFirstItem + index}
                       progressStatus={progress[question.id]}
                       onProgressChange={(status) => handleProgressChange(question.id, status)}
                     />
