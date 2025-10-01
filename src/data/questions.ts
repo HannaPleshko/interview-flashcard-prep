@@ -1923,7 +1923,104 @@ export const questionsData: Technology[] = [
         "question": "Как выполнять HTTP-запросы в Angular?",
         "answer": "HTTP-запросы выполняются с помощью встроенного сервиса <strong>`HttpClient`</strong>, который необходимо <strong>инжектировать</strong> в конструктор (обычно в сервисном классе).\n\n<strong>Шаги:</strong>\n1. Импортировать <strong>`HttpClientModule`</strong> в модуль.\n2. Инжектировать <strong>`HttpClient`</strong>.\n3. Использовать методы `this.http.get()`, `post()`, `put()`, `delete()`, которые возвращают <strong>Observable</strong> (требуют подписки <strong>`.subscribe()`</strong>).",
         "difficulty": "easy"
+      },
+      {
+        "id": "ang-16",
+        "question": "Жизненный цикл компонента: какие есть хуки (ngOnInit, ngOnChanges, ngOnDestroy и др.)?",
+        "answer": "<strong>Хуки Жизненного Цикла</strong> — это методы, которые Angular вызывает в определенные моменты существования компонента/директивы.\n\n<strong>Ключевые хуки:</strong>\n1. <strong><code>ngOnChanges</code></strong>: Вызывается при изменении входных свойств (<code>@Input()</code>).\n2. <strong><code>ngOnInit</code></strong>: Вызывается один раз после первого <code>ngOnChanges</code>; используется для инициализации данных.\n3. <strong><code>ngDoCheck</code></strong>: Вызывается сразу после CD. Используется для реализации своей логики CD.\n4. <strong><code>ngAfterContentInit/Checked</code></strong>: Для инициализации/проверки контента, вставленного через <code><ng-content></code>.\n5. <strong><code>ngAfterViewInit/Checked</code></strong>: Для инициализации/проверки элементов, полученных через <code>ViewChild</code>/<code>ViewChildren</code>.\n6. <strong><code>ngOnDestroy</code></strong>: Вызывается непосредственно перед уничтожением компонента; используется для отписки от Observables и очистки ресурсов.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-17",
+        "question": "Объясните разницу между @Input() и @Output().",
+        "answer": "Это механизмы для <strong>взаимодействия компонентов</strong> в Дереве Компонентов.\n\n1. <strong><code>@Input()</code>:</strong> Позволяет <strong>родительскому компоненту</strong> передавать <strong>данные вниз</strong> (в дочерний).\n2. <strong><code>@Output()</code>:</strong> Позволяет <strong>дочернему компоненту</strong> отправлять <strong>события вверх</strong> (родительскому) с помощью экземпляра <strong><code>EventEmitter</code></strong>.",
+        "difficulty": "easy"
+      },
+      {
+        "id": "ang-18",
+        "question": "Что такое Observables (RxJS) и чем они отличаются от Promise?",
+        "answer": "<strong>Observable (RxJS)</strong> — это поток данных, который может выдавать <strong>ноль, одно или несколько значений</strong> с течением времени (ленивый, многократный, отменяемый).\n\n<strong>Promise</strong> — выдает <strong>одно значение</strong> (или ошибку) и завершается (неленивый, однократный, неотменяемый).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-19",
+        "question": "Как работает Routing в Angular? Что такое lazy loading модулей?",
+        "answer": "<strong>Маршрутизация (Routing)</strong> позволяет приложению перемещаться между различными представлениями (компонентами) без перезагрузки страницы, используя API истории браузера. Навигация настраивается в конфигурации маршрутов.\n\n<strong>Lazy Loading (Ленивая загрузка)</strong> — это архитектурный паттерн, при котором <strong>Feature Module</strong> загружается не при старте приложения, а <strong>только при первом обращении к его маршрутам</strong>. Это значительно уменьшает начальный размер бандла и ускоряет запуск приложения.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-20",
+        "question": "Что такое Guard в Angular (CanActivate, CanDeactivate и т.д.)?",
+        "answer": "<strong>Гарды (Guards)</strong> — это классы, реализующие определенные интерфейсы (<code>CanActivate</code>, <code>CanDeactivate</code> и др.), которые позволяют <strong>управлять доступом</strong> к маршрутам. Они запускаются до или после навигации.\n\n* <strong><code>CanActivate</code></strong>: Разрешает/запрещает доступ к маршруту.\n* <strong><code>CanDeactivate</code></strong>: Разрешает/запрещает уход с маршрута (например, если форма не сохранена).",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-21",
+        "question": "Что такое Change Detection и какие есть стратегии (Default vs OnPush)?",
+        "answer": "<strong>Change Detection (CD)</strong> — механизм, который <strong>проверяет изменения</strong> в модели данных и <strong>обновляет DOM</strong>, чтобы отобразить новое состояние.\n\n<strong>Стратегии:</strong>\n1. <strong><code>Default</code> (CheckAlways)</strong>: Компонент проверяется при <strong>любом</strong> событии (клика, таймера, HTTP-запроса) в приложении.\n2. <strong><code>OnPush</code> (CheckOnce)</strong>: Компонент проверяется <strong>только</strong> если изменились входные свойства (<code>@Input()</code>) по ссылке (не мутация) или если произошло событие внутри компонента.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "ang-22",
+        "question": "Как работает механизм Zone.js и зачем он нужен Angular?",
+        "answer": "<strong>Zone.js</strong> — это библиотека, которая <strong>патчит</strong> (обертывает) асинхронные API браузера (<code>setTimeout</code>, <code>addEventListener</code>, <code>Promise</code> и др.), создавая <strong>\"зоны\" выполнения</strong>.\n\n<strong>Роль в Angular:</strong> Когда асинхронная операция в зоне завершается, Zone.js уведомляет Angular о потенциальном изменении данных. Это автоматически <strong>запускает цикл Change Detection</strong>, освобождая разработчика от ручного вызова CD.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "ang-23",
+        "question": "Объясните internals работы Change Detection и как OnPush влияет на производительность.",
+        "answer": "Внутренне CD — это <strong>обход Дерева Компонентов (Component Tree)</strong> сверху вниз. Для каждого компонента Angular сравнивает <strong>предыдущее значение</strong> свойства с <strong>текущим</strong> и при расхождении обновляет DOM.\n\n<strong><code>OnPush</code> Влияние:</strong> Значительно <strong>повышает производительность</strong>, так как Angular может <strong>пропускать поддерево</strong> компонентов, если их входные данные (<code>@Input</code>) не изменились по ссылке, а также не было событий внутри компонента. Это минимизирует количество проверок.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "ang-24",
+        "question": "Что такое Ahead-of-Time (AOT) компиляция и чем она отличается от JIT?",
+        "answer": "<strong>AOT (Ahead-of-Time)</strong> — компиляция шаблонов и компонентов **во время сборки** (build time), до того, как код будет запущен в браузере. \n\n**JIT (Just-in-Time)** — компиляция происходит **в браузере во время выполнения**.\n\n**Преимущества AOT:** Более быстрая загрузка (нет компиляции в браузере), меньший размер бандла (удаляется компилятор), более ранняя ловля ошибок шаблонов.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-25",
+        "question": "Чем отличаются ViewChild и ContentChild? В каких случаях использовать?",
+        "answer": "Оба декоратора используются для получения доступа к элементам в шаблоне компонента.\n\n1. <strong><code>@ViewChild()</code>:</strong> Получает ссылку на элемент (HTML, компонент или директиву), который находится **в собственном шаблоне** компонента.\n2. <strong><code>@ContentChild()</code>:</strong> Получает ссылку на элемент, который был **вставлен** в компонент через механизм <strong>проекции контента (<code><ng-content></code>)</strong>.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-26",
+        "question": "Разница между Subject, BehaviorSubject, ReplaySubject, AsyncSubject (RxJS).",
+        "answer": "Все они являются <strong>Observable</strong>, которые также могут быть <strong>Observer</strong> (то есть, они могут и генерировать, и принимать значения).\n\n1. <strong><code>Subject</code></strong>: Обычный вещатель, не хранит состояние. Подписчики получают **только будущие** значения.\n2. <strong><code>BehaviorSubject</code></strong>: Хранит <strong>текущее значение</strong> (требует начального). Подписчики получают **сразу последнее** значение, затем будущие.\n3. <strong><code>ReplaySubject</code></strong>: Хранит <strong>буфер</strong> из $N$ последних значений (кеширует их). Подписчики получают эти $N$ значений сразу.\n4. <strong><code>AsyncSubject</code></strong>: Отправляет <strong>только последнее</strong> значение, и только **после** вызова <code>complete()</code>.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "ang-27",
+        "question": "Что такое Ivy renderer и чем он отличается от старого View Engine?",
+        "answer": "<strong>Ivy</strong> — это кодовое название для переработанного <strong>движка рендеринга и компилятора Angular</strong> (начиная с Angular 9).\n\n<strong>Ключевые отличия:</strong>\n1. <strong>Tree-shaking:</strong> Значительно лучше удаляет неиспользуемый код, уменьшая размер бандла.\n2. <strong>Locality:</strong> Компилирует каждый компонент независимо (быстрее).\n3. <strong>Agnostic:</strong> Улучшает совместимость с другими фреймворками (Micro Frontends).\n4. **Smaller Bundle Size.**",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-28",
+        "question": "Что такое NgZone.run() и NgZone.runOutsideAngular()? Когда использовать?",
+        "answer": "Это методы для работы с <strong>Zone.js</strong> и механизмом Change Detection.\n\n1. <strong><code>NgZone.run(callback)</code>:</strong> Выполняет код **внутри зоны Angular**. Это **гарантирует** запуск Change Detection после выполнения <code>callback</code>. Используется редко, чаще всего для принудительного запуска CD после кода, который был запущен <code>runOutsideAngular</code>.\n2. <strong><code>NgZone.runOutsideAngular(callback)</code>:</strong> Выполняет код **вне зоны Angular**. Это <strong>предотвращает запуск Change Detection</strong>. Используется для высокочастотных, не влияющих на данные событий (например, движения мыши, анимации), чтобы избежать постоянного запуска CD и улучшить производительность.",
+        "difficulty": "hard"
+      },
+      {
+        "id": "ang-29",
+        "question": "Как работает оптимизация tree-shaking в Angular и зачем нужны providedIn: 'root'?",
+        "answer": "<strong>Tree-shaking</strong> — это процесс удаления \"мертвого\" кода (функций, классов), который был импортирован, но никогда не использовался, во время сборки.\n\n<strong><code>providedIn: 'root'</code>:</strong> Когда сервис зарегистрирован таким образом, Angular CLI может легко определить, **используется ли** этот сервис где-либо в приложении. Если он не инжектируется ни в один класс, компилятор AOT <strong>полностью удаляет</strong> этот сервис из финального бандла, обеспечивая эффективный tree-shaking и уменьшение размера кода.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-30",
+        "question": "Что такое State Management (NgRx, Akita, NGXS)? Какие плюсы и минусы у NgRx?",
+        "answer": "<strong>State Management</strong> — это паттерны и библиотеки для <strong>централизованного управления состоянием приложения</strong> (данными), особенно в больших SPA, для обеспечения предсказуемости.\n\n**NgRx (Redux-подобный):**\n* **Плюсы:** Предсказуемость (однонаправленный поток данных), мощные инструменты для отладки (DevTools), отличная масштабируемость.\n* **Минусы:** Много boilerplate-кода (Action, Reducer, Effect), высокий порог входа, требует больше времени на реализацию простых функций.",
+        "difficulty": "medium"
+      },
+      {
+        "id": "ang-31",
+        "question": "Какие есть стратегии оптимизации производительности Angular-приложения (CD, trackBy, detach, memoization)?",
+        "answer": "Основные стратегии:\n1.  <strong>Change Detection:</strong> Переход на стратегию <strong><code>OnPush</code></strong>.\n2.  <strong><code>trackBy</code> (в <code>*ngFor</code>):</strong> Помогает Angular более эффективно обновлять DOM-элементы в циклах, предотвращая перерисовку всего списка при добавлении/удалении одного элемента.\n3.  <strong><code>detach</code>/<code>attach</code>:</strong> Вручную отключает/включает поддерево компонентов из цикла CD для высокочастотных изменений (используется <code>ChangeDetectorRef</code>).\n4.  <strong>Lazy Loading:</strong> Ленивая загрузка модулей.\n5.  **AOT/Tree-Shaking.**\n6.  **Memoization (Пайпы):** Использование <code>Pure Pipes</code>, которые выполняются только при изменении входных данных.",
+        "difficulty": "hard"
       }
+
     ]
   },
   // AngularJS
