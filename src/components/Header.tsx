@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon } from "lucide-react";
+import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon, Lightbulb } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
@@ -42,6 +42,7 @@ const Header = () => {
     { path: "/", icon: BookOpen, label: "Учебник" },
     { path: "/allpractice", icon: Play, label: "Практика теории" },
     { path: "/tasks", icon: ListTodo, label: "Задачи" },
+    { path: "/tips", icon: Lightbulb, label: "Советы" },
   ];
 
   const toolItems: { path: string; icon: LucideIcon; label: string; isNew?: boolean }[] = [

@@ -16,6 +16,7 @@ import DataGenerator from "./pages/DataGenerator";
 import DataTypes from "./pages/DataTypes";
 import ApiClient from "./pages/ApiClient";
 import UnifiedReference from "./pages/UnifiedReference";
+import Tips from "./pages/Tips";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/data-types" element={<DataTypes />} />
           <Route path="/api-client" element={<ApiClient />} />
           <Route path="/reference" element={<UnifiedReference />} />
+          <Route path="/tips" element={<Tips />} />
           {/* Редиректы со старых страниц справочников */}
           <Route path="/functions" element={<UnifiedReference />} />
           <Route path="/oop" element={<UnifiedReference />} />
