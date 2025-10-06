@@ -231,6 +231,8 @@ const Study = () => {
       const initialQuestions = getTechnologyQuestions(techId);
       setQuestions(initialQuestions);
       setFilteredQuestions(initialQuestions);
+      setCurrentPage(1); // Сбрасываем пагинацию при смене технологии
+      setItemsPerPage(initialQuestions.length); // Устанавливаем "Все" по умолчанию
     }
   }, [techId]);
 
@@ -301,6 +303,7 @@ const Study = () => {
     setProgressFilter("all");
     setFlippedCards(new Set());
     setCurrentPage(1);
+    setItemsPerPage(filteredQuestions.length); // Устанавливаем "Все" при сбросе
   };
 
   
@@ -388,6 +391,11 @@ const Study = () => {
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentQuestions = filteredQuestions.slice(indexOfFirstItem, indexOfLastItem);
+  
+  // Calculate actual items on current page
+  const actualItemsOnPage = currentQuestions.length;
+  const startItem = filteredQuestions.length > 0 ? indexOfFirstItem + 1 : 0;
+  const endItem = Math.min(indexOfLastItem, filteredQuestions.length);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
@@ -644,23 +652,27 @@ const Study = () => {
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">Показать:</span>
               <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(parseInt(value))}>
-                <SelectTrigger className="w-20 h-8 bg-white/70 border-purple-200 focus:border-purple-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                <SelectTrigger className="w-24 h-8 bg-white/70 border-purple-200 focus:border-purple-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-lg shadow-xl">
-                  <SelectItem value="5" className="rounded-md hover:bg-purple-50">5</SelectItem>
                   <SelectItem value="10" className="rounded-md hover:bg-purple-50">10</SelectItem>
-                  <SelectItem value="15" className="rounded-md hover:bg-purple-50">15</SelectItem>
                   <SelectItem value="20" className="rounded-md hover:bg-purple-50">20</SelectItem>
-                  <SelectItem value="25" className="rounded-md hover:bg-purple-50">25</SelectItem>
+                  <SelectItem value={filteredQuestions.length.toString()} className="rounded-md hover:bg-purple-50">
+                    Все ({filteredQuestions.length})
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <span className="text-sm text-muted-foreground">элементов</span>
             </div>
 
             {/* Pagination buttons - справа */}
-            {totalPages > 1 && (
-              <div className="flex items-center gap-2 sm:gap-4">
+            {totalPages > 1 && itemsPerPage < filteredQuestions.length && (
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                {/* Mobile page info */}
+                <span className="text-muted-foreground font-medium text-sm sm:hidden">
+                  {currentPage} из {totalPages}
+                </span>
                 <Button
                   variant="outline"
                   size="sm"
@@ -673,7 +685,10 @@ const Study = () => {
                 </Button>
 
                 <span className="text-muted-foreground font-medium text-sm hidden sm:block">
-                  Страница {currentPage} из {totalPages}
+                  {itemsPerPage >= filteredQuestions.length 
+                    ? `Показано все ${filteredQuestions.length} элементов`
+                    : `Показано ${startItem}-${endItem} из ${filteredQuestions.length}`
+                  }
                 </span>
 
                 <Button
