@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const GeometricShapes = () => {
@@ -16,7 +15,7 @@ const GeometricShapes = () => {
             top: `${Math.random() * 100}%`,
             animationDuration: `${20 + index * 10}s`,
             animationDelay: `${index * 2}s`,
-            transform: 'translate(-50%, -50%)'
+            transform: "translate(-50%, -50%)",
           }}
         />
       ))}
@@ -30,14 +29,14 @@ const GeometricShapes = () => {
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             animationDelay: `${index * 1.5}s`,
-            animationDuration: `${15 + Math.random() * 10}s`
+            animationDuration: `${15 + Math.random() * 10}s`,
           }}
         >
-          <div 
+          <div
             className="w-0 h-0 border-l-[20px] border-r-[20px] border-b-[35px] border-l-transparent border-r-transparent border-b-purple-400/15"
             style={{
-              filter: 'blur(1px)',
-              transform: `rotate(${Math.random() * 360}deg)`
+              filter: "blur(1px)",
+              transform: `rotate(${Math.random() * 360}deg)`,
             }}
           />
         </div>
@@ -52,15 +51,15 @@ const GeometricShapes = () => {
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             animationDelay: `${index * 0.8}s`,
-            animationDuration: `${6 + Math.random() * 4}s`
+            animationDuration: `${6 + Math.random() * 4}s`,
           }}
         >
-          <div 
-            className="w-8 h-8 bg-gradient-to-br from-cyan-400/10 to-purple-400/10" 
-            style={{ 
-              clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-              transform: `rotate(${Math.random() * 360}deg)`
-            }} 
+          <div
+            className="w-8 h-8 bg-gradient-to-br from-cyan-400/10 to-purple-400/10"
+            style={{
+              clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+              transform: `rotate(${Math.random() * 360}deg)`,
+            }}
           />
         </div>
       ))}
@@ -75,7 +74,7 @@ const GeometricShapes = () => {
             top: `${Math.random() * 100}%`,
             animationDelay: `${index * 2}s`,
             animationDuration: `${12 + Math.random() * 8}s`,
-            transform: `rotate(${Math.random() * 45}deg)`
+            transform: `rotate(${Math.random() * 45}deg)`,
           }}
         />
       ))}

@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { Check, X, Copy, ChevronDown, ChevronUp, Plus, Minus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React, { useState, useRef } from "react";
+import { Check, X, Copy, ChevronDown, ChevronUp, Plus, Minus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,266 +12,267 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const FLAG_OPTIONS = [
-  { flag: 'g', label: 'g', description: 'Глобальный поиск' },
-  { flag: 'i', label: 'i', description: 'Игнорировать регистр' },
-  { flag: 'm', label: 'm', description: 'Многострочный режим' },
-  { flag: 's', label: 's', description: 'Точка (.) захватывает \n' },
-  { flag: 'u', label: 'u', description: 'Unicode режим' },
-  { flag: 'y', label: 'y', description: 'Поиск с текущей позиции (sticky)' },
+  { flag: "g", label: "g", description: "Глобальный поиск" },
+  { flag: "i", label: "i", description: "Игнорировать регистр" },
+  { flag: "m", label: "m", description: "Многострочный режим" },
+  { flag: "s", label: "s", description: "Точка (.) захватывает \n" },
+  { flag: "u", label: "u", description: "Unicode режим" },
+  { flag: "y", label: "y", description: "Поиск с текущей позиции (sticky)" },
 ];
 
 const REGEX_CHEAT_SHEET = [
   {
-    title: 'Флаги',
+    title: "Флаги",
     items: [
-      { 
-        pattern: 'g', 
-        description: 'Глобальный поиск',
+      {
+        pattern: "g",
+        description: "Глобальный поиск",
         example: '/hello/g - найдет все вхождения "hello"',
-        usage: 'Используется когда нужно найти все совпадения, а не только первое'
+        usage: "Используется когда нужно найти все совпадения, а не только первое",
       },
-      { 
-        pattern: 'i', 
-        description: 'Игнорирование регистра',
+      {
+        pattern: "i",
+        description: "Игнорирование регистра",
         example: '/hello/i - найдет "hello", "Hello", "HELLO"',
-        usage: 'Когда регистр букв не имеет значения'
+        usage: "Когда регистр букв не имеет значения",
       },
-      { 
-        pattern: 'm', 
-        description: 'Многострочный режим',
+      {
+        pattern: "m",
+        description: "Многострочный режим",
         example: '/^hello/m - найдет "hello" в начале каждой строки',
-        usage: 'Когда нужно искать совпадения в начале или конце каждой строки'
+        usage: "Когда нужно искать совпадения в начале или конце каждой строки",
       },
-      { 
-        pattern: 's', 
-        description: 'Точка (.) захватывает \n',
+      {
+        pattern: "s",
+        description: "Точка (.) захватывает \n",
         example: '/hello.world/s - найдет "hello\nworld"',
-        usage: 'Когда нужно чтобы точка (.) соответствовала также символу новой строки'
+        usage: "Когда нужно чтобы точка (.) соответствовала также символу новой строки",
       },
-      { 
-        pattern: 'u', 
-        description: 'Unicode режим',
-        example: '/\\u{1F600}/u - найдет эмодзи 😀',
-        usage: 'Для работы с Unicode символами и эмодзи'
+      {
+        pattern: "u",
+        description: "Unicode режим",
+        example: "/\\u{1F600}/u - найдет эмодзи 😀",
+        usage: "Для работы с Unicode символами и эмодзи",
       },
-      { 
-        pattern: 'y', 
-        description: 'Поиск с текущей позиции (sticky)',
-        example: '/hello/y - ищет только с текущей позиции',
-        usage: 'Когда нужно искать совпадения только с определенной позиции'
+      {
+        pattern: "y",
+        description: "Поиск с текущей позиции (sticky)",
+        example: "/hello/y - ищет только с текущей позиции",
+        usage: "Когда нужно искать совпадения только с определенной позиции",
       },
-    ]
+    ],
   },
   {
-    title: 'Основные символы',
+    title: "Основные символы",
     items: [
-      { 
-        pattern: '.', 
-        description: 'Любой символ, кроме новой строки',
+      {
+        pattern: ".",
+        description: "Любой символ, кроме новой строки",
         example: 'a.c - найдет "abc", "a1c", "a#c"',
-        usage: 'Используется когда нужно найти любой символ между двумя буквами'
+        usage: "Используется когда нужно найти любой символ между двумя буквами",
       },
-      { 
-        pattern: '\\d', 
-        description: 'Цифра [0-9]',
+      {
+        pattern: "\\d",
+        description: "Цифра [0-9]",
         example: '\\d{3} - найдет "123", "456", "789"',
-        usage: 'Для поиска последовательностей цифр'
+        usage: "Для поиска последовательностей цифр",
       },
-      { 
-        pattern: '\\D', 
-        description: 'Не цифра [^0-9]',
+      {
+        pattern: "\\D",
+        description: "Не цифра [^0-9]",
         example: '\\D+ - найдет "abc", "!@#", "hello"',
-        usage: 'Когда нужно найти все, кроме цифр'
+        usage: "Когда нужно найти все, кроме цифр",
       },
-      { 
-        pattern: '\\w', 
-        description: 'Буква, цифра или подчеркивание',
+      {
+        pattern: "\\w",
+        description: "Буква, цифра или подчеркивание",
         example: '\\w+ - найдет "hello", "user123", "my_name"',
-        usage: 'Для поиска слов и идентификаторов'
+        usage: "Для поиска слов и идентификаторов",
       },
-      { 
-        pattern: '\\W', 
-        description: 'Не буква, не цифра, не подчеркивание',
+      {
+        pattern: "\\W",
+        description: "Не буква, не цифра, не подчеркивание",
         example: '\\W+ - найдет "!@#", " ", "..."',
-        usage: 'Для поиска специальных символов и пробелов'
+        usage: "Для поиска специальных символов и пробелов",
       },
-      { 
-        pattern: '\\s', 
-        description: 'Пробельный символ',
+      {
+        pattern: "\\s",
+        description: "Пробельный символ",
         example: 'hello\\s+world - найдет "hello world", "hello  world"',
-        usage: 'Для поиска пробелов между словами'
+        usage: "Для поиска пробелов между словами",
       },
-      { 
-        pattern: '\\S', 
-        description: 'Не пробельный символ',
+      {
+        pattern: "\\S",
+        description: "Не пробельный символ",
         example: '\\S+ - найдет "hello", "123", "!@#"',
-        usage: 'Для поиска непробельных символов'
+        usage: "Для поиска непробельных символов",
       },
-      { 
-        pattern: '|', 
-        description: 'ИЛИ (например: a|b)',
+      {
+        pattern: "|",
+        description: "ИЛИ (например: a|b)",
         example: 'cat|dog - найдет "cat" или "dog"',
-        usage: 'Когда нужно найти одно из нескольких слов'
+        usage: "Когда нужно найти одно из нескольких слов",
       },
-    ]
+    ],
   },
   {
-    title: 'Квантификаторы',
+    title: "Квантификаторы",
     items: [
-      { 
-        pattern: '*', 
-        description: '0 или более',
+      {
+        pattern: "*",
+        description: "0 или более",
         example: 'a* - найдет "", "a", "aa", "aaa"',
-        usage: 'Когда символ может повторяться или отсутствовать'
+        usage: "Когда символ может повторяться или отсутствовать",
       },
-      { 
-        pattern: '+', 
-        description: '1 или более',
+      {
+        pattern: "+",
+        description: "1 или более",
         example: '\\d+ - найдет "1", "123", "456789"',
-        usage: 'Когда символ должен быть хотя бы один раз'
+        usage: "Когда символ должен быть хотя бы один раз",
       },
-      { 
-        pattern: '?', 
-        description: '0 или 1',
+      {
+        pattern: "?",
+        description: "0 или 1",
         example: 'colou?r - найдет "color" и "colour"',
-        usage: 'Для необязательных символов'
+        usage: "Для необязательных символов",
       },
-      { 
-        pattern: '{n}', 
-        description: 'Ровно n раз',
+      {
+        pattern: "{n}",
+        description: "Ровно n раз",
         example: '\\d{4} - найдет "1234", "5678"',
-        usage: 'Для точного количества повторений'
+        usage: "Для точного количества повторений",
       },
-      { 
-        pattern: '{n,}', 
-        description: 'n или более раз',
+      {
+        pattern: "{n,}",
+        description: "n или более раз",
         example: '\\d{3,} - найдет "123", "1234", "12345"',
-        usage: 'Когда нужно минимум n повторений'
+        usage: "Когда нужно минимум n повторений",
       },
-      { 
-        pattern: '{n,m}', 
-        description: 'От n до m раз',
+      {
+        pattern: "{n,m}",
+        description: "От n до m раз",
         example: '\\d{2,4} - найдет "12", "123", "1234"',
-        usage: 'Для ограничения количества повторений'
+        usage: "Для ограничения количества повторений",
       },
-    ]
+    ],
   },
   {
-    title: 'Границы и группы',
+    title: "Границы и группы",
     items: [
-      { 
-        pattern: '^', 
-        description: 'Начало строки',
+      {
+        pattern: "^",
+        description: "Начало строки",
         example: '^hello - найдет "hello world", но не "say hello"',
-        usage: 'Когда строка должна начинаться с определенного текста'
+        usage: "Когда строка должна начинаться с определенного текста",
       },
-      { 
-        pattern: '$', 
-        description: 'Конец строки',
+      {
+        pattern: "$",
+        description: "Конец строки",
         example: 'world$ - найдет "hello world", но не "world hello"',
-        usage: 'Когда строка должна заканчиваться определенным текстом'
+        usage: "Когда строка должна заканчиваться определенным текстом",
       },
-      { 
-        pattern: '\\b', 
-        description: 'Граница слова',
+      {
+        pattern: "\\b",
+        description: "Граница слова",
         example: '\\bcat\\b - найдет "cat", но не "catch" или "scat"',
-        usage: 'Для поиска целых слов'
+        usage: "Для поиска целых слов",
       },
-      { 
-        pattern: '\\B', 
-        description: 'Не граница слова',
+      {
+        pattern: "\\B",
+        description: "Не граница слова",
         example: '\\Bcat\\B - найдет "catch", но не "cat"',
-        usage: 'Для поиска частей слов'
+        usage: "Для поиска частей слов",
       },
-      { 
-        pattern: '(...)', 
-        description: 'Захватывающая группа',
+      {
+        pattern: "(...)",
+        description: "Захватывающая группа",
         example: '(\\d{3})-(\\d{2}) - найдет "123-45" и запомнит "123" и "45"',
-        usage: 'Для выделения и запоминания частей совпадения'
+        usage: "Для выделения и запоминания частей совпадения",
       },
-      { 
-        pattern: '(?:...)', 
-        description: 'Незахватывающая группа',
-        example: '(?:https?://)?(www\\.)?example\\.com',
-        usage: 'Для группировки без запоминания'
+      {
+        pattern: "(?:...)",
+        description: "Незахватывающая группа",
+        example: "(?:https?://)?(www\\.)?example\\.com",
+        usage: "Для группировки без запоминания",
       },
-      { 
-        pattern: '\\1', 
-        description: 'Ссылка на первую группу',
+      {
+        pattern: "\\1",
+        description: "Ссылка на первую группу",
         example: '(\\w+)\\s+\\1 - найдет "hello hello", "bye bye"',
-        usage: 'Для поиска повторяющихся слов'
+        usage: "Для поиска повторяющихся слов",
       },
-    ]
+    ],
   },
   {
-    title: 'Наборы символов',
+    title: "Наборы символов",
     items: [
-      { 
-        pattern: '[abc]', 
-        description: 'Любой из символов a, b или c',
+      {
+        pattern: "[abc]",
+        description: "Любой из символов a, b или c",
         example: '[abc]at - найдет "cat", "bat", "rat"',
-        usage: 'Когда нужно найти один из нескольких символов'
+        usage: "Когда нужно найти один из нескольких символов",
       },
-      { 
-        pattern: '[^abc]', 
-        description: 'Любой символ, кроме a, b и c',
+      {
+        pattern: "[^abc]",
+        description: "Любой символ, кроме a, b и c",
         example: '[^abc]at - найдет "rat", "hat", но не "cat"',
-        usage: 'Для исключения определенных символов'
+        usage: "Для исключения определенных символов",
       },
-      { 
-        pattern: '[a-z]', 
-        description: 'Любой символ от a до z',
+      {
+        pattern: "[a-z]",
+        description: "Любой символ от a до z",
         example: '[a-z]+ - найдет "hello", "world"',
-        usage: 'Для поиска строчных букв'
+        usage: "Для поиска строчных букв",
       },
-      { 
-        pattern: '[A-Z]', 
-        description: 'Любой символ от A до Z',
+      {
+        pattern: "[A-Z]",
+        description: "Любой символ от A до Z",
         example: '[A-Z][a-z]* - найдет "Hello", "World"',
-        usage: 'Для поиска заглавных букв'
+        usage: "Для поиска заглавных букв",
       },
-      { 
-        pattern: '[0-9]', 
-        description: 'Любая цифра',
+      {
+        pattern: "[0-9]",
+        description: "Любая цифра",
         example: '[0-9]{3} - найдет "123", "456", "789"',
-        usage: 'Для поиска цифр'
+        usage: "Для поиска цифр",
       },
-      { 
-        pattern: '[а-яё]', 
-        description: 'Любая русская буква',
+      {
+        pattern: "[а-яё]",
+        description: "Любая русская буква",
         example: '[а-яё]+ - найдет "привет", "мир"',
-        usage: 'Для поиска русских слов'
+        usage: "Для поиска русских слов",
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const COMMON_EXAMPLES = [
-  { pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', description: 'Email' },
-  { pattern: '^\\+?[1-9]\\d{10,14}$', description: 'Телефон' },
-  { pattern: '^\\d{4}-\\d{2}-\\d{2}$', description: 'Дата (YYYY-MM-DD)' },
-  { pattern: '^https?://[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?$', description: 'URL' },
-  { pattern: '^[А-Яа-яЁё\\s-]+$', description: 'Только русские буквы' },
-  { pattern: '^[A-Za-z]+$', description: 'Только латинские буквы' },
-  { pattern: '^\\d+$', description: 'Только числа' },
-  { pattern: '^[A-Za-zА-Яа-яЁё\\s]+$', description: 'Только буквы и пробелы' },
-  { pattern: '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$', description: 'Пароль: буквы и цифры, минимум 8 символов' },
-  { pattern: '^<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\/>)$', description: 'HTML-тег' },
+  { pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", description: "Email" },
+  { pattern: "^\\+?[1-9]\\d{10,14}$", description: "Телефон" },
+  { pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "Дата (YYYY-MM-DD)" },
+  {
+    pattern: "^https?://[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?$",
+    description: "URL",
+  },
+  { pattern: "^[А-Яа-яЁё\\s-]+$", description: "Только русские буквы" },
+  { pattern: "^[A-Za-z]+$", description: "Только латинские буквы" },
+  { pattern: "^\\d+$", description: "Только числа" },
+  { pattern: "^[A-Za-zА-Яа-яЁё\\s]+$", description: "Только буквы и пробелы" },
+  {
+    pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+    description: "Пароль: буквы и цифры, минимум 8 символов",
+  },
+  { pattern: "^<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\/>)$", description: "HTML-тег" },
 ];
 
 const Regex = () => {
-  const [pattern, setPattern] = useState('');
-  const [flags, setFlags] = useState('gm');
-  const [testString, setTestString] = useState('');
+  const [pattern, setPattern] = useState("");
+  const [flags, setFlags] = useState("gm");
+  const [testString, setTestString] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [isCheatSheetOpen, setIsCheatSheetOpen] = useState(true);
@@ -284,12 +285,12 @@ const Regex = () => {
   let matchRanges: { start: number; end: number }[] = [];
   try {
     const regex = new RegExp(pattern, flags);
-    isMatch = pattern !== '' && regex.test(testString);
+    isMatch = pattern !== "" && regex.test(testString);
     if (pattern && testString && !error) {
       matchRanges = [];
       let m;
-      if (flags.includes('g')) {
-        const re = new RegExp(pattern, flags.replace('g', '') + 'g');
+      if (flags.includes("g")) {
+        const re = new RegExp(pattern, flags.replace("g", "") + "g");
         while ((m = re.exec(testString)) !== null) {
           if (m[0].length === 0) break; // avoid infinite loop
           matchRanges.push({ start: m.index, end: m.index + m[0].length });
@@ -304,7 +305,7 @@ const Regex = () => {
     if (error) setError(null);
   } catch (err) {
     isMatch = false;
-    if (!error) setError('Ошибка в регулярном выражении');
+    if (!error) setError("Ошибка в регулярном выражении");
   }
 
   const handleCopy = () => {
@@ -316,18 +317,16 @@ const Regex = () => {
   const handleFlagChange = (flag: string) => {
     setFlags((prev) => {
       if (prev.includes(flag)) {
-        return prev.replace(flag, '');
+        return prev.replace(flag, "");
       } else {
-        return (prev + flag).split('').sort().join('');
+        return (prev + flag).split("").sort().join("");
       }
     });
   };
 
   const toggleSection = (index: number) => {
-    setExpandedSections(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
+    setExpandedSections((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
@@ -341,7 +340,9 @@ const Regex = () => {
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 Регулярные выражения
               </h1>
-              <p className="text-muted-foreground text-sm sm:text-base">Интерактивный инструмент для тестирования и изучения регулярных выражений</p>
+              <p className="text-muted-foreground text-sm sm:text-base">
+                Интерактивный инструмент для тестирования и изучения регулярных выражений
+              </p>
             </div>
           </div>
         </div>
@@ -355,25 +356,27 @@ const Regex = () => {
                       Скопировано!
                     </div>
                   )}
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Регулярное выражение</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Регулярное выражение
+                  </label>
                   <div className="flex items-center gap-2 relative">
                     <span className="absolute left-3 text-gray-400 text-lg select-none">/</span>
                     <Input
                       value={pattern}
-                      onChange={e => setPattern(e.target.value)}
+                      onChange={(e) => setPattern(e.target.value)}
                       placeholder="Введите регулярное выражение"
                       className="font-mono pl-7 pr-20 text-sm sm:text-base h-10 sm:h-12"
                     />
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <span className="absolute right-12 text-green-700 font-mono text-sm sm:text-base select-none cursor-pointer hover:bg-green-100 rounded px-1 py-0.5 transition">
-                          /{flags || <span className='text-gray-400'>-</span>}
+                          /{flags || <span className="text-gray-400">-</span>}
                         </span>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuLabel>Флаги</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        {FLAG_OPTIONS.map(opt => (
+                        {FLAG_OPTIONS.map((opt) => (
                           <DropdownMenuCheckboxItem
                             key={opt.flag}
                             checked={flags.includes(opt.flag)}
@@ -417,29 +420,37 @@ const Regex = () => {
                     ref={highlightRef}
                     aria-hidden
                     className="pointer-events-none absolute inset-0 whitespace-pre-wrap break-words rounded-lg p-3 text-sm sm:text-base min-h-[120px] sm:min-h-[180px] max-h-[300px] sm:max-h-[400px] bg-transparent"
-                    style={{ zIndex: 1, fontFamily: 'inherit', color: 'inherit', lineHeight: 'inherit' }}
+                    style={{
+                      zIndex: 1,
+                      fontFamily: "inherit",
+                      color: "inherit",
+                      lineHeight: "inherit",
+                    }}
                   >
                     {(() => {
                       if (!pattern || !testString || error || matchRanges.length === 0) {
-                        return <span className="text-gray-400">{testString || ''}</span>;
+                        return <span className="text-gray-400">{testString || ""}</span>;
                       }
                       let last = 0;
                       const out = [];
                       matchRanges.forEach((range, i) => {
                         if (last < range.start) {
                           out.push(
-                            <span key={last + '-n'}>{testString.slice(last, range.start)}</span>
+                            <span key={last + "-n"}>{testString.slice(last, range.start)}</span>
                           );
                         }
                         out.push(
-                          <span key={range.start + '-m'} className="bg-blue-200 text-blue-900 rounded px-0.5">
+                          <span
+                            key={range.start + "-m"}
+                            className="bg-blue-200 text-blue-900 rounded px-0.5"
+                          >
                             {testString.slice(range.start, range.end)}
                           </span>
                         );
                         last = range.end;
                       });
                       if (last < testString.length) {
-                        out.push(<span key={last + '-end'}>{testString.slice(last)}</span>);
+                        out.push(<span key={last + "-end"}>{testString.slice(last)}</span>);
                       }
                       return out;
                     })()}
@@ -447,22 +458,33 @@ const Regex = () => {
                   <Textarea
                     ref={textareaRef}
                     value={testString}
-                    onChange={e => setTestString(e.target.value)}
+                    onChange={(e) => setTestString(e.target.value)}
                     placeholder="Введите строку для проверки"
                     className="w-full min-h-[120px] sm:min-h-[180px] max-h-[300px] sm:max-h-[400px] text-sm sm:text-base rounded-xl border border-purple-200 bg-white/70 p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:border-purple-400 resize-vertical shadow-sm relative z-10 font-mono text-foreground caret-blue-700"
                     spellCheck={false}
                     autoCorrect="off"
-                    onScroll={e => {
+                    onScroll={(e) => {
                       if (highlightRef.current) {
-                        highlightRef.current.scrollTop = (e.target as HTMLTextAreaElement).scrollTop;
-                        highlightRef.current.scrollLeft = (e.target as HTMLTextAreaElement).scrollLeft;
+                        highlightRef.current.scrollTop = (
+                          e.target as HTMLTextAreaElement
+                        ).scrollTop;
+                        highlightRef.current.scrollLeft = (
+                          e.target as HTMLTextAreaElement
+                        ).scrollLeft;
                       }
                     }}
                   />
                 </div>
-                <h3 className="text-sm font-medium text-gray-700 mb-2 mt-4 flex items-center gap-2 cursor-pointer select-none" onClick={() => setShowExamples(v => !v)}>
+                <h3
+                  className="text-sm font-medium text-gray-700 mb-2 mt-4 flex items-center gap-2 cursor-pointer select-none"
+                  onClick={() => setShowExamples((v) => !v)}
+                >
                   <span>Частые примеры</span>
-                  {showExamples ? <ChevronUp className="h-4 w-4 text-gray-500" /> : <ChevronDown className="h-4 w-4 text-gray-500" />}
+                  {showExamples ? (
+                    <ChevronUp className="h-4 w-4 text-gray-500" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 text-gray-500" />
+                  )}
                 </h3>
                 {showExamples && (
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -471,7 +493,7 @@ const Regex = () => {
                         key={index}
                         onClick={() => setPattern(example.pattern)}
                         className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs sm:text-sm transition-colors group"
-                        style={{ boxShadow: 'none', border: 'none' }}
+                        style={{ boxShadow: "none", border: "none" }}
                       >
                         <code className="font-mono text-[10px] sm:text-xs bg-gray-100 px-1 sm:px-1.5 py-0.5 rounded group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                           {example.pattern}
@@ -495,13 +517,20 @@ const Regex = () => {
                     onClick={() => setIsCheatSheetOpen(!isCheatSheetOpen)}
                     className="text-gray-500 hover:text-gray-700"
                   >
-                    {isCheatSheetOpen ? <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5" /> : <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5" />}
+                    {isCheatSheetOpen ? (
+                      <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5" />
+                    )}
                   </button>
                 </div>
                 {isCheatSheetOpen && (
                   <div className="space-y-2">
                     {REGEX_CHEAT_SHEET.map((section, index) => (
-                      <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                      <div
+                        key={index}
+                        className="border border-gray-200 rounded-lg overflow-hidden"
+                      >
                         <button
                           onClick={() => toggleSection(index)}
                           className="w-full flex items-center justify-between p-2 bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -535,7 +564,9 @@ const Regex = () => {
                                     <div className="space-y-2">
                                       <p className="font-medium">{item.description}</p>
                                       <div className="text-sm">
-                                        <p className="text-blue-600 font-mono mb-1">{item.example}</p>
+                                        <p className="text-blue-600 font-mono mb-1">
+                                          {item.example}
+                                        </p>
                                         <p className="text-gray-600">{item.usage}</p>
                                       </div>
                                     </div>
@@ -562,11 +593,15 @@ const Regex = () => {
               <div className="space-y-4">
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">String.prototype.match()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Находит все совпадения в строке и возвращает массив.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Находит все совпадения в строке и возвращает массив.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const str = "Hello 123 World 456";<br/>
-                      const matches = str.match(/\d+/g);<br/>
+                      const str = "Hello 123 World 456";
+                      <br />
+                      const matches = str.match(/\d+/g);
+                      <br />
                       // ["123", "456"]
                     </code>
                   </div>
@@ -574,11 +609,15 @@ const Regex = () => {
 
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">String.prototype.replace()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Заменяет совпадения в строке на указанное значение.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Заменяет совпадения в строке на указанное значение.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const str = "Hello World";<br/>
-                      const newStr = str.replace(/World/, "JavaScript");<br/>
+                      const str = "Hello World";
+                      <br />
+                      const newStr = str.replace(/World/, "JavaScript");
+                      <br />
                       // "Hello JavaScript"
                     </code>
                   </div>
@@ -586,11 +625,15 @@ const Regex = () => {
 
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">String.prototype.split()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Разбивает строку на массив по регулярному выражению.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Разбивает строку на массив по регулярному выражению.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const str = "Hello,World,JavaScript";<br/>
-                      const arr = str.split(/,/);<br/>
+                      const str = "Hello,World,JavaScript";
+                      <br />
+                      const arr = str.split(/,/);
+                      <br />
                       // ["Hello", "World", "JavaScript"]
                     </code>
                   </div>
@@ -600,11 +643,15 @@ const Regex = () => {
               <div className="space-y-4">
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">RegExp.prototype.test()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Проверяет наличие совпадения в строке.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Проверяет наличие совпадения в строке.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const regex = /\d+/;<br/>
-                      const hasNumber = regex.test("Hello123");<br/>
+                      const regex = /\d+/;
+                      <br />
+                      const hasNumber = regex.test("Hello123");
+                      <br />
                       // true
                     </code>
                   </div>
@@ -612,11 +659,15 @@ const Regex = () => {
 
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">RegExp.prototype.exec()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Выполняет поиск совпадения и возвращает подробную информацию.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Выполняет поиск совпадения и возвращает подробную информацию.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const regex = /(\d+)/g;<br/>
-                      const result = regex.exec("Hello123World456");<br/>
+                      const regex = /(\d+)/g;
+                      <br />
+                      const result = regex.exec("Hello123World456");
+                      <br />
                       // ["123", "123", index: 5, input: "Hello123World456"]
                     </code>
                   </div>
@@ -624,11 +675,15 @@ const Regex = () => {
 
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-medium text-gray-900 mb-2">String.prototype.search()</h3>
-                  <p className="text-sm text-gray-600 mb-2">Возвращает индекс первого совпадения.</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    Возвращает индекс первого совпадения.
+                  </p>
                   <div className="bg-gray-50 rounded p-2">
                     <code className="text-sm font-mono text-blue-600">
-                      const str = "Hello123World";<br/>
-                      const index = str.search(/\d+/);<br/>
+                      const str = "Hello123World";
+                      <br />
+                      const index = str.search(/\d+/);
+                      <br />
                       // 5
                     </code>
                   </div>
@@ -643,4 +698,4 @@ const Regex = () => {
   );
 };
 
-export default Regex; 
+export default Regex;

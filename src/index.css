@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -95,7 +95,8 @@
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -114,21 +115,37 @@
   position: relative;
   padding: 2px;
   border-radius: 0.75rem;
-  background: linear-gradient(45deg, 
-    #ff0000, #ff7f00, #ffff00, #00ff00, 
-    #0000ff, #4b0082, #9400d3, #ff0000);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3,
+    #ff0000
+  );
   background-size: 400% 400%;
   animation: gradient-border 4s ease infinite;
 }
 
 .gradient-border-animated::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   padding: 2px;
-  background: linear-gradient(45deg, 
-    #ff0000, #ff7f00, #ffff00, #00ff00, 
-    #0000ff, #4b0082, #9400d3, #ff0000);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3,
+    #ff0000
+  );
   background-size: 400% 400%;
   border-radius: inherit;
   animation: gradient-border 4s ease infinite;
@@ -143,7 +160,8 @@
 }
 
 @keyframes gradient-border {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -153,7 +171,8 @@
 
 /* Custom animations and effects */
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -167,9 +186,15 @@
 }
 
 @keyframes gradient-animation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .gradient-hero {
@@ -181,11 +206,15 @@
 }
 
 .glow-hover:hover {
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 5px rgba(139, 92, 246, 0.2);
+  box-shadow:
+    0 0 15px rgba(139, 92, 246, 0.4),
+    0 0 5px rgba(139, 92, 246, 0.2);
 }
 
 .card-hover {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
 }
 
 .card-hover:hover {
@@ -198,7 +227,7 @@
 }
 
 .story-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -250,7 +279,8 @@
 
 /* Новые анимации для фона */
 @keyframes float-orb {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.4;
   }
@@ -265,7 +295,8 @@
 }
 
 @keyframes pulse-orb {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) rotate(0deg);
     opacity: 0.3;
   }
@@ -294,7 +325,8 @@
 }
 
 @keyframes expand-circle {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0.8) rotate(0deg);
     opacity: 0.2;
   }
@@ -305,7 +337,8 @@
 }
 
 @keyframes light-beam-v {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.2;
     transform: scaleY(0.5);
   }
@@ -316,7 +349,8 @@
 }
 
 @keyframes light-beam-h {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scaleX(0.6);
   }
@@ -327,7 +361,8 @@
 }
 
 @keyframes diagonal-beam {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.2;
     transform: rotate(30deg) scaleX(0.8);
   }
@@ -338,7 +373,8 @@
 }
 
 @keyframes float-triangle-new {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 0.3;
   }
@@ -357,7 +393,8 @@
 }
 
 @keyframes float-diamond {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(45deg) scale(1);
     opacity: 0.4;
   }
@@ -372,7 +409,8 @@
 }
 
 @keyframes twinkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(0.8);
   }
@@ -438,9 +476,9 @@
 }
 
 /* Убираем outline у всех инпутов и селекторов */
-input, 
-select, 
-textarea, 
+input,
+select,
+textarea,
 button,
 [role="button"],
 [role="combobox"],
@@ -449,8 +487,8 @@ button,
 }
 
 /* Focus стили для инпутов и селекторов */
-input:focus, 
-select:focus, 
+input:focus,
+select:focus,
 textarea:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.2) !important;
@@ -516,4 +554,3 @@ button:focus,
   outline: none !important;
   box-shadow: 0 0 0 2px rgba(139, 69, 219, 0.2) !important;
 }
-

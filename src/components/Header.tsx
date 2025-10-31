@@ -1,10 +1,30 @@
 import { Link, useLocation } from "react-router-dom";
-import { Code, Brain, BookOpen, Menu, X, Star, ClipboardList, Terminal, Regex, Database, Wrench, Send, LucideIcon, Lightbulb } from "lucide-react";
+import {
+  Code,
+  Brain,
+  BookOpen,
+  Menu,
+  X,
+  Star,
+  ClipboardList,
+  Terminal,
+  Regex,
+  Database,
+  Wrench,
+  Send,
+  LucideIcon,
+  Lightbulb,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ListTodo } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 
 const Header = () => {
@@ -25,7 +45,7 @@ const Header = () => {
 
   useEffect(() => {
     // Получаем количество задач из localStorage или устанавливаем начальное значение
-    const count = localStorage.getItem('taskCount') || '0';
+    const count = localStorage.getItem("taskCount") || "0";
     setTaskCount(parseInt(count));
   }, []);
 
@@ -52,8 +72,12 @@ const Header = () => {
     // { path: "/api-client", icon: Send, label: "API Клиент", isNew: true }, // убрано, теперь только в селекторе
   ];
 
-  const isReferenceActive = ["/reference", "/methods", "/data-types"].some((path) => location.pathname.startsWith(path));
-  const isToolsActive = ["/interpreter", "/regex", "/data-generator", "/api-client"].some((path) => location.pathname.startsWith(path));
+  const isReferenceActive = ["/reference", "/methods", "/data-types"].some((path) =>
+    location.pathname.startsWith(path)
+  );
+  const isToolsActive = ["/interpreter", "/regex", "/data-generator", "/api-client"].some((path) =>
+    location.pathname.startsWith(path)
+  );
 
   return (
     <>
@@ -111,17 +135,20 @@ const Header = () => {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
                   <Link to="/reference">
-                    <Star className="mr-2 h-4 w-4" />Справочник JS
+                    <Star className="mr-2 h-4 w-4" />
+                    Справочник JS
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/methods">
-                    <ClipboardList className="mr-2 h-4 w-4" />Методы
+                    <ClipboardList className="mr-2 h-4 w-4" />
+                    Методы
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/data-types">
-                    <Database className="mr-2 h-4 w-4" />Типы данных
+                    <Database className="mr-2 h-4 w-4" />
+                    Типы данных
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -145,22 +172,26 @@ const Header = () => {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
                   <Link to="/interpreter">
-                    <Terminal className="mr-2 h-4 w-4" />Интерпретатор
+                    <Terminal className="mr-2 h-4 w-4" />
+                    Интерпретатор
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/regex">
-                    <Regex className="mr-2 h-4 w-4" />RegEx
+                    <Regex className="mr-2 h-4 w-4" />
+                    RegEx
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/data-generator">
-                    <Database className="mr-2 h-4 w-4" />Генератор данных
+                    <Database className="mr-2 h-4 w-4" />
+                    Генератор данных
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/api-client">
-                    <Send className="mr-2 h-4 w-4" />API Клиент
+                    <Send className="mr-2 h-4 w-4" />
+                    API Клиент
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -174,11 +205,7 @@ const Header = () => {
             className="md:hidden text-[hsl(var(--foreground))]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </header>
@@ -195,7 +222,9 @@ const Header = () => {
               <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-md">
                 <Code className="h-6 w-6 text-white" />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">Hschool</h1>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                Hschool
+              </h1>
             </Link>
             <button
               onClick={toggleMenu}
@@ -217,7 +246,11 @@ const Header = () => {
                   location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                 }`}
               >
-                <Link to={item.path} className="flex items-center gap-3 relative" onClick={toggleMenu}>
+                <Link
+                  to={item.path}
+                  className="flex items-center gap-3 relative"
+                  onClick={toggleMenu}
+                >
                   <item.icon className="h-5 w-5" />
                   {item.label}
                 </Link>
@@ -236,7 +269,11 @@ const Header = () => {
                     location.pathname === item.path ? "bg-purple-100 text-purple-700" : ""
                   }`}
                 >
-                  <Link to={item.path} className="flex items-center gap-3 relative" onClick={toggleMenu}>
+                  <Link
+                    to={item.path}
+                    className="flex items-center gap-3 relative"
+                    onClick={toggleMenu}
+                  >
                     <item.icon className="h-5 w-5" />
                     {item.label}
                     {item.isNew && (
@@ -255,7 +292,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Overlay for Mobile Menu */}
       <div
         className={`fixed inset-0 z-[55] bg-black/20 backdrop-blur-sm md:hidden transition-opacity duration-300 ${

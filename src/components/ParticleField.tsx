@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const ParticleField = () => {
@@ -16,7 +15,7 @@ const ParticleField = () => {
             top: `${Math.random() * 100}%`,
             animationDelay: `${Math.random() * 10}s`,
             animationDuration: `${8 + Math.random() * 12}s`,
-            boxShadow: '0 0 10px rgba(139, 92, 246, 0.3)'
+            boxShadow: "0 0 10px rgba(139, 92, 246, 0.3)",
           }}
         />
       ))}
@@ -28,12 +27,12 @@ const ParticleField = () => {
           className="absolute bg-gradient-to-r from-transparent via-purple-400/20 to-transparent animate-constellation"
           style={{
             width: `${50 + Math.random() * 150}px`,
-            height: '1px',
+            height: "1px",
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             transform: `rotate(${Math.random() * 360}deg)`,
             animationDelay: `${index * 0.5}s`,
-            animationDuration: `${6 + Math.random() * 6}s`
+            animationDuration: `${6 + Math.random() * 6}s`,
           }}
         />
       ))}
@@ -50,7 +49,7 @@ const ParticleField = () => {
             top: `${Math.random() * 100}%`,
             animationDelay: `${index * 1.2}s`,
             animationDuration: `${5 + Math.random() * 5}s`,
-            filter: 'blur(8px)'
+            filter: "blur(8px)",
           }}
         />
       ))}

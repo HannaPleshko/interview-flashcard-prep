@@ -1,6 +1,5 @@
-
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const UnifiedInput = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {
@@ -14,9 +13,9 @@ const UnifiedInput = React.forwardRef<HTMLInputElement, React.ComponentProps<"in
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-UnifiedInput.displayName = "UnifiedInput"
+);
+UnifiedInput.displayName = "UnifiedInput";
 
-export { UnifiedInput }
+export { UnifiedInput };

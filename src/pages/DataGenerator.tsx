@@ -4,17 +4,40 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Copy, RefreshCw, Plus, Trash2, Database, Code, FileText, 
-  Download, Settings, Sparkles, Play, Edit3, Eye, FileJson,
-  User, Package, ShoppingCart, MessageSquare, Check, X
+import {
+  Copy,
+  RefreshCw,
+  Plus,
+  Trash2,
+  Database,
+  Code,
+  FileText,
+  Download,
+  Settings,
+  Sparkles,
+  Play,
+  Edit3,
+  Eye,
+  FileJson,
+  User,
+  Package,
+  ShoppingCart,
+  MessageSquare,
+  Check,
+  X,
 } from "lucide-react";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 interface Column {
   name: string;
@@ -51,7 +74,7 @@ const TEMPLATES = [
       { name: "age", type: "number", options: { min: 18, max: 80 } },
       { name: "isActive", type: "boolean" },
       { name: "createdAt", type: "date" },
-    ]
+    ],
   },
   {
     name: "Product",
@@ -61,11 +84,15 @@ const TEMPLATES = [
       { name: "name", type: "string", options: { length: 15 } },
       { name: "description", type: "string", options: { length: 50 } },
       { name: "price", type: "number", options: { min: 10, max: 9999 } },
-      { name: "category", type: "enum", options: { values: ["electronics", "clothing", "books", "home"] } },
+      {
+        name: "category",
+        type: "enum",
+        options: { values: ["electronics", "clothing", "books", "home"] },
+      },
       { name: "inStock", type: "boolean" },
       { name: "rating", type: "number", options: { min: 1, max: 5 } },
       { name: "createdAt", type: "date" },
-    ]
+    ],
   },
   {
     name: "Order",
@@ -76,9 +103,13 @@ const TEMPLATES = [
       { name: "productId", type: "number", options: { min: 1, max: 10000 } },
       { name: "quantity", type: "number", options: { min: 1, max: 10 } },
       { name: "totalAmount", type: "number", options: { min: 100, max: 50000 } },
-      { name: "status", type: "enum", options: { values: ["pending", "processing", "shipped", "delivered", "cancelled"] } },
+      {
+        name: "status",
+        type: "enum",
+        options: { values: ["pending", "processing", "shipped", "delivered", "cancelled"] },
+      },
       { name: "orderDate", type: "date" },
-    ]
+    ],
   },
   {
     name: "Comment",
@@ -91,8 +122,8 @@ const TEMPLATES = [
       { name: "likes", type: "number", options: { min: 0, max: 1000 } },
       { name: "isEdited", type: "boolean" },
       { name: "createdAt", type: "date" },
-    ]
-  }
+    ],
+  },
 ];
 
 const DataGenerator = () => {
@@ -102,11 +133,11 @@ const DataGenerator = () => {
   const [columns, setColumns] = useState<Column[]>([
     { name: "id", type: "number", options: { min: 1, max: 1000 } },
     { name: "name", type: "string", options: { length: 10 } },
-    { name: "active", type: "boolean" }
+    { name: "active", type: "boolean" },
   ]);
   const [textLength, setTextLength] = useState("100");
   const [textType, setTextType] = useState("lorem");
-  const [tab, setTab] = useState<'data' | 'ts' | 'structure'>("data");
+  const [tab, setTab] = useState<"data" | "ts" | "structure">("data");
   const [fieldModalOpen, setFieldModalOpen] = useState(false);
   const [editFieldIndex, setEditFieldIndex] = useState<number | null>(null);
   const [fieldDraft, setFieldDraft] = useState<Column | null>(null);
@@ -114,12 +145,15 @@ const DataGenerator = () => {
   const [jsonInput, setJsonInput] = useState("");
   const [formattedJson, setFormattedJson] = useState("");
   const [jsonValidationInput, setJsonValidationInput] = useState("");
-  const [jsonValidationResult, setJsonValidationResult] = useState<{ isValid: boolean; message: string } | null>(null);
+  const [jsonValidationResult, setJsonValidationResult] = useState<{
+    isValid: boolean;
+    message: string;
+  } | null>(null);
 
   const generateData = () => {
     try {
       const countNum = parseInt(count);
-      if ((outputType !== "text" && (isNaN(countNum) || countNum < 1))) {
+      if (outputType !== "text" && (isNaN(countNum) || countNum < 1)) {
         toast.error("Пожалуйста, введите корректное количество");
         return;
       }
@@ -153,7 +187,7 @@ const DataGenerator = () => {
   const generateJSON = (count: number) => {
     const data = Array.from({ length: count }, (_, i) => {
       const item: any = {};
-      columns.forEach(column => {
+      columns.forEach((column) => {
         item[column.name] = generateValue(column);
       });
       return item;
@@ -164,7 +198,7 @@ const DataGenerator = () => {
   const generateArray = (count: number) => {
     const data = Array.from({ length: count }, () => {
       const item: any = {};
-      columns.forEach(column => {
+      columns.forEach((column) => {
         item[column.name] = generateValue(column);
       });
       return item;
@@ -174,21 +208,23 @@ const DataGenerator = () => {
 
   const generateSQL = (count: number) => {
     if (columns.length === 0) return "";
-    
+
     const tableName = "generated_table";
-    const columnNames = columns.map(col => col.name).join(", ");
-    
+    const columnNames = columns.map((col) => col.name).join(", ");
+
     const insertStatements = Array.from({ length: count }, () => {
-      const values = columns.map(column => {
-        const value = generateValue(column);
-        if (typeof value === "string") {
-          return `'${value.replace(/'/g, "''")}'`;
-        }
-        return value;
-      }).join(", ");
+      const values = columns
+        .map((column) => {
+          const value = generateValue(column);
+          if (typeof value === "string") {
+            return `'${value.replace(/'/g, "''")}'`;
+          }
+          return value;
+        })
+        .join(", ");
       return `INSERT INTO ${tableName} (${columnNames}) VALUES (${values});`;
     });
-    
+
     return insertStatements.join("\n");
   };
 
@@ -219,7 +255,9 @@ const DataGenerator = () => {
       case "phone":
         const operators = ["29", "33", "44", "25"];
         const operator = operators[Math.floor(Math.random() * operators.length)];
-        const number = Math.floor(Math.random() * 10000000).toString().padStart(7, '0');
+        const number = Math.floor(Math.random() * 10000000)
+          .toString()
+          .padStart(7, "0");
         return `+375${operator}${number}`;
       case "enum":
         const values = column.options?.values || ["value1", "value2", "value3"];
@@ -231,11 +269,16 @@ const DataGenerator = () => {
 
   const generateRandomString = (length: number) => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join("");
+    return Array.from({ length }, () =>
+      chars.charAt(Math.floor(Math.random() * chars.length))
+    ).join("");
   };
 
   const generateLoremIpsum = (length: number) => {
-    const words = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua".split(" ");
+    const words =
+      "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua".split(
+        " "
+      );
     let result = "";
     while (result.length < length) {
       result += words[Math.floor(Math.random() * words.length)] + " ";
@@ -245,7 +288,9 @@ const DataGenerator = () => {
 
   const generateRandomText = (length: number) => {
     const chars = "abcdefghijklmnopqrstuvwxyz ";
-    return Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join("");
+    return Array.from({ length }, () =>
+      chars.charAt(Math.floor(Math.random() * chars.length))
+    ).join("");
   };
 
   const addColumn = () => {
@@ -276,7 +321,7 @@ const DataGenerator = () => {
       }
       const data = Array.from({ length: countNum }, () => {
         const item: any = {};
-        columns.forEach(column => {
+        columns.forEach((column) => {
           item[column.name] = generateValue(column);
         });
         return item;
@@ -298,7 +343,7 @@ const DataGenerator = () => {
   };
 
   const getTSInterface = () => {
-    const fields = columns.map(col => `  ${col.name}: ${tsType(col.type)};`).join("\n");
+    const fields = columns.map((col) => `  ${col.name}: ${tsType(col.type)};`).join("\n");
     return `interface GeneratedData {\n${fields}\n}`;
   };
 
@@ -309,14 +354,22 @@ const DataGenerator = () => {
 
   const tsType = (type: string) => {
     switch (type) {
-      case "number": return "number";
-      case "string": return "string";
-      case "boolean": return "boolean";
-      case "date": return "string";
-      case "email": return "string";
-      case "phone": return "string";
-      case "enum": return "string";
-      default: return "any";
+      case "number":
+        return "number";
+      case "string":
+        return "string";
+      case "boolean":
+        return "boolean";
+      case "date":
+        return "string";
+      case "email":
+        return "string";
+      case "phone":
+        return "string";
+      case "enum":
+        return "string";
+      default:
+        return "any";
     }
   };
 
@@ -332,7 +385,7 @@ const DataGenerator = () => {
   const getUniqueFieldName = (base: string) => {
     let name = base;
     let i = 1;
-    while (columns.some(c => c.name === name)) {
+    while (columns.some((c) => c.name === name)) {
       name = `${base}${i++}`;
     }
     return name;
@@ -340,7 +393,9 @@ const DataGenerator = () => {
 
   const openFieldModal = (index: number | null = null) => {
     setEditFieldIndex(index);
-    setFieldDraft(index !== null ? { ...columns[index] } : { name: "", type: "string", options: {} });
+    setFieldDraft(
+      index !== null ? { ...columns[index] } : { name: "", type: "string", options: {} }
+    );
     setFieldModalOpen(true);
   };
 
@@ -379,7 +434,7 @@ const DataGenerator = () => {
     setFormattedJson("");
   };
 
-  const applyTemplate = (template: typeof TEMPLATES[0]) => {
+  const applyTemplate = (template: (typeof TEMPLATES)[0]) => {
     setColumns(template.fields);
     toast.success(`Шаблон "${template.name}" применен`);
   };
@@ -403,7 +458,7 @@ const DataGenerator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
-      
+
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
@@ -500,7 +555,7 @@ const DataGenerator = () => {
                     </Button>
                   </div>
                 </div>
-                
+
                 <div className="space-y-2 max-h-64 overflow-y-auto">
                   {columns.length === 0 ? (
                     <div className="text-center py-8 text-muted-foreground">
@@ -516,7 +571,10 @@ const DataGenerator = () => {
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-sm">{col.name}</span>
-                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700">
+                            <Badge
+                              variant="secondary"
+                              className="text-xs bg-purple-100 text-purple-700"
+                            >
                               {col.type}
                             </Badge>
                           </div>
@@ -571,7 +629,7 @@ const DataGenerator = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 {outputType !== "text" ? (
                   <div>
                     <label className="text-sm font-medium mb-2 block">Количество</label>
@@ -638,28 +696,40 @@ const DataGenerator = () => {
                 <div className="space-y-4">
                   <Tabs value={tab} onValueChange={(v) => setTab(v as any)}>
                     <TabsList className="grid w-full grid-cols-3 bg-white/70 border-purple-200">
-                      <TabsTrigger value="data" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
+                      <TabsTrigger
+                        value="data"
+                        className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700"
+                      >
                         <FileText className="h-3 w-3 mr-1" />
                         Данные
                       </TabsTrigger>
-                      <TabsTrigger value="ts" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
+                      <TabsTrigger
+                        value="ts"
+                        className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700"
+                      >
                         <Code className="h-3 w-3 mr-1" />
                         TypeScript
                       </TabsTrigger>
-                      <TabsTrigger value="structure" className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700">
+                      <TabsTrigger
+                        value="structure"
+                        className="text-xs data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700"
+                      >
                         <Settings className="h-3 w-3 mr-1" />
                         Структура
                       </TabsTrigger>
                     </TabsList>
-                    
+
                     <TabsContent value="data" className="space-y-3">
-                      <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3" ref={scrollAreaRef}>
+                      <ScrollArea
+                        className="h-[300px] w-full rounded-lg border bg-white/70 p-3"
+                        ref={scrollAreaRef}
+                      >
                         <pre className="text-xs whitespace-pre-wrap break-all font-mono">
                           {generatedData}
                         </pre>
                       </ScrollArea>
                     </TabsContent>
-                    
+
                     <TabsContent value="ts" className="space-y-3">
                       <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3">
                         <pre className="text-xs whitespace-pre-wrap font-mono">
@@ -676,13 +746,16 @@ const DataGenerator = () => {
                         Копировать интерфейс
                       </Button>
                     </TabsContent>
-                    
+
                     <TabsContent value="structure" className="space-y-3">
                       <ScrollArea className="h-[300px] w-full rounded-lg border bg-white/70 p-3">
                         <pre className="text-xs whitespace-pre-wrap font-mono">
-                          {columns.map(col => 
-                            `${col.name}: ${col.type}${col.type === "enum" && col.options?.values ? ` [${col.options.values.join(", ")}]` : ""}`
-                          ).join("\n")}
+                          {columns
+                            .map(
+                              (col) =>
+                                `${col.name}: ${col.type}${col.type === "enum" && col.options?.values ? ` [${col.options.values.join(", ")}]` : ""}`
+                            )
+                            .join("\n")}
                         </pre>
                       </ScrollArea>
                     </TabsContent>
@@ -780,9 +853,7 @@ const DataGenerator = () => {
                   </div>
                   <ScrollArea className="h-[120px] w-full rounded-lg border bg-white/70 p-3">
                     {formattedJson ? (
-                      <pre className="text-xs whitespace-pre-wrap font-mono">
-                        {formattedJson}
-                      </pre>
+                      <pre className="text-xs whitespace-pre-wrap font-mono">{formattedJson}</pre>
                     ) : (
                       <div className="text-center py-8 text-muted-foreground">
                         <FileJson className="h-8 w-8 mx-auto mb-2 opacity-50" />
@@ -836,11 +907,13 @@ const DataGenerator = () => {
 
                 {/* Validation Result */}
                 {jsonValidationResult && (
-                  <div className={`p-3 rounded-lg border ${
-                    jsonValidationResult.isValid 
-                      ? 'bg-green-50 border-green-200 text-green-800' 
-                      : 'bg-red-50 border-red-200 text-red-800'
-                  }`}>
+                  <div
+                    className={`p-3 rounded-lg border ${
+                      jsonValidationResult.isValid
+                        ? "bg-green-50 border-green-200 text-green-800"
+                        : "bg-red-50 border-red-200 text-red-800"
+                    }`}
+                  >
                     <div className="flex items-center gap-2 mb-2">
                       {jsonValidationResult.isValid ? (
                         <Check className="h-4 w-4 text-green-600" />
@@ -848,7 +921,7 @@ const DataGenerator = () => {
                         <X className="h-4 w-4 text-red-600" />
                       )}
                       <span className="font-medium text-sm">
-                        {jsonValidationResult.isValid ? 'JSON корректен' : 'JSON содержит ошибки'}
+                        {jsonValidationResult.isValid ? "JSON корректен" : "JSON содержит ошибки"}
                       </span>
                     </div>
                     {!jsonValidationResult.isValid && (
@@ -878,14 +951,14 @@ const DataGenerator = () => {
             <CardContent className="space-y-4">
               <Input
                 value={fieldDraft?.name || ""}
-                onChange={(e) => setFieldDraft(f => f ? { ...f, name: e.target.value } : f)}
+                onChange={(e) => setFieldDraft((f) => (f ? { ...f, name: e.target.value } : f))}
                 placeholder="Имя поля"
                 className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
               />
-              
+
               <Select
                 value={fieldDraft?.type || "string"}
-                onValueChange={(v) => setFieldDraft(f => f ? { ...f, type: v } : f)}
+                onValueChange={(v) => setFieldDraft((f) => (f ? { ...f, type: v } : f))}
               >
                 <SelectTrigger className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl">
                   <SelectValue placeholder="Тип поля" />
@@ -906,20 +979,32 @@ const DataGenerator = () => {
                   <Input
                     type="number"
                     value={fieldDraft.options?.min ?? ""}
-                    onChange={(e) => setFieldDraft(f => f ? { 
-                      ...f, 
-                      options: { ...f.options, min: Number(e.target.value) } 
-                    } : f)}
+                    onChange={(e) =>
+                      setFieldDraft((f) =>
+                        f
+                          ? {
+                              ...f,
+                              options: { ...f.options, min: Number(e.target.value) },
+                            }
+                          : f
+                      )
+                    }
                     placeholder="Минимум"
                     className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
                   <Input
                     type="number"
                     value={fieldDraft.options?.max ?? ""}
-                    onChange={(e) => setFieldDraft(f => f ? { 
-                      ...f, 
-                      options: { ...f.options, max: Number(e.target.value) } 
-                    } : f)}
+                    onChange={(e) =>
+                      setFieldDraft((f) =>
+                        f
+                          ? {
+                              ...f,
+                              options: { ...f.options, max: Number(e.target.value) },
+                            }
+                          : f
+                      )
+                    }
                     placeholder="Максимум"
                     className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                   />
@@ -930,10 +1015,16 @@ const DataGenerator = () => {
                 <Input
                   type="number"
                   value={fieldDraft.options?.length ?? ""}
-                  onChange={(e) => setFieldDraft(f => f ? { 
-                    ...f, 
-                    options: { ...f.options, length: Number(e.target.value) } 
-                  } : f)}
+                  onChange={(e) =>
+                    setFieldDraft((f) =>
+                      f
+                        ? {
+                            ...f,
+                            options: { ...f.options, length: Number(e.target.value) },
+                          }
+                        : f
+                    )
+                  }
                   placeholder="Длина строки"
                   className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                 />
@@ -942,13 +1033,22 @@ const DataGenerator = () => {
               {fieldDraft?.type === "enum" && (
                 <Input
                   value={fieldDraft.options?.values?.join(",") || ""}
-                  onChange={(e) => setFieldDraft(f => f ? { 
-                    ...f, 
-                    options: { 
-                      ...f.options, 
-                      values: e.target.value.split(",").map(v => v.trim()).filter(Boolean) 
-                    } 
-                  } : f)}
+                  onChange={(e) =>
+                    setFieldDraft((f) =>
+                      f
+                        ? {
+                            ...f,
+                            options: {
+                              ...f.options,
+                              values: e.target.value
+                                .split(",")
+                                .map((v) => v.trim())
+                                .filter(Boolean),
+                            },
+                          }
+                        : f
+                    )
+                  }
                   placeholder="value1,value2,value3"
                   className="bg-white/70 border-purple-200 focus:border-purple-400 rounded-xl"
                 />

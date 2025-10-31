@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 
 interface AnimatedSectionProps {
@@ -18,11 +17,9 @@ const AnimatedSection = ({ children, className = "", delay = 0 }: AnimatedSectio
   }, [delay]);
 
   return (
-    <div 
+    <div
       className={`transition-all duration-1000 ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-8'
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       } ${className}`}
     >
       {children}

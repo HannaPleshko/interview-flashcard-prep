@@ -3,23 +3,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Copy, 
-  Code, 
-  Package, 
-  MousePointer, 
-  Zap, 
-  Globe, 
+import {
+  Copy,
+  Code,
+  Package,
+  MousePointer,
+  Zap,
+  Globe,
   Star,
   Search,
   Filter,
   BookOpen,
   Layers,
-  RotateCcw
+  RotateCcw,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -53,7 +58,7 @@ const UnifiedReference = () => {
 
 // Вызов до объявления работает благодаря hoisting
 console.log(greet("Анна")); // "Привет, Анна!"`,
-          tips: "Поднимается наверх (hoisting), доступна в любом месте области видимости"
+          tips: "Поднимается наверх (hoisting), доступна в любом месте области видимости",
         },
         {
           id: "expression",
@@ -66,7 +71,7 @@ console.log(greet("Анна")); // "Привет, Анна!"`,
 
 // Анонимная функция в колбэке
 [1, 2, 3].map(function(n) { return n * 2; });`,
-          tips: "Не поднимается (no hoisting), создается в момент выполнения"
+          tips: "Не поднимается (no hoisting), создается в момент выполнения",
         },
         {
           id: "arrow",
@@ -84,7 +89,7 @@ const obj = {
   regular() { console.log(this.name); }, // 'Object'
   arrow: () => { console.log(this.name); } // undefined
 };`,
-          tips: "Не имеет собственного this, arguments, не может быть конструктором"
+          tips: "Не имеет собственного this, arguments, не может быть конструктором",
         },
         {
           id: "closure",
@@ -103,7 +108,7 @@ const obj = {
 const counter = createCounter();
 console.log(counter.increment()); // 1
 console.log(counter.get()); // 1`,
-          tips: "Создает приватные переменные, основа для модульного программирования"
+          tips: "Создает приватные переменные, основа для модульного программирования",
         },
         {
           id: "iife",
@@ -119,13 +124,14 @@ console.log(counter.get()); // 1`,
 (() => {
   console.log('Arrow IIFE!');
 })();`,
-          tips: "IIFE часто используют для создания изолированной области видимости"
+          tips: "IIFE часто используют для создания изолированной области видимости",
         },
         {
           id: "currying",
           title: "Каррирование (Currying)",
           level: "advanced",
-          description: "Преобразование функции с несколькими аргументами в последовательность функций по одному аргументу",
+          description:
+            "Преобразование функции с несколькими аргументами в последовательность функций по одному аргументу",
           code: `function sum(a) {
   return function(b) {
     return function(c) {
@@ -135,7 +141,7 @@ console.log(counter.get()); // 1`,
 }
 
 console.log(sum(1)(2)(3)); // 6`,
-          tips: "Каррирование удобно для частичного применения и композиции функций"
+          tips: "Каррирование удобно для частичного применения и композиции функций",
         },
         {
           id: "recursion",
@@ -148,7 +154,7 @@ console.log(sum(1)(2)(3)); // 6`,
 }
 
 console.log(factorial(5)); // 120`,
-          tips: "Рекурсия полезна для работы с деревьями, обхода структур данных и алгоритмов"
+          tips: "Рекурсия полезна для работы с деревьями, обхода структур данных и алгоритмов",
         },
         {
           id: "generator",
@@ -164,9 +170,9 @@ console.log(factorial(5)); // 120`,
   for (const num of range(1, 3)) {
     console.log(num); // 1, 2, 3
   }`,
-          tips: "Генераторы удобны для ленивых вычислений и работы с потоками данных"
-        }
-      ]
+          tips: "Генераторы удобны для ленивых вычислений и работы с потоками данных",
+        },
+      ],
     },
     oop: {
       icon: Package,
@@ -189,7 +195,7 @@ console.log(factorial(5)); // 120`,
 
 const dog = new Animal('Шарик');
 dog.speak(); // 'Шарик издает звук'`,
-          tips: "Классы — синтаксический сахар над прототипами, поддерживают наследование и методы"
+          tips: "Классы — синтаксический сахар над прототипами, поддерживают наследование и методы",
         },
         {
           id: "static-methods",
@@ -203,7 +209,7 @@ dog.speak(); // 'Шарик издает звук'`,
 }
 
 console.log(MathUtils.add(2, 3)); // 5`,
-          tips: "Статические методы часто используют для утилитарных функций, не зависящих от состояния экземпляра"
+          tips: "Статические методы часто используют для утилитарных функций, не зависящих от состояния экземпляра",
         },
         {
           id: "oop-principles",
@@ -224,7 +230,7 @@ class Dog extends Animal { speak() { return 'Гав'; } }
 // Полиморфизм
 const animals = [new Animal(), new Dog()];
 animals.forEach(a => console.log(a.speak()));`,
-          tips: "ООП помогает структурировать код, облегчает повторное использование и расширяемость"
+          tips: "ООП помогает структурировать код, облегчает повторное использование и расширяемость",
         },
         {
           id: "solid",
@@ -244,7 +250,7 @@ class DB { /* ... */ }
 class Service {
   constructor(db) { this.db = db; }
 }`,
-          tips: "SOLID: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion"
+          tips: "SOLID: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
         },
         {
           id: "dry-kiss",
@@ -256,9 +262,9 @@ function sum(a, b) { return a + b; }
 // KISS — Keep It Simple, Stupid
 // YAGNI — You Aren't Gonna Need It
 // Принципы помогают писать чистый и поддерживаемый код`,
-          tips: "Следуйте этим принципам для простоты, читаемости и поддержки кода"
-        }
-      ]
+          tips: "Следуйте этим принципам для простоты, читаемости и поддержки кода",
+        },
+      ],
     },
     dom: {
       icon: MousePointer,
@@ -281,7 +287,7 @@ const byTag = document.getElementsByTagName('div');
 
 // Комплексные селекторы
 const nested = document.querySelector('.parent > .child:first-child');`,
-          tips: "querySelector/querySelectorAll поддерживают CSS селекторы и работают быстрее"
+          tips: "querySelector/querySelectorAll поддерживают CSS селекторы и работают быстрее",
         },
         {
           id: "manipulation",
@@ -306,7 +312,7 @@ element.style.cssText = 'color: red; font-size: 16px;';
 // Атрибуты
 element.setAttribute('data-id', '123');
 element.removeAttribute('hidden');`,
-          tips: "Используйте textContent для безопасности, innerHTML только для доверенного контента"
+          tips: "Используйте textContent для безопасности, innerHTML только для доверенного контента",
         },
         {
           id: "events",
@@ -328,9 +334,9 @@ document.addEventListener('click', (e) => {
     console.log('Клик по динамической кнопке');
   }
 });`,
-          tips: "Делегирование событий эффективно для динамического контента"
-        }
-      ]
+          tips: "Делегирование событий эффективно для динамического контента",
+        },
+      ],
     },
     async: {
       icon: Zap,
@@ -356,7 +362,7 @@ fetchData()
   .then(data => console.log(data))
   .catch(error => console.error(error))
   .finally(() => console.log('Завершено'));`,
-          tips: "Промисы имеют три состояния: pending, fulfilled, rejected"
+          tips: "Промисы имеют три состояния: pending, fulfilled, rejected",
         },
         {
           id: "async-await",
@@ -376,7 +382,7 @@ fetchData()
 
 // Использование
 const user = await fetchUserData(123);`,
-          tips: "async/await делает асинхронный код похожим на синхронный"
+          tips: "async/await делает асинхронный код похожим на синхронный",
         },
         {
           id: "promise-methods",
@@ -401,9 +407,9 @@ const settled = await Promise.allSettled([
   Promise.resolve('OK'),
   Promise.reject('Error')
 ]);`,
-          tips: "Promise.all завершается неудачей при первой ошибке, allSettled - нет"
-        }
-      ]
+          tips: "Promise.all завершается неудачей при первой ошибке, allSettled - нет",
+        },
+      ],
     },
     webapi: {
       icon: Globe,
@@ -430,7 +436,7 @@ const newUser = await fetch('/api/users', {
 if (!response.ok) {
   throw new Error(\`HTTP error! status: \${response.status}\`);
 }`,
-          tips: "Fetch не отклоняет промис для HTTP ошибок (404, 500), проверяйте response.ok"
+          tips: "Fetch не отклоняет промис для HTTP ошибок (404, 500), проверяйте response.ok",
         },
         {
           id: "storage",
@@ -449,7 +455,7 @@ sessionStorage.setItem('temp', 'value');
 if (typeof Storage !== 'undefined') {
   // Storage поддерживается
 }`,
-          tips: "localStorage сохраняется между сессиями, sessionStorage - только в рамках вкладки"
+          tips: "localStorage сохраняется между сессиями, sessionStorage - только в рамках вкладки",
         },
         {
           id: "geolocation",
@@ -471,9 +477,9 @@ navigator.geolocation.getCurrentPosition(
 // Отслеживание позиции
 const watchId = navigator.geolocation.watchPosition(callback);
 navigator.geolocation.clearWatch(watchId);`,
-          tips: "Требует разрешения пользователя, работает только по HTTPS"
-        }
-      ]
+          tips: "Требует разрешения пользователя, работает только по HTTPS",
+        },
+      ],
     },
     es6: {
       icon: Star,
@@ -499,7 +505,7 @@ const [, , third] = colors; // пропуск элементов
 function greet({ name, age }) {
   return \`\${name} is \${age} years old\`;
 }`,
-          tips: "Деструктуризация работает вложенно и поддерживает значения по умолчанию"
+          tips: "Деструктуризация работает вложенно и поддерживает значения по умолчанию",
         },
         {
           id: "spread-rest",
@@ -521,7 +527,7 @@ function sum(...numbers) {
 
 // Rest в деструктуризации
 const [first, ...rest] = [1, 2, 3, 4];`,
-          tips: "Spread создает поверхностную копию, для глубокого клонирования используйте другие методы"
+          tips: "Spread создает поверхностную копию, для глубокого клонирования используйте другие методы",
         },
         {
           id: "template-literals",
@@ -544,7 +550,7 @@ const html = \`
 
 // Вызов функций
 const formatted = \`Сумма: \${(100 * 1.2).toFixed(2)}$\`;`,
-          tips: "Используйте обратные кавычки (`), поддерживает любые JavaScript выражения"
+          tips: "Используйте обратные кавычки (`), поддерживает любые JavaScript выражения",
         },
         {
           id: "modules",
@@ -566,47 +572,56 @@ const module = await import('./math.js');
 if (condition) {
   const { feature } = await import('./feature.js');
 }`,
-          tips: "Модули загружаются асинхронно, export default - один на модуль"
-        }
-      ]
-    }
+          tips: "Модули загружаются асинхронно, export default - один на модуль",
+        },
+      ],
+    },
   };
 
   const filteredSections = (sections: any[]) => {
-    return sections.filter(section => {
-      const matchesSearch = searchTerm === "" || 
+    return sections.filter((section) => {
+      const matchesSearch =
+        searchTerm === "" ||
         section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         section.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         section.code.toLowerCase().includes(searchTerm.toLowerCase());
-      
+
       const matchesLevel = selectedLevel === "all" || section.level === selectedLevel;
-      
+
       return matchesSearch && matchesLevel;
     });
   };
 
   const getLevelColor = (level: string) => {
-    switch(level) {
-      case "basic": return "bg-green-100 text-green-700";
-      case "intermediate": return "bg-yellow-100 text-yellow-700";
-      case "advanced": return "bg-red-100 text-red-700";
-      default: return "bg-gray-100 text-gray-700";
+    switch (level) {
+      case "basic":
+        return "bg-green-100 text-green-700";
+      case "intermediate":
+        return "bg-yellow-100 text-yellow-700";
+      case "advanced":
+        return "bg-red-100 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-700";
     }
   };
 
   const getLevelText = (level: string) => {
-    switch(level) {
-      case "basic": return "Базовый";
-      case "intermediate": return "Средний";
-      case "advanced": return "Продвинутый";
-      default: return level;
+    switch (level) {
+      case "basic":
+        return "Базовый";
+      case "intermediate":
+        return "Средний";
+      case "advanced":
+        return "Продвинутый";
+      default:
+        return level;
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
-      
+
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex items-center gap-4 mb-8">
           <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 shadow-lg">
@@ -616,7 +631,9 @@ if (condition) {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
               Справочник JavaScript
             </h1>
-            <p className="text-muted-foreground">Полный интерактивный справочник по современному JavaScript</p>
+            <p className="text-muted-foreground">
+              Полный интерактивный справочник по современному JavaScript
+            </p>
           </div>
         </div>
 
@@ -694,7 +711,12 @@ if (condition) {
           </div>
           {/* Main content */}
           <div className="flex-1">
-            <Tabs defaultValue="functions" className="w-full" value={selectedTab} onValueChange={setSelectedTab}>
+            <Tabs
+              defaultValue="functions"
+              className="w-full"
+              value={selectedTab}
+              onValueChange={setSelectedTab}
+            >
               {Object.entries(referenceData).map(([key, data]) => (
                 <TabsContent key={key} value={key}>
                   <Card className="bg-white/60 backdrop-blur-sm border-white/20 shadow-lg">
@@ -709,129 +731,184 @@ if (condition) {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      {key === 'functions' ? (
+                      {key === "functions" ? (
                         <>
                           {/* Виды функций */}
-                          <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">Виды функций</h3>
+                          <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">
+                            Виды функций
+                          </h3>
                           <div className="mb-6">
                             <Accordion type="single" collapsible className="w-full">
-                              {filteredSections(data.sections).filter(section =>
-                                ['declaration', 'expression', 'arrow'].includes(section.id)
-                              ).map((section, index) => (
-                                <AccordionItem key={section.id} value={section.id} className="border border-purple-100 rounded-xl mb-3">
-                                  <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
-                                    <div className="flex items-center justify-between w-full mr-4">
-                                      <div>
-                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
-                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
-                                      </div>
-                                      <Badge className={getLevelColor(section.level)}>
-                                        {getLevelText(section.level)}
-                                      </Badge>
-                                    </div>
-                                  </AccordionTrigger>
-                                  <AccordionContent className="px-4 pb-4">
-                                    <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
-                                      <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
-                                        <Button
-                                          variant="ghost"
-                                          size="sm"
-                                          onClick={() => copyToClipboard(section.code, section.title)}
-                                          className="text-gray-600 hover:text-purple-600"
-                                        >
-                                          <Copy className="h-4 w-4 mr-2" />
-                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
-                                        </Button>
-                                      </div>
-                                      <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
-                                        <code>{section.code}</code>
-                                      </pre>
-                                    </div>
-                                    {section.tips && (
-                                      <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                                        <div className="flex items-start gap-2">
-                                          <div className="p-1 rounded-full bg-blue-100">
-                                            <BookOpen className="h-4 w-4 text-blue-600" />
+                              {filteredSections(data.sections)
+                                .filter((section) =>
+                                  ["declaration", "expression", "arrow"].includes(section.id)
+                                )
+                                .map((section, index) => (
+                                  <AccordionItem
+                                    key={section.id}
+                                    value={section.id}
+                                    className="border border-purple-100 rounded-xl mb-3"
+                                  >
+                                    <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
+                                      <div className="flex items-center justify-between w-full mr-4">
+                                        <div>
+                                          <div className="font-semibold text-lg text-foreground">
+                                            {section.title}
                                           </div>
-                                          <div>
-                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
-                                            <p className="text-sm text-blue-700">{section.tips}</p>
+                                          <div className="text-sm text-gray-600 mt-1">
+                                            {section.description}
                                           </div>
                                         </div>
+                                        <Badge className={getLevelColor(section.level)}>
+                                          {getLevelText(section.level)}
+                                        </Badge>
                                       </div>
-                                    )}
-                                  </AccordionContent>
-                                </AccordionItem>
-                              ))}
+                                    </AccordionTrigger>
+                                    <AccordionContent className="px-4 pb-4">
+                                      <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+                                          <span className="text-sm font-medium text-gray-700">
+                                            Пример кода
+                                          </span>
+                                          <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() =>
+                                              copyToClipboard(section.code, section.title)
+                                            }
+                                            className="text-gray-600 hover:text-purple-600"
+                                          >
+                                            <Copy className="h-4 w-4 mr-2" />
+                                            {copiedCode === section.title
+                                              ? "Скопировано!"
+                                              : "Копировать"}
+                                          </Button>
+                                        </div>
+                                        <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
+                                          <code>{section.code}</code>
+                                        </pre>
+                                      </div>
+                                      {section.tips && (
+                                        <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                          <div className="flex items-start gap-2">
+                                            <div className="p-1 rounded-full bg-blue-100">
+                                              <BookOpen className="h-4 w-4 text-blue-600" />
+                                            </div>
+                                            <div>
+                                              <h4 className="font-medium text-blue-800 mb-1">
+                                                💡 Совет
+                                              </h4>
+                                              <p className="text-sm text-blue-700">
+                                                {section.tips}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      )}
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                ))}
                             </Accordion>
                           </div>
                           {/* Остальные подтемы */}
-                          {filteredSections(data.sections).filter(section => !['declaration', 'expression', 'arrow'].includes(section.id)).map((section, idx) => (
-                            <div key={section.id} className="mb-6">
-                              <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">{section.title}</h3>
-                              <Accordion type="single" collapsible className="w-full">
-                                <AccordionItem value={section.id} className="border border-purple-100 rounded-xl mb-3">
-                                  <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
-                                    <div className="flex items-center justify-between w-full mr-4">
-                                      <div>
-                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
-                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
-                                      </div>
-                                      <Badge className={getLevelColor(section.level)}>
-                                        {getLevelText(section.level)}
-                                      </Badge>
-                                    </div>
-                                  </AccordionTrigger>
-                                  <AccordionContent className="px-4 pb-4">
-                                    <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
-                                      <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
-                                        <Button
-                                          variant="ghost"
-                                          size="sm"
-                                          onClick={() => copyToClipboard(section.code, section.title)}
-                                          className="text-gray-600 hover:text-purple-600"
-                                        >
-                                          <Copy className="h-4 w-4 mr-2" />
-                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
-                                        </Button>
-                                      </div>
-                                      <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
-                                        <code>{section.code}</code>
-                                      </pre>
-                                    </div>
-                                    {section.tips && (
-                                      <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                                        <div className="flex items-start gap-2">
-                                          <div className="p-1 rounded-full bg-blue-100">
-                                            <BookOpen className="h-4 w-4 text-blue-600" />
+                          {filteredSections(data.sections)
+                            .filter(
+                              (section) =>
+                                !["declaration", "expression", "arrow"].includes(section.id)
+                            )
+                            .map((section, idx) => (
+                              <div key={section.id} className="mb-6">
+                                <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent">
+                                  {section.title}
+                                </h3>
+                                <Accordion type="single" collapsible className="w-full">
+                                  <AccordionItem
+                                    value={section.id}
+                                    className="border border-purple-100 rounded-xl mb-3"
+                                  >
+                                    <AccordionTrigger className="text-left px-4 py-3 hover:bg-purple-50 rounded-t-xl">
+                                      <div className="flex items-center justify-between w-full mr-4">
+                                        <div>
+                                          <div className="font-semibold text-lg text-foreground">
+                                            {section.title}
                                           </div>
-                                          <div>
-                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
-                                            <p className="text-sm text-blue-700">{section.tips}</p>
+                                          <div className="text-sm text-gray-600 mt-1">
+                                            {section.description}
                                           </div>
                                         </div>
+                                        <Badge className={getLevelColor(section.level)}>
+                                          {getLevelText(section.level)}
+                                        </Badge>
                                       </div>
-                                    )}
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </Accordion>
-                            </div>
-                          ))}
+                                    </AccordionTrigger>
+                                    <AccordionContent className="px-4 pb-4">
+                                      <div className="bg-white/80 rounded-lg border border-purple-100 overflow-hidden">
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+                                          <span className="text-sm font-medium text-gray-700">
+                                            Пример кода
+                                          </span>
+                                          <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() =>
+                                              copyToClipboard(section.code, section.title)
+                                            }
+                                            className="text-gray-600 hover:text-purple-600"
+                                          >
+                                            <Copy className="h-4 w-4 mr-2" />
+                                            {copiedCode === section.title
+                                              ? "Скопировано!"
+                                              : "Копировать"}
+                                          </Button>
+                                        </div>
+                                        <pre className="p-4 overflow-x-auto text-sm font-mono text-purple-900 bg-white">
+                                          <code>{section.code}</code>
+                                        </pre>
+                                      </div>
+                                      {section.tips && (
+                                        <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                          <div className="flex items-start gap-2">
+                                            <div className="p-1 rounded-full bg-blue-100">
+                                              <BookOpen className="h-4 w-4 text-blue-600" />
+                                            </div>
+                                            <div>
+                                              <h4 className="font-medium text-blue-800 mb-1">
+                                                💡 Совет
+                                              </h4>
+                                              <p className="text-sm text-blue-700">
+                                                {section.tips}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      )}
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                </Accordion>
+                              </div>
+                            ))}
                         </>
                       ) : (
                         <>
                           {filteredSections(data.sections).map((section, idx) => (
                             <div key={section.id} className="mb-6">
-                              <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">{section.title}</h3>
+                              <h3 className="text-lg font-semibold mb-2 bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">
+                                {section.title}
+                              </h3>
                               <Accordion type="single" collapsible className="w-full">
-                                <AccordionItem value={section.id} className="border border-green-100 rounded-xl mb-3">
+                                <AccordionItem
+                                  value={section.id}
+                                  className="border border-green-100 rounded-xl mb-3"
+                                >
                                   <AccordionTrigger className="text-left px-4 py-3 hover:bg-green-50 rounded-t-xl">
                                     <div className="flex items-center justify-between w-full mr-4">
                                       <div>
-                                        <div className="font-semibold text-lg text-foreground">{section.title}</div>
-                                        <div className="text-sm text-gray-600 mt-1">{section.description}</div>
+                                        <div className="font-semibold text-lg text-foreground">
+                                          {section.title}
+                                        </div>
+                                        <div className="text-sm text-gray-600 mt-1">
+                                          {section.description}
+                                        </div>
                                       </div>
                                       <Badge className={getLevelColor(section.level)}>
                                         {getLevelText(section.level)}
@@ -841,15 +918,21 @@ if (condition) {
                                   <AccordionContent className="px-4 pb-4">
                                     <div className="bg-white/80 rounded-lg border border-green-100 overflow-hidden">
                                       <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-                                        <span className="text-sm font-medium text-gray-700">Пример кода</span>
+                                        <span className="text-sm font-medium text-gray-700">
+                                          Пример кода
+                                        </span>
                                         <Button
                                           variant="ghost"
                                           size="sm"
-                                          onClick={() => copyToClipboard(section.code, section.title)}
+                                          onClick={() =>
+                                            copyToClipboard(section.code, section.title)
+                                          }
                                           className="text-gray-600 hover:text-green-600"
                                         >
                                           <Copy className="h-4 w-4 mr-2" />
-                                          {copiedCode === section.title ? "Скопировано!" : "Копировать"}
+                                          {copiedCode === section.title
+                                            ? "Скопировано!"
+                                            : "Копировать"}
                                         </Button>
                                       </div>
                                       <pre className="p-4 overflow-x-auto text-sm font-mono text-green-900 bg-white">
@@ -863,7 +946,9 @@ if (condition) {
                                             <BookOpen className="h-4 w-4 text-blue-600" />
                                           </div>
                                           <div>
-                                            <h4 className="font-medium text-blue-800 mb-1">💡 Совет</h4>
+                                            <h4 className="font-medium text-blue-800 mb-1">
+                                              💡 Совет
+                                            </h4>
                                             <p className="text-sm text-blue-700">{section.tips}</p>
                                           </div>
                                         </div>

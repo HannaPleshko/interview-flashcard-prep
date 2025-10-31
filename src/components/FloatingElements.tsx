@@ -1,4 +1,3 @@
-
 import React from "react";
 import BackgroundGrid from "./BackgroundGrid";
 import GeometricShapes from "./GeometricShapes";
@@ -12,7 +11,7 @@ const FloatingElements = () => {
       <GeometricShapes />
       <ParticleField />
       <WaveBackground />
-      
+
       {/* Original simple floating elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Simple Orbs */}
@@ -26,7 +25,7 @@ const FloatingElements = () => {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${index * 3}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
+              animationDuration: `${8 + Math.random() * 4}s`,
             }}
           />
         ))}

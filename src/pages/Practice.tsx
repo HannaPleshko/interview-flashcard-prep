@@ -3,12 +3,21 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, Code, RotateCcw, Shuffle, Check, Clock, ChevronDown, ChevronRight } from "lucide-react";
+import {
+  ArrowLeft,
+  Code,
+  RotateCcw,
+  Shuffle,
+  Check,
+  Clock,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import confetti from 'canvas-confetti';
+import confetti from "canvas-confetti";
 
 type ProgressData = {
   [questionId: string]: ProgressStatus;
@@ -26,15 +35,17 @@ const Practice = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [hiddenTopics, setHiddenTopics] = useState<Set<string>>(new Set());
 
-  const technology = questionsData.find(t => t.id === techId);
-  
+  const technology = questionsData.find((t) => t.id === techId);
+
   // Проверяем, есть ли рандомные вопросы в localStorage (только если нет techId)
-  const randomQuestions = !techId ? localStorage.getItem('randomInterviewQuestions') : null;
-  const randomTechnologies = !techId ? localStorage.getItem('randomInterviewTechnologies') : null;
-  
-  const allQuestions = randomQuestions 
+  const randomQuestions = !techId ? localStorage.getItem("randomInterviewQuestions") : null;
+  const randomTechnologies = !techId ? localStorage.getItem("randomInterviewTechnologies") : null;
+
+  const allQuestions = randomQuestions
     ? JSON.parse(randomQuestions)
-    : techId ? getTechnologyQuestions(techId) : [];
+    : techId
+      ? getTechnologyQuestions(techId)
+      : [];
 
   // Загрузка прогресса из localStorage при монтировании компонента
   useEffect(() => {
@@ -54,7 +65,7 @@ const Practice = () => {
     let interval: NodeJS.Timeout;
     if (isTimerRunning) {
       interval = setInterval(() => {
-        setTimer(prev => prev + 1);
+        setTimer((prev) => prev + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -70,7 +81,7 @@ const Practice = () => {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const toggleTimer = () => {
@@ -83,7 +94,7 @@ const Practice = () => {
   };
 
   const handleProgressChange = (questionId: string, status: ProgressStatus) => {
-    setProgress(prev => {
+    setProgress((prev) => {
       const newProgress = { ...prev };
       if (newProgress[questionId] === status) {
         delete newProgress[questionId];
@@ -120,7 +131,7 @@ const Practice = () => {
         return Math.random() * (max - min) + min;
       }
 
-      const interval: any = setInterval(function() {
+      const interval: any = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
@@ -128,17 +139,17 @@ const Practice = () => {
         }
 
         const particleCount = 50 * (timeLeft / duration);
-        
+
         // since particles fall down, start a bit higher than random
         confetti({
           ...defaults,
           particleCount,
-          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
         });
         confetti({
           ...defaults,
           particleCount,
-          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
         });
       }, 250);
 
@@ -185,15 +196,17 @@ const Practice = () => {
   }
 
   const currentQuestion = currentQuestions[currentIndex];
-  const progressPercentage = currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
+  const progressPercentage =
+    currentQuestions.length > 0 ? ((currentIndex + 1) / currentQuestions.length) * 100 : 0;
 
   // Проверяем, все ли карточки отмечены как "изученные"
-  const allCardsCompleted = currentQuestions.length > 0 && 
-    currentQuestions.every(question => progress[question.id] === 'known');
+  const allCardsCompleted =
+    currentQuestions.length > 0 &&
+    currentQuestions.every((question) => progress[question.id] === "known");
 
   // Функция для переключения видимости темы
   const toggleTopicVisibility = (techId: string) => {
-    setHiddenTopics(prev => {
+    setHiddenTopics((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(techId)) {
         newSet.delete(techId);
@@ -207,34 +220,37 @@ const Practice = () => {
   // Функция для генерации нового интервью
   const generateNewInterview = () => {
     if (!randomTechnologies) return;
-    
+
     const selectedTechIds = JSON.parse(randomTechnologies);
     const newRandomQuestions: any[] = [];
-    
+
     selectedTechIds.forEach((techId: string) => {
       const techQuestions = getTechnologyQuestions(techId);
-      
+
       // Перемешиваем вопросы технологии
       const shuffledTechQuestions = [...techQuestions].sort(() => Math.random() - 0.5);
-      
+
       // Определяем количество вопросов в зависимости от технологии
       let minQuestions, maxQuestions;
-      
+
       // Популярные технологии - больше вопросов
-      if (['javascript', 'typescript', 'csharp', 'angular', 'react'].includes(techId)) {
+      if (["javascript", "typescript", "csharp", "angular", "react"].includes(techId)) {
         minQuestions = 20; // минимум 20 вопросов для популярных
         maxQuestions = 30; // максимум 30 вопросов для популярных
       } else {
-        minQuestions = 10;  // минимум 10 вопросов для всех остальных
+        minQuestions = 10; // минимум 10 вопросов для всех остальных
         maxQuestions = 15; // максимум 15 вопросов для всех остальных
       }
-      
+
       // Берем случайное количество вопросов в заданном диапазоне
       const questionsCount = Math.min(
-        Math.max(minQuestions, Math.floor(Math.random() * (maxQuestions - minQuestions + 1)) + minQuestions),
+        Math.max(
+          minQuestions,
+          Math.floor(Math.random() * (maxQuestions - minQuestions + 1)) + minQuestions
+        ),
         shuffledTechQuestions.length
       );
-      
+
       const selectedQuestions = shuffledTechQuestions.slice(0, questionsCount);
       newRandomQuestions.push(...selectedQuestions);
     });
@@ -243,8 +259,8 @@ const Practice = () => {
     const finalQuestions = newRandomQuestions.sort(() => Math.random() - 0.5);
 
     // Обновляем localStorage
-    localStorage.setItem('randomInterviewQuestions', JSON.stringify(finalQuestions));
-    
+    localStorage.setItem("randomInterviewQuestions", JSON.stringify(finalQuestions));
+
     // Обновляем состояние компонента
     setCurrentQuestions(finalQuestions);
     setHiddenTopics(new Set()); // Сбрасываем скрытые темы
@@ -258,13 +274,12 @@ const Practice = () => {
           <div className="flex items-center gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                {randomQuestions ? 'Имитация технического интервью' : technology?.name}
+                {randomQuestions ? "Имитация технического интервью" : technology?.name}
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base">
-                {randomQuestions 
+                {randomQuestions
                   ? `Подготовка к собеседованию с ${allQuestions.length} вопросами по ${randomTechnologies ? JSON.parse(randomTechnologies).length : 0} технологиям`
-                  : 'Практика с карточками'
-                }
+                  : "Практика с карточками"}
               </p>
               {randomQuestions && (
                 <p className="text-xs text-gray-500 mt-1">
@@ -307,7 +322,9 @@ const Practice = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Ответьте вслух</h3>
-                    <p className="text-muted-foreground">Попробуйте ответить на вопрос, как на реальном собеседовании</p>
+                    <p className="text-muted-foreground">
+                      Попробуйте ответить на вопрос, как на реальном собеседовании
+                    </p>
                   </div>
                 </div>
 
@@ -317,7 +334,9 @@ const Practice = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Проверьте ответ</h3>
-                    <p className="text-muted-foreground">Нажмите на карточку, чтобы увидеть правильный ответ</p>
+                    <p className="text-muted-foreground">
+                      Нажмите на карточку, чтобы увидеть правильный ответ
+                    </p>
                   </div>
                 </div>
 
@@ -327,17 +346,19 @@ const Practice = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Отметьте прогресс</h3>
-                    <p className="text-muted-foreground">Оцените свой ответ и отметьте статус изучения</p>
+                    <p className="text-muted-foreground">
+                      Оцените свой ответ и отметьте статус изучения
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button 
+                <Button
                   onClick={() => {
                     setShowPreview(false);
                     setIsTimerRunning(true);
-                  }} 
+                  }}
                   className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Приступить к практике
@@ -361,12 +382,12 @@ const Practice = () => {
                 Хотите повторить или выбрать другую технологию?
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
-                <Button 
+                <Button
                   onClick={() => {
                     shuffleQuestions();
                     resetTimer();
                     setIsTimerRunning(true);
-                  }} 
+                  }}
                   className="bg-gradient-to-r from-purple-500 to-blue-500 text-white"
                 >
                   Повторить вопросы
@@ -382,7 +403,10 @@ const Practice = () => {
             {!randomQuestions && (
               <div className="flex justify-between items-center mb-4 sm:mb-6">
                 <div className="flex items-center gap-3">
-                  <Badge variant="secondary" className="bg-white/70 border border-purple-200 text-purple-700 hover:bg-white/70">
+                  <Badge
+                    variant="secondary"
+                    className="bg-white/70 border border-purple-200 text-purple-700 hover:bg-white/70"
+                  >
                     Вопрос {currentIndex + 1} из {currentQuestions.length}
                   </Badge>
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-purple-100 bg-white/50">
@@ -391,14 +415,14 @@ const Practice = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button 
-                    onClick={shuffleQuestions} 
+                  <Button
+                    onClick={shuffleQuestions}
                     size="sm"
                     className="bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 border-0 px-3"
                   >
                     <Shuffle className="h-4 w-4" />
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => {
                       resetPractice();
                       resetTimer();
@@ -424,19 +448,24 @@ const Practice = () => {
                         👋
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-800 mb-2">Добро пожаловать на интервью!</h3>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                          Добро пожаловать на интервью!
+                        </h3>
                         <div className="text-gray-700 leading-relaxed space-y-3">
                           <p>
-                            Добрый день! Меня зовут Анна, я представляю компанию <strong>HSchool</strong>. 
-                            Спасибо, что нашли время для встречи с нами сегодня.
+                            Добрый день! Меня зовут Анна, я представляю компанию{" "}
+                            <strong>HSchool</strong>. Спасибо, что нашли время для встречи с нами
+                            сегодня.
                           </p>
                           <p>
-                            Я вижу, что у вас интересный опыт в разработке. Мне очень любопытно узнать больше о ваших проектах 
-                            и том, как вы подходите к решению технических задач.
+                            Я вижу, что у вас интересный опыт в разработке. Мне очень любопытно
+                            узнать больше о ваших проектах и том, как вы подходите к решению
+                            технических задач.
                           </p>
                           <p>
-                            Не волнуйтесь, это будет неформальная беседа. Я хочу понять, как вы мыслите, 
-                            какие у вас есть сильные стороны, и как вы видите свое развитие в нашей команде.
+                            Не волнуйтесь, это будет неформальная беседа. Я хочу понять, как вы
+                            мыслите, какие у вас есть сильные стороны, и как вы видите свое развитие
+                            в нашей команде.
                           </p>
                         </div>
                       </div>
@@ -444,10 +473,12 @@ const Practice = () => {
                   </div>
 
                   {(() => {
-                    const selectedTechIds = randomTechnologies ? JSON.parse(randomTechnologies) : [];
+                    const selectedTechIds = randomTechnologies
+                      ? JSON.parse(randomTechnologies)
+                      : [];
                     const techNames: { [key: string]: string } = {};
                     selectedTechIds.forEach((techId: string) => {
-                      const tech = questionsData.find(t => t.id === techId);
+                      const tech = questionsData.find((t) => t.id === techId);
                       if (tech) {
                         techNames[techId] = tech.name;
                       }
@@ -455,20 +486,20 @@ const Practice = () => {
 
                     // Группируем вопросы по технологиям, используя информацию о том, из какой технологии взят вопрос
                     const questionsByTech: { [key: string]: any[] } = {};
-                    
+
                     // Для каждого вопроса определяем его технологию, проверяя в каких технологиях он встречается
-                    currentQuestions.forEach(question => {
-                      let questionTechId = 'unknown';
-                      
+                    currentQuestions.forEach((question) => {
+                      let questionTechId = "unknown";
+
                       // Ищем в какой из выбранных технологий находится этот вопрос
                       for (const techId of selectedTechIds) {
-                        const tech = questionsData.find(t => t.id === techId);
-                        if (tech && tech.questions.some(q => q.id === question.id)) {
+                        const tech = questionsData.find((t) => t.id === techId);
+                        if (tech && tech.questions.some((q) => q.id === question.id)) {
                           questionTechId = techId;
                           break;
                         }
                       }
-                      
+
                       if (!questionsByTech[questionTechId]) {
                         questionsByTech[questionTechId] = [];
                       }
@@ -478,13 +509,13 @@ const Practice = () => {
                     // Сортируем технологии в логическом порядке: сначала общие, потом английский, затем технические
                     const sortedTechs = Object.entries(questionsByTech).sort(([a], [b]) => {
                       // Приоритет 1: общие вопросы о кандидате
-                      if (a === 'candidate_general_questions_answers') return -1;
-                      if (b === 'candidate_general_questions_answers') return 1;
-                      
+                      if (a === "candidate_general_questions_answers") return -1;
+                      if (b === "candidate_general_questions_answers") return 1;
+
                       // Приоритет 2: вопросы на английском (Questions for English)
-                      if (a === 'english_language_assessment_questions_full') return -1;
-                      if (b === 'english_language_assessment_questions_full') return 1;
-                      
+                      if (a === "english_language_assessment_questions_full") return -1;
+                      if (b === "english_language_assessment_questions_full") return 1;
+
                       // Остальные технические вопросы в алфавитном порядке
                       return a.localeCompare(b);
                     });
@@ -493,9 +524,9 @@ const Practice = () => {
                       <div className="space-y-8">
                         {sortedTechs.map(([techId, questions], techIndex) => {
                           const isHidden = hiddenTopics.has(techId);
-                          const isGeneral = techId === 'candidate_general_questions_answers';
-                          const isEnglish = techId === 'english_language_assessment_questions_full';
-                          
+                          const isGeneral = techId === "candidate_general_questions_answers";
+                          const isEnglish = techId === "english_language_assessment_questions_full";
+
                           return (
                             <div key={techId} className="space-y-6">
                               {/* Введение для каждой секции */}
@@ -506,19 +537,24 @@ const Practice = () => {
                                       💬
                                     </div>
                                     <div>
-                                      <h4 className="text-base font-semibold text-gray-800 mb-3">Давайте сначала познакомимся</h4>
+                                      <h4 className="text-base font-semibold text-gray-800 mb-3">
+                                        Давайте сначала познакомимся
+                                      </h4>
                                       <div className="text-gray-700 space-y-3">
                                         <p>
-                                          Отлично! Давайте начнем с того, что я бы хотел узнать о вас немного больше. 
-                                          Расскажите, пожалуйста, о своем опыте в разработке.
+                                          Отлично! Давайте начнем с того, что я бы хотел узнать о
+                                          вас немного больше. Расскажите, пожалуйста, о своем опыте
+                                          в разработке.
                                         </p>
                                         <p>
-                                          Меня интересует не только то, какие технологии вы используете, но и то, 
-                                          как вы подходите к решению задач, что вас мотивирует в работе, 
-                                          и какие проекты были для вас наиболее интересными.
+                                          Меня интересует не только то, какие технологии вы
+                                          используете, но и то, как вы подходите к решению задач,
+                                          что вас мотивирует в работе, и какие проекты были для вас
+                                          наиболее интересными.
                                         </p>
                                         <p className="text-sm text-gray-600 italic">
-                                          "Не стесняйтесь рассказывать подробности - мне важно понять ваш стиль работы и мышления."
+                                          "Не стесняйтесь рассказывать подробности - мне важно
+                                          понять ваш стиль работы и мышления."
                                         </p>
                                       </div>
                                     </div>
@@ -538,7 +574,8 @@ const Practice = () => {
                                         Расскажите о себе и своем технологическом стеке
                                       </p>
                                       <p className="text-sm text-gray-600 mt-2 italic">
-                                        "Начните с краткого рассказа о себе, вашем опыте и технологиях, с которыми вы работаете"
+                                        "Начните с краткого рассказа о себе, вашем опыте и
+                                        технологиях, с которыми вы работаете"
                                       </p>
                                     </div>
                                   </div>
@@ -552,19 +589,24 @@ const Practice = () => {
                                       🌍
                                     </div>
                                     <div>
-                                      <h4 className="text-base font-semibold text-gray-800 mb-3">Проверим ваш английский</h4>
+                                      <h4 className="text-base font-semibold text-gray-800 mb-3">
+                                        Проверим ваш английский
+                                      </h4>
                                       <div className="text-gray-700 space-y-3">
                                         <p>
-                                          Отлично! Теперь я бы хотел проверить ваш уровень английского языка. 
-                                          Не против ли вы, если мы немного пообщаемся на английском?
+                                          Отлично! Теперь я бы хотел проверить ваш уровень
+                                          английского языка. Не против ли вы, если мы немного
+                                          пообщаемся на английском?
                                         </p>
                                         <p>
-                                          В нашей команде много международных проектов, и нам часто приходится 
-                                          общаться с зарубежными коллегами, читать документацию на английском, 
-                                          и участвовать в видеоконференциях.
+                                          В нашей команде много международных проектов, и нам часто
+                                          приходится общаться с зарубежными коллегами, читать
+                                          документацию на английском, и участвовать в
+                                          видеоконференциях.
                                         </p>
                                         <p className="text-sm text-gray-600 italic">
-                                          "Не волнуйтесь, если что-то не понятно - можете переспросить или попросить повторить."
+                                          "Не волнуйтесь, если что-то не понятно - можете
+                                          переспросить или попросить повторить."
                                         </p>
                                       </div>
                                     </div>
@@ -579,19 +621,26 @@ const Practice = () => {
                                       🎯
                                     </div>
                                     <div>
-                                      <h4 className="text-base font-semibold text-gray-800 mb-3">Технические вопросы</h4>
+                                      <h4 className="text-base font-semibold text-gray-800 mb-3">
+                                        Технические вопросы
+                                      </h4>
                                       <div className="text-gray-700 space-y-3">
                                         <p>
-                                          Отлично! Теперь давайте перейдем к техническим вопросам. 
-                                          Я хочу проверить ваши знания в области <strong>{techNames[techId] || techId.toUpperCase()}</strong>.
+                                          Отлично! Теперь давайте перейдем к техническим вопросам. Я
+                                          хочу проверить ваши знания в области{" "}
+                                          <strong>
+                                            {techNames[techId] || techId.toUpperCase()}
+                                          </strong>
+                                          .
                                         </p>
                                         <p>
-                                          Не переживайте, если не знаете ответ на какой-то вопрос - 
-                                          мне важно понять, как вы мыслите и подходите к решению задач. 
-                                          Можете рассуждать вслух, это даже лучше!
+                                          Не переживайте, если не знаете ответ на какой-то вопрос -
+                                          мне важно понять, как вы мыслите и подходите к решению
+                                          задач. Можете рассуждать вслух, это даже лучше!
                                         </p>
                                         <p className="text-sm text-gray-600 italic">
-                                          "Если что-то не ясно, не стесняйтесь задавать уточняющие вопросы."
+                                          "Если что-то не ясно, не стесняйтесь задавать уточняющие
+                                          вопросы."
                                         </p>
                                       </div>
                                     </div>
@@ -605,7 +654,7 @@ const Practice = () => {
                                   {techIndex + 1}
                                 </div>
                                 <div className="flex-1">
-                                  <div 
+                                  <div
                                     className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-3 rounded-lg transition-colors"
                                     onClick={() => toggleTopicVisibility(techId)}
                                   >
@@ -616,20 +665,18 @@ const Practice = () => {
                                     )}
                                     <div className="flex-1">
                                       <h4 className="text-lg font-semibold text-gray-800">
-                                        {isGeneral 
-                                          ? "Общие вопросы о кандидате" 
-                                          : isEnglish 
-                                          ? "Вопросы на английском языке"
-                                          : `Технические вопросы: ${techNames[techId] || techId.toUpperCase()}`
-                                        }
+                                        {isGeneral
+                                          ? "Общие вопросы о кандидате"
+                                          : isEnglish
+                                            ? "Вопросы на английском языке"
+                                            : `Технические вопросы: ${techNames[techId] || techId.toUpperCase()}`}
                                       </h4>
                                       <p className="text-sm text-gray-600 mt-1">
-                                        {isGeneral 
+                                        {isGeneral
                                           ? "Расскажите о себе, своих целях и мотивации"
-                                          : isEnglish 
-                                          ? "Проверим ваш уровень владения английским языком"
-                                          : `Проверим ваши знания в области ${techNames[techId] || techId.toUpperCase()}`
-                                        }
+                                          : isEnglish
+                                            ? "Проверим ваш уровень владения английским языком"
+                                            : `Проверим ваши знания в области ${techNames[techId] || techId.toUpperCase()}`}
                                       </p>
                                     </div>
                                     <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
@@ -638,11 +685,11 @@ const Practice = () => {
                                   </div>
                                 </div>
                               </div>
-                              
+
                               {!isHidden && (
                                 <div className="ml-11 space-y-3">
                                   {questions.map((question, index) => (
-                                    <div 
+                                    <div
                                       key={question.id}
                                       className="flex items-start gap-3 p-4 bg-white/50 rounded-lg border border-gray-200/50 hover:bg-white/70 transition-colors"
                                     >
@@ -664,7 +711,7 @@ const Practice = () => {
                       </div>
                     );
                   })()}
-                  
+
                   {/* Прощание рекрутера */}
                   <div className="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-l-4 border-indigo-400">
                     <div className="flex items-start gap-4">
@@ -672,19 +719,25 @@ const Practice = () => {
                         🤝
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-3">Отлично! Спасибо за интервью</h4>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-3">
+                          Отлично! Спасибо за интервью
+                        </h4>
                         <div className="text-gray-700 space-y-3">
                           <p>
-                            Превосходно! Мы прошли все основные вопросы. Мне было очень интересно с вами общаться 
-                            и узнавать о вашем опыте и подходе к работе.
+                            Превосходно! Мы прошли все основные вопросы. Мне было очень интересно с
+                            вами общаться и узнавать о вашем опыте и подходе к работе.
                           </p>
                           <p>
-                            Я вижу, что у вас есть хорошие технические знания и интересный опыт. 
-                            Ваши ответы показывают, что вы умеете мыслить системно и подходить к задачам творчески.
+                            Я вижу, что у вас есть хорошие технические знания и интересный опыт.
+                            Ваши ответы показывают, что вы умеете мыслить системно и подходить к
+                            задачам творчески.
                           </p>
                           <p>
-                            <strong>У вас есть какие-то вопросы ко мне или к нашей компании?</strong> 
-                            Может быть, что-то о проектах, команде, процессах разработки или условиях работы?
+                            <strong>
+                              У вас есть какие-то вопросы ко мне или к нашей компании?
+                            </strong>
+                            Может быть, что-то о проектах, команде, процессах разработки или
+                            условиях работы?
                           </p>
                           <p className="text-sm text-gray-600 italic">
                             "Не стесняйтесь задавать любые вопросы - это нормальная часть интервью!"
@@ -704,18 +757,18 @@ const Practice = () => {
                         <h4 className="text-base font-semibold text-gray-800 mb-2">Что дальше?</h4>
                         <div className="text-gray-700 space-y-2">
                           <p>
-                            Мы свяжемся с вами в течение недели с результатами интервью. 
-                            Если у нас возникнут дополнительные вопросы, мы обязательно с вами созвонимся.
+                            Мы свяжемся с вами в течение недели с результатами интервью. Если у нас
+                            возникнут дополнительные вопросы, мы обязательно с вами созвонимся.
                           </p>
                           <p>
-                            Спасибо еще раз за ваше время и интерес к нашей компании. 
-                            Было очень приятно с вами познакомиться!
+                            Спасибо еще раз за ваше время и интерес к нашей компании. Было очень
+                            приятно с вами познакомиться!
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Кнопка для генерации нового интервью */}
                   <div className="mt-8 pt-6 border-t border-gray-200/50">
                     <div className="text-center">
@@ -744,15 +797,15 @@ const Practice = () => {
                 </div>
 
                 <div className="flex justify-center gap-4">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={prevQuestion}
                     disabled={currentIndex === 0}
                     className="w-full sm:w-auto"
                   >
                     Предыдущий
                   </Button>
-                  <Button 
+                  <Button
                     onClick={nextQuestion}
                     className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-blue-500 text-white"
                   >

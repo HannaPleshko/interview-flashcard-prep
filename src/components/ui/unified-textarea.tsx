@@ -1,22 +1,20 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import * as React from "react"
-import { cn } from "@/lib/utils"
+const UnifiedTextarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<"textarea">>(
+  ({ className, ...props }, ref) => {
+    return (
+      <textarea
+        className={cn(
+          "flex min-h-[80px] w-full rounded-xl border border-purple-200 bg-white/70 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:border-purple-400 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm backdrop-blur-sm transition-all duration-200",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+UnifiedTextarea.displayName = "UnifiedTextarea";
 
-const UnifiedTextarea = React.forwardRef<
-  HTMLTextAreaElement,
-  React.ComponentProps<"textarea">
->(({ className, ...props }, ref) => {
-  return (
-    <textarea
-      className={cn(
-        "flex min-h-[80px] w-full rounded-xl border border-purple-200 bg-white/70 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:border-purple-400 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm backdrop-blur-sm transition-all duration-200",
-        className
-      )}
-      ref={ref}
-      {...props}
-    />
-  )
-})
-UnifiedTextarea.displayName = "UnifiedTextarea"
-
-export { UnifiedTextarea }
+export { UnifiedTextarea };

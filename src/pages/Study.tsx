@@ -3,9 +3,38 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ArrowLeft, Search, Filter, ArrowUpDown, Sparkles, BookOpen, Check, RefreshCw, Book, ArrowRight, X, LayoutGrid, List, GripVertical, Globe, Layers, Zap, Code, Shield, Server, Package, Database } from "lucide-react";
+import {
+  ArrowLeft,
+  Search,
+  Filter,
+  ArrowUpDown,
+  Sparkles,
+  BookOpen,
+  Check,
+  RefreshCw,
+  Book,
+  ArrowRight,
+  X,
+  LayoutGrid,
+  List,
+  GripVertical,
+  Globe,
+  Layers,
+  Zap,
+  Code,
+  Shield,
+  Server,
+  Package,
+  Database,
+} from "lucide-react";
 import { questionsData, getTechnologyQuestions, Question, ProgressStatus } from "@/data/questions";
 import QuestionCard from "@/components/QuestionCard";
 import QuestionListItem from "@/components/QuestionListItem";
@@ -19,7 +48,7 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
@@ -27,14 +56,18 @@ import {
   useSortable,
   verticalListSortingStrategy,
   rectSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 type ProgressData = {
   [questionId: string]: ProgressStatus;
 };
 
-const SortableQuestionCard = ({ question, index, ...props }: { question: Question; index: number } & any) => {
+const SortableQuestionCard = ({
+  question,
+  index,
+  ...props
+}: { question: Question; index: number } & any) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -42,41 +75,37 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
       setIsMobile(window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: question.id, disabled: isMobile });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: question.id,
+    disabled: isMobile,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition: isDragging ? 'none' : 'transform 200ms ease-out',
+    transition: isDragging ? "none" : "transform 200ms ease-out",
     opacity: isDragging ? 0.8 : 1,
     zIndex: isDragging ? 1 : 0,
-    position: 'relative' as const,
-    willChange: 'transform',
+    position: "relative" as const,
+    willChange: "transform",
   };
 
   return (
-    <div 
-      ref={setNodeRef} 
-      style={style} 
+    <div
+      ref={setNodeRef}
+      style={style}
       className={`
-        ${isDragging ? 'shadow-lg' : ''}
+        ${isDragging ? "shadow-lg" : ""}
         w-full
       `}
     >
       <div className="relative">
         {!isMobile && (
-          <div 
-            {...attributes} 
+          <div
+            {...attributes}
             {...listeners}
             className="absolute top-2 right-2 p-2 rounded-lg cursor-grab active:cursor-grabbing hover:bg-white/50 transition-colors z-10"
           >
@@ -89,7 +118,11 @@ const SortableQuestionCard = ({ question, index, ...props }: { question: Questio
   );
 };
 
-const SortableQuestionListItem = ({ question, index, ...props }: { question: Question; index?: number } & any) => {
+const SortableQuestionListItem = ({
+  question,
+  index,
+  ...props
+}: { question: Question; index?: number } & any) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -97,40 +130,36 @@ const SortableQuestionListItem = ({ question, index, ...props }: { question: Que
       setIsMobile(window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: question.id, disabled: isMobile });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: question.id,
+    disabled: isMobile,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition: isDragging ? 'none' : 'transform 200ms ease-out',
+    transition: isDragging ? "none" : "transform 200ms ease-out",
     opacity: isDragging ? 0.8 : 1,
     zIndex: isDragging ? 1 : 0,
-    position: 'relative' as const,
-    willChange: 'transform',
+    position: "relative" as const,
+    willChange: "transform",
   };
 
   return (
-    <div 
-      ref={setNodeRef} 
-      style={style} 
+    <div
+      ref={setNodeRef}
+      style={style}
       className={`
-        ${isDragging ? 'shadow-lg' : ''}
+        ${isDragging ? "shadow-lg" : ""}
         flex items-center gap-2
       `}
     >
       {!isMobile && (
-        <div 
-          {...attributes} 
+        <div
+          {...attributes}
           {...listeners}
           className="
             cursor-grab p-2 
@@ -159,52 +188,52 @@ const Study = () => {
   const [progressFilter, setProgressFilter] = useState("all");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [progress, setProgress] = useState<ProgressData>({});
-  const [viewMode, setViewMode] = useState<'cards' | 'list'>('list');
+  const [viewMode, setViewMode] = useState<"cards" | "list">("list");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const ITEMS_PER_PAGE = itemsPerPage;
-  
+
   // Маппинг иконок для технологий
   const getTechIcon = (techId: string) => {
     const iconMap: { [key: string]: any } = {
-      'html': Globe,
-      'css': Layers,
-      'javascript': Zap,
-      'oop': Package,
-      'nextjs': Code,
-      'angular': Code,
-      'angularjs': Code,
-      'typescript': Code,
-      'nodejs': Server,
-      'sql': Database,
-      'mongodb': Database,
-      'security': Shield,
-      'csharp': Code
+      html: Globe,
+      css: Layers,
+      javascript: Zap,
+      oop: Package,
+      nextjs: Code,
+      angular: Code,
+      angularjs: Code,
+      typescript: Code,
+      nodejs: Server,
+      sql: Database,
+      mongodb: Database,
+      security: Shield,
+      csharp: Code,
     };
     return iconMap[techId] || BookOpen;
   };
-  
+
   // Маппинг градиентов для технологий
   const getTechGradient = (techId: string) => {
     const gradientMap: { [key: string]: string } = {
-      'html': 'from-orange-400 to-orange-600',
-      'css': 'from-blue-400 to-blue-600',
-      'javascript': 'from-yellow-400 to-yellow-600',
-      'oop': 'from-green-500 to-green-700',
-      'nextjs': 'from-gray-500 to-gray-700',
-      'angular': 'from-red-500 to-red-700',
-      'angularjs': 'from-red-400 to-red-600',
-      'typescript': 'from-purple-500 to-purple-700',
-      'nodejs': 'from-green-400 to-green-600',
-      'sql': 'from-indigo-500 to-indigo-700',
-      'mongodb': 'from-green-600 to-green-800',
-      'security': 'from-emerald-400 to-emerald-600',
-      'csharp': 'from-blue-600 to-blue-800'
+      html: "from-orange-400 to-orange-600",
+      css: "from-blue-400 to-blue-600",
+      javascript: "from-yellow-400 to-yellow-600",
+      oop: "from-green-500 to-green-700",
+      nextjs: "from-gray-500 to-gray-700",
+      angular: "from-red-500 to-red-700",
+      angularjs: "from-red-400 to-red-600",
+      typescript: "from-purple-500 to-purple-700",
+      nodejs: "from-green-400 to-green-600",
+      sql: "from-indigo-500 to-indigo-700",
+      mongodb: "from-green-600 to-green-800",
+      security: "from-emerald-400 to-emerald-600",
+      csharp: "from-blue-600 to-blue-800",
     };
-    return gradientMap[techId] || 'from-gray-400 to-gray-600';
+    return gradientMap[techId] || "from-gray-400 to-gray-600";
   };
-  
-  const technology = questionsData.find(t => t.id === techId);
+
+  const technology = questionsData.find((t) => t.id === techId);
   const allQuestions = techId ? getTechnologyQuestions(techId) : [];
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -239,23 +268,29 @@ const Study = () => {
   // Функция для определения веса сложности
   const getDifficultyWeight = (difficulty: string) => {
     switch (difficulty) {
-      case 'easy': return 1;
-      case 'medium': return 2;
-      case 'hard': return 3;
-      default: return 0;
+      case "easy":
+        return 1;
+      case "medium":
+        return 2;
+      case "hard":
+        return 3;
+      default:
+        return 0;
     }
   };
 
   // Filtering and sorting logic
   useEffect(() => {
     const filtered = questions
-      .filter(question => {
+      .filter((question) => {
         const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
+        const matchesDifficulty =
+          difficultyFilter === "all" || question.difficulty === difficultyFilter;
         const questionProgress = progress[question.id];
-        const matchesProgress = progressFilter === 'all' || 
-                              (progressFilter === 'not_started' && !questionProgress) ||
-                              questionProgress === progressFilter;
+        const matchesProgress =
+          progressFilter === "all" ||
+          (progressFilter === "not_started" && !questionProgress) ||
+          questionProgress === progressFilter;
         return matchesSearch && matchesDifficulty && matchesProgress;
       })
       .sort((a, b) => {
@@ -270,7 +305,7 @@ const Study = () => {
             return 0;
         }
       });
-    
+
     setFilteredQuestions(filtered);
   }, [questions, searchTerm, difficultyFilter, sortBy, progressFilter, progress]);
 
@@ -285,7 +320,7 @@ const Study = () => {
   };
 
   const handleProgressChange = (questionId: string, status: ProgressStatus) => {
-    setProgress(prev => {
+    setProgress((prev) => {
       const newProgress = { ...prev };
       if (newProgress[questionId] === status) {
         delete newProgress[questionId];
@@ -306,16 +341,15 @@ const Study = () => {
     setItemsPerPage(filteredQuestions.length); // Устанавливаем "Все" при сбросе
   };
 
-  
   const getProgressStats = () => {
-    const stats: { [key in ProgressStatus | 'not_started']: number } = {
+    const stats: { [key in ProgressStatus | "not_started"]: number } = {
       learning: 0,
       review: 0,
       known: 0,
       not_started: 0,
     };
-    
-    filteredQuestions.forEach(q => {
+
+    filteredQuestions.forEach((q) => {
       const status = progress[q.id];
       if (status) {
         stats[status]++;
@@ -335,33 +369,39 @@ const Study = () => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    
+
     if (over && active.id !== over.id) {
       setQuestions((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
         const newItems = arrayMove(items, oldIndex, newIndex);
-        
+
         // Обновляем filteredQuestions с сохранением текущих фильтров
         const filtered = newItems
-          .filter(question => {
-            const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesDifficulty = difficultyFilter === "all" || question.difficulty === difficultyFilter;
+          .filter((question) => {
+            const matchesSearch = question.question
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase());
+            const matchesDifficulty =
+              difficultyFilter === "all" || question.difficulty === difficultyFilter;
             const questionProgress = progress[question.id];
-            const matchesProgress = progressFilter === 'all' || 
-                                  (progressFilter === 'not_started' && !questionProgress) ||
-                                  questionProgress === progressFilter;
+            const matchesProgress =
+              progressFilter === "all" ||
+              (progressFilter === "not_started" && !questionProgress) ||
+              questionProgress === progressFilter;
             return matchesSearch && matchesDifficulty && matchesProgress;
           })
           .sort((a, b) => {
-            if (sortBy === 'difficulty') {
+            if (sortBy === "difficulty") {
               const difficultyOrder = { easy: 0, medium: 1, hard: 2 };
-              return difficultyOrder[a.difficulty as keyof typeof difficultyOrder] - 
-                     difficultyOrder[b.difficulty as keyof typeof difficultyOrder];
+              return (
+                difficultyOrder[a.difficulty as keyof typeof difficultyOrder] -
+                difficultyOrder[b.difficulty as keyof typeof difficultyOrder]
+              );
             }
             return 0;
           });
-        
+
         setFilteredQuestions(filtered);
         return newItems;
       });
@@ -385,13 +425,13 @@ const Study = () => {
   }
 
   const progressStats = getProgressStats();
-  
+
   // Pagination logic
   const totalPages = Math.ceil(filteredQuestions.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentQuestions = filteredQuestions.slice(indexOfFirstItem, indexOfLastItem);
-  
+
   // Calculate actual items on current page
   const actualItemsOnPage = currentQuestions.length;
   const startItem = filteredQuestions.length > 0 ? indexOfFirstItem + 1 : 0;
@@ -405,12 +445,16 @@ const Study = () => {
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" asChild className="hover:bg-white/50 flex-shrink-0 -ml-2 sm:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              asChild
+              className="hover:bg-white/50 flex-shrink-0 -ml-2 sm:hidden"
+            >
               <Link to="/">
                 <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
-          
           </div>
         </div>
 
@@ -420,7 +464,7 @@ const Study = () => {
             {questionsData.map((tech) => {
               const IconComponent = getTechIcon(tech.id);
               const isActive = techId === tech.id;
-              
+
               return (
                 <Button
                   key={tech.id}
@@ -428,9 +472,10 @@ const Study = () => {
                   size="sm"
                   onClick={() => navigate(`/study/${tech.id}`)}
                   className={`
-                    ${isActive 
-                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg` 
-                      : 'bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105'
+                    ${
+                      isActive
+                        ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg`
+                        : "bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105"
                     }
                     rounded-full px-6 py-3 text-sm font-medium
                     transition-all duration-300
@@ -485,8 +530,6 @@ const Study = () => {
                 </Select>
               </div>
 
-           
-
               {/* Sort */}
               <div className="relative">
                 <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 z-10" />
@@ -513,12 +556,12 @@ const Study = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <ToggleGroup 
-                type="single" 
-                variant="outline" 
+              <ToggleGroup
+                type="single"
+                variant="outline"
                 value={viewMode}
                 onValueChange={(value) => {
-                  if (value) setViewMode(value as 'cards' | 'list');
+                  if (value) setViewMode(value as "cards" | "list");
                 }}
               >
                 <ToggleGroupItem value="cards" aria-label="Вид карточек">
@@ -542,46 +585,54 @@ const Study = () => {
           </div>
         </div>
 
-     {/* Stats Cards */}
+        {/* Stats Cards */}
         <div className="flex flex-wrap gap-2 mb-8">
-          <div 
+          <div
             className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === 'all' ? 'bg-gray-100 ring-2 ring-gray-500' : 'bg-white/60 backdrop-blur-sm border border-white/20'
+              progressFilter === "all"
+                ? "bg-gray-100 ring-2 ring-gray-500"
+                : "bg-white/60 backdrop-blur-sm border border-white/20"
             }`}
-            onClick={() => setProgressFilter('all')}
+            onClick={() => setProgressFilter("all")}
           >
             <div className="text-lg font-bold text-purple-600">{allQuestions.length}</div>
             <div className="text-sm text-muted-foreground">Все</div>
           </div>
-          <div 
+          <div
             className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === 'learning' ? 'bg-blue-100 ring-2 ring-blue-500' : 'bg-blue-50/80 border border-blue-200/50'
+              progressFilter === "learning"
+                ? "bg-blue-100 ring-2 ring-blue-500"
+                : "bg-blue-50/80 border border-blue-200/50"
             }`}
-            onClick={() => setProgressFilter(progressFilter === 'learning' ? 'all' : 'learning')}
+            onClick={() => setProgressFilter(progressFilter === "learning" ? "all" : "learning")}
           >
             <div className="text-lg font-bold text-blue-600">{progressStats.learning}</div>
             <div className="text-sm text-blue-700">📘 Учу</div>
           </div>
-          <div 
+          <div
             className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === 'review' ? 'bg-yellow-100 ring-2 ring-yellow-500' : 'bg-yellow-50/80 border border-yellow-200/50'
+              progressFilter === "review"
+                ? "bg-yellow-100 ring-2 ring-yellow-500"
+                : "bg-yellow-50/80 border border-yellow-200/50"
             }`}
-            onClick={() => setProgressFilter(progressFilter === 'review' ? 'all' : 'review')}
+            onClick={() => setProgressFilter(progressFilter === "review" ? "all" : "review")}
           >
             <div className="text-lg font-bold text-orange-600">{progressStats.review}</div>
             <div className="text-sm text-orange-700">🔄 Повторяю</div>
           </div>
-          <div 
+          <div
             className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === 'known' ? 'bg-green-100 ring-2 ring-green-500' : 'bg-green-50/80 border border-green-200/50'
+              progressFilter === "known"
+                ? "bg-green-100 ring-2 ring-green-500"
+                : "bg-green-50/80 border border-green-200/50"
             }`}
-            onClick={() => setProgressFilter(progressFilter === 'known' ? 'all' : 'known')}
+            onClick={() => setProgressFilter(progressFilter === "known" ? "all" : "known")}
           >
             <div className="text-lg font-bold text-green-600">{progressStats.known}</div>
             <div className="text-sm text-green-700">✅ Знаю</div>
           </div>
         </div>
-        
+
         {/* Questions Grid / List */}
         {currentQuestions.length > 0 ? (
           <DndContext
@@ -589,9 +640,9 @@ const Study = () => {
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
-            {viewMode === 'cards' ? (
+            {viewMode === "cards" ? (
               <SortableContext
-                items={currentQuestions.map(q => q.id)}
+                items={currentQuestions.map((q) => q.id)}
                 strategy={rectSortingStrategy}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -610,7 +661,7 @@ const Study = () => {
               </SortableContext>
             ) : (
               <SortableContext
-                items={currentQuestions.map(q => q.id)}
+                items={currentQuestions.map((q) => q.id)}
                 strategy={verticalListSortingStrategy}
               >
                 <div className="space-y-4">
@@ -651,14 +702,24 @@ const Study = () => {
             {/* Items per page selector - слева */}
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">Показать:</span>
-              <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(parseInt(value))}>
+              <Select
+                value={itemsPerPage.toString()}
+                onValueChange={(value) => setItemsPerPage(parseInt(value))}
+              >
                 <SelectTrigger className="w-24 h-8 bg-white/70 border-purple-200 focus:border-purple-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-white/95 backdrop-blur-md border-purple-200 rounded-lg shadow-xl">
-                  <SelectItem value="10" className="rounded-md hover:bg-purple-50">10</SelectItem>
-                  <SelectItem value="20" className="rounded-md hover:bg-purple-50">20</SelectItem>
-                  <SelectItem value={filteredQuestions.length.toString()} className="rounded-md hover:bg-purple-50">
+                  <SelectItem value="10" className="rounded-md hover:bg-purple-50">
+                    10
+                  </SelectItem>
+                  <SelectItem value="20" className="rounded-md hover:bg-purple-50">
+                    20
+                  </SelectItem>
+                  <SelectItem
+                    value={filteredQuestions.length.toString()}
+                    className="rounded-md hover:bg-purple-50"
+                  >
                     Все ({filteredQuestions.length})
                   </SelectItem>
                 </SelectContent>
@@ -676,7 +737,7 @@ const Study = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
                   className="hover:bg-white/50 border-purple-200 text-purple-700"
                 >
@@ -685,16 +746,15 @@ const Study = () => {
                 </Button>
 
                 <span className="text-muted-foreground font-medium text-sm hidden sm:block">
-                  {itemsPerPage >= filteredQuestions.length 
+                  {itemsPerPage >= filteredQuestions.length
                     ? `Показано все ${filteredQuestions.length} элементов`
-                    : `Показано ${startItem}-${endItem} из ${filteredQuestions.length}`
-                  }
+                    : `Показано ${startItem}-${endItem} из ${filteredQuestions.length}`}
                 </span>
 
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
                   className="hover:bg-white/50 border-purple-200 text-purple-700"
                 >

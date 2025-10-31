@@ -32,7 +32,7 @@ const str3 = \`Hello \${str2}\`;`,
     keyPoints: [
       "Неизменяемый (immutable) тип данных",
       "Может быть создан с помощью одинарных, двойных или обратных кавычек",
-      "Имеет встроенные методы для работы со строками"
+      "Имеет встроенные методы для работы со строками",
     ],
     methods: [
       "length - длина строки",
@@ -40,13 +40,9 @@ const str3 = \`Hello \${str2}\`;`,
       "toLowerCase() - преобразование в нижний регистр",
       "trim() - удаление пробелов",
       "split() - разбиение на массив",
-      "includes() - проверка наличия подстроки"
+      "includes() - проверка наличия подстроки",
     ],
-    useCases: [
-      "Хранение текстовых данных",
-      "Форматирование строк",
-      "Валидация ввода"
-    ]
+    useCases: ["Хранение текстовых данных", "Форматирование строк", "Валидация ввода"],
   },
   {
     name: "Number",
@@ -58,19 +54,15 @@ const exp = 1e6;`,
     keyPoints: [
       "Представляет как целые, так и дробные числа",
       "Имеет специальные значения: Infinity, -Infinity, NaN",
-      "Точность до 15-17 значащих цифр"
+      "Точность до 15-17 значащих цифр",
     ],
     methods: [
       "toFixed() - округление до указанного знака",
       "toString() - преобразование в строку",
       "parseInt() - преобразование строки в целое число",
-      "parseFloat() - преобразование строки в дробное число"
+      "parseFloat() - преобразование строки в дробное число",
     ],
-    useCases: [
-      "Математические вычисления",
-      "Работа с координатами",
-      "Обработка числовых данных"
-    ]
+    useCases: ["Математические вычисления", "Работа с координатами", "Обработка числовых данных"],
   },
   {
     name: "Boolean",
@@ -82,17 +74,13 @@ const result = 5 > 3; // true`,
     keyPoints: [
       "Имеет только два значения: true и false",
       "Используется в условных операторах",
-      "Результат логических операций"
+      "Результат логических операций",
     ],
     methods: [
       "toString() - преобразование в строку",
-      "valueOf() - получение примитивного значения"
+      "valueOf() - получение примитивного значения",
     ],
-    useCases: [
-      "Условные операторы",
-      "Валидация данных",
-      "Флаги состояния"
-    ]
+    useCases: ["Условные операторы", "Валидация данных", "Флаги состояния"],
   },
   {
     name: "Symbol",
@@ -104,18 +92,18 @@ console.log(sym1 === sym2); // false`,
     keyPoints: [
       "Создает уникальное значение",
       "Не может быть создан через new",
-      "Используется как ключ объекта"
+      "Используется как ключ объекта",
     ],
     methods: [
       "Symbol.for() - получение символа из глобального реестра",
       "Symbol.keyFor() - получение ключа символа",
-      "toString() - преобразование в строку"
+      "toString() - преобразование в строку",
     ],
     useCases: [
       "Создание уникальных ключей",
       "Определение специальных свойств",
-      "Скрытие свойств объекта"
-    ]
+      "Скрытие свойств объекта",
+    ],
   },
   {
     name: "BigInt",
@@ -126,17 +114,13 @@ const bigInt2 = BigInt(9007199254740991);`,
     keyPoints: [
       "Представляет целые числа произвольной точности",
       "Создается с помощью суффикса n или функции BigInt()",
-      "Нельзя смешивать с Number"
+      "Нельзя смешивать с Number",
     ],
     methods: [
       "toString() - преобразование в строку",
-      "valueOf() - получение примитивного значения"
+      "valueOf() - получение примитивного значения",
     ],
-    useCases: [
-      "Работа с большими числами",
-      "Финансовые вычисления",
-      "Криптография"
-    ]
+    useCases: ["Работа с большими числами", "Финансовые вычисления", "Криптография"],
   },
   {
     name: "undefined",
@@ -149,14 +133,14 @@ console.log(test()); // undefined`,
     keyPoints: [
       "Значение по умолчанию для неинициализированных переменных",
       "Возвращаемое значение функции без return",
-      "Не рекомендуется присваивать явно"
+      "Не рекомендуется присваивать явно",
     ],
     methods: [],
     useCases: [
       "Проверка инициализации переменных",
       "Обработка отсутствующих значений",
-      "Валидация параметров"
-    ]
+      "Валидация параметров",
+    ],
   },
   {
     name: "null",
@@ -168,14 +152,14 @@ console.log(typeof value); // object`,
     keyPoints: [
       "Явное указание отсутствия значения",
       "Отличается от undefined",
-      "Используется для очистки ссылок"
+      "Используется для очистки ссылок",
     ],
     methods: [],
     useCases: [
       "Очистка ссылок на объекты",
       "Инициализация переменных",
-      "Обработка отсутствующих данных"
-    ]
+      "Обработка отсутствующих данных",
+    ],
   },
   {
     name: "Object",
@@ -191,20 +175,20 @@ console.log(typeof value); // object`,
     keyPoints: [
       "Базовый тип для всех объектов",
       "Хранит данные в виде ключ-значение",
-      "Может содержать методы"
+      "Может содержать методы",
     ],
     methods: [
       "Object.keys() - получение ключей",
       "Object.values() - получение значений",
       "Object.entries() - получение пар ключ-значение",
       "Object.assign() - копирование свойств",
-      "Object.create() - создание объекта с прототипом"
+      "Object.create() - создание объекта с прототипом",
     ],
     useCases: [
       "Структурирование данных",
       "Создание классов и объектов",
-      "Хранение связанных данных"
-    ]
+      "Хранение связанных данных",
+    ],
   },
   {
     name: "Array",
@@ -216,20 +200,16 @@ const doubled = arr.map(x => x * 2);`,
     keyPoints: [
       "Упорядоченная коллекция элементов",
       "Может содержать элементы разных типов",
-      "Имеет встроенные методы для манипуляций"
+      "Имеет встроенные методы для манипуляций",
     ],
     methods: [
       "push() - добавление элемента",
       "pop() - удаление последнего элемента",
       "map() - преобразование элементов",
       "filter() - фильтрация элементов",
-      "reduce() - свертка массива"
+      "reduce() - свертка массива",
     ],
-    useCases: [
-      "Хранение списков данных",
-      "Обработка коллекций",
-      "Реализация стеков и очередей"
-    ]
+    useCases: ["Хранение списков данных", "Обработка коллекций", "Реализация стеков и очередей"],
   },
   {
     name: "Date",
@@ -241,20 +221,16 @@ console.log(now.toLocaleDateString());`,
     keyPoints: [
       "Представляет дату и время",
       "Внутренне хранится как миллисекунды",
-      "Имеет методы для форматирования"
+      "Имеет методы для форматирования",
     ],
     methods: [
       "getDate() - получение дня",
       "getMonth() - получение месяца",
       "getFullYear() - получение года",
       "toLocaleDateString() - форматирование даты",
-      "toISOString() - преобразование в ISO формат"
+      "toISOString() - преобразование в ISO формат",
     ],
-    useCases: [
-      "Работа с датами и временем",
-      "Форматирование дат",
-      "Вычисления с датами"
-    ]
+    useCases: ["Работа с датами и временем", "Форматирование дат", "Вычисления с датами"],
   },
   {
     name: "RegExp",
@@ -266,19 +242,15 @@ console.log(regex.test(str)); // true`,
     keyPoints: [
       "Используется для поиска и замены в строках",
       "Может быть создан через конструктор или литерал",
-      "Имеет флаги для настройки поиска"
+      "Имеет флаги для настройки поиска",
     ],
     methods: [
       "test() - проверка совпадения",
       "exec() - поиск совпадения",
       "match() - поиск всех совпадений",
-      "replace() - замена совпадений"
+      "replace() - замена совпадений",
     ],
-    useCases: [
-      "Валидация данных",
-      "Поиск в тексте",
-      "Замена подстрок"
-    ]
+    useCases: ["Валидация данных", "Поиск в тексте", "Замена подстрок"],
   },
   {
     name: "Function",
@@ -291,18 +263,18 @@ const arrow = (x) => x * 2;`,
     keyPoints: [
       "Является объектом первого класса",
       "Может быть присвоена переменной",
-      "Имеет собственный контекст выполнения"
+      "Имеет собственный контекст выполнения",
     ],
     methods: [
       "call() - вызов с указанным контекстом",
       "apply() - вызов с массивом аргументов",
-      "bind() - создание новой функции с привязанным контекстом"
+      "bind() - создание новой функции с привязанным контекстом",
     ],
     useCases: [
       "Создание переиспользуемого кода",
       "Обработка событий",
-      "Реализация паттернов проектирования"
-    ]
+      "Реализация паттернов проектирования",
+    ],
   },
   {
     name: "Error",
@@ -316,17 +288,10 @@ const arrow = (x) => x * 2;`,
     keyPoints: [
       "Базовый класс для всех ошибок",
       "Содержит стек вызовов",
-      "Имеет сообщение об ошибке"
+      "Имеет сообщение об ошибке",
     ],
-    methods: [
-      "toString() - преобразование в строку",
-      "stack - получение стека вызовов"
-    ],
-    useCases: [
-      "Обработка исключений",
-      "Отладка кода",
-      "Логирование ошибок"
-    ]
+    methods: ["toString() - преобразование в строку", "stack - получение стека вызовов"],
+    useCases: ["Обработка исключений", "Отладка кода", "Логирование ошибок"],
   },
   {
     name: "Map",
@@ -338,20 +303,16 @@ console.log(map.get('key')); // value`,
     keyPoints: [
       "Ключи могут быть любого типа",
       "Сохраняет порядок вставки",
-      "Имеет встроенные методы для работы"
+      "Имеет встроенные методы для работы",
     ],
     methods: [
       "set() - добавление элемента",
       "get() - получение элемента",
       "has() - проверка наличия",
       "delete() - удаление элемента",
-      "clear() - очистка коллекции"
+      "clear() - очистка коллекции",
     ],
-    useCases: [
-      "Кэширование данных",
-      "Хранение связанных данных",
-      "Уникальные ключи"
-    ]
+    useCases: ["Кэширование данных", "Хранение связанных данных", "Уникальные ключи"],
   },
   {
     name: "Set",
@@ -363,19 +324,15 @@ console.log(set.has(3)); // true`,
     keyPoints: [
       "Хранит только уникальные значения",
       "Может содержать значения любого типа",
-      "Имеет встроенные методы для работы"
+      "Имеет встроенные методы для работы",
     ],
     methods: [
       "add() - добавление элемента",
       "has() - проверка наличия",
       "delete() - удаление элемента",
-      "clear() - очистка коллекции"
+      "clear() - очистка коллекции",
     ],
-    useCases: [
-      "Удаление дубликатов",
-      "Проверка уникальности",
-      "Математические множества"
-    ]
+    useCases: ["Удаление дубликатов", "Проверка уникальности", "Математические множества"],
   },
   {
     name: "WeakMap",
@@ -387,19 +344,19 @@ weakMap.set(key, 'value');`,
     keyPoints: [
       "Ключи могут быть только объектами",
       "Не препятствует сборке мусора",
-      "Не итерируемая коллекция"
+      "Не итерируемая коллекция",
     ],
     methods: [
       "set() - добавление элемента",
       "get() - получение элемента",
       "has() - проверка наличия",
-      "delete() - удаление элемента"
+      "delete() - удаление элемента",
     ],
     useCases: [
       "Хранение приватных данных",
       "Кэширование объектов",
-      "Связывание данных с объектами"
-    ]
+      "Связывание данных с объектами",
+    ],
   },
   {
     name: "WeakSet",
@@ -411,19 +368,15 @@ weakSet.add(obj);`,
     keyPoints: [
       "Может содержать только объекты",
       "Не препятствует сборке мусора",
-      "Не итерируемая коллекция"
+      "Не итерируемая коллекция",
     ],
     methods: [
       "add() - добавление элемента",
       "has() - проверка наличия",
-      "delete() - удаление элемента"
+      "delete() - удаление элемента",
     ],
-    useCases: [
-      "Отслеживание объектов",
-      "Хранение метаданных",
-      "Предотвращение утечек памяти"
-    ]
-  }
+    useCases: ["Отслеживание объектов", "Хранение метаданных", "Предотвращение утечек памяти"],
+  },
 ];
 
 const DataTypesSchema = () => {
@@ -434,18 +387,16 @@ const DataTypesSchema = () => {
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-purple-700">Структура типов данных в JavaScript</h2>
+            <h2 className="text-lg font-bold text-purple-700">
+              Структура типов данных в JavaScript
+            </h2>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                {isOpen ? (
-                  <ChevronUp className="h-4 w-4" />
-                ) : (
-                  <ChevronDown className="h-4 w-4" />
-                )}
+                {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
               </Button>
             </CollapsibleTrigger>
           </div>
-          
+
           <CollapsibleContent>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Примитивы */}
@@ -454,7 +405,7 @@ const DataTypesSchema = () => {
                   <Circle className="h-4 w-4 text-purple-500" />
                   <h3 className="font-semibold text-purple-700 text-sm">Примитивы</h3>
                 </div>
-                
+
                 <div className="pl-6 grid grid-cols-3 gap-x-2 gap-y-1">
                   <div className="flex items-center gap-1">
                     <ArrowRight className="h-3 w-3 text-gray-400" />
@@ -580,11 +531,12 @@ const DataTypes = () => {
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
 
   const filteredDataTypes = dataTypes.filter((type) => {
-    const matchesSearch = searchQuery === "" || 
+    const matchesSearch =
+      searchQuery === "" ||
       type.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       type.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      type.keyPoints.some(point => point.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      type.useCases.some(useCase => useCase.toLowerCase().includes(searchQuery.toLowerCase()));
+      type.keyPoints.some((point) => point.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      type.useCases.some((useCase) => useCase.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const matchesCategory = selectedCategory === null || type.category === selectedCategory;
 
@@ -674,11 +626,13 @@ const DataTypes = () => {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-lg font-bold text-purple-700">{type.name}</CardTitle>
+                      <CardTitle className="text-lg font-bold text-purple-700">
+                        {type.name}
+                      </CardTitle>
                       <p className="text-sm text-muted-foreground mt-1">{type.description}</p>
                     </div>
-                    <Badge variant={type.category === 'primitive' ? 'default' : 'secondary'}>
-                      {type.category === 'primitive' ? 'Примитив' : 'Объект'}
+                    <Badge variant={type.category === "primitive" ? "default" : "secondary"}>
+                      {type.category === "primitive" ? "Примитив" : "Объект"}
                     </Badge>
                   </div>
                 </CardHeader>
@@ -693,7 +647,9 @@ const DataTypes = () => {
                     <CollapsibleContent className="space-y-4 pt-2">
                       {/* Ключевые моменты */}
                       <div>
-                        <h4 className="text-sm font-semibold mb-2 text-purple-700">Ключевые моменты</h4>
+                        <h4 className="text-sm font-semibold mb-2 text-purple-700">
+                          Ключевые моменты
+                        </h4>
                         <ul className="space-y-1">
                           {type.keyPoints.map((point, index) => (
                             <li key={index} className="text-sm flex items-start gap-2">
@@ -722,7 +678,9 @@ const DataTypes = () => {
                       {/* Примеры использования */}
                       {type.useCases && type.useCases.length > 0 && (
                         <div>
-                          <h4 className="text-sm font-semibold mb-2 text-green-700">Примеры использования</h4>
+                          <h4 className="text-sm font-semibold mb-2 text-green-700">
+                            Примеры использования
+                          </h4>
                           <ul className="space-y-1">
                             {type.useCases.map((useCase, index) => (
                               <li key={index} className="text-sm flex items-start gap-2">
@@ -756,4 +714,4 @@ const DataTypes = () => {
   );
 };
 
-export default DataTypes; 
+export default DataTypes;

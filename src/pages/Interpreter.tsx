@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Play, Trash2, Copy, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React, { useState, useEffect } from "react";
+import { Play, Trash2, Copy, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Interpreter = () => {
-  const [code, setCode] = useState('// Напишите ваш JavaScript код здесь\nconsole.log("Привет, мир!");');
+  const [code, setCode] = useState(
+    '// Напишите ваш JavaScript код здесь\nconsole.log("Привет, мир!");'
+  );
   const [output, setOutput] = useState<string[]>([]);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -15,9 +17,12 @@ const Interpreter = () => {
     const originalConsoleLog = console.log;
     console.log = (...args) => {
       originalConsoleLog.apply(console, args);
-      setOutput(prev => [...prev, args.map(arg => 
-        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
-      ).join(' ')]);
+      setOutput((prev) => [
+        ...prev,
+        args
+          .map((arg) => (typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg)))
+          .join(" "),
+      ]);
     };
 
     return () => {
@@ -30,16 +35,16 @@ const Interpreter = () => {
     try {
       // Очищаем предыдущий вывод
       setOutput([]);
-      
+
       // Выполняем код
       const result = new Function(code)();
-      
+
       // Если код вернул значение, добавляем его в вывод
       if (result !== undefined) {
-        setOutput(prev => [...prev, String(result)]);
+        setOutput((prev) => [...prev, String(result)]);
       }
     } catch (error) {
-      setOutput(prev => [...prev, `Ошибка: ${error.message}`]);
+      setOutput((prev) => [...prev, `Ошибка: ${error.message}`]);
     }
   };
 
@@ -57,7 +62,7 @@ const Interpreter = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 flex flex-col">
       <Header />
-      
+
       <div className="container mx-auto px-4 py-8 flex-grow">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 gap-4">
@@ -69,7 +74,9 @@ const Interpreter = () => {
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
                 JavaScript Интерпретатор
               </h1>
-              <p className="text-muted-foreground text-sm sm:text-base">Напишите и запустите JavaScript код прямо в браузере</p>
+              <p className="text-muted-foreground text-sm sm:text-base">
+                Напишите и запустите JavaScript код прямо в браузере
+              </p>
             </div>
           </div>
         </div>
@@ -87,7 +94,7 @@ const Interpreter = () => {
                   className="flex items-center gap-2 border-purple-200 text-purple-700 hover:bg-white/50"
                 >
                   {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  {isCopied ? 'Скопировано' : 'Копировать'}
+                  {isCopied ? "Скопировано" : "Копировать"}
                 </Button>
                 <Button
                   variant="outline"
@@ -141,4 +148,4 @@ const Interpreter = () => {
   );
 };
 
-export default Interpreter; 
+export default Interpreter;

@@ -1,11 +1,10 @@
-
 import React from "react";
 
 const AnimatedMesh = () => {
   return (
     <div className="absolute inset-0">
       {/* Основная анимированная сетка */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
@@ -14,13 +13,13 @@ const AnimatedMesh = () => {
             linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
             linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
           `,
-          backgroundSize: '80px 80px, 80px 80px, 20px 20px, 20px 20px',
-          animation: 'mesh-flow 25s linear infinite'
+          backgroundSize: "80px 80px, 80px 80px, 20px 20px, 20px 20px",
+          animation: "mesh-flow 25s linear infinite",
         }}
       />
-      
+
       {/* Дополнительные диагональные линии */}
-      <div 
+      <div
         className="absolute inset-0 opacity-15"
         style={{
           backgroundImage: `
@@ -39,10 +38,10 @@ const AnimatedMesh = () => {
               rgba(6, 182, 212, 0.2) 62px
             )
           `,
-          animation: 'diagonal-flow 20s linear infinite'
+          animation: "diagonal-flow 20s linear infinite",
         }}
       />
-      
+
       {/* Радиальные круги */}
       <div className="absolute inset-0 opacity-10">
         {[...Array(6)].map((_, index) => (
@@ -54,9 +53,9 @@ const AnimatedMesh = () => {
               height: `${150 + index * 100}px`,
               left: `${20 + index * 15}%`,
               top: `${10 + index * 15}%`,
-              borderColor: index % 2 === 0 ? 'rgba(139, 92, 246, 0.3)' : 'rgba(59, 130, 246, 0.3)',
+              borderColor: index % 2 === 0 ? "rgba(139, 92, 246, 0.3)" : "rgba(59, 130, 246, 0.3)",
               animationDelay: `${index * 3}s`,
-              animationDuration: `${15 + index * 5}s`
+              animationDuration: `${15 + index * 5}s`,
             }}
           />
         ))}
