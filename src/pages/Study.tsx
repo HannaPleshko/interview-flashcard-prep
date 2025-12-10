@@ -474,8 +474,8 @@ const Study = () => {
                   className={`
                     ${
                       isActive
-                        ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg`
-                        : "bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105"
+                      ? `bg-gradient-to-r ${getTechGradient(tech.id)} text-white border-0 shadow-lg`
+                      : "bg-transparent border-2 border-gray-300/50 text-gray-700 hover:border-gray-400 hover:bg-gray-100/50 hover:text-gray-700 hover:scale-105"
                     }
                     rounded-full px-6 py-3 text-sm font-medium
                     transition-all duration-300
@@ -588,44 +588,40 @@ const Study = () => {
         {/* Stats Cards */}
         <div className="flex flex-wrap gap-2 mb-8">
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === "all"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${progressFilter === "all"
                 ? "bg-gray-100 ring-2 ring-gray-500"
                 : "bg-white/60 backdrop-blur-sm border border-white/20"
-            }`}
+              }`}
             onClick={() => setProgressFilter("all")}
           >
             <div className="text-lg font-bold text-purple-600">{allQuestions.length}</div>
             <div className="text-sm text-muted-foreground">Все</div>
           </div>
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === "learning"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${progressFilter === "learning"
                 ? "bg-blue-100 ring-2 ring-blue-500"
                 : "bg-blue-50/80 border border-blue-200/50"
-            }`}
+              }`}
             onClick={() => setProgressFilter(progressFilter === "learning" ? "all" : "learning")}
           >
             <div className="text-lg font-bold text-blue-600">{progressStats.learning}</div>
             <div className="text-sm text-blue-700">📘 Учу</div>
           </div>
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === "review"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${progressFilter === "review"
                 ? "bg-yellow-100 ring-2 ring-yellow-500"
                 : "bg-yellow-50/80 border border-yellow-200/50"
-            }`}
+              }`}
             onClick={() => setProgressFilter(progressFilter === "review" ? "all" : "review")}
           >
             <div className="text-lg font-bold text-orange-600">{progressStats.review}</div>
             <div className="text-sm text-orange-700">🔄 Повторяю</div>
           </div>
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-              progressFilter === "known"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 ${progressFilter === "known"
                 ? "bg-green-100 ring-2 ring-green-500"
                 : "bg-green-50/80 border border-green-200/50"
-            }`}
+              }`}
             onClick={() => setProgressFilter(progressFilter === "known" ? "all" : "known")}
           >
             <div className="text-lg font-bold text-green-600">{progressStats.known}</div>
