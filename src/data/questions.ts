@@ -3555,8 +3555,125 @@ function App() {
       
       5. <strong>Feature-Sliced Design</strong> — современный подход к организации React-приложений. Код делится на функциональные модули, что облегчает масштабируемость, поддержку и повторное использование компонентов.`,
         difficulty: "medium",
+      },
+      {
+        id: "rct-28",
+        question: "Что такое useReducer и как его использовать?",
+        answer: `<strong>useReducer</strong> — это хук React для управления состоянием в функциональных компонентах, особенно когда логика обновления сложная или зависит от предыдущего состояния.<br/><br/>
+      
+      Он принимает два аргумента:<br/>
+      1. <strong>reducer</strong> — функция, принимающая текущее состояние и действие, возвращающая новое состояние.<br/>
+      2. <strong>initialState</strong> — начальное состояние.<br/><br/>
+      
+      Пример использования:<br/>
+      <pre>
+      const initialState = { count: 0 };
+      
+      function reducer(state, action) {
+        switch(action.type) {
+          case 'increment': return { count: state.count + 1 };
+          case 'decrement': return { count: state.count - 1 };
+          default: return state;
+        }
       }
       
+      const Counter = () =&gt; {
+        const [state, dispatch] = useReducer(reducer, initialState);
+      
+        return (
+          &lt;div&gt;
+            &lt;p&gt;Count: {state.count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; dispatch({ type: 'increment' })}&gt;Increment&lt;/button&gt;
+            &lt;button onClick={() =&gt; dispatch({ type: 'decrement' })}&gt;Decrement&lt;/button&gt;
+          &lt;/div&gt;
+        );
+      }
+      </pre>`,
+        difficulty: "medium",
+      },
+      {
+        id: "rct-29",
+        question: "В чем разница между useLayoutEffect и useEffect?",
+        answer: `<strong>useEffect</strong> выполняется асинхронно после того, как изменения DOM были отрисованы на экране. Он подходит для большинства побочных эффектов, таких как загрузка данных, подписки и логирование.<br/><br/>
+      
+      <strong>useLayoutEffect</strong> выполняется синхронно после всех изменений DOM, но до того, как браузер успел отобразить обновления. Это полезно для измерений DOM, корректировки стилей или анимаций, где важно изменить DOM перед отрисовкой.<br/><br/>
+      
+      Пример:<br/>
+      <pre>
+      useLayoutEffect(() =&gt; {
+        const height = elementRef.current.clientHeight;
+        console.log('Height:', height);
+      }, []);
+      </pre><br/>
+      
+      Используйте useEffect для обычных побочных эффектов и useLayoutEffect, когда нужно синхронно работать с DOM перед его отрисовкой.`,
+        difficulty: "medium",
+      },
+      {
+        id: "rct-30",
+        question: "Что такое React.lazy и как используется?",
+        answer: `<strong>React.lazy</strong> позволяет загружать компоненты лениво (динамически) по мере их необходимости, что уменьшает размер начальной сборки приложения и ускоряет загрузку.<br/><br/>
+      
+      Пример использования:<br/>
+      <pre>
+      import React, { Suspense, lazy } from 'react';
+      
+      const LazyComponent = lazy(() =&gt; import('./LazyComponent'));
+      
+      const App = () =&gt; (
+        &lt;Suspense fallback=&lt;div&gt;Loading...&lt;/div&gt;&gt;
+          &lt;LazyComponent /&gt;
+        &lt;/Suspense&gt;
+      );
+      </pre>
+      
+      Хук <strong>Suspense</strong> позволяет показывать fallback-контент (например, индикатор загрузки) до того, как компонент загрузится.`,
+        difficulty: "medium",
+      },
+      {
+        id: "rct-31",
+        question: "Какие есть практические техники оптимизации производительности в React?",
+        answer: `1. <strong>React.memo</strong> — предотвращает лишние рендеры функциональных компонентов при неизменных пропсах.<br/>
+      2. <strong>useMemo</strong> и <strong>useCallback</strong> — мемоизация вычислений и функций.<br/>
+      3. <strong>Код-сплиттинг</strong> с React.lazy и Suspense — уменьшает размер начальной загрузки.<br/>
+      4. <strong>Оптимизация рендеринга списков</strong> с ключами и виртуализацией (например, react-window или react-virtualized).<br/>
+      5. <strong>Использование shouldComponentUpdate</strong> в классовых компонентах для контроля повторных рендеров.<br/>
+      6. <strong>Отложенная загрузка тяжелых компонентов</strong> и ресурсов.<br/>
+      7. <strong>Минимизация inline-функций и объектов</strong> в JSX, чтобы избежать постоянного пересоздания новых ссылок.`,
+        difficulty: "medium",
+      },
+      {
+        id: "rct-32",
+        question: "Как использовать React Router в проектах?",
+        answer: `<strong>React Router</strong> — библиотека для организации маршрутизации в React-приложениях.<br/><br/>
+      
+      Пример использования:<br/>
+      <pre>
+      import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+      
+      const Home = () =&gt; &lt;h1&gt;Home&lt;/h1&gt;;
+      const About = () =&gt; &lt;h1&gt;About&lt;/h1&gt;;
+      
+      const App = () =&gt; (
+        &lt;Router&gt;
+          &lt;nav&gt;
+            &lt;Link to="/"&gt;Home&lt;/Link&gt;
+            &lt;Link to="/about"&gt;About&lt;/Link&gt;
+          &lt;/nav&gt;
+          &lt;Routes&gt;
+            &lt;Route path="/" element=&lt;Home /&gt; /&gt;
+            &lt;Route path="/about" element=&lt;About /&gt; /&gt;
+          &lt;/Routes&gt;
+        &lt;/Router&gt;
+      );
+      </pre>
+      
+      React Router позволяет:<br/>
+      — определять маршруты и компоненты для них;<br/>
+      — создавать вложенные маршруты;<br/>
+      — использовать ссылки и навигацию без перезагрузки страницы.`,
+        difficulty: "medium",
+      }
       
     ],
   },
